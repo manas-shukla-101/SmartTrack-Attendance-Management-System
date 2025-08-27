@@ -1,0 +1,170 @@
+/* system_settings.css - Page specific styles for System Settings */
+/* Keep Admin Sidebar, Header, Footer styling consistent with provided Common Components */
+:root {
+    --primary: #f08e1b;
+    --secondary: #9a296a
+    }
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee
+    }
+.admin-sidebar .brand {
+    background: var(--primary);
+    color: #fff
+    }
+.admin-sidebar .nav-link {
+    color: #333;
+    border-radius: 0.4rem;
+    margin: 0.15rem 0.5rem
+    }
+.admin-sidebar .nav-link.active {
+    background: rgba(240, 142, 27, 0.15);
+    color: #000;
+    border-left: 4px solid var(--primary)
+    }
+.admin-sidebar .nav-link:hover {
+    background: rgba(154, 41, 106, 0.08);
+    color: #000
+    }
+.admin-header {
+    border-bottom: 1px solid #eee;
+    background: #fff
+    }
+.admin-footer {
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    color: #555
+    }
+/* Layout adjustments */
+.admin-layout {
+    min-height: 100vh
+    }
+.content {
+    min-width: 0;
+    /* prevents overflow with flex children */
+    }
+/* Settings Navigation styling */
+.settings-nav .list-group-item {
+    border: 0;
+    border-bottom: 1px solid var(--divider-color);
+    padding: 0.75rem 1rem
+    }
+.settings-nav .list-group-item.active {
+    background: var(--primary-soft);
+    color: var(--text-strong)
+    }
+.settings-nav .list-group-item i {
+    color: var(--color-primary)
+    }
+/* Calendar styles */
+.calendar {
+    width: 100%
+    }
+.calendar .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 6px
+    }
+.calendar .weekday {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-muted)
+    }
+.calendar .cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px
+    }
+.calendar .day {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 6px;
+    min-height: 88px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-1);
+    background: var(--surface-0);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer
+    }
+.calendar .day:hover {
+    background: var(--neutral-soft)
+    }
+.calendar .day.empty {
+    visibility: hidden;
+    border: none;
+    padding: 0;
+    min-height: 0
+    }
+.calendar .day.today {
+    outline: 2px solid var(--color-info)
+    }
+.calendar .day.out-of-year {
+    opacity: 0.5
+    }
+.calendar .day.has-event {
+    border-color: var(--color-warning)
+    }
+.calendar .day .date {
+    font-weight: 600;
+    color: var(--text-strong)
+    }
+.calendar .event-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-sm);
+    background: var(--warning-soft);
+    color: #5a3f00
+    }
+.calendar .type-workday .event-chip {
+    background: var(--info-soft);
+    color: #005b7a
+    }
+.calendar .type-special .event-chip {
+    background: var(--primary-soft);
+    color: var(--text-strong)
+    }
+/* Table hover reveal for schedule list delete icons (uses global .hover-control fade) */
+#scheduleList .hover-control {
+    opacity: 0;
+    transition: opacity 0.2s ease
+    }
+#scheduleList .list-group-item:hover .hover-control {
+    opacity: 1
+    }
+/* Periods table */
+#periodsTable thead th {
+    white-space: nowrap
+    }
+#periodsTable tbody td {
+    vertical-align: middle
+    }
+/* Codes table */
+#codesTable thead th {
+    user-select: none
+    }
+#codesTable tbody tr:hover {
+    background: rgba(0, 0, 0, 0.02)
+    }
+/* Skeleton placeholder height tweaks */
+.skeleton {
+    display: block
+    }
+/* Responsive tweaks */
+@media (max-width: 991.98px) {
+    .admin-sidebar {
+        position: sticky;
+        top: 0;
+        height: auto
+        }
+    }

@@ -1,0 +1,64 @@
+/* Calendar Settings page-specific styles */
+#calendarSettingsPage body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Calendar layout */
+#calendar {
+    min-height: 640px;
+    padding: 8px
+    }
+/* FullCalendar tweaks */
+.fc .fc-toolbar-title {
+    font-weight: 600
+    }
+.fc .fc-daygrid-day-frame {
+    transition: background-color 0.15s ease
+    }
+.fc .fc-daygrid-day:hover .fc-daygrid-day-frame {
+    background: var(--neutral-soft)
+    }
+/* Shade weekends */
+.fc .fc-day-sat .fc-daygrid-day-frame, .fc .fc-day-sun .fc-daygrid-day-frame {
+    background: rgba(0, 0, 0, 0.025)
+    }
+/* Event type color accents (borders for better contrast on light bg) */
+.fc .fc-event.evt-instructional {
+    border-left: 3px solid var(--color-success)
+    }
+.fc .fc-event.evt-holiday {
+    border-left: 3px solid var(--color-error)
+    }
+.fc .fc-event.evt-workday {
+    border-left: 3px solid var(--color-warning)
+    }
+.fc .fc-event.evt-special_schedule {
+    border-left: 3px solid var(--color-info)
+    }
+/* Legend tags sizing */
+.tag .fa-circle {
+    font-size: 0.55rem
+    }
+/* Summary card */
+#summaryChart {
+    width: 100% !important
+    }
+#summaryStats div + div {
+    margin-top: 4px
+    }
+/* Events table adjustments */
+#eventsTable td, #eventsTable th {
+    vertical-align: middle
+    }
+#eventsTable .badge-soft {
+    font-weight: 600
+    }
+/* Modal spacing */
+#dateEditorModal .modal-body .form-text {
+    color: var(--text-muted)
+    }
+/* Offcanvas width to match sidebar on mobile */
+@media (max-width: 991.98px) {
+    #sidebar.offcanvas {
+        width: 280px
+        }
+    }

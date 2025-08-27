@@ -1,0 +1,102 @@
+/* Admin Dashboard - Page Specific Styles (admin_dashboard.css) */
+/* Typography override for this page */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Common components styling (from provided design) */
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee
+    }
+.admin-sidebar .brand {
+    background: var(--color-primary);
+    color: #fff
+    }
+.admin-sidebar .nav-link {
+    color: #333;
+    border-radius: 0.4rem;
+    margin: 0.15rem 0.5rem
+    }
+.admin-sidebar .nav-link.active {
+    background: rgba(240, 142, 27, 0.15);
+    color: #000;
+    border-left: 4px solid var(--color-primary)
+    }
+.admin-sidebar .nav-link:hover {
+    background: rgba(154, 41, 106, 0.08);
+    color: #000
+    }
+.admin-header {
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: var(--z-nav)
+    }
+.admin-footer {
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    color: #555
+    }
+/* Layout shell */
+.page-shell {
+    min-height: calc(100vh - 56px);
+    /* approx header height */
+    }
+.main-content {
+    min-width: 0;
+    /* allow flex child to shrink */
+    }
+/* Ensure offcanvas width similar to sidebar */
+.offcanvas-start {
+    width: 260px
+    }
+/* Page header tweaks */
+.page-title {
+    font-weight: 700
+    }
+/* Metric cards enhancements */
+.metric-card {
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.2s ease
+    }
+.metric-card:hover {
+    transform: translatey(-2px);
+    box-shadow: var(--shadow-2)
+    }
+.metric-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.1rem
+    }
+/* Charts sizing */
+#trendChart {
+    max-height: 260px
+    }
+#distChart {
+    max-width: 220px;
+    max-height: 220px
+    }
+/* Table sorting indicator hover */
+#atRiskTable th.sortable:hover {
+    color: var(--color-primary)
+    }
+/* Footer spacing inside main content */
+.admin-footer {
+    border-radius: var(--radius-1)
+    }
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .page-shell {
+        min-height: calc(100vh - 56px)
+        }
+    .admin-footer {
+        margin-bottom: 64px
+        }
+    }

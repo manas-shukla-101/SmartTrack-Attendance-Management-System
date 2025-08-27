@@ -1,0 +1,49 @@
+/* correction_form.css - Page specific styles for Correction Form */
+/* Use Poppins for this page */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Form Card max width on large screens */
+.form-card {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto
+    }
+/* Record details grid */
+.record-details {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))
+    }
+/* Tighter spacing for form texts */
+#justHelp {
+    margin-top: 0.25rem
+    }
+#statusHelp {
+    margin-top: 0.25rem
+    }
+/* Status badge alignment in header */
+#originalStatusBadge.badge-soft {
+    padding: 4px 10px;
+    border-radius: var(--radius-pill)
+    }
+/* Footer actions responsiveness */
+@media (max-width: 575.98px) {
+    .form-card .card-footer {
+        flex-direction: column;
+        align-items: stretch !important
+        }
+    .form-card .card-footer .d-flex.gap-2 {
+        width: 100%;
+        justify-content: stretch
+        }
+    #cancelBtn, #submitBtn {
+        width: 100%
+        }
+    }
+/* System feedback spacing */
+#systemFeedback .alert {
+    margin-bottom: 0
+    }
+/* Toast override to better match theme */
+#actionToast.text-bg-primary {
+    background-color: var(--color-info) !important
+    }

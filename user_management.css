@@ -1,0 +1,110 @@
+/* user_management.css - page-specific styles for User Management Page */
+/* Ensure Poppins font is used on this page */
+body {
+    font-family: "Poppins", var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif
+    }
+/* Sidebar, Header, Footer styles as provided (kept consistent across pages) */
+:root {
+    --primary: #f08e1b;
+    --secondary: #9a296a
+    }
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee
+    }
+.admin-sidebar .brand {
+    background: var(--primary);
+    color: #fff
+    }
+.admin-sidebar .nav-link {
+    color: #333;
+    border-radius: 0.4rem;
+    margin: 0.15rem 0.5rem
+    }
+.admin-sidebar .nav-link.active {
+    background: rgba(240, 142, 27, 0.15);
+    color: #000;
+    border-left: 4px solid var(--primary)
+    }
+.admin-sidebar .nav-link:hover {
+    background: rgba(154, 41, 106, 0.08);
+    color: #000
+    }
+.admin-header {
+    border-bottom: 1px solid #eee;
+    background: #fff
+    }
+.admin-footer {
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    color: #555
+    }
+/* Layout: sidebar + main content */
+.admin-layout {
+    min-height: calc(100vh - 48px - 40px);
+    /* approx header/footer heights */
+    }
+@media (max-width: 991.98px) {
+    .admin-sidebar {
+        display: none
+        }
+    }
+/* Page header alignment tweaks */
+.page-header {
+    margin-top: 8px
+    }
+.page-title {
+    letter-spacing: 0.2px
+    }
+/* Table sortable icons spacing */
+#usersTable thead th.sortable i {
+    margin-left: 6px;
+    color: var(--text-muted)
+    }
+#usersTable thead th.sortable:hover i {
+    color: var(--text)
+    }
+/* Status dot spacing inside badge-soft */
+.badge-soft .status-dot {
+    margin-right: 6px
+    }
+/* Empty state sizing inside table */
+.empty-state {
+    background: transparent;
+    border: 0;
+    padding: 24px
+    }
+/* Card header tweaks */
+.card-header .title .widget-title {
+    font-weight: 700
+    }
+/* Button group spacing in table */
+#usersTable .btn-group .btn {
+    min-width: 36px
+    }
+/* Metrics grid responsive gap */
+.metric-card .metric-title {
+    text-transform: uppercase;
+    font-weight: 600
+    }
+/* Offcanvas inherits sidebar visuals */
+.offcanvas .admin-sidebar .brand {
+    background: var(--primary);
+    color: #fff
+    }
+/* Improve focus ring for accessibility using theme var if present */
+.btn:focus-visible, .form-control:focus, .form-select:focus {
+    outline: none
+    }
+/* Pagination alignment on small screens */
+@media (max-width: 575.98px) {
+    .card-footer {
+        flex-direction: column;
+        align-items: stretch !important
+        }
+    #pagination {
+        justify-content: center
+        }
+    }

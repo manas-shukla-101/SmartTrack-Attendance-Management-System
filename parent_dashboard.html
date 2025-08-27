@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Parent Dashboard | Attendance System
+  </title>
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+  <!-- Global Theme CSS -->
+  <link href="style.css" rel="stylesheet"/>
+  <!-- Page CSS -->
+  <link href="ParentDashboard.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="d-flex">
+   <!-- Parent Sidebar (left) -->
+   <nav class="parent-sidebar d-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/72/36';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Parent Portal
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/parent/40/40';" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold">
+        Parent Name
+       </div>
+       <small class="text-muted">
+        Parent/Guardian
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link active" href="./parent_dashboard.html">
+        <i class="fa-solid fa-house me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_history.html">
+        <i class="fa-solid fa-clock-rotate-left me-2">
+        </i>
+        Attendance History
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./excuse_form.html">
+        <i class="fa-solid fa-file-circle-plus me-2">
+        </i>
+        Submit Excuse
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Main Column (Header + Content + Footer) -->
+   <div class="flex-grow-1 d-flex flex-column min-vh-100">
+    <!-- Parent Header (top) -->
+    <nav class="parent-header navbar navbar-expand-lg px-3">
+     <a class="navbar-brand d-flex align-items-center" href="./parent_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/56/28';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Parent
+      </span>
+     </a>
+     <div class="ms-3">
+      <a class="btn" href="./excuse_form.html" id="quickReportBtnHeader" style="background:var(--primary); color:#fff;">
+       <i class="fa-solid fa-file-circle-plus me-2">
+       </i>
+       Report an Absence
+      </a>
+     </div>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item me-2">
+       <a class="nav-link position-relative" data-bs-title="Notifications" data-bs-toggle="tooltip" href="#" id="notifBell">
+        <i class="fa-solid fa-bell">
+        </i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+         1
+        </span>
+       </a>
+      </li>
+      <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/32/32';" src="https://via.placeholder.com/32"/>
+        Parent
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./parent_dashboard.html">
+          <i class="fa-solid fa-house me-2">
+          </i>
+          Dashboard
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main content -->
+    <main class="container-fluid py-3 py-lg-4 flex-grow-1">
+     <!-- Page Header & Student Selector -->
+     <div class="page-header">
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+       <h1 class="page-title mb-0">
+        Parent Dashboard
+       </h1>
+       <div class="text-muted">
+        At-a-glance attendance overview
+       </div>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+       <div class="d-flex align-items-center gap-2" id="studentSelectorWrapper">
+        <label class="form-label mb-0" for="studentSelect">
+         <i class="fa-solid fa-children me-2 text-primary">
+         </i>
+         Select Student
+        </label>
+        <select class="form-select form-select-sm" id="studentSelect" style="min-width:220px">
+        </select>
+       </div>
+      </div>
+     </div>
+     <!-- Status/Errors -->
+     <div class="mb-3 visually-hidden" id="systemFeedback">
+      <div class="alert alert-warning d-flex align-items-center" role="alert">
+       <i class="fa-solid fa-circle-exclamation me-2">
+       </i>
+       <div id="systemFeedbackText">
+        System notice goes here.
+       </div>
+      </div>
+     </div>
+     <div class="row g-3 g-lg-4">
+      <!-- Left column -->
+      <div class="col-12 col-lg-8">
+       <!-- Today Attendance Summary -->
+       <div class="card">
+        <div class="card-header">
+         <div class="d-flex align-items-center gap-2">
+          <span class="widget-title">
+           Today's Attendance Summary
+          </span>
+          <span class="text-muted" id="todayDateLabel">
+          </span>
+         </div>
+         <div class="d-flex align-items-center gap-2">
+          <select aria-label="Filter by status" class="form-select form-select-sm" id="statusFilter" title="Filter by status">
+           <option selected="" value="all">
+            All statuses
+           </option>
+           <option value="Present">
+            Present
+           </option>
+           <option value="Absent">
+            Absent
+           </option>
+           <option value="Tardy">
+            Tardy
+           </option>
+           <option value="Pending">
+            Not Yet Taken
+           </option>
+          </select>
+          <a class="btn btn-light btn-sm" href="./attendance_history.html" id="viewTodayLink">
+           <i class="fa-solid fa-calendar-check me-2">
+           </i>
+           View Today
+          </a>
+         </div>
+        </div>
+        <div class="card-body p-0">
+         <div class="p-3" id="todaySummaryLoading">
+          <div class="skeleton mb-2" style="height:18px">
+          </div>
+          <div class="skeleton mb-2" style="height:18px">
+          </div>
+          <div class="skeleton mb-2" style="height:18px">
+          </div>
+         </div>
+         <div aria-live="polite" class="list-group list-group-flush" id="todaySummaryList">
+         </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between small text-muted">
+         <div>
+          Updates in near real-time as teachers submit attendance.
+         </div>
+         <a class="text-decoration-none" href="./attendance_history.html" id="viewFullDayLink">
+          Open full day
+          <i class="fa-solid fa-arrow-right ms-1">
+          </i>
+         </a>
+        </div>
+       </div>
+       <!-- Recent Days Overview (table) -->
+       <div class="card mt-3">
+        <div class="card-header">
+         <div class="d-flex align-items-center gap-2">
+          <span class="widget-title">
+           Recent Days Overview
+          </span>
+          <i class="fa-solid fa-circle-info text-muted" data-bs-title="Last 7 school days" data-bs-toggle="tooltip">
+          </i>
+         </div>
+         <div class="d-flex align-items-center gap-2">
+          <div class="input-group input-group-sm" style="width:280px;">
+           <span class="input-group-text">
+            <i class="fa-solid fa-magnifying-glass">
+            </i>
+           </span>
+           <input class="form-control" id="recentFilter" placeholder="Filter by date or note" type="text"/>
+          </div>
+         </div>
+        </div>
+        <div class="card-body p-0">
+         <div class="table-responsive">
+          <table class="table table-hover mb-0 align-middle" id="recentTable">
+           <thead class="table-light">
+            <tr>
+             <th data-sort="date" role="button">
+              Date
+              <i class="fa-solid fa-sort ms-1">
+              </i>
+             </th>
+             <th>
+              Present
+             </th>
+             <th>
+              Tardy
+             </th>
+             <th>
+              Absent
+             </th>
+             <th data-sort="note" role="button">
+              Note
+              <i class="fa-solid fa-sort ms-1">
+              </i>
+             </th>
+             <th class="text-end">
+              Action
+             </th>
+            </tr>
+           </thead>
+           <tbody>
+           </tbody>
+          </table>
+         </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between small text-muted">
+         <div id="recentPaginationInfo">
+          Showing 0 to 0 of 0 entries
+         </div>
+         <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-light btn-sm" disabled="" id="recentPrev">
+           <i class="fa-solid fa-angle-left">
+           </i>
+          </button>
+          <button class="btn btn-light btn-sm" disabled="" id="recentNext">
+           <i class="fa-solid fa-angle-right">
+           </i>
+          </button>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Right column -->
+      <div class="col-12 col-lg-4">
+       <!-- Quick Actions -->
+       <div class="card mb-3">
+        <div class="card-header">
+         <span class="widget-title">
+          Quick Actions
+         </span>
+        </div>
+        <div class="card-body">
+         <div class="d-grid gap-2">
+          <a class="btn btn-primary" href="./excuse_form.html" id="quickReportBtn">
+           <i class="fa-solid fa-file-circle-plus me-2">
+           </i>
+           Report an Absence
+          </a>
+          <a class="btn btn-outline-primary" href="./attendance_history.html" id="viewHistoryBtn">
+           <i class="fa-solid fa-clock-rotate-left me-2">
+           </i>
+           View Full History
+          </a>
+         </div>
+        </div>
+       </div>
+       <!-- Attendance Highlights -->
+       <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
+         <span class="widget-title">
+          Attendance Highlights
+         </span>
+         <a class="btn btn-light btn-sm" href="./attendance_history.html" id="highlightsHistory">
+          Details
+         </a>
+        </div>
+        <div class="card-body">
+         <div class="alert alert-warning d-none" id="chronicBanner" role="alert">
+          <div class="d-flex align-items-center justify-content-between gap-2">
+           <div>
+            <i class="fa-solid fa-triangle-exclamation me-2">
+            </i>
+            <strong>
+             Chronic Absenteeism Risk:
+            </strong>
+            <span id="absencePct">
+             0%
+            </span>
+            .
+            <a class="ms-1" href="#" id="learnMoreLink">
+             Learn More
+            </a>
+           </div>
+           <button aria-label="Dismiss" class="btn-close" id="dismissChronic" type="button">
+           </button>
+          </div>
+         </div>
+         <div class="row g-2 mb-3">
+          <div class="col-6">
+           <div class="metric-card text-center py-3">
+            <div class="metric-title">
+             Unexcused Absences
+            </div>
+            <div class="metric-value" id="absencesCount">
+             0
+            </div>
+           </div>
+          </div>
+          <div class="col-6">
+           <div class="metric-card text-center py-3">
+            <div class="metric-title">
+             Tardies
+            </div>
+            <div class="metric-value" id="tardiesCount">
+             0
+            </div>
+           </div>
+          </div>
+         </div>
+         <div>
+          <canvas aria-label="Term attendance composition chart" height="200" id="termAttendanceChart" role="img">
+          </canvas>
+         </div>
+        </div>
+       </div>
+       <!-- Recent Notifications -->
+       <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+         <span class="widget-title">
+          Recent Notifications
+         </span>
+         <button class="btn btn-light btn-sm" id="clearNotifs">
+          <i class="fa-solid fa-broom me-1">
+          </i>
+          Clear
+         </button>
+        </div>
+        <div class="card-body p-0">
+         <ul class="list-group list-group-flush" id="notificationsList">
+          <!-- filled by JS -->
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </main>
+    <!-- Footer (bottom) -->
+    <footer class="parent-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/foot/36/18';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Toast Container (system feedback) -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080">
+   <div aria-atomic="true" aria-live="polite" class="toast align-items-center text-bg-light border" id="liveToast" role="status">
+    <div class="d-flex">
+     <div class="toast-body">
+      <i class="fa-solid fa-bell me-2 text-warning">
+      </i>
+      <span id="toastMessage">
+       New update available.
+      </span>
+     </div>
+     <button aria-label="Close" class="btn-close me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- JS: Bootstrap Bundle, SweetAlert2, Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Mock data
+const students = [{
+    id: 's1',
+    name: 'Alice Johnson',
+    grade: 'Grade 8'
+}, {
+    id: 's2',
+    name: 'Ben Johnson',
+    grade: 'Grade 5'
+}];
+
+const mockToday = {
+    s1: [{
+        period: 1,
+        className: 'Math 8',
+        status: 'Present'
+    }, {
+        period: 2,
+        className: 'English',
+        status: 'Present'
+    }, {
+        period: 3,
+        className: 'Science',
+        status: 'Tardy'
+    }, {
+        period: 4,
+        className: 'History',
+        status: 'Present'
+    }, {
+        period: 5,
+        className: 'Physical Ed.',
+        status: 'Pending'
+    }, {
+        period: 6,
+        className: 'Art',
+        status: 'Pending'
+    }],
+    s2: [{
+        period: 1,
+        className: 'Math 5',
+        status: 'Present'
+    }, {
+        period: 2,
+        className: 'Reading',
+        status: 'Present'
+    }, {
+        period: 3,
+        className: 'Science',
+        status: 'Present'
+    }, {
+        period: 4,
+        className: 'Social Studies',
+        status: 'Present'
+    }, {
+        period: 5,
+        className: 'Music',
+        status: 'Present'
+    }]
+};
+
+const mockStats = {
+    s1: {
+        absences: 6,
+        tardies: 3,
+        absentSessions: 6,
+        tardySessions: 3,
+        presentSessions: 82
+    },
+    s2: {
+        absences: 1,
+        tardies: 0,
+        absentSessions: 1,
+        tardySessions: 0,
+        presentSessions: 88
+    }
+};
+
+const mockNotifications = {
+    s1: [{
+        id: 1,
+        time: '08:15 AM',
+        text: 'Period 1: Present recorded.'
+    }, {
+        id: 2,
+        time: '09:10 AM',
+        text: 'Period 2: Present recorded.'
+    }, {
+        id: 3,
+        time: '10:03 AM',
+        text: 'Period 3: Marked Tardy.'
+    }],
+    s2: [{
+        id: 1,
+        time: '08:10 AM',
+        text: 'Period 1: Present recorded.'
+    }, {
+        id: 2,
+        time: '09:05 AM',
+        text: 'Period 2: Present recorded.'
+    }]
+};
+
+let selectedStudentId = students[0].id;
+let termChart = null;
+let recentData = [];
+const RECENT_PAGE_SIZE = 7; // all in one page for now
+
+// Utilities
+const todayStr = new Date().toLocaleDateString(undefined, {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+});
+
+function fmtDate(d) {
+    return d.toLocaleDateString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
+}
+
+function buildRecentMock(studentId) {
+    const base = [];
+    const now = new Date();
+    for (let i = 0; i < 7; i++) {
+        const dt = new Date(now);
+        dt.setDate(now.getDate() - i);
+        // simple randomization influenced by student stats
+        const stat = mockStats[studentId];
+        const absentChance = Math.min(0.25, stat.absences / 100 + 0.05);
+        const tardyChance = Math.min(0.20, stat.tardies / 100 + 0.03);
+        let absent = Math.random() < absentChance ? Math.floor(Math.random() * 2) : 0;
+        let tardy = Math.random() < tardyChance ? 1 : 0;
+        const present = 6 - absent - tardy;
+        const note = absent > 0 ? 'Parent note required' : (tardy > 0 ? 'Arrived late' : '');
+        base.push({
+            date: new Date(dt),
+            present,
+            tardy,
+            absent,
+            note
+        });
+    }
+    return base;
+}
+
+// Rendering functions
+function renderStudentSelector() {
+    const sel = document.getElementById('studentSelect');
+    sel.innerHTML = '';
+    students.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = `${s.name} (${s.grade})`;
+        if (s.id === selectedStudentId) opt.selected = true;
+        sel.appendChild(opt);
+    });
+    // show/hide wrapper based on count
+    const wrapper = document.getElementById('studentSelectorWrapper');
+    if (students.length <= 1) wrapper.classList.add('d-none');
+    else wrapper.classList.remove('d-none');
+}
+
+function renderTodaySummary() {
+    document.getElementById('todayDateLabel').textContent = `• ${todayStr}`;
+    const list = document.getElementById('todaySummaryList');
+    const loading = document.getElementById('todaySummaryLoading');
+    loading.classList.remove('d-none');
+    list.innerHTML = '';
+
+    setTimeout(() => {
+        loading.classList.add('d-none');
+        const periods = mockToday[selectedStudentId] || [];
+        const filterVal = document.getElementById('statusFilter').value;
+        periods
+            .filter(p => filterVal === 'all' || p.status === filterVal)
+            .forEach(p => {
+                const item = document.createElement('a');
+                item.href = `./attendance_history.html?studentId=${encodeURIComponent(selectedStudentId)}&date=${encodeURIComponent(new Date().toISOString().slice(0,10))}&period=${p.period}`;
+                item.className = 'list-group-item list-group-item-action d-flex align-items-center justify-content-between';
+                const left = document.createElement('div');
+                left.className = 'd-flex align-items-center gap-3';
+                left.innerHTML = `
+              <span class="badge rounded-pill bg-secondary-subtle text-secondary fw-bold">P${p.period}</span>
+              <div>
+                <div class="fw-semibold">${p.className}</div>
+                <small class="text-muted">Period ${p.period}</small>
+              </div>`;
+                const right = document.createElement('div');
+                const statusClass = statusToClass(p.status);
+                right.innerHTML = `<span class="badge ${statusClass}">${statusLabel(p.status)}</span>`;
+                item.appendChild(left);
+                item.appendChild(right);
+                list.appendChild(item);
+            });
+        // update quick link for day
+        document.getElementById('viewTodayLink').href = `./attendance_history.html?studentId=${encodeURIComponent(selectedStudentId)}&date=${encodeURIComponent(new Date().toISOString().slice(0,10))}`;
+        document.getElementById('viewFullDayLink').href = document.getElementById('viewTodayLink').href;
+    }, 500);
+}
+
+function statusToClass(status) {
+    switch (status) {
+        case 'Present':
+            return 'status-present';
+        case 'Absent':
+            return 'status-absent';
+        case 'Tardy':
+            return 'status-tardy';
+        default:
+            return 'status-pending';
+    }
+}
+
+function statusLabel(status) {
+    return status === 'Pending' ? 'Not Yet Taken' : status;
+}
+
+function renderHighlights() {
+    const s = mockStats[selectedStudentId] || {
+        absences: 0,
+        tardies: 0,
+        presentSessions: 0,
+        absentSessions: 0,
+        tardySessions: 0
+    };
+    document.getElementById('absencesCount').textContent = s.absences;
+    document.getElementById('tardiesCount').textContent = s.tardies;
+
+    const total = (s.presentSessions || 0) + (s.absentSessions || 0) + (s.tardySessions || 0) || 1;
+    const absencePct = Math.round((s.absentSessions / total) * 100);
+    const threshold = 10; // 10% example
+    const banner = document.getElementById('chronicBanner');
+    document.getElementById('absencePct').textContent = `${absencePct}%`;
+    if (absencePct >= threshold) {
+        banner.classList.remove('d-none');
+    } else {
+        banner.classList.add('d-none');
+    }
+
+    // Update links with studentId
+    document.getElementById('highlightsHistory').href = `./attendance_history.html?studentId=${encodeURIComponent(selectedStudentId)}`;
+
+    // Chart
+    const ctx = document.getElementById('termAttendanceChart');
+    const data = {
+        labels: ['Present', 'Tardy', 'Absent'],
+        datasets: [{
+            data: [s.presentSessions, s.tardySessions, s.absentSessions],
+            backgroundColor: ['#e5f1ed', '#fff6e5', '#fae8e9'],
+            borderColor: ['#0d5c3d', '#5a3f00', '#7a0f12'],
+            borderWidth: 1
+        }]
+    };
+    if (termChart) {
+        termChart.destroy();
+    }
+    termChart = new Chart(ctx, {
+        type: 'doughnut',
+        data,
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+            cutout: '60%'
+        }
+    });
+}
+
+function renderNotifications() {
+    const ul = document.getElementById('notificationsList');
+    ul.innerHTML = '';
+    const items = mockNotifications[selectedStudentId] || [];
+    if (!items.length) {
+        const li = document.createElement('li');
+        li.className = 'list-group-item text-muted';
+        li.textContent = 'No notifications available.';
+        ul.appendChild(li);
+        return;
+    }
+    items.forEach(n => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        li.innerHTML = `<span><i class="fa-solid fa-bell text-warning me-2"></i>${n.text}</span><small class="text-muted">${n.time}</small>`;
+        ul.appendChild(li);
+    });
+}
+
+function renderRecentTable() {
+    recentData = buildRecentMock(selectedStudentId);
+    const tbody = document.querySelector('#recentTable tbody');
+    tbody.innerHTML = '';
+    recentData.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${fmtDate(r.date)}</td>
+          <td>${r.present}</td>
+          <td>${r.tardy}</td>
+          <td>${r.absent}</td>
+          <td>${r.note || ''}</td>
+          <td class="text-end"><a href="./attendance_history.html?studentId=${encodeURIComponent(selectedStudentId)}&date=${encodeURIComponent(r.date.toISOString().slice(0,10))}" class="btn btn-sm btn-light">Open</a></td>`;
+        tbody.appendChild(tr);
+    });
+    document.getElementById('recentPaginationInfo').textContent = `Showing 1 to ${recentData.length} of ${recentData.length} entries`;
+}
+
+function applyRecentFilter() {
+    const q = document.getElementById('recentFilter').value.toLowerCase();
+    const tbody = document.querySelector('#recentTable tbody');
+    Array.from(tbody.rows).forEach(row => {
+        const dateText = row.cells[0].textContent.toLowerCase();
+        const noteText = row.cells[4].textContent.toLowerCase();
+        const show = dateText.includes(q) || noteText.includes(q);
+        row.classList.toggle('d-none', !show);
+    });
+    const visible = Array.from(tbody.rows).filter(r => !r.classList.contains('d-none')).length;
+    document.getElementById('recentPaginationInfo').textContent = `Showing 1 to ${visible} of ${recentData.length} entries`;
+}
+
+function addInteractivity() {
+    // Tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
+
+    // Toast example
+    const toastEl = document.getElementById('liveToast');
+    const toast = new bootstrap.Toast(toastEl, {
+        delay: 3500
+    });
+    setTimeout(() => {
+        document.getElementById('toastMessage').textContent = 'Attendance updated for Period 3.';
+        toast.show();
+    }, 1200);
+
+    // Learn more banner
+    document.getElementById('learnMoreLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        Swal.fire({
+            icon: 'info',
+            title: 'Chronic Absenteeism Policy',
+            html: '<div class="text-start">Students are considered at risk when absences exceed 10% of school days. Please contact the school office for support and documentation requirements.</div>',
+            confirmButtonColor: '#f08e1b'
+        });
+    });
+    document.getElementById('dismissChronic').addEventListener('click', () => {
+        document.getElementById('chronicBanner').classList.add('d-none');
+    });
+
+    // Status filter for Today
+    document.getElementById('statusFilter').addEventListener('change', renderTodaySummary);
+
+    // Recent filter
+    document.getElementById('recentFilter').addEventListener('input', applyRecentFilter);
+
+    // Sorting (simple)
+    const thead = document.querySelector('#recentTable thead');
+    let sortState = {
+        key: null,
+        asc: true
+    };
+    thead.addEventListener('click', (e) => {
+        const th = e.target.closest('th[data-sort]');
+        if (!th) return;
+        const key = th.getAttribute('data-sort');
+        sortState.asc = sortState.key === key ? !sortState.asc : true;
+        sortState.key = key;
+        recentData.sort((a, b) => {
+            if (key === 'date') return sortState.asc ? a.date - b.date : b.date - a.date;
+            const av = (a[key] || '').toString().toLowerCase();
+            const bv = (b[key] || '').toString().toLowerCase();
+            return sortState.asc ? av.localeCompare(bv) : bv.localeCompare(av);
+        });
+        const tbody = document.querySelector('#recentTable tbody');
+        tbody.innerHTML = '';
+        recentData.forEach(r => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+            <td>${fmtDate(r.date)}</td>
+            <td>${r.present}</td>
+            <td>${r.tardy}</td>
+            <td>${r.absent}</td>
+            <td>${r.note || ''}</td>
+            <td class="text-end"><a href="./attendance_history.html?studentId=${encodeURIComponent(selectedStudentId)}&date=${encodeURIComponent(r.date.toISOString().slice(0,10))}" class="btn btn-sm btn-light">Open</a></td>`;
+            tbody.appendChild(tr);
+        });
+        applyRecentFilter();
+    });
+
+    // Clear notifications
+    document.getElementById('clearNotifs').addEventListener('click', () => {
+        mockNotifications[selectedStudentId] = [];
+        renderNotifications();
+    });
+
+    // Student change
+    document.getElementById('studentSelect').addEventListener('change', (e) => {
+        selectedStudentId = e.target.value;
+        updateAll();
+    });
+
+    // Simulate near real-time update
+    setInterval(() => {
+        const periods = mockToday[selectedStudentId];
+        if (!periods || !periods.length) return;
+        const idx = Math.floor(Math.random() * periods.length);
+        const before = periods[idx].status;
+        const transitions = ['Present', 'Absent', 'Tardy'];
+        const next = transitions[Math.floor(Math.random() * transitions.length)];
+        periods[idx].status = periods[idx].status === 'Pending' ? next : periods[idx].status; // only change pending -> something
+        if (before !== periods[idx].status) {
+            (mockNotifications[selectedStudentId] = mockNotifications[selectedStudentId] || []).unshift({
+                id: Date.now(),
+                time: new Date().toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                text: `Period ${periods[idx].period}: ${periods[idx].status} recorded.`
+            });
+            renderTodaySummary();
+            renderNotifications();
+        }
+    }, 8000);
+}
+
+function updateAll() {
+    // Update action links to include studentId
+    document.getElementById('quickReportBtn').href = `./excuse_form.html?studentId=${encodeURIComponent(selectedStudentId)}`;
+    document.getElementById('quickReportBtnHeader').href = `./excuse_form.html?studentId=${encodeURIComponent(selectedStudentId)}`;
+    document.getElementById('viewHistoryBtn').href = `./attendance_history.html?studentId=${encodeURIComponent(selectedStudentId)}`;
+
+    renderTodaySummary();
+    renderHighlights();
+    renderNotifications();
+    renderRecentTable();
+    applyRecentFilter();
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('todayDateLabel').textContent = `• ${todayStr}`;
+    renderStudentSelector();
+    updateAll();
+    addInteractivity();
+});
+  </script>
+ </body>
+</html>

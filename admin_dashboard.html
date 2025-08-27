@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Admin Dashboard — Attendance System
+  </title>
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Font Awesome 6 -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+   <!-- SweetAlert2 (styling comes with JS, no extra CSS needed) -->
+   <!-- Site Theme CSS -->
+   <link href="style.css" rel="stylesheet"/>
+   <!-- Page-specific CSS -->
+   <link href="admin_dashboard.css" rel="stylesheet"/>
+  </link>
+ </head>
+ <body class="bg-light">
+  <!-- Header (Common Component: Included on Admin Dashboard) -->
+  <nav class="admin-header navbar navbar-expand-lg px-3">
+   <button aria-label="Open navigation" class="btn btn-link d-lg-none" data-bs-target="#sidebar" data-bs-toggle="offcanvas">
+    <i class="fa-solid fa-bars">
+    </i>
+   </button>
+   <a class="navbar-brand d-flex align-items-center" href="./admin_dashboard.html">
+    <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/28/28';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+    <span class="fw-semibold">
+     Admin Portal
+    </span>
+   </a>
+   <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+    <div class="input-group">
+     <span class="input-group-text bg-white">
+      <i class="fa-solid fa-magnifying-glass">
+      </i>
+     </span>
+     <input class="form-control" id="globalSearch" placeholder="Search students, classes, users..." type="search"/>
+    </div>
+   </form>
+   <ul class="navbar-nav ms-auto">
+    <li class="nav-item me-2">
+     <a class="nav-link position-relative" data-bs-title="Notifications" data-bs-toggle="tooltip" href="#" id="notifBell">
+      <i class="fa-solid fa-bell">
+      </i>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+       3
+      </span>
+     </a>
+    </li>
+    <li class="nav-item me-2">
+     <a class="nav-link" data-bs-title="Messages" data-bs-toggle="tooltip" href="#">
+      <i class="fa-solid fa-envelope">
+      </i>
+     </a>
+    </li>
+    <li class="nav-item dropdown">
+     <a aria-expanded="false" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/admin/32/32';" src="https://via.placeholder.com/32"/>
+      Admin
+     </a>
+     <ul class="dropdown-menu dropdown-menu-end">
+      <li>
+       <a class="dropdown-item" href="./user_management.html">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Manage Users
+       </a>
+      </li>
+      <li>
+       <a class="dropdown-item" href="./system_settings.html">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+       </a>
+      </li>
+      <li>
+       <hr class="dropdown-divider"/>
+      </li>
+      <li>
+       <a class="dropdown-item" href="./index.html">
+        <i class="fa-solid fa-right-from-bracket me-2">
+        </i>
+        Logout
+       </a>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </nav>
+  <!-- Offcanvas Sidebar for mobile (Common Component) -->
+  <div aria-labelledby="sidebarLabel" class="offcanvas offcanvas-start" id="sidebar" tabindex="-1">
+   <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="sidebarLabel">
+     Navigation
+    </h5>
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button">
+    </button>
+   </div>
+   <div class="offcanvas-body p-0">
+    <!-- Sidebar (same structure as static sidebar) -->
+    <nav class="admin-sidebar d-flex flex-column w-100 h-100">
+     <div class="brand d-flex align-items-center p-3">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/36/36';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;">
+       <div class="fw-bold">
+        Attendance System
+       </div>
+      </img>
+     </div>
+     <div class="p-3 border-bottom">
+      <div class="d-flex align-items-center">
+       <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/40/40';" src="https://via.placeholder.com/40"/>
+       <div>
+        <div class="fw-semibold">
+         Admin User
+        </div>
+        <small class="text-muted">
+         Administrator
+        </small>
+       </div>
+      </div>
+     </div>
+     <div class="flex-grow-1 overflow-auto">
+      <ul class="nav flex-column mt-2">
+       <li class="nav-item">
+        <a class="nav-link active" href="./admin_dashboard.html">
+         <i class="fa-solid fa-gauge me-2">
+         </i>
+         Dashboard
+        </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="./reports_page.html">
+         <i class="fa-solid fa-chart-line me-2">
+         </i>
+         Reports
+        </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="./approval_queue.html">
+         <i class="fa-solid fa-list-check me-2">
+         </i>
+         Approvals
+        </a>
+       </li>
+       <li class="nav-item">
+        <a aria-controls="adminUsersMenuMobile" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenuMobile" role="button">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Users
+         <i class="fa-solid fa-chevron-down float-end">
+         </i>
+        </a>
+        <div class="collapse ps-4" id="adminUsersMenuMobile">
+         <a class="nav-link" href="./user_management.html">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Manage Users
+         </a>
+         <a class="nav-link" href="./user_form.html">
+          <i class="fa-solid fa-user-plus me-2">
+          </i>
+          Add New User
+         </a>
+        </div>
+       </li>
+       <li class="nav-item">
+        <a aria-controls="adminSettingsMenuMobile" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenuMobile" role="button">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         Settings
+         <i class="fa-solid fa-chevron-down float-end">
+         </i>
+        </a>
+        <div class="collapse ps-4" id="adminSettingsMenuMobile">
+         <a class="nav-link" href="./system_settings.html">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          System Settings
+         </a>
+         <a class="nav-link" href="./calendar_settings.html">
+          <i class="fa-solid fa-calendar-days me-2">
+          </i>
+          Calendar
+         </a>
+         <a class="nav-link" href="./schedule_settings.html">
+          <i class="fa-solid fa-clock me-2">
+          </i>
+          Bell Schedules
+         </a>
+         <a class="nav-link" href="./codes_settings.html">
+          <i class="fa-solid fa-code me-2">
+          </i>
+          Attendance Codes
+         </a>
+        </div>
+       </li>
+      </ul>
+     </div>
+     <div class="p-3">
+      <a class="btn btn-outline-secondary w-100" href="./index.html">
+       <i class="fa-solid fa-right-from-bracket me-2">
+       </i>
+       Logout
+      </a>
+     </div>
+    </nav>
+   </div>
+  </div>
+  <!-- Page Layout: Sidebar (desktop) + Main content -->
+  <div class="page-shell d-flex">
+   <!-- Static Sidebar (Common Component) - visible lg+ -->
+   <nav class="admin-sidebar d-none d-lg-flex flex-column" id="sidebar-static">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/36/36';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Attendance System
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/40/40';" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold">
+        Admin User
+       </div>
+       <small class="text-muted">
+        Administrator
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link active" href="./admin_dashboard.html">
+        <i class="fa-solid fa-gauge me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./reports_page.html">
+        <i class="fa-solid fa-chart-line me-2">
+        </i>
+        Reports
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./approval_queue.html">
+        <i class="fa-solid fa-list-check me-2">
+        </i>
+        Approvals
+       </a>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminUsersMenu" aria-expanded="true" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenu" role="button">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Users
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse show ps-4" id="adminUsersMenu">
+        <a class="nav-link" href="./user_management.html">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Manage Users
+        </a>
+        <a class="nav-link" href="./user_form.html">
+         <i class="fa-solid fa-user-plus me-2">
+         </i>
+         Add New User
+        </a>
+       </div>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminSettingsMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenu" role="button">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminSettingsMenu">
+        <a class="nav-link" href="./system_settings.html">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         System Settings
+        </a>
+        <a class="nav-link" href="./calendar_settings.html">
+         <i class="fa-solid fa-calendar-days me-2">
+         </i>
+         Calendar
+        </a>
+        <a class="nav-link" href="./schedule_settings.html">
+         <i class="fa-solid fa-clock me-2">
+         </i>
+         Bell Schedules
+        </a>
+        <a class="nav-link" href="./codes_settings.html">
+         <i class="fa-solid fa-code me-2">
+         </i>
+         Attendance Codes
+        </a>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Main Content -->
+   <main class="main-content flex-grow-1">
+    <div class="container-fluid px-3 px-md-4">
+     <!-- Top system alert / feedback -->
+     <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+      <i class="fa-solid fa-triangle-exclamation me-2">
+      </i>
+      There are 3 pending approval requests that need your attention.
+      <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
+      </button>
+     </div>
+     <!-- Page Header with Date Filter -->
+     <div class="page-header d-flex align-items-center justify-content-between mt-3">
+      <div class="d-flex align-items-center gap-2">
+       <h1 class="page-title mb-0">
+        <i class="fa-solid fa-gauge-high text-primary me-2">
+        </i>
+        Admin Dashboard
+       </h1>
+       <span class="badge-soft info ms-2">
+        <i class="fa-solid fa-circle-info me-1">
+        </i>
+        Real-time
+       </span>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+       <div class="input-group" style="min-width:260px;">
+        <span class="input-group-text">
+         <i class="fa-regular fa-calendar-days">
+         </i>
+        </span>
+        <input aria-label="Select date" class="form-control" id="datePicker" type="date">
+        </input>
+       </div>
+       <button class="btn btn-light" id="refreshBtn">
+        <i class="fa-solid fa-rotate">
+        </i>
+       </button>
+      </div>
+     </div>
+     <!-- Key Metrics Summary -->
+     <div class="row g-3 key-metrics">
+      <div class="col-12 col-sm-6 col-xl-4">
+       <div class="metric-card h-100" data-link="./reports_page.html" id="metricAttendance" role="button" tabindex="0" title="View detailed daily attendance report">
+        <div class="d-flex align-items-center justify-content-between">
+         <div class="d-flex align-items-center gap-2">
+          <div class="metric-icon bg-primary-soft text-primary">
+           <i class="fa-solid fa-user-check">
+           </i>
+          </div>
+          <div>
+           <div class="metric-title">
+            Attendance Rate
+           </div>
+           <div class="metric-value" id="attRateValue">
+            <span class="skeleton" style="width:120px;height:32px;display:inline-block;border-radius:6px">
+            </span>
+           </div>
+          </div>
+         </div>
+         <div class="text-success fw-semibold" id="attTrend">
+          <i class="fa-solid fa-caret-up me-1">
+          </i>
+          +0.8%
+         </div>
+        </div>
+        <div class="mt-2">
+         <canvas height="48" id="sparkAttendance">
+         </canvas>
+        </div>
+       </div>
+      </div>
+      <div class="col-12 col-sm-6 col-xl-4">
+       <div class="metric-card h-100" data-link="./reports_page.html" id="metricAbsences" role="button" tabindex="0" title="View all absences for the selected day">
+        <div class="d-flex align-items-center justify-content-between">
+         <div class="d-flex align-items-center gap-2">
+          <div class="metric-icon bg-error-soft text-danger">
+           <i class="fa-solid fa-user-xmark">
+           </i>
+          </div>
+          <div>
+           <div class="metric-title">
+            Total Absences
+           </div>
+           <div class="metric-value" id="absencesValue">
+            <span class="skeleton" style="width:80px;height:32px;display:inline-block;border-radius:6px">
+            </span>
+           </div>
+          </div>
+         </div>
+         <div class="text-danger fw-semibold" id="absTrend">
+          <i class="fa-solid fa-caret-up me-1">
+          </i>
+          +2
+         </div>
+        </div>
+        <div class="mt-2">
+         <canvas height="48" id="sparkAbsences">
+         </canvas>
+        </div>
+       </div>
+      </div>
+      <div class="col-12 col-sm-6 col-xl-4">
+       <div class="metric-card h-100" data-link="./reports_page.html" id="metricTardies" role="button" tabindex="0" title="View all tardies for the selected day">
+        <div class="d-flex align-items-center justify-content-between">
+         <div class="d-flex align-items-center gap-2">
+          <div class="metric-icon bg-warning-soft text-warning">
+           <i class="fa-solid fa-user-clock">
+           </i>
+          </div>
+          <div>
+           <div class="metric-title">
+            Total Tardies
+           </div>
+           <div class="metric-value" id="tardiesValue">
+            <span class="skeleton" style="width:80px;height:32px;display:inline-block;border-radius:6px">
+            </span>
+           </div>
+          </div>
+         </div>
+         <div class="text-warning fw-semibold" id="tardyTrend">
+          <i class="fa-solid fa-caret-down me-1">
+          </i>
+          -5
+         </div>
+        </div>
+        <div class="mt-2">
+         <canvas height="48" id="sparkTardies">
+         </canvas>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- Charts Row -->
+     <div class="row g-3 mt-1">
+      <div class="col-12 col-xl-8">
+       <div class="card h-100">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-chart-line text-primary">
+          </i>
+          7-Day Attendance Trend
+         </div>
+         <div class="text-muted small" id="trendSubtitle">
+          Week to date
+         </div>
+        </div>
+        <div class="card-body">
+         <canvas height="140" id="trendChart">
+         </canvas>
+        </div>
+       </div>
+      </div>
+      <div class="col-12 col-xl-4">
+       <div class="card h-100">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-chart-pie text-secondary">
+          </i>
+          Today's Distribution
+         </div>
+         <div class="text-muted small">
+          Present vs Absent vs Tardy
+         </div>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+         <canvas height="180" id="distChart" width="180">
+         </canvas>
+        </div>
+        <div class="card-footer d-flex justify-content-between small text-muted">
+         <span>
+          <i class="fa-solid fa-square text-success me-1">
+          </i>
+          Present
+         </span>
+         <span>
+          <i class="fa-solid fa-square text-danger me-1">
+          </i>
+          Absent
+         </span>
+         <span>
+          <i class="fa-solid fa-square text-warning me-1">
+          </i>
+          Tardy
+         </span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- Action Items Panel -->
+     <div class="row g-3 mt-1">
+      <!-- Chronic Absenteeism Alerts -->
+      <div class="col-12 col-xl-8">
+       <div class="card h-100">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-user-shield text-danger">
+          </i>
+          Chronic Absenteeism Alerts
+         </div>
+         <div class="d-flex align-items-center gap-2">
+          <input class="form-control form-control-sm" id="atRiskFilter" placeholder="Filter by student or grade" style="max-width:220px;" type="text"/>
+          <button class="btn btn-sm btn-light" id="resetFilter">
+           <i class="fa-solid fa-eraser me-1">
+           </i>
+           Clear
+          </button>
+         </div>
+        </div>
+        <div class="card-body p-0">
+         <div class="table-responsive">
+          <table class="table table-theme mb-0" id="atRiskTable">
+           <thead>
+            <tr>
+             <th class="sortable" data-key="name" scope="col">
+              Student
+              <i class="fa-solid fa-sort ms-1 text-muted">
+              </i>
+             </th>
+             <th class="sortable" data-key="grade" scope="col">
+              Grade
+              <i class="fa-solid fa-sort ms-1 text-muted">
+              </i>
+             </th>
+             <th class="sortable" data-key="percent" data-type="number" scope="col">
+              Absence %
+              <i class="fa-solid fa-sort ms-1 text-muted">
+              </i>
+             </th>
+             <th scope="col">
+              Days Missed
+             </th>
+             <th class="text-end" scope="col">
+              Action
+             </th>
+            </tr>
+           </thead>
+           <tbody id="atRiskBody">
+            <!-- rows injected by JS -->
+           </tbody>
+          </table>
+         </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+         <small class="text-muted" id="paginationInfo">
+          Showing 0 of 0 • Sorted by Absence % desc
+         </small>
+         <a class="btn btn-sm btn-info" href="./reports_page.html" id="viewChronicReport">
+          <i class="fa-solid fa-file-lines me-1">
+          </i>
+          View Full Report
+         </a>
+        </div>
+       </div>
+      </div>
+      <!-- Pending Approvals -->
+      <div class="col-12 col-xl-4">
+       <div class="card h-100">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-inbox text-info">
+          </i>
+          Pending Approvals
+         </div>
+        </div>
+        <div class="card-body">
+         <div class="d-flex align-items-center justify-content-between border rounded p-3 mb-2">
+          <div>
+           <div class="fw-semibold">
+            Pending Corrections
+           </div>
+           <small class="text-muted">
+            Teacher-submitted changes
+           </small>
+          </div>
+          <div class="display-6 m-0" id="pendingCorrections">
+           --
+          </div>
+         </div>
+         <div class="d-flex align-items-center justify-content-between border rounded p-3">
+          <div>
+           <div class="fw-semibold">
+            Pending Excuses
+           </div>
+           <small class="text-muted">
+            Parent-submitted excuses
+           </small>
+          </div>
+          <div class="display-6 m-0" id="pendingExcuses">
+           --
+          </div>
+         </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+         <a class="btn btn-warning flex-grow-1 me-2" href="./approval_queue.html" id="reviewRequests">
+          <i class="fa-solid fa-list-check me-1">
+          </i>
+          Review Requests
+         </a>
+         <button class="btn btn-light" id="refreshApprovals">
+          <i class="fa-solid fa-arrows-rotate">
+          </i>
+         </button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- Footer (Common Component) -->
+     <footer class="admin-footer py-2 px-3 d-flex align-items-center justify-content-between mt-3 mb-2 rounded">
+      <div class="d-flex align-items-center">
+       <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/18/18';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+       <small class="text-muted">
+        © 2025 Attendance System
+       </small>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+       <small class="text-muted" id="lastRefreshed">
+        Last refreshed: --
+       </small>
+       <a class="text-decoration-none" href="#">
+        Terms
+       </a>
+       <a class="text-decoration-none" href="#">
+        Privacy
+       </a>
+      </div>
+     </footer>
+    </div>
+   </main>
+  </div>
+  <!-- Toast Container -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 2000;">
+   <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-bg-primary border-0" id="refreshToast" role="alert">
+    <div class="d-flex">
+     <div class="toast-body">
+      <i class="fa-solid fa-circle-check me-2">
+      </i>
+      Dashboard data refreshed
+     </div>
+     <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Initialize Bootstrap tooltips
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
+
+// Toast helper
+const toastEl = document.getElementById('refreshToast');
+const refreshToast = toastEl ? new bootstrap.Toast(toastEl) : null;
+
+// Date initialization (default to today)
+const datePicker = document.getElementById('datePicker');
+const todayStr = new Date().toISOString().split('T')[0];
+datePicker.value = todayStr;
+
+const lastRefreshedEl = document.getElementById('lastRefreshed');
+
+// Charts refs
+let trendChart, distChart, sparkA, sparkB, sparkC;
+
+// Mock fetch to simulate API latency
+function mockFetchDashboard(dateStr) {
+    return new Promise((resolve, reject) => {
+        const latency = 700 + Math.random() * 600;
+        setTimeout(() => {
+            // Occasionally simulate an error
+            if (Math.random() < 0.04) {
+                reject(new Error('Network error fetching dashboard data'));
+                return;
+            }
+
+            const totalEnrolled = 1200;
+            const absent = Math.floor(60 + Math.random() * 80); // 60-140
+            const tardy = Math.floor(20 + Math.random() * 60); // 20-80
+            const present = Math.max(totalEnrolled - absent - tardy, 0);
+            const attRate = (present / totalEnrolled * 100).toFixed(1);
+
+            const sevenDay = Array.from({
+                length: 7
+            }, (_, i) => {
+                const p = 1100 + Math.floor(Math.random() * 80) - 40;
+                return Math.min(1200, Math.max(1000, p));
+            });
+
+            const approvals = {
+                corrections: Math.floor(5 + Math.random() * 10),
+                excuses: Math.floor(2 + Math.random() * 8)
+            };
+
+            const atRiskList = [{
+                name: 'Alex Johnson',
+                grade: '10',
+                percent: 18.6,
+                missed: '16 / 86'
+            }, {
+                name: 'Brianna Lee',
+                grade: '11',
+                percent: 17.2,
+                missed: '15 / 87'
+            }, {
+                name: 'Carlos Mendoza',
+                grade: '9',
+                percent: 15.1,
+                missed: '13 / 86'
+            }, {
+                name: 'Diana Patel',
+                grade: '12',
+                percent: 14.9,
+                missed: '14 / 94'
+            }, {
+                name: 'Evan Smith',
+                grade: '9',
+                percent: 13.3,
+                missed: '11 / 83'
+            }, {
+                name: 'Fatima Noor',
+                grade: '10',
+                percent: 12.8,
+                missed: '10 / 78'
+            }].sort((a, b) => b.percent - a.percent);
+
+            resolve({
+                totalEnrolled,
+                absent,
+                tardy,
+                present,
+                attRate,
+                sevenDay,
+                approvals,
+                atRiskList
+            });
+        }, latency);
+    });
+}
+
+// Update DOM with data
+function updateMetrics(data) {
+    document.getElementById('attRateValue').textContent = data.attRate + '%';
+    document.getElementById('absencesValue').textContent = data.absent.toLocaleString();
+    document.getElementById('tardiesValue').textContent = data.tardy.toLocaleString();
+}
+
+function renderSparklines(data) {
+    // Destroy previous
+    [sparkA, sparkB, sparkC].forEach(c => {
+        try {
+            c && c.destroy();
+        } catch (e) {}
+    });
+
+    const commonOpts = {
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                enabled: true
+            }
+        },
+        elements: {
+            point: {
+                radius: 0
+            }
+        },
+        scales: {
+            x: {
+                display: false
+            },
+            y: {
+                display: false
+            }
+        }
+    };
+
+    sparkA = new Chart(document.getElementById('sparkAttendance').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: data.sevenDay.map((_, i) => i + 1),
+            datasets: [{
+                data: data.sevenDay.map(v => Math.round(v / 12)),
+                borderColor: '#f08e1b',
+                backgroundColor: 'rgba(240,142,27,0.15)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: commonOpts
+    });
+    sparkB = new Chart(document.getElementById('sparkAbsences').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: data.sevenDay.map((_, i) => i + 1),
+            datasets: [{
+                data: data.sevenDay.map(() => 40 + Math.floor(Math.random() * 20)),
+                borderColor: '#CD2026',
+                backgroundColor: 'rgba(205,32,38,0.15)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: commonOpts
+    });
+    sparkC = new Chart(document.getElementById('sparkTardies').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: data.sevenDay.map((_, i) => i + 1),
+            datasets: [{
+                data: data.sevenDay.map(() => 20 + Math.floor(Math.random() * 10)),
+                borderColor: '#FFA500',
+                backgroundColor: 'rgba(255,165,0,0.15)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: commonOpts
+    });
+}
+
+function renderTrendChart(data) {
+    try {
+        trendChart && trendChart.destroy();
+    } catch (e) {}
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    trendChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Present',
+                data: data.sevenDay,
+                borderColor: '#00774E',
+                backgroundColor: 'rgba(0,119,78,0.1)',
+                tension: 0.35,
+                fill: true,
+                pointRadius: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    suggestedMin: 1000,
+                    suggestedMax: 1200
+                }
+            }
+        }
+    });
+}
+
+function renderDistChart(data) {
+    try {
+        distChart && distChart.destroy();
+    } catch (e) {}
+    const ctx = document.getElementById('distChart').getContext('2d');
+    distChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Present', 'Absent', 'Tardy'],
+            datasets: [{
+                data: [data.present, data.absent, data.tardy],
+                backgroundColor: ['#00774E', '#CD2026', '#FFA500'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            cutout: '60%'
+        }
+    });
+}
+
+// At-risk table
+const tableBody = document.getElementById('atRiskBody');
+const paginationInfo = document.getElementById('paginationInfo');
+let atRiskData = [];
+let currentSort = {
+    key: 'percent',
+    dir: 'desc'
+};
+
+function populateTable(list) {
+    tableBody.innerHTML = '';
+    list.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><a href="./attendance_history.html" class="text-decoration-none">${item.name}</a></td>
+          <td>${item.grade}</td>
+          <td><span class="badge-soft error"><i class="fa-solid fa-exclamation-circle me-1"></i>${item.percent.toFixed(1)}%</span></td>
+          <td>${item.missed}</td>
+          <td class="text-end">
+            <a href="./attendance_history.html" class="btn btn-sm btn-outline-secondary">View</a>
+          </td>`;
+        tableBody.appendChild(tr);
+    });
+    paginationInfo.textContent = `Showing ${list.length} of ${list.length} • Sorted by ${currentSort.key} ${currentSort.dir}`;
+}
+
+function sortTable(key, dir) {
+    const type = key === 'percent' ? 'number' : 'string';
+    atRiskData.sort((a, b) => {
+        const av = a[key];
+        const bv = b[key];
+        if (type === 'number') return dir === 'asc' ? av - bv : bv - av;
+        return dir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+    });
+    populateTable(atRiskData);
+}
+
+// Filter
+const filterInput = document.getElementById('atRiskFilter');
+const resetFilterBtn = document.getElementById('resetFilter');
+filterInput.addEventListener('input', () => {
+    const q = filterInput.value.toLowerCase();
+    const filtered = atRiskData.filter(r => r.name.toLowerCase().includes(q) || String(r.grade).includes(q));
+    populateTable(filtered);
+});
+resetFilterBtn.addEventListener('click', () => {
+    filterInput.value = '';
+    populateTable(atRiskData);
+});
+
+// Sorting interactions
+document.querySelectorAll('#atRiskTable th.sortable').forEach(th => {
+    th.style.cursor = 'pointer';
+    th.addEventListener('click', () => {
+        const key = th.getAttribute('data-key');
+        currentSort.dir = (currentSort.key === key && currentSort.dir === 'asc') ? 'desc' : 'asc';
+        currentSort.key = key;
+        sortTable(key, currentSort.dir);
+    });
+});
+
+// Load data and render
+const refreshBtn = document.getElementById('refreshBtn');
+const pendingCorrectionsEl = document.getElementById('pendingCorrections');
+const pendingExcusesEl = document.getElementById('pendingExcuses');
+
+async function loadDashboard() {
+    // show skeletons
+    document.getElementById('attRateValue').innerHTML = '<span class="skeleton" style="width:120px;height:32px;display:inline-block;border-radius:6px"></span>';
+    document.getElementById('absencesValue').innerHTML = '<span class="skeleton" style="width:80px;height:32px;display:inline-block;border-radius:6px"></span>';
+    document.getElementById('tardiesValue').innerHTML = '<span class="skeleton" style="width:80px;height:32px;display:inline-block;border-radius:6px"></span>';
+    pendingCorrectionsEl.textContent = '--';
+    pendingExcusesEl.textContent = '--';
+
+    try {
+        const data = await mockFetchDashboard(datePicker.value);
+        updateMetrics(data);
+        renderTrendChart(data);
+        renderDistChart(data);
+        renderSparklines(data);
+        atRiskData = data.atRiskList.slice();
+        sortTable(currentSort.key, currentSort.dir);
+        pendingCorrectionsEl.textContent = data.approvals.corrections;
+        pendingExcusesEl.textContent = data.approvals.excuses;
+        const ts = new Date();
+        lastRefreshedEl.textContent = 'Last refreshed: ' + ts.toLocaleString();
+        refreshToast && refreshToast.show();
+    } catch (err) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Unable to refresh',
+            text: err.message,
+            confirmButtonColor: '#f08e1b'
+        });
+    }
+}
+
+refreshBtn.addEventListener('click', loadDashboard);
+datePicker.addEventListener('change', loadDashboard);
+
+// CTA interactions
+function attachCardNavigation(id) {
+    const el = document.getElementById(id);
+    el.addEventListener('click', () => {
+        Swal.fire({
+            title: 'Open detailed report?',
+            text: 'You will be taken to Reports filtered for this metric.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Open Reports',
+            confirmButtonColor: '#f08e1b'
+        }).then(res => {
+            if (res.isConfirmed) {
+                window.location.href = './reports_page.html';
+            }
+        });
+    });
+    el.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            el.click();
+        }
+    });
+}
+['metricAttendance', 'metricAbsences', 'metricTardies'].forEach(attachCardNavigation);
+
+document.getElementById('viewChronicReport').addEventListener('click', (e) => {
+    e.preventDefault();
+    Swal.fire({
+        title: 'View Chronic Absenteeism Report?',
+        text: 'Open the full report in Reports module.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Open Report',
+        confirmButtonColor: '#f08e1b'
+    }).then(res => {
+        if (res.isConfirmed) {
+            window.location.href = './reports_page.html';
+        }
+    });
+});
+
+document.getElementById('reviewRequests').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = './approval_queue.html';
+});
+
+document.getElementById('refreshApprovals').addEventListener('click', async () => {
+    try {
+        const data = await mockFetchDashboard(datePicker.value);
+        pendingCorrectionsEl.textContent = data.approvals.corrections;
+        pendingExcusesEl.textContent = data.approvals.excuses;
+        Swal.fire({
+            icon: 'success',
+            title: 'Approvals updated',
+            timer: 1200,
+            showConfirmButton: false
+        });
+    } catch (err) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Failed to update approvals',
+            text: err.message
+        });
+    }
+});
+
+// Initial load
+loadDashboard();
+  </script>
+ </body>
+</html>

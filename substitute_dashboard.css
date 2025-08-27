@@ -1,0 +1,84 @@
+/* substitute_dashboard.css - page-specific styles */
+/* Brand font override for this page */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Keep the left sidebar fixed width and layout aligned */
+.sub-layout {
+    min-height: 100vh;
+    background: transparent
+    }
+.sub-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee;
+    position: sticky;
+    top: 0
+    }
+/* Header stickiness within content area */
+.sub-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-nav);
+    border-bottom: 1px solid #eee;
+    background: #fff
+    }
+/* Assignment cards */
+.assignment-card {
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-2)
+    }
+.assignment-card:hover {
+    box-shadow: var(--shadow-2);
+    transform: translatey(-2px)
+    }
+.assignment-card .arrow {
+    transition: transform 0.15s ease
+    }
+.assignment-card:hover .arrow {
+    transform: translatex(3px)
+    }
+.period-pill {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-pill);
+    background: var(--neutral-soft);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text)
+    }
+/* Controls spacing */
+#controlForm .form-control, #controlForm .form-select {
+    min-height: 42px
+    }
+/* Grid adjustments to ensure comfortable widths */
+.card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+    }
+/* Toast look tweak */
+#liveToast {
+    box-shadow: var(--shadow-2)
+    }
+/* Make chart canvas adapt if needed */
+#submissionChart {
+    max-height: 200px
+    }
+/* Empty state image sizing */
+#emptyState img {
+    max-width: 160px;
+    opacity: 0.9
+    }
+/* Responsive tweaks */
+@media (max-width: 991.98px) {
+    .sub-sidebar {
+        position: fixed;
+        left: 0;
+        transform: translatex(0);
+        z-index: var(--z-sidebar)
+        }
+    .content-area {
+        margin-left: 0
+        }
+    }

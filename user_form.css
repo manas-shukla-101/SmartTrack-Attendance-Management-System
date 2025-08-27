@@ -1,0 +1,88 @@
+/* User Form Page - Specific Styles (user_form.css) */
+/* Use Poppins as primary font for this page */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Admin common components styling (consistent across admin pages) */
+:root {
+    --primary: #f08e1b;
+    --secondary: #9a296a
+    }
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee
+    }
+.admin-sidebar .brand {
+    background: var(--primary);
+    color: #fff
+    }
+.admin-sidebar .nav-link {
+    color: #333;
+    border-radius: 0.4rem;
+    margin: 0.15rem 0.5rem
+    }
+.admin-sidebar .nav-link.active {
+    background: rgba(240, 142, 27, 0.15);
+    color: #000;
+    border-left: 4px solid var(--primary)
+    }
+.admin-sidebar .nav-link:hover {
+    background: rgba(154, 41, 106, 0.08);
+    color: #000
+    }
+.admin-header {
+    border-bottom: 1px solid #eee;
+    background: #fff
+    }
+.admin-footer {
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    color: #555
+    }
+/* Layout helpers for mobile sidebar */
+@media (max-width: 991.98px) {
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translatex(-100%);
+        transition: transform 0.25s ease;
+        z-index: 1045;
+        box-shadow: var(--shadow-2)
+        }
+    .admin-sidebar.open {
+        transform: translatex(0)
+        }
+    .sidebar-backdrop {
+        display: none
+        }
+    .sidebar-backdrop.show {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 1040
+        }
+    }
+/* Form sections spacing tweaks */
+.section-label {
+    font-weight: 700
+    }
+/* Ensure card headers match theme */
+.card-header .title i {
+    color: var(--color-primary)
+    }
+/* Validation tweaks */
+.was-validated .form-control:invalid, .form-control.is-invalid {
+    border-color: var(--color-error)
+    }
+.was-validated .form-control:valid {
+    border-color: var(--color-success)
+    }
+/* Make the success toast visually consistent */
+#successToast {
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-2)
+    }

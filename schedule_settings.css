@@ -1,0 +1,99 @@
+/* schedule_settings.css - Page specific styles for Schedule Settings */
+/* Keep sidebar/header/footer styles consistent with provided common components */
+:root {
+    --primary: #f08e1b;
+    --secondary: #9a296a
+    }
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee
+    }
+.admin-sidebar .brand {
+    background: var(--primary);
+    color: #fff
+    }
+.admin-sidebar .nav-link {
+    color: #333;
+    border-radius: 0.4rem;
+    margin: 0.15rem 0.5rem
+    }
+.admin-sidebar .nav-link.active {
+    background: rgba(240, 142, 27, 0.15);
+    color: #000;
+    border-left: 4px solid var(--primary)
+    }
+.admin-sidebar .nav-link:hover {
+    background: rgba(154, 41, 106, 0.08);
+    color: #000
+    }
+.admin-header {
+    border-bottom: 1px solid #eee;
+    background: #fff
+    }
+.admin-footer {
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    color: #555
+    }
+/* Mobile sidebar collapse helper */
+body.sidebar-collapsed #sidebar {
+    display: none
+    }
+body.sidebar-collapsed .admin-header {
+    border-left: none
+    }
+/* Ensure main panel uses remaining width next to sidebar */
+@media (min-width: 992px) {
+    #scheduleListCard {
+        position: sticky;
+        top: 84px
+        }
+    }
+/* Schedule list item reveal actions on hover */
+.schedule-list-item .btn-icon {
+    opacity: 0;
+    transition: opacity 0.18s ease
+    }
+.schedule-list-item:hover .btn-icon {
+    opacity: 1
+    }
+.schedule-list-item.active {
+    background: var(--neutral-soft)
+    }
+/* Period row layout */
+.period-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 48px;
+    gap: 8px;
+    align-items: end;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-1);
+    background: var(--surface-0)
+    }
+@media (max-width: 575.98px) {
+    .period-row {
+        grid-template-columns: 1fr 1fr
+        }
+    .period-row > div:nth-child(1) {
+        grid-column: span 2
+        }
+    }
+/* Buttons */
+#btnAddNew i, #btnAddPeriod i, #btnSave i {
+    pointer-events: none
+    }
+/* Card headers align */
+.card-header .title {
+    gap: 8px
+    }
+/* Form error highlighting synergy */
+input.is-invalid, select.is-invalid {
+    border-color: var(--color-error)
+    }
+/* Toast layering */
+#saveToast {
+    box-shadow: var(--shadow-2)
+    }

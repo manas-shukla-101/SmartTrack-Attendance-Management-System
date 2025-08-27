@@ -1,0 +1,54 @@
+/* attendance_roster.css - Page-specific styles for Attendance Roster */
+/* Use brand font (Poppins) for this page while respecting global theme */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Layout helpers */
+.student-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06)
+    }
+/* Sticky header styling */
+.roster-sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-1)
+    }
+/* Status segmented control spacing */
+.status-segment .btn {
+    min-width: 84px
+    }
+@media (max-width: 575.98px) {
+    .status-segment {
+        flex-wrap: wrap
+        }
+    .status-segment .btn {
+        min-width: calc(50% - 4px);
+        margin-bottom: 6px
+        }
+    }
+/* Ensure space for sticky bottom bar */
+.main-panel {
+    padding-bottom: 80px
+    }
+/* Table tweaks */
+#rosterTable th, #rosterTable td {
+    vertical-align: middle
+    }
+#rosterTable tbody tr:hover {
+    background: rgba(0, 0, 0, 0.02)
+    }
+/* Chart canvas responsive height hint */
+#statusChart {
+    max-width: 100%
+    }
+/* Action bar buttons alignment on smaller screens */
+@media (max-width: 767.98px) {
+    #rosterActionBar {
+        flex-wrap: wrap
+        }
+    }

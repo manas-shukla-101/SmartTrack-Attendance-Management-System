@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Correction Form • Attendance System
+  </title>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Font Awesome 6 -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+   <!-- Theme CSS (provided) -->
+   <link href="style.css" rel="stylesheet"/>
+   <!-- Page-specific CSS -->
+   <link href="correction_form.css" rel="stylesheet"/>
+  </link>
+ </head>
+ <body>
+  <div class="d-flex min-vh-100">
+   <!-- Sidebar: Include for this page (Correction Form) -->
+   <nav class="common-sidebar d-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/attendance-logo/32/32';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:32px;"/>
+     <div class="fw-bold">
+      Attendance
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" data-role="auto" href="#" id="backToDashboard">
+        <i class="fa-solid fa-arrow-left me-2">
+        </i>
+        Back to Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_history.html">
+        <i class="fa-solid fa-list me-2">
+        </i>
+        Attendance History
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_roster.html">
+        <i class="fa-solid fa-clipboard-check me-2">
+        </i>
+        Take Attendance
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./excuse_form.html">
+        <i class="fa-solid fa-file-circle-plus me-2">
+        </i>
+        Submit Excuse
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="#">
+        <i class="fa-solid fa-circle-question me-2">
+        </i>
+        Help
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3 border-top">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-to-bracket me-2">
+      </i>
+      Login
+     </a>
+    </div>
+   </nav>
+   <!-- Main content wrapper -->
+   <div class="flex-grow-1 d-flex flex-column">
+    <!-- Header: Include for shared pages -->
+    <nav class="common-header navbar navbar-expand-lg px-3">
+     <a class="navbar-brand d-flex align-items-center" href="#">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/attendance-logo-2/28/28';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Attendance
+      </span>
+     </a>
+     <span class="ms-3 text-muted d-none d-md-inline" id="commonPageTitle">
+      Correction Form
+     </span>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/avatar/28/28';" src="https://via.placeholder.com/28"/>
+        Account
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="#" id="backDashDD">
+          <i class="fa-solid fa-arrow-left me-2">
+          </i>
+          Back to Dashboard
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-to-bracket me-2">
+          </i>
+          Login
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main -->
+    <main class="main-panel p-3 p-md-4">
+     <div class="container-fluid container-max">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="breadcrumb mb-3">
+       <ol class="breadcrumb m-0">
+        <li class="breadcrumb-item">
+         <a href="./teacher_dashboard.html">
+          Dashboard
+         </a>
+        </li>
+        <li class="breadcrumb-item">
+         <a href="./attendance_history.html">
+          Attendance History
+         </a>
+        </li>
+        <li aria-current="page" class="breadcrumb-item active">
+         Correction Form
+        </li>
+       </ol>
+      </nav>
+      <!-- Page header -->
+      <div class="page-header">
+       <div class="d-flex align-items-center gap-2">
+        <h1 class="page-title m-0">
+         <i class="fa-solid fa-pen-to-square me-2 text-primary">
+         </i>
+         Attendance Correction Request
+        </h1>
+        <span class="badge-soft info">
+         Modal-style form
+        </span>
+       </div>
+       <div aria-label="View options" class="view-switcher" role="group">
+        <div class="option active">
+         <i class="fa-solid fa-rectangle-list me-1">
+         </i>
+         Form
+        </div>
+       </div>
+      </div>
+      <!-- System feedback area (alerts) -->
+      <div aria-live="polite" class="mb-3" id="systemFeedback">
+      </div>
+      <!-- Correction Form Card -->
+      <div class="card form-card" id="correctionFormCard">
+       <div class="card-header">
+        <div class="d-flex flex-wrap align-items-center justify-content-between w-100 gap-2">
+         <div class="d-flex flex-column">
+          <div class="d-flex align-items-center flex-wrap gap-2">
+           <span class="widget-title">
+            Record Details
+           </span>
+           <span class="badge-soft error" id="originalStatusBadge">
+            Original: Absent
+           </span>
+          </div>
+          <small class="text-muted">
+           Review the original entry and propose a correction.
+          </small>
+         </div>
+         <div class="text-end small text-muted">
+          <i class="fa-regular fa-clock me-1">
+          </i>
+          <span id="recordDateLabel">
+           Feb 5, 2025 • 08:15 AM
+          </span>
+         </div>
+        </div>
+       </div>
+       <div class="card-body">
+        <form id="correctionForm" novalidate="">
+         <input id="recordId" type="hidden" value="REC-AL2-P3-20250205-0815"/>
+         <!-- Record Details Header (read-only) -->
+         <div class="record-details grid mb-3">
+          <div class="d-flex align-items-center gap-2">
+           <i class="fa-solid fa-user text-muted">
+           </i>
+           <div>
+            <div class="text-muted">
+             Student
+            </div>
+            <div class="fw-semibold" id="studentName">
+             Jordan Lee
+            </div>
+           </div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+           <i class="fa-solid fa-building-columns text-muted">
+           </i>
+           <div>
+            <div class="text-muted">
+             Class
+            </div>
+            <div class="fw-semibold" id="className">
+             Algebra II — Period 3
+            </div>
+           </div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+           <i class="fa-solid fa-tag text-muted">
+           </i>
+           <div>
+            <div class="text-muted">
+             Original Status
+            </div>
+            <div class="fw-semibold" id="originalStatusText">
+             Absent
+            </div>
+           </div>
+          </div>
+         </div>
+         <!-- Inputs -->
+         <div class="row g-3">
+          <div class="col-12 col-md-6">
+           <label class="form-label" for="newStatus">
+            New Status
+            <span class="text-danger">
+             *
+            </span>
+           </label>
+           <select aria-describedby="statusHelp" class="form-select" id="newStatus" required="">
+            <!-- options injected by JS -->
+           </select>
+           <div class="form-text" id="statusHelp">
+            Select the corrected status. It cannot match the original status.
+           </div>
+           <div class="invalid-feedback" id="statusError">
+            Please select a status different from the original.
+           </div>
+          </div>
+          <div class="col-12">
+           <label class="form-label" for="justification">
+            Justification
+            <span class="text-danger">
+             *
+            </span>
+           </label>
+           <textarea aria-describedby="justHelp justCount" class="form-control" id="justification" maxlength="500" placeholder="Enter a clear reason for this correction (min. 10 characters)" required="" rows="5"></textarea>
+           <div class="form-text" id="justHelp">
+            This reason will be reviewed by an administrator during approval.
+           </div>
+           <div class="d-flex justify-content-between mt-1">
+            <div class="invalid-feedback d-block" id="justificationError" style="display:none;">
+             Please enter at least 10 characters.
+            </div>
+            <small class="text-muted ms-auto" id="justCount">
+             <span id="charCount">
+              0
+             </span>
+             /500
+            </small>
+           </div>
+          </div>
+         </div>
+        </form>
+       </div>
+       <div class="card-footer d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="d-flex align-items-center gap-2">
+         <span class="status-dot info">
+         </span>
+         <small class="text-muted">
+          Changes are reviewed by admin before applying.
+         </small>
+        </div>
+        <div class="d-flex gap-2">
+         <a class="btn btn-light" href="./attendance_history.html" id="cancelBtn">
+          <i class="fa-solid fa-xmark me-1">
+          </i>
+          Cancel
+         </a>
+         <button class="btn btn-primary" disabled="" id="submitBtn">
+          <span class="btn-text">
+           <i class="fa-solid fa-paper-plane me-2">
+           </i>
+           Submit Request
+          </span>
+          <span class="btn-loading d-none">
+           <span aria-hidden="true" class="spinner-border spinner-border-sm me-2" role="status">
+           </span>
+           Submitting...
+          </span>
+         </button>
+        </div>
+       </div>
+      </div>
+      <!-- Info: Approval guidance -->
+      <div class="alert alert-info mt-3" role="alert">
+       <i class="fa-solid fa-circle-info me-2">
+       </i>
+       After submission, this request will appear in the
+       <a class="fw-semibold" href="./approval_queue.html">
+        Approval Queue
+       </a>
+       for administrative review. You’ll be notified upon decision.
+      </div>
+     </div>
+    </main>
+    <!-- Footer -->
+    <footer class="common-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/attendance-logo-3/18/18';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Toast container -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+   <div aria-atomic="true" aria-live="polite" class="toast align-items-center text-bg-primary border-0" id="actionToast" role="status">
+    <div class="d-flex">
+     <div class="toast-body">
+      <i class="fa-solid fa-circle-check me-2">
+      </i>
+      <span id="toastText">
+       Status updated.
+      </span>
+     </div>
+     <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- Day.js (optional for date formatting) -->
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js">
+  </script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script>
+   // Role-aware back navigation
+(function() {
+    const map = {
+        Admin: './admin_dashboard.html',
+        Teacher: './teacher_dashboard.html',
+        Parent: './parent_dashboard.html',
+        Student: './student_dashboard.html',
+        Substitute: './substitute_dashboard.html'
+    };
+    const role = (window.currentUserRole || '').trim();
+    const el = document.getElementById('backToDashboard');
+    if (el && map[role]) el.setAttribute('href', map[role]);
+    const back = document.getElementById('backDashDD');
+    if (back && map[role]) back.setAttribute('href', map[role]);
+})();
+
+// Mock original record details (would normally come from router/state)
+const originalRecord = {
+    id: 'REC-AL2-P3-20250205-0815',
+    studentName: 'Jordan Lee',
+    className: 'Algebra II — Period 3',
+    recordDate: '2025-02-05T08:15:00',
+    originalStatus: 'Absent'
+};
+
+const attendanceCodes = [
+    'Present', 'Tardy', 'Excused Absence', 'Unexcused Absence', 'Absent'
+];
+
+const els = {
+    studentName: document.getElementById('studentName'),
+    className: document.getElementById('className'),
+    recordDateLabel: document.getElementById('recordDateLabel'),
+    originalStatusText: document.getElementById('originalStatusText'),
+    originalStatusBadge: document.getElementById('originalStatusBadge'),
+    recordId: document.getElementById('recordId'),
+    newStatus: document.getElementById('newStatus'),
+    justification: document.getElementById('justification'),
+    justificationError: document.getElementById('justificationError'),
+    charCount: document.getElementById('charCount'),
+    submitBtn: document.getElementById('submitBtn'),
+    cancelBtn: document.getElementById('cancelBtn'),
+    statusError: document.getElementById('statusError'),
+    toast: document.getElementById('actionToast'),
+    toastText: document.getElementById('toastText'),
+    systemFeedback: document.getElementById('systemFeedback'),
+    form: document.getElementById('correctionForm')
+};
+
+let formState = {
+    selectedStatus: '',
+    justificationText: '',
+    isSubmitting: false,
+    dirty: false,
+    errors: {
+        status: '',
+        justification: ''
+    }
+};
+
+function initRecord() {
+    els.studentName.textContent = originalRecord.studentName;
+    els.className.textContent = originalRecord.className;
+    try {
+        const d = dayjs(originalRecord.recordDate);
+        els.recordDateLabel.textContent = d.format('MMM D, YYYY • hh:mm A');
+    } catch (e) {
+        els.recordDateLabel.textContent = originalRecord.recordDate;
+    }
+    els.originalStatusText.textContent = originalRecord.originalStatus;
+    els.recordId.value = originalRecord.id;
+    // Badge color logic based on status
+    const status = originalRecord.originalStatus.toLowerCase();
+    els.originalStatusBadge.textContent = 'Original: ' + originalRecord.originalStatus;
+    els.originalStatusBadge.classList.remove('primary', 'secondary', 'info', 'success', 'warning', 'error');
+    if (status.includes('absent') && !status.includes('excused')) {
+        els.originalStatusBadge.classList.add('error');
+    } else if (status.includes('tardy') || status.includes('late')) {
+        els.originalStatusBadge.classList.add('warning');
+    } else if (status.includes('excused')) {
+        els.originalStatusBadge.classList.add('info');
+    } else {
+        els.originalStatusBadge.classList.add('success');
+    }
+}
+
+function populateStatusOptions() {
+    els.newStatus.innerHTML = '';
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Select new status';
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    els.newStatus.appendChild(placeholder);
+
+    attendanceCodes.forEach(code => {
+        const opt = document.createElement('option');
+        opt.value = code;
+        opt.textContent = code;
+        if (code === originalRecord.originalStatus) {
+            opt.disabled = true; // prevent selecting original status
+        }
+        els.newStatus.appendChild(opt);
+    });
+}
+
+function validateForm() {
+    // Reset errors
+    formState.errors = {
+        status: '',
+        justification: ''
+    };
+    let valid = true;
+
+    // Status: required and not same as original
+    const statusVal = els.newStatus.value.trim();
+    if (!statusVal) {
+        formState.errors.status = 'Please select a status different from the original.';
+        valid = false;
+    }
+
+    // Justification: at least 10 chars
+    const justVal = els.justification.value.trim();
+    if (justVal.length < 10) {
+        formState.errors.justification = 'Please enter at least 10 characters.';
+        valid = false;
+    }
+
+    // UI feedback
+    if (formState.errors.status) {
+        els.newStatus.classList.add('is-invalid');
+        els.statusError.textContent = formState.errors.status;
+    } else {
+        els.newStatus.classList.remove('is-invalid');
+    }
+
+    if (formState.errors.justification) {
+        els.justification.classList.add('is-invalid');
+        els.justificationError.style.display = 'block';
+        els.justificationError.textContent = formState.errors.justification;
+    } else {
+        els.justification.classList.remove('is-invalid');
+        els.justificationError.style.display = 'none';
+    }
+
+    els.submitBtn.disabled = !valid || formState.isSubmitting;
+    return valid;
+}
+
+function setDirty() {
+    if (!formState.dirty) formState.dirty = true;
+}
+
+function showToast(message) {
+    els.toastText.textContent = message;
+    const toast = new bootstrap.Toast(els.toast, {
+        delay: 2200
+    });
+    toast.show();
+}
+
+function setSubmitting(isSubmitting) {
+    formState.isSubmitting = isSubmitting;
+    els.submitBtn.disabled = isSubmitting || !validateForm();
+    const txt = els.submitBtn.querySelector('.btn-text');
+    const loading = els.submitBtn.querySelector('.btn-loading');
+    if (isSubmitting) {
+        txt.classList.add('d-none');
+        loading.classList.remove('d-none');
+    } else {
+        txt.classList.remove('d-none');
+        loading.classList.add('d-none');
+    }
+}
+
+function attachEvents() {
+    els.newStatus.addEventListener('change', () => {
+        formState.selectedStatus = els.newStatus.value;
+        setDirty();
+        validateForm();
+        if (els.newStatus.value) {
+            showToast('Selected status: ' + els.newStatus.value);
+        }
+    });
+
+    els.justification.addEventListener('input', () => {
+        formState.justificationText = els.justification.value;
+        els.charCount.textContent = els.justification.value.length;
+        setDirty();
+        validateForm();
+    });
+
+    els.submitBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (!validateForm()) {
+            // Show system alert
+            els.systemFeedback.innerHTML = '<div class="alert alert-warning"><i class="fa-solid fa-triangle-exclamation me-2"></i>Please fix the highlighted fields before submitting.</div>';
+            return;
+        }
+        els.systemFeedback.innerHTML = '';
+
+        // Confirm and submit
+        const result = await Swal.fire({
+            title: 'Submit correction?',
+            html: `<div class="text-start small">\
+                  <div><strong>Student:</strong> ${originalRecord.studentName}</div>\
+                  <div><strong>Class:</strong> ${originalRecord.className}</div>\
+                  <div><strong>Original:</strong> ${originalRecord.originalStatus}</div>\
+                  <div><strong>New:</strong> ${els.newStatus.value}</div>\
+                  <div class="mt-2"><strong>Justification:</strong><br>${els.justification.value.replace(/</g,'&lt;')}</div>\
+                 </div>`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            cancelButtonText: 'Review Again',
+            focusConfirm: false
+        });
+
+        if (!result.isConfirmed) return;
+
+        setSubmitting(true);
+        try {
+            // Simulate API call
+            await new Promise(res => setTimeout(res, 1200));
+            // Mock success
+            formState.dirty = false;
+            await Swal.fire({
+                title: 'Request Submitted',
+                text: 'Your correction has been sent for administrative approval.',
+                icon: 'success',
+                showDenyButton: true,
+                denyButtonText: 'Back to History',
+                confirmButtonText: 'Go to Approval Queue'
+            }).then((choice) => {
+                if (choice.isConfirmed) {
+                    window.location.href = './approval_queue.html';
+                } else if (choice.isDenied) {
+                    window.location.href = './attendance_history.html';
+                }
+            });
+        } catch (err) {
+            await Swal.fire({
+                title: 'Submission Failed',
+                text: 'We could not submit your request right now. Please try again.',
+                icon: 'error'
+            });
+        } finally {
+            setSubmitting(false);
+        }
+    });
+
+    // Cancel with unsaved changes guard
+    els.cancelBtn.addEventListener('click', (e) => {
+        if (formState.dirty) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Discard changes?',
+                text: 'You have unsaved changes. This action will discard them.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Discard',
+                cancelButtonText: 'Stay'
+            }).then(res => {
+                if (res.isConfirmed) {
+                    window.location.href = e.currentTarget.getAttribute('href');
+                }
+            });
+        }
+    });
+
+    // Before unload guard
+    window.addEventListener('beforeunload', (e) => {
+        if (formState.dirty) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
+}
+
+// Initialize page
+initRecord();
+populateStatusOptions();
+attachEvents();
+validateForm();
+  </script>
+ </body>
+</html>

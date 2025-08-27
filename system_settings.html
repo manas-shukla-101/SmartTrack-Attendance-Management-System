@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   System Settings | Attendance Admin
+  </title>
+  <!-- Brand Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Font Awesome 6 -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+   <!-- SweetAlert2 -->
+   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet"/>
+   <!-- Global Theme Styles -->
+   <link href="style.css" rel="stylesheet"/>
+   <!-- Page-specific Styles -->
+   <link href="system_settings.css" rel="stylesheet"/>
+   <style>
+    body { font-family: 'Poppins', var(--font-sans); }
+   </style>
+  </link>
+ </head>
+ <body>
+  <div class="admin-layout d-flex">
+   <!-- Sidebar (Left) -->
+   <nav class="admin-sidebar d-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brandlogo/36/36'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Attendance System
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/adminavatar/40/40'" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold">
+        Admin User
+       </div>
+       <small class="text-muted">
+        Administrator
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" href="./admin_dashboard.html">
+        <i class="fa-solid fa-gauge me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./reports_page.html">
+        <i class="fa-solid fa-chart-line me-2">
+        </i>
+        Reports
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./approval_queue.html">
+        <i class="fa-solid fa-list-check me-2">
+        </i>
+        Approvals
+       </a>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminUsersMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenu" role="button">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Users
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminUsersMenu">
+        <a class="nav-link" href="./user_management.html">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Manage Users
+        </a>
+        <a class="nav-link" href="./user_form.html">
+         <i class="fa-solid fa-user-plus me-2">
+         </i>
+         Add New User
+        </a>
+       </div>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminSettingsMenu" aria-expanded="true" class="nav-link active" data-bs-toggle="collapse" href="#adminSettingsMenu" role="button">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse show ps-4" id="adminSettingsMenu">
+        <a class="nav-link active" href="./system_settings.html">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         System Settings
+        </a>
+        <a class="nav-link" href="./calendar_settings.html">
+         <i class="fa-solid fa-calendar-days me-2">
+         </i>
+         Calendar
+        </a>
+        <a class="nav-link" href="./schedule_settings.html">
+         <i class="fa-solid fa-clock me-2">
+         </i>
+         Bell Schedules
+        </a>
+        <a class="nav-link" href="./codes_settings.html">
+         <i class="fa-solid fa-code me-2">
+         </i>
+         Attendance Codes
+        </a>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Right Content: Header + Main + Footer -->
+   <div class="content flex-grow-1 d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <nav class="admin-header navbar navbar-expand-lg px-3">
+     <button class="btn btn-link d-lg-none" data-bs-target="#sidebar" data-bs-toggle="offcanvas">
+      <i class="fa-solid fa-bars">
+      </i>
+     </button>
+     <a class="navbar-brand d-flex align-items-center" href="./admin_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brandmark/28/28'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Admin Portal
+      </span>
+     </a>
+     <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+      <div class="input-group">
+       <span class="input-group-text bg-white">
+        <i class="fa-solid fa-magnifying-glass">
+        </i>
+       </span>
+       <input class="form-control" placeholder="Search students, classes, users..." type="search"/>
+      </div>
+     </form>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item me-2">
+       <a class="nav-link position-relative" href="#">
+        <i class="fa-solid fa-bell">
+        </i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+         3
+        </span>
+       </a>
+      </li>
+      <li class="nav-item me-2">
+       <a class="nav-link" href="#">
+        <i class="fa-solid fa-envelope">
+        </i>
+       </a>
+      </li>
+      <li class="nav-item dropdown">
+       <a aria-expanded="false" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user32/32/32'" src="https://via.placeholder.com/32"/>
+        Admin
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./user_management.html">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Manage Users
+         </a>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./system_settings.html">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          Settings
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main Content -->
+    <main class="main-panel container-fluid py-3 flex-grow-1">
+     <!-- Page Header -->
+     <div class="page-header">
+      <div class="d-flex align-items-center gap-2">
+       <nav aria-label="breadcrumb" class="breadcrumb mb-0">
+        <span class="breadcrumb-item">
+         <a href="./admin_dashboard.html">
+          <i class="fa-solid fa-gauge me-1">
+          </i>
+          Dashboard
+         </a>
+        </span>
+        <span aria-current="page" class="breadcrumb-item active">
+         System Settings
+        </span>
+       </nav>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+       <button class="btn btn-light" id="btnViewDocs">
+        <i class="fa-solid fa-book me-2">
+        </i>
+        Docs
+       </button>
+       <button class="btn btn-primary" id="btnSaveAll">
+        <i class="fa-solid fa-floppy-disk me-2">
+        </i>
+        Save All
+       </button>
+      </div>
+     </div>
+     <!-- System Feedback -->
+     <div aria-live="polite" class="mb-3" id="feedbackArea">
+     </div>
+     <div class="row g-3 g-lg-4">
+      <!-- Left: Settings Tabs -->
+      <aside class="col-12 col-lg-3">
+       <div class="card h-100">
+        <div class="card-header">
+         <div class="widget-title">
+          <i class="fa-solid fa-sliders me-2 text-primary">
+          </i>
+          Settings Panels
+         </div>
+        </div>
+        <div class="list-group list-group-flush nav nav-pills flex-column settings-nav" id="settingsTabs" role="tablist">
+         <a aria-controls="panel-calendar" aria-selected="true" class="list-group-item list-group-item-action active" data-bs-toggle="pill" href="#panel-calendar" id="tab-calendar" role="tab">
+          <i class="fa-solid fa-calendar-days me-2">
+          </i>
+          Calendar
+         </a>
+         <a aria-controls="panel-schedules" aria-selected="false" class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#panel-schedules" id="tab-schedules" role="tab">
+          <i class="fa-solid fa-clock me-2">
+          </i>
+          Bell Schedules
+         </a>
+         <a aria-controls="panel-codes" aria-selected="false" class="list-group-item list-group-item-action" data-bs-toggle="pill" href="#panel-codes" id="tab-codes" role="tab">
+          <i class="fa-solid fa-code me-2">
+          </i>
+          Attendance Codes
+         </a>
+        </div>
+        <div class="card-body">
+         <div class="small text-muted">
+          Choose a panel to configure. Changes apply system-wide. Ensure you Save after edits.
+         </div>
+        </div>
+       </div>
+      </aside>
+      <!-- Right: Panels Content -->
+      <section class="col-12 col-lg-9">
+       <div class="tab-content" id="settingsTabsContent">
+        <!-- CalendarSettingsPanel -->
+        <div aria-labelledby="tab-calendar" class="tab-pane fade show active" id="panel-calendar" role="tabpanel">
+         <div class="card mb-3">
+          <div class="card-header">
+           <div class="d-flex align-items-center justify-content-between w-100">
+            <div class="widget-title">
+             <i class="fa-solid fa-calendar-check me-2 text-primary">
+             </i>
+             Academic Year
+            </div>
+            <span class="badge-soft info">
+             <i class="fa-solid fa-circle-info me-1">
+             </i>
+             Impacts attendance calculations
+            </span>
+           </div>
+          </div>
+          <div class="card-body">
+           <form class="row g-3 align-items-end" id="academicYearForm">
+            <div class="col-md-5">
+             <label class="form-label" for="ayStart">
+              Start Date
+             </label>
+             <input class="form-control" id="ayStart" required="" type="date"/>
+            </div>
+            <div class="col-md-5">
+             <label class="form-label" for="ayEnd">
+              End Date
+             </label>
+             <input class="form-control" id="ayEnd" required="" type="date"/>
+            </div>
+            <div class="col-md-2 d-grid">
+             <button class="btn btn-success" id="saveYearBtn" type="submit">
+              <i class="fa-solid fa-save me-1">
+              </i>
+              Save
+             </button>
+            </div>
+            <div class="col-12">
+             <small class="form-text">
+              <i class="fa-solid fa-triangle-exclamation text-warning me-1">
+              </i>
+              Start date must be before end date. Both dates are required.
+             </small>
+            </div>
+           </form>
+          </div>
+         </div>
+         <div class="card">
+          <div class="card-header">
+           <div class="d-flex align-items-center justify-content-between w-100">
+            <div class="widget-title">
+             <i class="fa-solid fa-calendar-days me-2 text-primary">
+             </i>
+             Interactive Calendar
+            </div>
+            <div class="d-flex align-items-center gap-2">
+             <div class="legend d-none d-md-flex align-items-center gap-2 small">
+              <span class="badge-soft success">
+               <span class="status-dot success">
+               </span>
+               School Day
+              </span>
+              <span class="badge-soft warning">
+               <span class="status-dot warning">
+               </span>
+               Holiday/Break
+              </span>
+              <span class="badge-soft info">
+               <span class="status-dot info">
+               </span>
+               Teacher Workday
+              </span>
+             </div>
+             <div class="btn-group">
+              <button class="btn btn-light btn-sm" id="prevMonth">
+               <i class="fa-solid fa-chevron-left">
+               </i>
+              </button>
+              <button class="btn btn-light btn-sm" id="todayBtn">
+               Today
+              </button>
+              <button class="btn btn-light btn-sm" id="nextMonth">
+               <i class="fa-solid fa-chevron-right">
+               </i>
+              </button>
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="card-body">
+           <div class="d-flex align-items-center justify-content-between mb-2">
+            <h5 class="mb-0" id="calendarMonthLabel">
+             Loading...
+            </h5>
+            <div class="small text-muted" id="calendarYearRange">
+            </div>
+           </div>
+           <div aria-live="polite" class="calendar" id="calendarGrid">
+            <!-- Calendar grid will render here -->
+            <div class="skeleton" style="height:220px">
+            </div>
+           </div>
+           <div class="mt-3 small text-muted">
+            Click a date to add or edit a special day. Regular school days are implied unless marked as Holiday/Break or Teacher Workday.
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- BellScheduleSettingsPanel -->
+        <div aria-labelledby="tab-schedules" class="tab-pane fade" id="panel-schedules" role="tabpanel">
+         <div class="row g-3">
+          <div class="col-12 col-xl-4">
+           <div class="card h-100">
+            <div class="card-header d-flex align-items-center justify-content-between">
+             <div class="widget-title">
+              <i class="fa-solid fa-bell me-2 text-primary">
+              </i>
+              Schedules
+             </div>
+             <button class="btn btn-sm btn-primary" id="addScheduleBtn">
+              <i class="fa-solid fa-plus me-1">
+              </i>
+              Add New
+             </button>
+            </div>
+            <div class="card-body p-0">
+             <div class="list-group list-group-flush" id="scheduleList">
+              <!-- Schedules populated dynamically -->
+              <div class="p-3">
+               <span class="skeleton" style="height:16px">
+               </span>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="col-12 col-xl-8">
+           <div class="card h-100">
+            <div class="card-header d-flex align-items-center justify-content-between">
+             <div class="widget-title">
+              <i class="fa-solid fa-pen-to-square me-2 text-primary">
+              </i>
+              Schedule Editor
+             </div>
+             <div>
+              <button class="btn btn-sm btn-light me-2" id="cancelScheduleBtn">
+               <i class="fa-solid fa-xmark me-1">
+               </i>
+               Cancel
+              </button>
+              <button class="btn btn-sm btn-success" id="saveScheduleBtn">
+               <i class="fa-solid fa-save me-1">
+               </i>
+               Save
+              </button>
+             </div>
+            </div>
+            <div class="card-body">
+             <form class="grid gap-3" id="scheduleForm">
+              <div>
+               <label class="form-label" for="scheduleName">
+                Schedule Name
+               </label>
+               <input class="form-control" id="scheduleName" placeholder="e.g., Regular Day" required="" type="text"/>
+               <small class="form-text">
+                Required. Make it descriptive.
+               </small>
+              </div>
+              <div class="table-responsive">
+               <table class="table table-theme align-middle" id="periodsTable">
+                <thead>
+                 <tr>
+                  <th style="width:45%">
+                   Period
+                  </th>
+                  <th style="width:22.5%">
+                   Start
+                  </th>
+                  <th style="width:22.5%">
+                   End
+                  </th>
+                  <th class="text-end" style="width:10%">
+                   <button class="btn btn-sm btn-info" id="addPeriodBtn" type="button">
+                    <i class="fa-solid fa-plus">
+                    </i>
+                   </button>
+                  </th>
+                 </tr>
+                </thead>
+                <tbody id="periodsTbody">
+                 <!-- Period rows -->
+                </tbody>
+               </table>
+              </div>
+             </form>
+             <div class="d-flex align-items-center justify-content-between mt-2">
+              <div class="small text-muted">
+               Periods cannot overlap. End time must be after start time.
+              </div>
+              <button class="btn btn-sm btn-outline-danger d-none" id="deleteScheduleBtn">
+               <i class="fa-solid fa-trash me-1">
+               </i>
+               Delete
+              </button>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- AttendanceCodeSettingsPanel -->
+        <div aria-labelledby="tab-codes" class="tab-pane fade" id="panel-codes" role="tabpanel">
+         <div class="card mb-3">
+          <div class="card-header d-flex align-items-center justify-content-between">
+           <div class="widget-title">
+            <i class="fa-solid fa-qrcode me-2 text-primary">
+            </i>
+            Attendance Codes
+           </div>
+           <div>
+            <button class="btn btn-sm btn-primary" id="addCodeBtn">
+             <i class="fa-solid fa-plus me-1">
+             </i>
+             Add Code
+            </button>
+           </div>
+          </div>
+          <div class="card-body">
+           <div class="row g-3 align-items-end mb-3">
+            <div class="col-md-4">
+             <label class="form-label" for="codesSearch">
+              Search
+             </label>
+             <input class="form-control" id="codesSearch" placeholder="Search code or description" type="text"/>
+            </div>
+            <div class="col-md-3">
+             <label class="form-label" for="typeFilter">
+              Filter Type
+             </label>
+             <select class="form-select" id="typeFilter">
+              <option value="">
+               All
+              </option>
+              <option>
+               Present
+              </option>
+              <option>
+               Absent
+              </option>
+              <option>
+               Tardy
+              </option>
+              <option>
+               Excused
+              </option>
+             </select>
+            </div>
+            <div class="col-md-5 text-md-end">
+             <small class="text-muted">
+              Sortable columns. Click headers to sort.
+             </small>
+            </div>
+           </div>
+           <div class="table-responsive">
+            <table class="table table-theme table-hover-reveal" id="codesTable">
+             <thead>
+              <tr>
+               <th data-sort="code" role="button">
+                Code
+                <i class="fa-solid fa-sort ms-1">
+                </i>
+               </th>
+               <th data-sort="description" role="button">
+                Description
+                <i class="fa-solid fa-sort ms-1">
+                </i>
+               </th>
+               <th data-sort="type" role="button">
+                Type
+                <i class="fa-solid fa-sort ms-1">
+                </i>
+               </th>
+               <th class="text-center" data-sort="truancy" role="button">
+                Counts Toward Truancy
+                <i class="fa-solid fa-sort ms-1">
+                </i>
+               </th>
+               <th class="text-end">
+                Actions
+               </th>
+              </tr>
+             </thead>
+             <tbody id="codesTbody">
+              <!-- Rows dynamically rendered -->
+              <tr>
+               <td colspan="5">
+                <span class="skeleton" style="height:16px">
+                </span>
+               </td>
+              </tr>
+             </tbody>
+            </table>
+           </div>
+           <div class="d-flex align-items-center justify-content-between mt-2">
+            <div class="small text-muted" id="codesPagination">
+             Showing 0 of 0
+            </div>
+            <div class="small text-muted" id="codesSortInfo">
+             Sort: code (asc)
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="card">
+          <div class="card-header">
+           <div class="widget-title">
+            <i class="fa-solid fa-chart-column me-2 text-primary">
+            </i>
+            Code Usage (Last 30 Days)
+           </div>
+          </div>
+          <div class="card-body">
+           <canvas aria-label="Usage chart" height="120" id="codesUsageChart" role="img">
+           </canvas>
+           <small class="text-muted">
+            Interactive: hover for details
+           </small>
+          </div>
+         </div>
+        </div>
+       </div>
+      </section>
+     </div>
+    </main>
+    <!-- Footer -->
+    <footer class="admin-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/footerlogo/18/18'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Toast Container for inline notifications -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+   <div aria-atomic="true" aria-live="assertive" class="toast align-items-center border-0" id="liveToast" role="alert">
+    <div class="d-flex">
+     <div class="toast-body">
+      Action completed successfully.
+     </div>
+     <button aria-label="Close" class="btn-close me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/plugin/customParseFormat.js">
+  </script>
+  <script>
+   dayjs.extend(window.dayjs_plugin_customParseFormat)
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Initialize Bootstrap tooltips
+document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+
+// Feedback helper
+function showFeedback(message, type = 'success') {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type} alert-dismissible fade show`;
+    alert.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+    const area = document.getElementById('feedbackArea');
+    area.innerHTML = '';
+    area.appendChild(alert);
+    setTimeout(() => {
+        const toastEl = document.getElementById('liveToast');
+        toastEl.querySelector('.toast-body').textContent = message;
+        const toast = new bootstrap.Toast(toastEl, {
+            delay: 2500
+        });
+        toast.show();
+    }, 150);
+}
+
+// Save All button
+document.getElementById('btnSaveAll').addEventListener('click', () => {
+    Swal.fire({
+        icon: 'success',
+        title: 'All changes saved',
+        text: 'Your system settings have been updated.',
+        confirmButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--color-success') || '#00774E'
+    });
+});
+
+// Docs button
+document.getElementById('btnViewDocs').addEventListener('click', () => {
+    Swal.fire({
+        icon: 'info',
+        title: 'System Settings Docs',
+        html: '<div class="text-start">\n          <p>Use Calendar to configure academic year and non-instructional days.</p>\n          <p>Use Bell Schedules to define periods for different day types.</p>\n          <p>Use Attendance Codes to manage the code list teachers use during roll call.</p>\n        </div>',
+        confirmButtonText: 'Got it'
+    });
+});
+
+// -----------------------------
+// CalendarSettingsPanel Logic
+// -----------------------------
+const calendarState = {
+    current: dayjs().startOf('month'),
+    academicYear: {
+        start: dayjs().startOf('year'),
+        end: dayjs().endOf('year')
+    },
+    events: [{
+        date: dayjs().format('YYYY-MM-DD'),
+        name: 'Teacher Workday',
+        type: 'Workday'
+    }, {
+        date: dayjs().add(7, 'day').format('YYYY-MM-DD'),
+        name: 'Fall Break',
+        type: 'Holiday'
+    }, {
+        date: dayjs().add(14, 'day').format('YYYY-MM-DD'),
+        name: 'Assembly',
+        type: 'Special'
+    }]
+};
+
+const ayStart = document.getElementById('ayStart');
+const ayEnd = document.getElementById('ayEnd');
+const calendarMonthLabel = document.getElementById('calendarMonthLabel');
+const calendarYearRange = document.getElementById('calendarYearRange');
+const calendarGrid = document.getElementById('calendarGrid');
+
+function initAcademicYear() {
+    ayStart.value = calendarState.academicYear.start.format('YYYY-MM-DD');
+    ayEnd.value = calendarState.academicYear.end.format('YYYY-MM-DD');
+    calendarYearRange.textContent = `${calendarState.academicYear.start.format('MMM D, YYYY')} – ${calendarState.academicYear.end.format('MMM D, YYYY')}`;
+}
+
+function renderCalendar() {
+    const month = calendarState.current;
+    calendarMonthLabel.textContent = month.format('MMMM YYYY');
+    const startOfMonth = month.startOf('month');
+    const endOfMonth = month.endOf('month');
+    const startWeekday = startOfMonth.day(); // 0=Sun
+    const daysInMonth = month.daysInMonth();
+
+    // Header row for weekdays
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let html = '<div class="cal-weekdays">' + weekdays.map(d => `<div class="weekday">${d}</div>`).join('') + '</div>';
+
+    // Empty cells before start
+    html += '<div class="cal-days">';
+    for (let i = 0; i < startWeekday; i++) html += '<div class="day empty"></div>';
+
+    // Days
+    for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = month.date(d).format('YYYY-MM-DD');
+        const isToday = dayjs().isSame(month.date(d), 'day');
+        const ev = calendarState.events.find(e => e.date === dateStr);
+        const withinAY = dayjs(dateStr).isAfter(calendarState.academicYear.start.subtract(1, 'day')) && dayjs(dateStr).isBefore(calendarState.academicYear.end.add(1, 'day'));
+        const classes = ["day", withinAY ? '' : 'out-of-year', isToday ? 'today' : '', ev ? `has-event type-${(ev.type||'').toLowerCase()}` : ''].join(' ');
+        html += `<button type="button" class="${classes}" data-date="${dateStr}" aria-label="${dateStr}">` +
+            `<span class="date">${d}</span>` +
+            (ev ? `<span class="event-chip">${ev.name}</span>` : '') +
+            `</button>`;
+    }
+    html += '</div>';
+    calendarGrid.innerHTML = html;
+
+    // Attach click handlers
+    calendarGrid.querySelectorAll('.day').forEach(btn => {
+        if (!btn.classList.contains('empty')) {
+            btn.addEventListener('click', onDayClick);
+        }
+    });
+}
+
+function onDayClick(e) {
+    const dateStr = e.currentTarget.getAttribute('data-date');
+    const existing = calendarState.events.find(ev => ev.date === dateStr);
+    const types = ['Holiday', 'Workday', 'Special'];
+    const typeOptions = types.map(t => `<option ${existing && existing.type===t ? 'selected' : ''}>${t}</option>`).join('');
+    Swal.fire({
+        title: dayjs(dateStr).format('dddd, MMM D, YYYY'),
+        html: `
+          <div class="text-start">
+            <div class="mb-2">
+              <label class="form-label">Event Name</label>
+              <input id="swalEvName" class="swal2-input" value="${existing ? existing.name : ''}" placeholder="e.g., Winter Break">
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Event Type</label>
+              <select id="swalEvType" class="swal2-select">${typeOptions}</select>
+            </div>
+          </div>
+        `,
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: existing ? 'Save' : 'Add',
+        showDenyButton: !!existing,
+        denyButtonText: 'Delete',
+        preConfirm: () => {
+            const name = document.getElementById('swalEvName').value.trim();
+            const type = document.getElementById('swalEvType').value;
+            if (!name) {
+                Swal.showValidationMessage('Event Name is required');
+                return false;
+            }
+            return {
+                name,
+                type
+            };
+        }
+    }).then(res => {
+        if (res.isConfirmed && res.value) {
+            const idx = calendarState.events.findIndex(ev => ev.date === dateStr);
+            if (idx >= 0) {
+                calendarState.events[idx] = {
+                    date: dateStr,
+                    ...res.value
+                };
+            } else {
+                calendarState.events.push({
+                    date: dateStr,
+                    ...res.value
+                });
+            }
+            renderCalendar();
+            showFeedback('Calendar updated successfully.');
+        } else if (res.isDenied) {
+            calendarState.events = calendarState.events.filter(ev => ev.date !== dateStr);
+            renderCalendar();
+            showFeedback('Event deleted.', 'warning');
+        }
+    });
+}
+
+document.getElementById('prevMonth').addEventListener('click', () => {
+    calendarState.current = calendarState.current.subtract(1, 'month');
+    renderCalendar();
+});
+document.getElementById('nextMonth').addEventListener('click', () => {
+    calendarState.current = calendarState.current.add(1, 'month');
+    renderCalendar();
+});
+document.getElementById('todayBtn').addEventListener('click', () => {
+    calendarState.current = dayjs().startOf('month');
+    renderCalendar();
+});
+
+document.getElementById('academicYearForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const start = dayjs(ayStart.value, 'YYYY-MM-DD');
+    const end = dayjs(ayEnd.value, 'YYYY-MM-DD');
+    if (!start.isValid() || !end.isValid()) {
+        showFeedback('Please provide both start and end dates.', 'danger');
+        return;
+    }
+    if (!start.isBefore(end)) {
+        showFeedback('Start date must be before end date.', 'danger');
+        return;
+    }
+    calendarState.academicYear = {
+        start,
+        end
+    };
+    calendarYearRange.textContent = `${start.format('MMM D, YYYY')} – ${end.format('MMM D, YYYY')}`;
+    Swal.fire({
+        icon: 'success',
+        title: 'Academic year saved',
+        timer: 1500,
+        showConfirmButton: false
+    });
+    renderCalendar();
+});
+
+// Initialize calendar UI
+initAcademicYear();
+setTimeout(renderCalendar, 250); // simulate loading
+
+// -----------------------------
+// BellScheduleSettingsPanel Logic
+// -----------------------------
+const scheduleListEl = document.getElementById('scheduleList');
+const scheduleNameEl = document.getElementById('scheduleName');
+const periodsTbody = document.getElementById('periodsTbody');
+const addPeriodBtn = document.getElementById('addPeriodBtn');
+const saveScheduleBtn = document.getElementById('saveScheduleBtn');
+const cancelScheduleBtn = document.getElementById('cancelScheduleBtn');
+const deleteScheduleBtn = document.getElementById('deleteScheduleBtn');
+
+let schedules = [{
+    id: 'sch1',
+    name: 'Regular Day',
+    periods: [{
+        name: 'Period 1',
+        start: '08:00',
+        end: '08:45'
+    }, {
+        name: 'Period 2',
+        start: '08:50',
+        end: '09:35'
+    }, {
+        name: 'Period 3',
+        start: '09:40',
+        end: '10:25'
+    }, {
+        name: 'Lunch',
+        start: '10:25',
+        end: '11:05'
+    }, {
+        name: 'Period 4',
+        start: '11:10',
+        end: '11:55'
+    }]
+}, {
+    id: 'sch2',
+    name: 'Half Day',
+    periods: [{
+        name: 'Period 1',
+        start: '08:00',
+        end: '08:35'
+    }, {
+        name: 'Period 2',
+        start: '08:40',
+        end: '09:15'
+    }, {
+        name: 'Period 3',
+        start: '09:20',
+        end: '09:55'
+    }, {
+        name: 'Period 4',
+        start: '10:00',
+        end: '10:35'
+    }]
+}, {
+    id: 'sch3',
+    name: 'Assembly Schedule',
+    periods: [{
+        name: 'Period 1',
+        start: '08:00',
+        end: '08:40'
+    }, {
+        name: 'Assembly',
+        start: '08:45',
+        end: '09:30'
+    }, {
+        name: 'Period 2',
+        start: '09:35',
+        end: '10:15'
+    }, {
+        name: 'Period 3',
+        start: '10:20',
+        end: '11:00'
+    }]
+}];
+let selectedScheduleId = schedules[0].id;
+
+function renderScheduleList() {
+    if (!schedules.length) {
+        scheduleListEl.innerHTML = '<div class="p-3 text-muted">No schedules. Click Add New to create.</div>';
+        return;
+    }
+    scheduleListEl.innerHTML = schedules.map(s => `
+        <a href="#" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between ${s.id===selectedScheduleId ? 'active' : ''}" data-id="${s.id}">
+          <span><i class="fa-solid fa-bell me-2"></i>${s.name}</span>
+          <span class="hover-control"><button class="btn btn-sm btn-outline-danger delete-schedule" data-id="${s.id}"><i class="fa-solid fa-trash"></i></button></span>
+        </a>`).join('');
+    scheduleListEl.querySelectorAll('.list-group-item').forEach(el => el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = el.getAttribute('data-id');
+        selectedScheduleId = id;
+        renderScheduleList();
+        loadScheduleToForm();
+    }));
+    scheduleListEl.querySelectorAll('.delete-schedule').forEach(btn => btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = btn.getAttribute('data-id');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Delete schedule?',
+            text: 'This cannot be undone.',
+            showCancelButton: true
+        }).then(r => {
+            if (r.isConfirmed) {
+                schedules = schedules.filter(s => s.id !== id);
+                if (selectedScheduleId === id && schedules[0]) selectedScheduleId = schedules[0].id;
+                renderScheduleList();
+                loadScheduleToForm();
+                showFeedback('Schedule deleted', 'warning');
+            }
+        });
+    }));
+}
+
+function loadScheduleToForm() {
+    const sch = schedules.find(s => s.id === selectedScheduleId) || {
+        id: null,
+        name: '',
+        periods: []
+    };
+    scheduleNameEl.value = sch.name || '';
+    deleteScheduleBtn.classList.toggle('d-none', !sch.id);
+    renderPeriods(sch.periods);
+}
+
+function renderPeriods(periods) {
+    periodsTbody.innerHTML = '';
+    (periods || []).forEach((p, idx) => addPeriodRow(p.name, p.start, p.end));
+    if (!periods || periods.length === 0) addPeriodRow('Period 1', '08:00', '08:45');
+}
+
+function addPeriodRow(name = '', start = '08:00', end = '08:45') {
+    const id = crypto.randomUUID();
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td><input type="text" class="form-control period-name" value="${name}" placeholder="Period name" required></td>
+        <td><input type="time" class="form-control period-start" value="${start}" required></td>
+        <td><input type="time" class="form-control period-end" value="${end}" required></td>
+        <td class="text-end"><button type="button" class="btn btn-sm btn-outline-danger remove-period" data-id="${id}"><i class="fa-solid fa-trash"></i></button></td>`;
+    periodsTbody.appendChild(tr);
+    tr.querySelector('.remove-period').addEventListener('click', () => {
+        tr.remove();
+    });
+}
+
+document.getElementById('addScheduleBtn').addEventListener('click', () => {
+    const newId = crypto.randomUUID();
+    schedules.push({
+        id: newId,
+        name: 'New Schedule',
+        periods: []
+    });
+    selectedScheduleId = newId;
+    renderScheduleList();
+    loadScheduleToForm();
+});
+
+addPeriodBtn.addEventListener('click', () => addPeriodRow());
+
+cancelScheduleBtn.addEventListener('click', () => loadScheduleToForm());
+
+deleteScheduleBtn.addEventListener('click', () => {
+    const id = selectedScheduleId;
+    if (!id) return;
+    Swal.fire({
+        icon: 'warning',
+        title: 'Delete schedule?',
+        text: 'This cannot be undone.',
+        showCancelButton: true
+    }).then(r => {
+        if (r.isConfirmed) {
+            schedules = schedules.filter(s => s.id !== id);
+            selectedScheduleId = schedules[0] ? schedules[0].id : null;
+            renderScheduleList();
+            loadScheduleToForm();
+            showFeedback('Schedule deleted', 'warning');
+        }
+    });
+});
+
+function validateScheduleForm() {
+    const name = scheduleNameEl.value.trim();
+    if (!name) {
+        showFeedback('Schedule name is required.', 'danger');
+        return null;
+    }
+    const rows = Array.from(periodsTbody.querySelectorAll('tr'));
+    const periods = rows.map(r => ({
+        name: r.querySelector('.period-name').value.trim(),
+        start: r.querySelector('.period-start').value,
+        end: r.querySelector('.period-end').value
+    }));
+    // Check basic validity
+    for (const p of periods) {
+        if (!p.name || !p.start || !p.end) {
+            showFeedback('All periods must have name, start and end times.', 'danger');
+            return null;
+        }
+        if (p.end <= p.start) {
+            showFeedback(`End time must be after start time for ${p.name}.`, 'danger');
+            return null;
+        }
+    }
+    // Overlap check
+    const toMinutes = t => parseInt(t.split(':')[0]) * 60 + parseInt(t.split(':')[1]);
+    const sorted = periods.map(p => ({
+        ...p,
+        s: toMinutes(p.start),
+        e: toMinutes(p.end)
+    })).sort((a, b) => a.s - b.s);
+    for (let i = 1; i < sorted.length; i++) {
+        if (sorted[i].s < sorted[i - 1].e) {
+            showFeedback(`Time overlap between ${sorted[i-1].name} and ${sorted[i].name}.`, 'danger');
+            return null;
+        }
+    }
+    return {
+        name,
+        periods
+    };
+}
+
+saveScheduleBtn.addEventListener('click', () => {
+    const data = validateScheduleForm();
+    if (!data) return;
+    if (!selectedScheduleId) {
+        selectedScheduleId = crypto.randomUUID();
+        schedules.push({
+            id: selectedScheduleId,
+            ...data
+        });
+    } else {
+        const idx = schedules.findIndex(s => s.id === selectedScheduleId);
+        if (idx >= 0) schedules[idx] = {
+            id: selectedScheduleId,
+            ...data
+        };
+    }
+    renderScheduleList();
+    showFeedback('Schedule saved successfully.');
+});
+
+// Initialize schedules UI
+setTimeout(() => {
+    renderScheduleList();
+    loadScheduleToForm();
+}, 250);
+
+// -----------------------------
+// AttendanceCodeSettingsPanel Logic
+// -----------------------------
+let codes = [{
+    code: 'P',
+    description: 'Present',
+    type: 'Present',
+    truancy: false
+}, {
+    code: 'A',
+    description: 'Absent (Unexcused)',
+    type: 'Absent',
+    truancy: true
+}, {
+    code: 'E',
+    description: 'Excused Absence',
+    type: 'Excused',
+    truancy: false
+}, {
+    code: 'T',
+    description: 'Tardy',
+    type: 'Tardy',
+    truancy: true
+}, {
+    code: 'L',
+    description: 'Left Early',
+    type: 'Excused',
+    truancy: false
+}, {
+    code: 'F',
+    description: 'Field Trip',
+    type: 'Excused',
+    truancy: false
+}];
+
+const codesTbody = document.getElementById('codesTbody');
+const codesSearch = document.getElementById('codesSearch');
+const typeFilter = document.getElementById('typeFilter');
+const codesPagination = document.getElementById('codesPagination');
+const codesSortInfo = document.getElementById('codesSortInfo');
+let sortState = {
+    column: 'code',
+    direction: 'asc'
+};
+
+function renderCodes() {
+    const term = codesSearch.value.trim().toLowerCase();
+    const filter = typeFilter.value;
+    let rows = codes.filter(c => (!filter || c.type === filter) && (c.code.toLowerCase().includes(term) || c.description.toLowerCase().includes(term)));
+    rows.sort((a, b) => {
+        const col = sortState.column;
+        let va = a[col],
+            vb = b[col];
+        if (col === 'truancy') {
+            va = a.truancy ? 1 : 0;
+            vb = b.truancy ? 1 : 0;
+        }
+        if (typeof va === 'string') {
+            va = va.toLowerCase();
+            vb = vb.toLowerCase();
+        }
+        if (va < vb) return sortState.direction === 'asc' ? -1 : 1;
+        if (va > vb) return sortState.direction === 'asc' ? 1 : -1;
+        return 0;
+    });
+    codesTbody.innerHTML = rows.map(c => `
+        <tr>
+          <td><span class="fw-bold">${c.code}</span></td>
+          <td>${c.description}</td>
+          <td>${c.type}</td>
+          <td class="text-center">${c.truancy ? '<span class="badge-soft error"><i class="fa-solid fa-circle-exclamation me-1"></i>Yes</span>' : '<span class="badge-soft success"><i class="fa-solid fa-circle-check me-1"></i>No</span>'}</td>
+          <td class="text-end">
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-light edit-code" data-code="${c.code}"><i class="fa-solid fa-pen"></i></button>
+              <button class="btn btn-light text-danger delete-code" data-code="${c.code}"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>`).join('');
+    codesPagination.textContent = `Showing ${rows.length} of ${codes.length}`;
+    codesSortInfo.textContent = `Sort: ${sortState.column} (${sortState.direction})`;
+
+    codesTbody.querySelectorAll('.edit-code').forEach(btn => btn.addEventListener('click', () => openCodeEditor(btn.getAttribute('data-code'))));
+    codesTbody.querySelectorAll('.delete-code').forEach(btn => btn.addEventListener('click', () => deleteCode(btn.getAttribute('data-code'))));
+}
+
+function openCodeEditor(codeKey = null) {
+    const editing = codeKey != null;
+    const codeObj = editing ? codes.find(c => c.code === codeKey) : {
+        code: '',
+        description: '',
+        type: 'Present',
+        truancy: false
+    };
+    Swal.fire({
+        title: editing ? `Edit Code: ${codeObj.code}` : 'Add New Code',
+        html: `
+          <div class="text-start">
+            <label class="form-label">Code</label>
+            <input id="swalCode" class="swal2-input" value="${codeObj.code}" placeholder="e.g., P" ${editing ? 'readonly' : ''}>
+            <label class="form-label mt-2">Description</label>
+            <input id="swalDesc" class="swal2-input" value="${codeObj.description}" placeholder="e.g., Present">
+            <label class="form-label mt-2">Type</label>
+            <select id="swalType" class="swal2-select">
+              ${['Present','Absent','Tardy','Excused'].map(t => `<option ${codeObj.type===t?'selected':''}>${t}</option>`).join('')}
+            </select>
+            <div class="form-check form-switch mt-3">
+              <input class="form-check-input" type="checkbox" id="swalTruancy" ${codeObj.truancy?'checked':''}>
+              <label class="form-check-label" for="swalTruancy">Counts Toward Truancy</label>
+            </div>
+          </div>`,
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+        preConfirm: () => {
+            const code = document.getElementById('swalCode').value.trim().toUpperCase();
+            const description = document.getElementById('swalDesc').value.trim();
+            const type = document.getElementById('swalType').value;
+            const truancy = document.getElementById('swalTruancy').checked;
+            if (!code) {
+                Swal.showValidationMessage('Code is required.');
+                return false;
+            }
+            if (!description) {
+                Swal.showValidationMessage('Description is required.');
+                return false;
+            }
+            if (!editing && codes.some(c => c.code === code)) {
+                Swal.showValidationMessage('Code must be unique.');
+                return false;
+            }
+            return {
+                code,
+                description,
+                type,
+                truancy
+            };
+        }
+    }).then(res => {
+        if (res.isConfirmed && res.value) {
+            if (editing) {
+                const idx = codes.findIndex(c => c.code === codeObj.code);
+                codes[idx] = res.value;
+            } else {
+                codes.push(res.value);
+            }
+            renderCodes();
+            showFeedback('Codes updated successfully.');
+        }
+    });
+}
+
+function deleteCode(codeKey) {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Delete code?',
+        text: 'This action cannot be undone.',
+        showCancelButton: true
+    }).then(r => {
+        if (r.isConfirmed) {
+            codes = codes.filter(c => c.code !== codeKey);
+            renderCodes();
+            showFeedback('Code deleted.', 'warning');
+        }
+    });
+}
+
+// Sorting handlers
+document.querySelectorAll('#codesTable thead th[role="button"]').forEach(th => {
+    th.addEventListener('click', () => {
+        const col = th.getAttribute('data-sort');
+        if (sortState.column === col) {
+            sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            sortState.column = col;
+            sortState.direction = 'asc';
+        }
+        renderCodes();
+    });
+});
+
+codesSearch.addEventListener('input', renderCodes);
+typeFilter.addEventListener('change', renderCodes);
+setTimeout(renderCodes, 250);
+
+// Add Code button
+document.getElementById('addCodeBtn').addEventListener('click', () => openCodeEditor());
+
+// Chart.js - usage chart
+const chartCtx = document.getElementById('codesUsageChart');
+const usageLabels = codes.map(c => c.code);
+const usageData = codes.map(() => Math.floor(50 + Math.random() * 150));
+new Chart(chartCtx, {
+    type: 'bar',
+    data: {
+        labels: usageLabels,
+        datasets: [{
+            label: 'Count',
+            data: usageData,
+            backgroundColor: 'rgba(240,142,27,0.5)',
+            borderColor: 'rgba(240,142,27,1)',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(240,142,27,0.7)'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                enabled: true
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+  </script>
+ </body>
+</html>

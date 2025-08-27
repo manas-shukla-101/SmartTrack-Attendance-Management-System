@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Attendance Codes Settings | Admin
+  </title>
+  <!-- Brand font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+  <!-- Theme CSS -->
+  <link href="style.css" rel="stylesheet"/>
+  <!-- Page-specific CSS -->
+  <link href="codes_settings.css" rel="stylesheet"/>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <style>
+   html, body { font-family: 'Poppins', var(--font-sans, system-ui), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+  </style>
+ </head>
+ <body>
+  <div class="d-flex min-vh-100 bg-transparent">
+   <!-- Sidebar (Common Component) -->
+   <nav aria-label="Sidebar Navigation" class="admin-sidebar d-none d-lg-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/36/36';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Attendance System
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/40/40';" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold">
+        Admin User
+       </div>
+       <small class="text-muted">
+        Administrator
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" href="./admin_dashboard.html">
+        <i class="fa-solid fa-gauge me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./reports_page.html">
+        <i class="fa-solid fa-chart-line me-2">
+        </i>
+        Reports
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./approval_queue.html">
+        <i class="fa-solid fa-list-check me-2">
+        </i>
+        Approvals
+       </a>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminUsersMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenu" role="button">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Users
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminUsersMenu">
+        <a class="nav-link" href="./user_management.html">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Manage Users
+        </a>
+        <a class="nav-link" href="./user_form.html">
+         <i class="fa-solid fa-user-plus me-2">
+         </i>
+         Add New User
+        </a>
+       </div>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminSettingsMenu" aria-expanded="true" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenu" role="button">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse show ps-4" id="adminSettingsMenu">
+        <a class="nav-link" href="./system_settings.html">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         System Settings
+        </a>
+        <a class="nav-link" href="./calendar_settings.html">
+         <i class="fa-solid fa-calendar-days me-2">
+         </i>
+         Calendar
+        </a>
+        <a class="nav-link" href="./schedule_settings.html">
+         <i class="fa-solid fa-clock me-2">
+         </i>
+         Bell Schedules
+        </a>
+        <a class="nav-link active" href="./codes_settings.html">
+         <i class="fa-solid fa-code me-2">
+         </i>
+         Attendance Codes
+        </a>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Mobile sidebar as offcanvas -->
+   <div aria-labelledby="mobileSidebarLabel" class="offcanvas offcanvas-start" id="mobileSidebar" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title" id="mobileSidebarLabel">
+      Menu
+     </h5>
+     <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+    <div class="offcanvas-body p-0">
+     <nav class="admin-sidebar d-flex flex-column" style="width:100%; min-height:auto; border-right:0;">
+      <div class="brand d-flex align-items-center p-3">
+       <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/36/36';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+       <div class="fw-bold">
+        Attendance System
+       </div>
+      </div>
+      <ul class="nav flex-column mt-2">
+       <li class="nav-item">
+        <a class="nav-link" href="./admin_dashboard.html">
+         <i class="fa-solid fa-gauge me-2">
+         </i>
+         Dashboard
+        </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="./reports_page.html">
+         <i class="fa-solid fa-chart-line me-2">
+         </i>
+         Reports
+        </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="./approval_queue.html">
+         <i class="fa-solid fa-list-check me-2">
+         </i>
+         Approvals
+        </a>
+       </li>
+       <li class="nav-item">
+        <a aria-controls="mUsersMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#mUsersMenu" role="button">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Users
+         <i class="fa-solid fa-chevron-down float-end">
+         </i>
+        </a>
+        <div class="collapse ps-4" id="mUsersMenu">
+         <a class="nav-link" href="./user_management.html">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Manage Users
+         </a>
+         <a class="nav-link" href="./user_form.html">
+          <i class="fa-solid fa-user-plus me-2">
+          </i>
+          Add New User
+         </a>
+        </div>
+       </li>
+       <li class="nav-item">
+        <a aria-controls="mSettingsMenu" aria-expanded="true" class="nav-link" data-bs-toggle="collapse" href="#mSettingsMenu" role="button">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         Settings
+         <i class="fa-solid fa-chevron-down float-end">
+         </i>
+        </a>
+        <div class="collapse show ps-4" id="mSettingsMenu">
+         <a class="nav-link" href="./system_settings.html">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          System Settings
+         </a>
+         <a class="nav-link" href="./calendar_settings.html">
+          <i class="fa-solid fa-calendar-days me-2">
+          </i>
+          Calendar
+         </a>
+         <a class="nav-link" href="./schedule_settings.html">
+          <i class="fa-solid fa-clock me-2">
+          </i>
+          Bell Schedules
+         </a>
+         <a class="nav-link active" href="./codes_settings.html">
+          <i class="fa-solid fa-code me-2">
+          </i>
+          Attendance Codes
+         </a>
+        </div>
+       </li>
+       <li class="nav-item p-3">
+        <a class="btn btn-outline-secondary w-100" href="./index.html">
+         <i class="fa-solid fa-right-from-bracket me-2">
+         </i>
+         Logout
+        </a>
+       </li>
+      </ul>
+     </nav>
+    </div>
+   </div>
+   <!-- Right Column -->
+   <div class="flex-grow-1 d-flex flex-column">
+    <!-- Header (Common Component) -->
+    <nav class="admin-header navbar navbar-expand-lg px-3">
+     <button aria-label="Open Menu" class="btn btn-link d-lg-none" data-bs-target="#mobileSidebar" data-bs-toggle="offcanvas">
+      <i class="fa-solid fa-bars">
+      </i>
+     </button>
+     <a class="navbar-brand d-flex align-items-center" href="./admin_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/28/28';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Admin Portal
+      </span>
+     </a>
+     <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+      <div class="input-group">
+       <span class="input-group-text bg-white">
+        <i class="fa-solid fa-magnifying-glass">
+        </i>
+       </span>
+       <input class="form-control" placeholder="Search students, classes, users..." type="search"/>
+      </div>
+     </form>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item me-2">
+       <a aria-label="Notifications" class="nav-link position-relative" href="#">
+        <i class="fa-solid fa-bell">
+        </i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+         3
+        </span>
+       </a>
+      </li>
+      <li class="nav-item me-2">
+       <a aria-label="Messages" class="nav-link" href="#">
+        <i class="fa-solid fa-envelope">
+        </i>
+       </a>
+      </li>
+      <li class="nav-item dropdown">
+       <a aria-expanded="false" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/32/32';" src="https://via.placeholder.com/32"/>
+        Admin
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./user_management.html">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Manage Users
+         </a>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./system_settings.html">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          Settings
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main Content -->
+    <main class="main-panel container-fluid">
+     <div class="container-max">
+      <!-- Page header -->
+      <div class="page-header">
+       <div>
+        <div class="breadcrumb small mb-1">
+         <span class="breadcrumb-item">
+          <a href="./admin_dashboard.html">
+           Dashboard
+          </a>
+         </span>
+         <span class="breadcrumb-item">
+          <a href="./system_settings.html">
+           Settings
+          </a>
+         </span>
+         <span aria-current="page" class="breadcrumb-item active">
+          Attendance Codes
+         </span>
+        </div>
+        <h1 class="page-title mb-0">
+         Attendance Codes Settings
+        </h1>
+       </div>
+       <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-primary" id="btnAddCodeHeader">
+         <i class="fa-solid fa-plus me-2">
+         </i>
+         Add New Code
+        </button>
+       </div>
+      </div>
+      <!-- Notification/Feedback Area -->
+      <div class="mb-3" id="systemFeedback" style="display:none;">
+      </div>
+      <!-- Card: Codes List -->
+      <div class="card app-card">
+       <div class="card-header">
+        <div class="title d-flex align-items-center gap-2">
+         <i class="fa-solid fa-code text-primary">
+         </i>
+         <span class="widget-title">
+          All Attendance Codes
+         </span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+         <button class="btn btn-primary" id="btnAddCode">
+          <i class="fa-solid fa-plus me-2">
+          </i>
+          Add New Code
+         </button>
+        </div>
+       </div>
+       <div class="card-body">
+        <!-- Filters -->
+        <div class="row g-2 align-items-center mb-3">
+         <div class="col-12 col-md-6">
+          <div class="input-group">
+           <span class="input-group-text">
+            <i class="fa-solid fa-magnifying-glass">
+            </i>
+           </span>
+           <input class="form-control" id="searchInput" placeholder="Search by name, abbreviation, description..." type="text"/>
+          </div>
+         </div>
+         <div class="col-6 col-md-3">
+          <select class="form-select" id="truancyFilter">
+           <option value="all">
+            All codes
+           </option>
+           <option value="true">
+            Counts toward truancy
+           </option>
+           <option value="false">
+            Does not count toward truancy
+           </option>
+          </select>
+         </div>
+         <div class="col-6 col-md-3 text-md-end">
+          <div class="d-flex gap-2 justify-content-end">
+           <select class="form-select" id="rowsPerPage" style="max-width: 140px;">
+            <option selected="" value="5">
+             Rows: 5
+            </option>
+            <option value="10">
+             Rows: 10
+            </option>
+            <option value="20">
+             Rows: 20
+            </option>
+           </select>
+           <button class="btn btn-light" id="btnClearFilters">
+            <i class="fa-solid fa-eraser me-2">
+            </i>
+            Clear
+           </button>
+          </div>
+         </div>
+        </div>
+        <!-- Loading state -->
+        <div class="loading-state" id="loadingState" style="display:none;">
+         <div class="skeleton w-100" style="height:14px;">
+         </div>
+         <div class="skeleton w-100 mt-2" style="height:14px;">
+         </div>
+         <div class="skeleton w-100 mt-2" style="height:14px;">
+         </div>
+        </div>
+        <!-- Error state -->
+        <div class="alert alert-danger d-none" id="errorState" role="alert">
+         <i class="fa-solid fa-triangle-exclamation me-2">
+         </i>
+         <span id="errorText">
+          Failed to load codes. Please retry.
+         </span>
+         <button class="btn btn-sm btn-danger ms-2" id="retryLoad">
+          Retry
+         </button>
+        </div>
+        <!-- Table -->
+        <div class="table-responsive">
+         <table class="table table-theme align-middle" id="codesTable">
+          <thead>
+           <tr>
+            <th class="sortable" data-sort-key="name" scope="col">
+             Code Name
+             <i class="sort-indicator fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="sortable" data-sort-key="abbreviation" scope="col">
+             Abbreviation
+             <i class="sort-indicator fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="sortable" data-sort-key="description" scope="col">
+             Description
+             <i class="sort-indicator fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="sortable text-center" data-sort-key="countsTowardsTruancy" scope="col">
+             Counts Towards Truancy
+             <i class="sort-indicator fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="text-end" scope="col">
+             Actions
+            </th>
+           </tr>
+          </thead>
+          <tbody id="codesTbody">
+           <!-- Rows injected by JS -->
+          </tbody>
+         </table>
+        </div>
+        <!-- Pagination -->
+        <div class="d-flex align-items-center justify-content-between mt-2">
+         <div class="text-muted small" id="pageInfo">
+          Showing 0 to 0 of 0 codes
+         </div>
+         <nav aria-label="Codes pagination">
+          <ul class="pagination pagination-sm mb-0" id="pagination">
+           <!-- Pagination items -->
+          </ul>
+         </nav>
+        </div>
+       </div>
+      </div>
+     </div>
+    </main>
+    <!-- Footer (Common Component) -->
+    <footer class="admin-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/18/18';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Modal: Add/Edit Code -->
+  <div aria-hidden="true" aria-labelledby="codeModalLabel" class="modal fade" id="codeModal" tabindex="-1">
+   <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+     <div class="modal-header bg-muted">
+      <h5 class="modal-title" id="codeModalLabel">
+       Add New Code
+      </h5>
+      <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+      </button>
+     </div>
+     <form id="codeForm" novalidate="">
+      <div class="modal-body">
+       <input id="codeId" type="hidden"/>
+       <div class="row g-3">
+        <div class="col-md-6">
+         <label class="form-label" for="codeName">
+          Code Name
+         </label>
+         <input class="form-control" id="codeName" maxlength="50" required="" type="text"/>
+         <div class="invalid-feedback">
+          Code Name is required and must be unique.
+         </div>
+        </div>
+        <div class="col-md-6">
+         <label class="form-label" for="codeAbbr">
+          Abbreviation
+         </label>
+         <input class="form-control" id="codeAbbr" maxlength="5" required="" type="text"/>
+         <div class="invalid-feedback">
+          Abbreviation is required and must be unique.
+         </div>
+        </div>
+        <div class="col-12">
+         <label class="form-label" for="codeDesc">
+          Description
+         </label>
+         <textarea class="form-control" id="codeDesc" maxlength="255" placeholder="Describe when this code should be used" rows="3"></textarea>
+         <div class="form-text">
+          Optional. Max 255 characters.
+         </div>
+        </div>
+        <div class="col-12">
+         <div class="form-check form-switch">
+          <input class="form-check-input" id="codeTruancy" role="switch" type="checkbox"/>
+          <label class="form-check-label" for="codeTruancy">
+           Counts towards truancy/chronic absenteeism?
+          </label>
+         </div>
+        </div>
+        <div class="col-12 d-none" id="systemDefaultInfo">
+         <div class="alert alert-info mb-0">
+          <i class="fa-solid fa-circle-info me-2">
+          </i>
+          This is a system default code. It cannot be deleted.
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+       <button class="btn btn-light" data-bs-dismiss="modal" type="button">
+        Cancel
+       </button>
+       <button class="btn btn-primary" id="btnSaveCode" type="submit">
+        <span class="save-label">
+         Save Code
+        </span>
+        <span aria-hidden="true" class="spinner-border spinner-border-sm ms-2 d-none" role="status">
+        </span>
+       </button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div>
+  <!-- Bootstrap JS -->
+  <script crossorigin="anonymous" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script>
+   // Data model (mock)
+let codes = [{
+    id: 1,
+    name: 'Present',
+    abbreviation: 'P',
+    description: 'Student is present in class',
+    countsTowardsTruancy: false,
+    systemDefault: true
+}, {
+    id: 2,
+    name: 'Absent - Unexcused',
+    abbreviation: 'AU',
+    description: 'Unexcused absence without valid reason',
+    countsTowardsTruancy: true,
+    systemDefault: true
+}, {
+    id: 3,
+    name: 'Absent - Excused',
+    abbreviation: 'AE',
+    description: 'Excused absence due to valid reason',
+    countsTowardsTruancy: false,
+    systemDefault: true
+}, {
+    id: 4,
+    name: 'Tardy',
+    abbreviation: 'T',
+    description: 'Arrived late to class',
+    countsTowardsTruancy: true,
+    systemDefault: false
+}, {
+    id: 5,
+    name: 'Early Dismissal',
+    abbreviation: 'ED',
+    description: 'Left class early with permission',
+    countsTowardsTruancy: false,
+    systemDefault: false
+}, {
+    id: 6,
+    name: 'Field Trip',
+    abbreviation: 'FT',
+    description: 'School-sanctioned field trip',
+    countsTowardsTruancy: false,
+    systemDefault: false
+}, {
+    id: 7,
+    name: 'In-School Suspension',
+    abbreviation: 'ISS',
+    description: 'Student removed from regular classes, in school',
+    countsTowardsTruancy: true,
+    systemDefault: false
+}];
+
+// State
+let currentSort = {
+    key: 'name',
+    dir: 'asc'
+};
+let currentPage = 1;
+let rowsPerPage = 5;
+let isLoading = true;
+
+// Elements
+const tbody = document.getElementById('codesTbody');
+const pageInfo = document.getElementById('pageInfo');
+const paginationEl = document.getElementById('pagination');
+const searchInput = document.getElementById('searchInput');
+const truancyFilter = document.getElementById('truancyFilter');
+const rowsPerPageSelect = document.getElementById('rowsPerPage');
+const clearFiltersBtn = document.getElementById('btnClearFilters');
+const loadingState = document.getElementById('loadingState');
+const errorState = document.getElementById('errorState');
+
+// Modal controls
+const codeModalEl = document.getElementById('codeModal');
+const codeModal = new bootstrap.Modal(codeModalEl);
+const codeForm = document.getElementById('codeForm');
+const codeId = document.getElementById('codeId');
+const codeName = document.getElementById('codeName');
+const codeAbbr = document.getElementById('codeAbbr');
+const codeDesc = document.getElementById('codeDesc');
+const codeTruancy = document.getElementById('codeTruancy');
+const systemDefaultInfo = document.getElementById('systemDefaultInfo');
+const btnSaveCode = document.getElementById('btnSaveCode');
+
+// Buttons
+document.getElementById('btnAddCode').addEventListener('click', () => openAddModal());
+document.getElementById('btnAddCodeHeader').addEventListener('click', () => openAddModal());
+
+// Sorting handlers
+document.querySelectorAll('#codesTable thead th.sortable').forEach(th => {
+    th.style.cursor = 'pointer';
+    th.addEventListener('click', () => {
+        const key = th.getAttribute('data-sort-key');
+        if (currentSort.key === key) {
+            currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
+        } else {
+            currentSort.key = key;
+            currentSort.dir = 'asc';
+        }
+        currentPage = 1;
+        render();
+    });
+});
+
+// Filter handlers
+searchInput.addEventListener('input', () => {
+    currentPage = 1;
+    render();
+});
+truancyFilter.addEventListener('change', () => {
+    currentPage = 1;
+    render();
+});
+rowsPerPageSelect.addEventListener('change', () => {
+    rowsPerPage = parseInt(rowsPerPageSelect.value, 10);
+    currentPage = 1;
+    render();
+});
+clearFiltersBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    truancyFilter.value = 'all';
+    rowsPerPageSelect.value = '5';
+    rowsPerPage = 5;
+    currentPage = 1;
+    render();
+});
+
+// Load simulation
+function simulateLoad() {
+    isLoading = true;
+    loadingState.style.display = 'block';
+    errorState.classList.add('d-none');
+    setTimeout(() => {
+        isLoading = false;
+        loadingState.style.display = 'none';
+        render();
+    }, 600);
+}
+
+document.getElementById('retryLoad').addEventListener('click', simulateLoad);
+
+// Render pipeline
+function applyFiltersAndSort(data) {
+    const q = searchInput.value.trim().toLowerCase();
+    const tf = truancyFilter.value;
+    let filtered = data.filter(c => {
+        const matchesQ = !q || c.name.toLowerCase().includes(q) || c.abbreviation.toLowerCase().includes(q) || (c.description || '').toLowerCase().includes(q);
+        const matchesT = tf === 'all' || (tf === 'true' && c.countsTowardsTruancy) || (tf === 'false' && !c.countsTowardsTruancy);
+        return matchesQ && matchesT;
+    });
+    filtered.sort((a, b) => {
+        const {
+            key,
+            dir
+        } = currentSort;
+        let va = a[key];
+        let vb = b[key];
+        // Normalize for string compare
+        if (typeof va === 'string') va = va.toLowerCase();
+        if (typeof vb === 'string') vb = vb.toLowerCase();
+        // Booleans: true > false
+        if (typeof va === 'boolean' && typeof vb === 'boolean') {
+            return dir === 'asc' ? (va === vb ? 0 : va ? 1 : -1) : (va === vb ? 0 : va ? -1 : 1);
+        }
+        if (va < vb) return dir === 'asc' ? -1 : 1;
+        if (va > vb) return dir === 'asc' ? 1 : -1;
+        return 0;
+    });
+    return filtered;
+}
+
+function renderTableRows(rows) {
+    tbody.innerHTML = '';
+    rows.forEach(code => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${escapeHtml(code.name)}</td>
+          <td><span class="badge bg-light text-dark border">${escapeHtml(code.abbreviation)}</span></td>
+          <td>${escapeHtml(code.description || '')}</td>
+          <td class="text-center">${code.countsTowardsTruancy
+            ? '<span class="badge-soft success"><i class="fa-solid fa-check me-1"></i>Yes</span>'
+            : '<span class="badge-soft warning"><i class="fa-solid fa-minus me-1"></i>No</span>'}
+          </td>
+          <td class="text-end">
+            <div class="d-inline-flex gap-1">
+              <button class="btn btn-light btn-sm" aria-label="Edit" data-action="edit" data-id="${code.id}"><i class="fa-solid fa-pen"></i></button>
+              ${code.systemDefault ? '' : `<button class="btn btn-danger btn-sm" aria-label="Delete" data-action="delete" data-id="${code.id}"><i class="fa-solid fa-trash"></i></button>`}
+            </div>
+          </td>`;
+        tbody.appendChild(tr);
+    });
+}
+
+function renderPagination(totalItems) {
+    const totalPages = Math.max(1, Math.ceil(totalItems / rowsPerPage));
+    if (currentPage > totalPages) currentPage = totalPages;
+    paginationEl.innerHTML = '';
+
+    const prevLi = document.createElement('li');
+    prevLi.className = 'page-item' + (currentPage === 1 ? ' disabled' : '');
+    prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>`;
+    prevLi.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+            currentPage--;
+            render();
+        }
+    });
+    paginationEl.appendChild(prevLi);
+
+    for (let p = 1; p <= totalPages; p++) {
+        const li = document.createElement('li');
+        li.className = 'page-item' + (p === currentPage ? ' active' : '');
+        li.innerHTML = `<a class="page-link" href="#">${p}</a>`;
+        li.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentPage = p;
+            render();
+        });
+        paginationEl.appendChild(li);
+    }
+
+    const nextLi = document.createElement('li');
+    nextLi.className = 'page-item' + (currentPage === totalPages ? ' disabled' : '');
+    nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>`;
+    nextLi.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+            currentPage++;
+            render();
+        }
+    });
+    paginationEl.appendChild(nextLi);
+
+    const start = (totalItems === 0) ? 0 : (currentPage - 1) * rowsPerPage + 1;
+    const end = Math.min(currentPage * rowsPerPage, totalItems);
+    pageInfo.textContent = `Showing ${start} to ${end} of ${totalItems} codes`;
+}
+
+function setSortIndicators() {
+    document.querySelectorAll('#codesTable thead th.sortable').forEach(th => {
+        const icon = th.querySelector('.sort-indicator');
+        const key = th.getAttribute('data-sort-key');
+        icon.className = 'sort-indicator fa-solid fa-sort ms-1 text-muted';
+        if (key === currentSort.key) {
+            icon.className = `sort-indicator fa-solid ${currentSort.dir === 'asc' ? 'fa-sort-up' : 'fa-sort-down'} ms-1 text-primary`;
+        }
+    });
+}
+
+function render() {
+    if (isLoading) {
+        loadingState.style.display = 'block';
+        return;
+    }
+    loadingState.style.display = 'none';
+    const filtered = applyFiltersAndSort(codes);
+    const total = filtered.length;
+    const startIdx = (currentPage - 1) * rowsPerPage;
+    const pageRows = filtered.slice(startIdx, startIdx + rowsPerPage);
+    renderTableRows(pageRows);
+    renderPagination(total);
+    setSortIndicators();
+    wireRowActions();
+}
+
+// Actions
+function wireRowActions() {
+    tbody.querySelectorAll('button[data-action]')?.forEach(btn => {
+        const id = parseInt(btn.getAttribute('data-id'), 10);
+        const action = btn.getAttribute('data-action');
+        if (action === 'edit') {
+            btn.addEventListener('click', () => openEditModal(id));
+        } else if (action === 'delete') {
+            btn.addEventListener('click', () => confirmDelete(id));
+        }
+    });
+}
+
+function openAddModal() {
+    resetForm();
+    document.getElementById('codeModalLabel').textContent = 'Add New Code';
+    systemDefaultInfo.classList.add('d-none');
+    codeModal.show();
+}
+
+function openEditModal(id) {
+    const c = codes.find(x => x.id === id);
+    if (!c) return;
+    resetForm();
+    document.getElementById('codeModalLabel').textContent = 'Edit Code';
+    codeId.value = c.id;
+    codeName.value = c.name;
+    codeAbbr.value = c.abbreviation;
+    codeDesc.value = c.description || '';
+    codeTruancy.checked = !!c.countsTowardsTruancy;
+    if (c.systemDefault) systemDefaultInfo.classList.remove('d-none');
+    else systemDefaultInfo.classList.add('d-none');
+    codeModal.show();
+}
+
+function resetForm() {
+    codeForm.classList.remove('was-validated');
+    codeId.value = '';
+    codeName.value = '';
+    codeAbbr.value = '';
+    codeDesc.value = '';
+    codeTruancy.checked = false;
+    codeName.classList.remove('is-invalid');
+    codeAbbr.classList.remove('is-invalid');
+    toggleSaveLoading(false);
+}
+
+function toggleSaveLoading(loading) {
+    const spinner = btnSaveCode.querySelector('.spinner-border');
+    const label = btnSaveCode.querySelector('.save-label');
+    if (loading) {
+        btnSaveCode.disabled = true;
+        spinner.classList.remove('d-none');
+        label.textContent = 'Saving...';
+    } else {
+        btnSaveCode.disabled = false;
+        spinner.classList.add('d-none');
+        label.textContent = 'Save Code';
+    }
+}
+
+function confirmDelete(id) {
+    const c = codes.find(x => x.id === id);
+    if (!c) return;
+    if (c.systemDefault) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Protected Code',
+            text: 'System-default codes cannot be deleted.'
+        });
+        return;
+    }
+    Swal.fire({
+        title: 'Delete Code?',
+        html: `Are you sure you want to delete <strong>${escapeHtml(c.name)} (${escapeHtml(c.abbreviation)})</strong>?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#CD2026'
+    }).then(result => {
+        if (result.isConfirmed) {
+            codes = codes.filter(x => x.id !== id);
+            Swal.fire({
+                icon: 'success',
+                title: 'Deleted',
+                timer: 1200,
+                showConfirmButton: false
+            });
+            // If last item on page removed, adjust page
+            const totalPages = Math.max(1, Math.ceil(applyFiltersAndSort(codes).length / rowsPerPage));
+            if (currentPage > totalPages) currentPage = totalPages;
+            render();
+        }
+    });
+}
+
+// Form submit
+codeForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const idVal = codeId.value ? parseInt(codeId.value, 10) : null;
+    const nameVal = codeName.value.trim();
+    const abbrVal = codeAbbr.value.trim();
+    const descVal = codeDesc.value.trim();
+    const truancyVal = !!codeTruancy.checked;
+
+    // Validation: required & unique
+    let valid = true;
+    if (!nameVal) {
+        valid = false;
+        codeName.classList.add('is-invalid');
+    } else {
+        codeName.classList.remove('is-invalid');
+    }
+    if (!abbrVal) {
+        valid = false;
+        codeAbbr.classList.add('is-invalid');
+    } else {
+        codeAbbr.classList.remove('is-invalid');
+    }
+
+    const nameExists = codes.some(c => c.name.toLowerCase() === nameVal.toLowerCase() && c.id !== idVal);
+    const abbrExists = codes.some(c => c.abbreviation.toLowerCase() === abbrVal.toLowerCase() && c.id !== idVal);
+    if (nameExists) {
+        valid = false;
+        codeName.classList.add('is-invalid');
+    }
+    if (abbrExists) {
+        valid = false;
+        codeAbbr.classList.add('is-invalid');
+    }
+
+    if (!valid) {
+        codeForm.classList.add('was-validated');
+        return;
+    }
+
+    toggleSaveLoading(true);
+    setTimeout(() => {
+        if (idVal) {
+            const idx = codes.findIndex(c => c.id === idVal);
+            if (idx !== -1) {
+                const keepSystemDefault = codes[idx].systemDefault === true;
+                codes[idx] = {
+                    id: idVal,
+                    name: nameVal,
+                    abbreviation: abbrVal,
+                    description: descVal,
+                    countsTowardsTruancy: truancyVal,
+                    systemDefault: keepSystemDefault
+                };
+            }
+            Swal.fire({
+                icon: 'success',
+                title: 'Code updated',
+                timer: 1200,
+                showConfirmButton: false
+            });
+        } else {
+            const newId = (codes.reduce((m, c) => Math.max(m, c.id), 0) + 1) || 1;
+            codes.push({
+                id: newId,
+                name: nameVal,
+                abbreviation: abbrVal,
+                description: descVal,
+                countsTowardsTruancy: truancyVal,
+                systemDefault: false
+            });
+            Swal.fire({
+                icon: 'success',
+                title: 'Code added',
+                timer: 1200,
+                showConfirmButton: false
+            });
+        }
+        codeModal.hide();
+        toggleSaveLoading(false);
+        render();
+    }, 600);
+});
+
+// Utils
+function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+}
+
+// Init
+simulateLoad();
+  </script>
+ </body>
+</html>

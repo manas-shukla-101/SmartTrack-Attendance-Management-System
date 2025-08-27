@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Attendance History
+  </title>
+  <!-- Brand Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Font Awesome 6 -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+   <!-- Global Theme Styles -->
+   <link href="style.css" rel="stylesheet"/>
+   <!-- Page-specific CSS -->
+   <link href="attendance_history.css" rel="stylesheet"/>
+   <!-- Flatpickr Datepicker CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet"/>
+   <!-- Choices.js for enhanced selects/autocomplete -->
+   <link href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" rel="stylesheet"/>
+   <!-- Common Components (Sidebar/Header/Footer) minimal styling from context -->
+   <style>
+    :root { --primary:#f08e1b; --secondary:#9a296a; }
+    .common-sidebar { width: 240px; min-height: 100vh; background:#fff; border-right:1px solid #eee; }
+    .common-sidebar .brand { background: var(--primary); color:#fff; }
+    .common-sidebar .nav-link { color:#333; border-radius:.4rem; margin:.15rem .5rem; }
+    .common-sidebar .nav-link:hover { background: rgba(154,41,106,0.08); }
+    .common-header { border-bottom:1px solid #eee; background:#fff; }
+    .common-footer { border-top:1px solid #eee; background:#f8f9fa; }
+    @media (max-width: 991.98px) {
+      .common-sidebar { display:none; }
+    }
+   </style>
+  </link>
+ </head>
+ <body>
+  <script>
+   // Assume this is set by your app auth layer; fallback for demo
+window.currentUserRole = window.currentUserRole || 'Teacher'; // 'Administrator' | 'Teacher' | 'Parent' | 'Student' | 'Substitute'
+  </script>
+  <div class="d-flex" style="min-height:100vh;">
+   <!-- Left Sidebar (present on this page) -->
+   <nav class="common-sidebar d-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/attendance/64/64'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:32px;"/>
+     <div class="fw-bold">
+      Attendance
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" data-role="auto" href="#" id="backToDashboard">
+        <i class="fa-solid fa-arrow-left me-2">
+        </i>
+        Back to Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link active" href="./attendance_history.html">
+        <i class="fa-solid fa-list me-2">
+        </i>
+        Attendance History
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_roster.html">
+        <i class="fa-solid fa-clipboard-check me-2">
+        </i>
+        Take Attendance
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./excuse_form.html">
+        <i class="fa-solid fa-file-circle-plus me-2">
+        </i>
+        Submit Excuse
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="#">
+        <i class="fa-solid fa-circle-question me-2">
+        </i>
+        Help
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3 border-top">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-to-bracket me-2">
+      </i>
+      Login
+     </a>
+    </div>
+   </nav>
+   <!-- Right Column: Header + Main + Footer -->
+   <div class="flex-grow-1 d-flex flex-column">
+    <!-- Header -->
+    <nav class="common-header navbar navbar-expand-lg px-3">
+     <a class="navbar-brand d-flex align-items-center" href="#">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/56/28'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Attendance
+      </span>
+     </a>
+     <span class="ms-3 text-muted d-none d-md-inline" id="commonPageTitle">
+      Attendance History
+     </span>
+     <button class="btn btn-light btn-sm ms-3 d-lg-none" id="openFilters">
+      <i class="fa-solid fa-sliders">
+      </i>
+      Filters
+     </button>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item d-flex align-items-center me-3">
+       <span class="badge rounded-pill bg-secondary-soft text-secondary" id="roleBadge">
+        <i class="fa-solid fa-user-shield me-1">
+        </i>
+        Role
+       </span>
+      </li>
+      <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#">
+        <img alt="Avatar" class="rounded-circle me-2" src="https://via.placeholder.com/28"/>
+        Account
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="#" id="backDashDD">
+          <i class="fa-solid fa-arrow-left me-2">
+          </i>
+          Back to Dashboard
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-to-bracket me-2">
+          </i>
+          Login
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+     <div class="container-fluid py-3">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="breadcrumb mb-3">
+       <span class="breadcrumb-item">
+        <a href="#">
+         Home
+        </a>
+       </span>
+       <span class="breadcrumb-item">
+        <a href="#">
+         Attendance
+        </a>
+       </span>
+       <span aria-current="page" class="breadcrumb-item active">
+        History
+       </span>
+      </nav>
+      <!-- Page Header / Title Row -->
+      <div class="page-header">
+       <div class="d-flex align-items-center gap-2">
+        <h1 class="page-title m-0">
+         Attendance History
+        </h1>
+        <span class="text-muted">
+         Review and export historical records
+        </span>
+       </div>
+       <div aria-label="view options" class="view-switcher" role="group">
+        <div class="option active" data-view="table">
+         <i class="fa-solid fa-table me-1">
+         </i>
+         Table
+        </div>
+        <div class="option" data-view="tiles">
+         <i class="fa-solid fa-grip me-1">
+         </i>
+         Tiles
+        </div>
+       </div>
+      </div>
+      <!-- System Feedback / Alerts -->
+      <div class="mb-3" id="feedbackArea" style="display:none;">
+       <div class="alert alert-info d-flex align-items-center" role="alert">
+        <i class="fa-solid fa-circle-info me-2">
+        </i>
+        <div id="feedbackMessage">
+         Filters applied.
+        </div>
+       </div>
+      </div>
+      <!-- Filters Panel -->
+      <section class="card mb-3" id="filtersCard">
+       <div class="card-header d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+         <i class="fa-solid fa-sliders text-primary">
+         </i>
+         <div class="widget-title">
+          Filter Records
+         </div>
+        </div>
+        <button aria-expanded="false" class="btn btn-light btn-sm d-lg-none" data-bs-target="#filtersCollapse" data-bs-toggle="collapse">
+         <i class="fa-solid fa-chevron-down">
+         </i>
+        </button>
+       </div>
+       <div class="card-body collapse show" id="filtersCollapse">
+        <div class="row g-3 align-items-end">
+         <!-- Student Search (Admin/Teacher) -->
+         <div class="col-12 col-md-4" data-role-visibility="Administrator,Teacher">
+          <label class="form-label" for="studentSearch">
+           Student
+          </label>
+          <select class="form-select" id="studentSearch" placeholder="Search for a student...">
+          </select>
+          <div class="form-text">
+           Search by name or ID
+          </div>
+         </div>
+         <!-- Class Selector (Teacher only) -->
+         <div class="col-12 col-md-3" data-role-visibility="Teacher">
+          <label class="form-label" for="classSelect">
+           Select Class
+          </label>
+          <select class="form-select" id="classSelect">
+          </select>
+         </div>
+         <!-- Date Range (All) -->
+         <div class="col-12 col-md-3">
+          <label class="form-label" for="dateStart">
+           Start Date
+          </label>
+          <input class="form-control" id="dateStart" placeholder="YYYY-MM-DD"/>
+         </div>
+         <div class="col-12 col-md-3">
+          <label class="form-label" for="dateEnd">
+           End Date
+          </label>
+          <input class="form-control" id="dateEnd" placeholder="YYYY-MM-DD"/>
+         </div>
+         <!-- Status Multi-select (All) -->
+         <div class="col-12 col-md-3">
+          <label class="form-label" for="statusSelect">
+           Status
+          </label>
+          <select class="form-select" id="statusSelect" multiple="">
+           <option value="Present">
+            Present
+           </option>
+           <option value="Absent">
+            Absent
+           </option>
+           <option value="Tardy">
+            Tardy
+           </option>
+           <option value="Excused">
+            Excused
+           </option>
+          </select>
+         </div>
+         <!-- Action Buttons -->
+         <div class="col-12 col-md-6 d-flex gap-2">
+          <button class="btn btn-primary" id="applyFiltersBtn">
+           <i class="fa-solid fa-filter me-2">
+           </i>
+           Apply Filters
+          </button>
+          <button class="btn btn-outline-primary" data-role-visibility="Administrator,Teacher" id="exportBtn">
+           <i class="fa-solid fa-download me-2">
+           </i>
+           Export CSV
+          </button>
+         </div>
+        </div>
+       </div>
+      </section>
+      <!-- Summary + Chart Row -->
+      <section class="mb-3">
+       <div class="row g-3">
+        <div class="col-12 col-lg-8">
+         <div class="card h-100">
+          <div class="card-header">
+           <div class="widget-title">
+            30-Day Attendance Trend
+           </div>
+          </div>
+          <div class="card-body">
+           <canvas height="120" id="trendChart">
+           </canvas>
+          </div>
+         </div>
+        </div>
+        <div class="col-12 col-lg-4">
+         <div class="grid auto-fit-sm">
+          <div class="metric-card">
+           <div class="metric-title">
+            Total Absences
+           </div>
+           <div class="metric-value" id="totalAbsences">
+            0
+           </div>
+          </div>
+          <div class="metric-card">
+           <div class="metric-title">
+            Total Tardies
+           </div>
+           <div class="metric-value" id="totalTardies">
+            0
+           </div>
+          </div>
+          <div class="metric-card">
+           <div class="metric-title">
+            Attendance Rate
+           </div>
+           <div class="metric-value" id="attendanceRate">
+            0%
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </section>
+      <!-- Records Table -->
+      <section class="card">
+       <div class="card-header">
+        <div class="d-flex align-items-center gap-2">
+         <i class="fa-solid fa-table text-primary">
+         </i>
+         <div class="widget-title">
+          Records
+         </div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+         <div class="text-muted small" id="paginationInfo">
+          Page 1 of 1 • 0 records
+         </div>
+        </div>
+       </div>
+       <div class="card-body p-0">
+        <div class="table-responsive">
+         <table class="table table-theme mb-0" id="recordsTable">
+          <thead>
+           <tr>
+            <th class="sortable" data-col="date">
+             Date
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="sortable" data-col="student" data-role-visibility="Administrator,Teacher">
+             Student
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="sortable" data-col="class">
+             Class
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th class="sortable" data-col="status">
+             Status
+             <i class="fa-solid fa-sort ms-1">
+             </i>
+            </th>
+            <th>
+             Notes
+            </th>
+            <th data-role-visibility="Teacher">
+             Actions
+            </th>
+           </tr>
+          </thead>
+          <tbody id="recordsTbody">
+           <!-- Rows injected by JS -->
+          </tbody>
+         </table>
+        </div>
+       </div>
+       <div class="card-footer d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div class="d-flex align-items-center gap-2">
+         <label class="form-label m-0" for="itemsPerPage">
+          Rows per page
+         </label>
+         <select class="form-select form-select-sm" id="itemsPerPage" style="width:auto;">
+          <option>
+           5
+          </option>
+          <option>
+           10
+          </option>
+          <option>
+           20
+          </option>
+         </select>
+        </div>
+        <nav>
+         <ul class="pagination pagination-sm mb-0" id="pagination">
+          <!-- Pagination injected by JS -->
+         </ul>
+        </nav>
+       </div>
+      </section>
+     </div>
+    </main>
+    <!-- Footer -->
+    <footer class="common-footer py-2 px-3 d-flex align-items-center justify-content-between">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/36/18'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <!-- Flatpickr -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr">
+  </script>
+  <!-- Choices.js -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js">
+  </script>
+  <script>
+   // Role-aware Back links (from provided common snippets)
+(function() {
+    const map = {
+        Admin: './admin_dashboard.html',
+        Teacher: './teacher_dashboard.html',
+        Parent: './parent_dashboard.html',
+        Student: './student_dashboard.html',
+        Substitute: './substitute_dashboard.html'
+    };
+    const role = (window.currentUserRole || '').trim();
+    const el = document.getElementById('backToDashboard');
+    if (el && map[role]) el.setAttribute('href', map[role]);
+    const back = document.getElementById('backDashDD');
+    if (back && map[role]) back.setAttribute('href', map[role]);
+})();
+
+// Role display and conditional UI
+function updateRoleUI() {
+    const role = (window.currentUserRole || '').trim();
+    const badge = document.getElementById('roleBadge');
+    if (badge) badge.innerHTML = `<i class="fa-solid fa-user-shield me-1"></i> ${role||'Guest'}`;
+    // toggle visibility
+    document.querySelectorAll('[data-role-visibility]').forEach(el => {
+        const allowed = (el.getAttribute('data-role-visibility') || '').split(',').map(s => s.trim());
+        if (!role || !allowed.includes(role)) {
+            el.style.display = 'none';
+        } else {
+            el.style.display = '';
+        }
+    });
+}
+
+// Initialize controls
+let statusChoices, studentChoices, classChoices, startPicker, endPicker;
+const today = new Date();
+
+function initControls() {
+    // Status multiselect
+    statusChoices = new Choices('#statusSelect', {
+        removeItemButton: true,
+        searchEnabled: false,
+        placeholder: true,
+        placeholderValue: 'All statuses'
+    });
+
+    // Date pickers with default to last 30 days
+    const defaultEnd = new Date();
+    const defaultStart = new Date();
+    defaultStart.setDate(defaultEnd.getDate() - 30);
+    startPicker = flatpickr('#dateStart', {
+        dateFormat: 'Y-m-d',
+        maxDate: today,
+        defaultDate: defaultStart
+    });
+    endPicker = flatpickr('#dateEnd', {
+        dateFormat: 'Y-m-d',
+        maxDate: today,
+        defaultDate: defaultEnd
+    });
+
+    // Student autocomplete (Choices as searchable select)
+    const students = getAvailableStudents();
+    const studentSelect = document.getElementById('studentSearch');
+    students.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = `${s.name} (${s.id})`;
+        studentSelect.appendChild(opt);
+    });
+    studentChoices = new Choices('#studentSearch', {
+        searchPlaceholderValue: 'Search for a student...',
+        placeholder: true,
+        allowHTML: false,
+        searchResultLimit: 10,
+        noResultsText: 'No student found',
+        shouldSort: false
+    });
+
+    // Class select for Teacher
+    const classes = getAvailableClasses();
+    const classSelect = document.getElementById('classSelect');
+    classes.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = c.name;
+        classSelect.appendChild(opt);
+    });
+    classChoices = new Choices('#classSelect', {
+        searchEnabled: false,
+        placeholder: true,
+        allowHTML: false,
+        itemSelectText: ''
+    });
+
+    // Filters button (mobile)
+    document.getElementById('openFilters')?.addEventListener('click', () => {
+        const el = document.getElementById('filtersCollapse');
+        if (el) new bootstrap.Collapse(el, {
+            toggle: true
+        });
+    });
+
+    document.getElementById('applyFiltersBtn')?.addEventListener('click', applyFilters);
+    document.getElementById('exportBtn')?.addEventListener('click', onExport);
+    document.getElementById('itemsPerPage')?.addEventListener('change', () => {
+        state.currentPage = 1;
+        render();
+    });
+
+    // Sorting
+    document.querySelectorAll('#recordsTable thead th.sortable').forEach(th => {
+        th.addEventListener('click', () => {
+            const col = th.getAttribute('data-col');
+            if (state.sortColumn === col) {
+                state.sortDirection = state.sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                state.sortColumn = col;
+                state.sortDirection = 'asc';
+            }
+            render();
+        });
+    });
+}
+
+// Mock data providers
+function getAvailableStudents() {
+    return [{
+        id: 'S1001',
+        name: 'Alex Johnson'
+    }, {
+        id: 'S1002',
+        name: 'Priya Patel'
+    }, {
+        id: 'S1003',
+        name: 'Marcus Lee'
+    }, {
+        id: 'S1004',
+        name: 'Sofia Garcia'
+    }, {
+        id: 'S1005',
+        name: 'Liam O\'Connor'
+    }];
+}
+
+function getAvailableClasses() {
+    return [{
+        id: 'C-ENG-101',
+        name: 'English 101'
+    }, {
+        id: 'C-MTH-201',
+        name: 'Math 201'
+    }, {
+        id: 'C-SCI-110',
+        name: 'Science 110'
+    }];
+}
+
+// Mock records
+const allRecords = [{
+    id: 'R001',
+    date: '2025-01-22',
+    studentId: 'S1001',
+    student: 'Alex Johnson',
+    classId: 'C-ENG-101',
+    class: 'English 101',
+    status: 'Present',
+    notes: '',
+    pendingCorrection: false
+}, {
+    id: 'R002',
+    date: '2025-01-21',
+    studentId: 'S1001',
+    student: 'Alex Johnson',
+    classId: 'C-ENG-101',
+    class: 'English 101',
+    status: 'Tardy',
+    notes: 'Arrived 10 min late',
+    pendingCorrection: false
+}, {
+    id: 'R003',
+    date: '2025-01-20',
+    studentId: 'S1002',
+    student: 'Priya Patel',
+    classId: 'C-MTH-201',
+    class: 'Math 201',
+    status: 'Absent',
+    notes: 'No note',
+    pendingCorrection: true
+}, {
+    id: 'R004',
+    date: '2025-01-19',
+    studentId: 'S1003',
+    student: 'Marcus Lee',
+    classId: 'C-SCI-110',
+    class: 'Science 110',
+    status: 'Present',
+    notes: '',
+    pendingCorrection: false
+}, {
+    id: 'R005',
+    date: '2025-01-18',
+    studentId: 'S1004',
+    student: 'Sofia Garcia',
+    classId: 'C-MTH-201',
+    class: 'Math 201',
+    status: 'Excused',
+    notes: 'Doctor\'s note',
+    pendingCorrection: false
+}, {
+    id: 'R006',
+    date: '2025-01-17',
+    studentId: 'S1005',
+    student: 'Liam O\'Connor',
+    classId: 'C-ENG-101',
+    class: 'English 101',
+    status: 'Absent',
+    notes: 'Family emergency',
+    pendingCorrection: false
+}, {
+    id: 'R007',
+    date: '2025-01-16',
+    studentId: 'S1002',
+    student: 'Priya Patel',
+    classId: 'C-SCI-110',
+    class: 'Science 110',
+    status: 'Present',
+    notes: '',
+    pendingCorrection: false
+}, {
+    id: 'R008',
+    date: '2025-01-15',
+    studentId: 'S1003',
+    student: 'Marcus Lee',
+    classId: 'C-MTH-201',
+    class: 'Math 201',
+    status: 'Tardy',
+    notes: 'Traffic',
+    pendingCorrection: false
+}, {
+    id: 'R009',
+    date: '2025-01-14',
+    studentId: 'S1004',
+    student: 'Sofia Garcia',
+    classId: 'C-ENG-101',
+    class: 'English 101',
+    status: 'Present',
+    notes: '',
+    pendingCorrection: false
+}, {
+    id: 'R010',
+    date: '2025-01-13',
+    studentId: 'S1005',
+    student: 'Liam O\'Connor',
+    classId: 'C-SCI-110',
+    class: 'Science 110',
+    status: 'Absent',
+    notes: '',
+    pendingCorrection: false
+}, {
+    id: 'R011',
+    date: '2025-01-12',
+    studentId: 'S1002',
+    student: 'Priya Patel',
+    classId: 'C-ENG-101',
+    class: 'English 101',
+    status: 'Present',
+    notes: '',
+    pendingCorrection: false
+}, {
+    id: 'R012',
+    date: '2025-01-11',
+    studentId: 'S1001',
+    student: 'Alex Johnson',
+    classId: 'C-SCI-110',
+    class: 'Science 110',
+    status: 'Excused',
+    notes: 'School trip',
+    pendingCorrection: false
+}];
+
+const state = {
+    filters: {
+        studentId: '',
+        classId: '',
+        startDate: '',
+        endDate: '',
+        statuses: []
+    },
+    currentPage: 1,
+    itemsPerPage: 5,
+    sortColumn: 'date',
+    sortDirection: 'desc',
+    records: []
+};
+
+function getFiltersFromUI() {
+    const role = (window.currentUserRole || '').trim();
+    const studentId = document.getElementById('studentSearch')?.value || '';
+    const classId = role === 'Teacher' ? (document.getElementById('classSelect')?.value || '') : '';
+    const startDate = document.getElementById('dateStart')?.value || '';
+    const endDate = document.getElementById('dateEnd')?.value || '';
+    const statuses = statusChoices ? statusChoices.getValue(true) : [];
+    return {
+        studentId,
+        classId,
+        startDate,
+        endDate,
+        statuses: Array.isArray(statuses) ? statuses : (statuses ? [statuses] : [])
+    };
+}
+
+function validateDateRange(start, end) {
+    if (!start || !end) return true;
+    const s = new Date(start + 'T00:00:00');
+    const e = new Date(end + 'T23:59:59');
+    if (s > e) return false;
+    if (e > today) return false;
+    return true;
+}
+
+function applyFilters() {
+    const f = getFiltersFromUI();
+    if (!validateDateRange(f.startDate, f.endDate)) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Invalid date range',
+            text: 'Ensure Start Date is before End Date and End Date is not in the future.'
+        });
+        return;
+    }
+    state.filters = f;
+    state.currentPage = 1;
+    showFeedback('Applying filters...');
+    // Simulate fetch latency
+    setTimeout(() => {
+        render();
+        showFeedback('Filters applied successfully.', true);
+    }, 500);
+}
+
+function showFeedback(message, autoHide = false) {
+    const area = document.getElementById('feedbackArea');
+    const msg = document.getElementById('feedbackMessage');
+    if (area && msg) {
+        msg.textContent = message;
+        area.style.display = '';
+        if (autoHide) setTimeout(() => area.style.display = 'none', 2000);
+    }
+}
+
+function filterRecords(dataset) {
+    const role = (window.currentUserRole || '').trim();
+    const {
+        studentId,
+        classId,
+        startDate,
+        endDate,
+        statuses
+    } = state.filters;
+    return dataset.filter(r => {
+        if (studentId && r.studentId !== studentId) return false;
+        if (role === 'Teacher' && classId && r.classId !== classId) return false;
+        if (startDate && r.date < startDate) return false;
+        if (endDate && r.date > endDate) return false;
+        if (statuses && statuses.length > 0 && !statuses.includes(r.status)) return false;
+        // For Parent/Student, you might filter to only their own studentId in real app
+        return true;
+    });
+}
+
+function sortRecords(records) {
+    const {
+        sortColumn,
+        sortDirection
+    } = state;
+    const dir = sortDirection === 'asc' ? 1 : -1;
+    const copy = [...records];
+    copy.sort((a, b) => {
+        let va, vb;
+        if (sortColumn === 'date') {
+            va = a.date;
+            vb = b.date;
+        } else if (sortColumn === 'student') {
+            va = a.student.toLowerCase();
+            vb = b.student.toLowerCase();
+        } else if (sortColumn === 'class') {
+            va = a.class.toLowerCase();
+            vb = b.class.toLowerCase();
+        } else if (sortColumn === 'status') {
+            va = a.status;
+            vb = b.status;
+        } else {
+            va = a[sortColumn];
+            vb = b[sortColumn];
+        }
+        if (va < vb) return -1 * dir;
+        if (va > vb) return 1 * dir;
+        return 0;
+    });
+    return copy;
+}
+
+function paginate(records) {
+    const per = state.itemsPerPage;
+    const start = (state.currentPage - 1) * per;
+    const end = start + per;
+    return records.slice(start, end);
+}
+
+function statusBadge(status) {
+    const map = {
+        Present: 'success',
+        Absent: 'error',
+        Tardy: 'warning',
+        Excused: 'info'
+    };
+    const cls = map[status] || 'neutral';
+    return `<span class="badge-soft ${cls}">${status}</span>`;
+}
+
+function renderTable(records) {
+    const tbody = document.getElementById('recordsTbody');
+    const role = (window.currentUserRole || '').trim();
+    const showStudentCol = (role === 'Administrator' || role === 'Teacher');
+    const showActions = (role === 'Teacher');
+    tbody.innerHTML = records.map(r => {
+        const disabled = r.pendingCorrection ? 'disabled' : '';
+        const tooltip = r.pendingCorrection ? 'data-bs-toggle="tooltip" data-bs-title="Request already pending"' : '';
+        return `<tr>
+          <td>${formatDate(r.date)}</td>
+          ${showStudentCol ? `<td>${escapeHtml(r.student)}</td>` : ''}
+          <td>${escapeHtml(r.class)}</td>
+          <td>${statusBadge(r.status)}</td>
+          <td>${escapeHtml(r.notes || '')}</td>
+          ${showActions ? `<td>
+            <button class="btn btn-sm btn-outline-primary" ${disabled} ${tooltip} onclick="onRequestCorrection('${r.id}')">
+              <i class="fa-solid fa-pen-to-square me-1"></i>Request Correction
+            </button>
+          </td>` : ''}
+        </tr>`;
+    }).join('');
+    // Enable tooltips
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+}
+
+function renderPagination(totalCount) {
+    const per = state.itemsPerPage;
+    const totalPages = Math.max(1, Math.ceil(totalCount / per));
+    const cur = Math.min(state.currentPage, totalPages);
+    state.currentPage = cur;
+    const ul = document.getElementById('pagination');
+    const createItem = (label, page, disabled = false, active = false, icon) => `
+        <li class="page-item ${disabled?'disabled':''} ${active?'active':''}">
+          <a class="page-link" href="#" onclick="event.preventDefault(); ${!disabled?`gotoPage(${page})`:''}">${icon?`<i class=\"${icon}\"></i>`:label}</a>
+        </li>`;
+    ul.innerHTML = [
+        createItem('First', 1, cur === 1, false, 'fa-solid fa-angles-left'),
+        createItem('Prev', Math.max(1, cur - 1), cur === 1, false, 'fa-solid fa-angle-left'),
+        createItem(String(cur), cur, true, true),
+        createItem('Next', Math.min(totalPages, cur + 1), cur === totalPages, false, 'fa-solid fa-angle-right'),
+        createItem('Last', totalPages, cur === totalPages, false, 'fa-solid fa-angles-right')
+    ].join('');
+    document.getElementById('paginationInfo').textContent = `Page ${cur} of ${totalPages} • ${totalCount} records`;
+}
+
+function gotoPage(p) {
+    state.currentPage = p;
+    render();
+}
+
+function computeSummary(records) {
+    const totals = {
+        Absent: 0,
+        Tardy: 0,
+        Present: 0,
+        Excused: 0
+    };
+    records.forEach(r => {
+        totals[r.status] = (totals[r.status] || 0) + 1;
+    });
+    const totalCount = records.length;
+    const presentCount = totals.Present || 0;
+    const rate = totalCount ? Math.round((presentCount / totalCount) * 100) : 0;
+    document.getElementById('totalAbsences').textContent = totals.Absent || 0;
+    document.getElementById('totalTardies').textContent = totals.Tardy || 0;
+    document.getElementById('attendanceRate').textContent = rate + '%';
+}
+
+function render() {
+    // Sync items per page
+    const perSel = document.getElementById('itemsPerPage');
+    state.itemsPerPage = parseInt(perSel?.value || '5', 10);
+
+    // Filter + sort
+    const filtered = filterRecords(allRecords);
+    const sorted = sortRecords(filtered);
+    const pageData = paginate(sorted);
+    renderTable(pageData);
+    renderPagination(filtered.length);
+    computeSummary(filtered);
+    updateTrendChart(filtered);
+}
+
+function onRequestCorrection(recordId) {
+    const record = allRecords.find(r => r.id === recordId);
+    if (!record) return;
+    if (record.pendingCorrection) return;
+    Swal.fire({
+        title: 'Request correction?',
+        text: `Record ${recordId} • ${record.date} • ${record.student} • ${record.class}`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, continue',
+        cancelButtonText: 'Cancel'
+    }).then(res => {
+        if (res.isConfirmed) {
+            const url = `./correction_form.html?recordId=${encodeURIComponent(recordId)}&date=${encodeURIComponent(record.date)}&student=${encodeURIComponent(record.student)}&class=${encodeURIComponent(record.class)}`;
+            window.location.href = url;
+        }
+    });
+}
+
+function onExport() {
+    const filtered = sortRecords(filterRecords(allRecords));
+    if (!filtered.length) {
+        Swal.fire({
+            icon: 'info',
+            title: 'No data to export',
+            text: 'Adjust filters and try again.'
+        });
+        return;
+    }
+    const csv = toCSV(filtered);
+    const blob = new Blob([csv], {
+        type: 'text/csv;charset=utf-8;'
+    });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `attendance_export_${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    Swal.fire({
+        icon: 'success',
+        title: 'Export started',
+        text: 'Your CSV has been downloaded.'
+    });
+}
+
+function toCSV(records) {
+    const role = (window.currentUserRole || '').trim();
+    const showStudentCol = (role === 'Administrator' || role === 'Teacher');
+    const headers = ['Date', ...(showStudentCol ? ['Student'] : []), 'Class', 'Status', 'Notes'];
+    const lines = [headers.join(',')];
+    records.forEach(r => {
+        const row = [r.date, ...(showStudentCol ? [r.student] : []), r.class, r.status, (r.notes || '')];
+        lines.push(row.map(csvEscape).join(','));
+    });
+    return lines.join('\n');
+}
+
+function csvEscape(val) {
+    const v = String(val || '');
+    if (v.includes(',') || v.includes('"') || v.includes('\n')) {
+        return '"' + v.replace(/"/g, '""') + '"';
+    }
+    return v;
+}
+
+function formatDate(iso) {
+    // Expect YYYY-MM-DD; display as Mon DD, YYYY
+    try {
+        const d = new Date(iso + 'T00:00:00');
+        return d.toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit'
+        });
+    } catch {
+        return iso;
+    }
+}
+
+function escapeHtml(str) {
+    return String(str).replace(/[&<>"]g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]));
+    }
+
+    // Chart
+    let chartInstance;
+
+    function updateTrendChart(records) {
+        // Build date -> counts
+        const map = {};
+        records.forEach(r => {
+            map[r.date] = (map[r.date] || 0) + (r.status === 'Present' ? 1 : 0);
+        });
+        // Last 30 days labels
+        const labels = [];
+        const values = [];
+        const end = new Date();
+        const start = new Date();
+        start.setDate(end.getDate() - 29);
+        for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+            const iso = d.toISOString().slice(0, 10);
+            labels.push(d.toLocaleDateString(undefined, {
+                month: 'short',
+                day: '2-digit'
+            }));
+            values.push(map[iso] || 0);
+        }
+        const ctx = document.getElementById('trendChart');
+        if (chartInstance) chartInstance.destroy();
+        chartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Present count',
+                    data: values,
+                    fill: true,
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--color-success') || '#00774E',
+                    backgroundColor: 'rgba(0,119,78,0.08)',
+                    tension: 0.25,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                }
+            }
+        });
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+        updateRoleUI();
+        initControls();
+        // Default apply filters
+        applyFilters();
+    });
+  </script>
+ </body>
+</html>

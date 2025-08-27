@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   User Form | Admin Portal
+  </title>
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+   <!-- Global Theme CSS -->
+   <link href="style.css" rel="stylesheet">
+    <!-- Page-specific CSS -->
+    <link href="user_form.css" rel="stylesheet"/>
+   </link>
+  </link>
+ </head>
+ <body>
+  <div class="d-flex min-vh-100">
+   <!-- Left Sidebar (Admin) -->
+   <nav aria-label="Sidebar Navigation" class="admin-sidebar d-flex flex-column" id="sidebar">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/attendance/36/36';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Attendance System
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/40/40';" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold">
+        Admin User
+       </div>
+       <small class="text-muted">
+        Administrator
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" href="./admin_dashboard.html">
+        <i class="fa-solid fa-gauge me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./reports_page.html">
+        <i class="fa-solid fa-chart-line me-2">
+        </i>
+        Reports
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./approval_queue.html">
+        <i class="fa-solid fa-list-check me-2">
+        </i>
+        Approvals
+       </a>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminUsersMenu" aria-expanded="true" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenu" role="button">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Users
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse show ps-4" id="adminUsersMenu">
+        <a class="nav-link" href="./user_management.html">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Manage Users
+        </a>
+        <a class="nav-link active" href="./user_form.html">
+         <i class="fa-solid fa-user-plus me-2">
+         </i>
+         Add New User
+        </a>
+       </div>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminSettingsMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenu" role="button">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminSettingsMenu">
+        <a class="nav-link" href="./system_settings.html">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         System Settings
+        </a>
+        <a class="nav-link" href="./calendar_settings.html">
+         <i class="fa-solid fa-calendar-days me-2">
+         </i>
+         Calendar
+        </a>
+        <a class="nav-link" href="./schedule_settings.html">
+         <i class="fa-solid fa-clock me-2">
+         </i>
+         Bell Schedules
+        </a>
+        <a class="nav-link" href="./codes_settings.html">
+         <i class="fa-solid fa-code me-2">
+         </i>
+         Attendance Codes
+        </a>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Content Area (Right) -->
+   <div class="flex-grow-1 d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <nav class="admin-header navbar navbar-expand-lg px-3">
+     <button aria-label="Toggle sidebar" class="btn btn-link d-lg-none" id="sidebarToggle">
+      <i class="fa-solid fa-bars">
+      </i>
+     </button>
+     <a class="navbar-brand d-flex align-items-center" href="./admin_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/28/28';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Admin Portal
+      </span>
+     </a>
+     <form class="d-none d-md-flex ms-3 flex-grow-1" onsubmit="event.preventDefault();" role="search">
+      <div class="input-group">
+       <span class="input-group-text bg-white">
+        <i class="fa-solid fa-magnifying-glass">
+        </i>
+       </span>
+       <input class="form-control" placeholder="Search students, classes, users..." type="search"/>
+      </div>
+     </form>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item me-2">
+       <a aria-label="Notifications" class="nav-link position-relative" href="#">
+        <i class="fa-solid fa-bell">
+        </i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+         3
+        </span>
+       </a>
+      </li>
+      <li class="nav-item me-2">
+       <a aria-label="Messages" class="nav-link" href="#">
+        <i class="fa-solid fa-envelope">
+        </i>
+       </a>
+      </li>
+      <li class="nav-item dropdown">
+       <a aria-expanded="false" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/admin/32/32';" src="https://via.placeholder.com/32"/>
+        Admin
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./user_management.html">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Manage Users
+         </a>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./system_settings.html">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          Settings
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main -->
+    <main class="container-fluid p-3 p-lg-4 flex-grow-1">
+     <!-- Breadcrumb -->
+     <nav class="breadcrumb">
+      <span class="breadcrumb-item">
+       <a href="./admin_dashboard.html">
+        Home
+       </a>
+      </span>
+      <span class="breadcrumb-item">
+       <a href="./user_management.html">
+        Users
+       </a>
+      </span>
+      <span aria-current="page" class="breadcrumb-item active" id="breadcrumbCurrent">
+       Create User
+      </span>
+     </nav>
+     <!-- Page Header -->
+     <div class="page-header">
+      <div class="d-flex align-items-center gap-2">
+       <h1 class="page-title mb-0" id="pageTitle">
+        Create New User
+       </h1>
+       <span class="badge-soft success d-none" id="userStatusBadge">
+        <span class="status-dot success me-1">
+        </span>
+        Active
+       </span>
+      </div>
+      <div class="text-muted small" id="auditInfoTop">
+       Last updated: —
+      </div>
+     </div>
+     <!-- Feedback/Alert placeholder -->
+     <div class="mb-3" id="feedbackArea">
+      <div class="alert alert-info d-none" id="infoAlert" role="alert">
+       <i class="fa-solid fa-circle-info me-2">
+       </i>
+       Fill out required fields and assign a role. Email will be used as the username.
+      </div>
+     </div>
+     <!-- Form Card -->
+     <div class="app-card mb-4">
+      <div class="card-header">
+       <div class="title d-flex align-items-center gap-2">
+        <i class="fa-solid fa-user-plus" id="headerIcon">
+        </i>
+        <span id="headerText">
+         New User Details
+        </span>
+       </div>
+       <div class="d-flex gap-2">
+        <button class="btn btn-light btn-sm" id="resetBtn" type="button">
+         <i class="fa-solid fa-rotate-left me-1">
+         </i>
+         Reset
+        </button>
+       </div>
+      </div>
+      <div class="card-body">
+       <!-- Loading skeleton for edit mode (hidden by default) -->
+       <div class="d-none" id="loadingSkeleton">
+        <div class="skeleton mb-3" style="height:24px">
+        </div>
+        <div class="skeleton mb-3" style="height:24px">
+        </div>
+        <div class="skeleton mb-3" style="height:24px">
+        </div>
+       </div>
+       <form class="needs-validation" id="userForm" novalidate="">
+        <!-- Personal Information -->
+        <section class="mb-4">
+         <div class="section-label mb-2">
+          Personal Information
+         </div>
+         <div class="row g-3">
+          <div class="col-md-4">
+           <label class="form-label" for="firstName">
+            First Name
+           </label>
+           <input class="form-control" id="firstName" pattern="^[A-Za-z'\-\s]+$" placeholder="Enter first name" required="" type="text"/>
+           <div class="invalid-feedback">
+            Please enter a valid first name (letters, spaces, hyphens, apostrophes).
+           </div>
+          </div>
+          <div class="col-md-4">
+           <label class="form-label" for="lastName">
+            Last Name
+           </label>
+           <input class="form-control" id="lastName" pattern="^[A-Za-z'\-\s]+$" placeholder="Enter last name" required="" type="text"/>
+           <div class="invalid-feedback">
+            Please enter a valid last name (letters, spaces, hyphens, apostrophes).
+           </div>
+          </div>
+          <div class="col-md-4">
+           <label class="form-label" for="staffId">
+            User/Staff ID
+           </label>
+           <input class="form-control" id="staffId" placeholder="Enter unique ID" required="" type="text"/>
+           <div class="form-text">
+            This unique ID may sync with SIS.
+           </div>
+           <div class="invalid-feedback">
+            User/Staff ID is required.
+           </div>
+          </div>
+         </div>
+        </section>
+        <!-- Contact & Role -->
+        <section class="mb-4">
+         <div class="section-label mb-2">
+          Contact &amp; Login
+         </div>
+         <div class="row g-3">
+          <div class="col-md-6">
+           <label class="form-label" for="email">
+            Email Address (Username)
+           </label>
+           <input class="form-control" id="email" placeholder="e.g., name@school.edu" required="" type="email"/>
+           <div class="invalid-feedback">
+            Please enter a valid email address.
+           </div>
+          </div>
+          <div class="col-md-6">
+           <label class="form-label" for="role">
+            System Role
+           </label>
+           <select class="form-select" id="role" required="">
+            <option disabled="" selected="" value="">
+             Select role...
+            </option>
+           </select>
+           <div class="invalid-feedback">
+            Please select a role.
+           </div>
+          </div>
+         </div>
+        </section>
+        <section class="mb-2">
+         <div class="d-flex align-items-center gap-2">
+          <i class="fa-solid fa-triangle-exclamation text-warning">
+          </i>
+          <small class="text-muted">
+           An activation email may be sent to the user upon creation.
+          </small>
+         </div>
+        </section>
+        <!-- Buttons -->
+        <div class="submit-action-footer d-flex justify-content-between align-items-center">
+         <div>
+          <button class="btn btn-danger d-none" id="deactivateBtn" type="button">
+           <i class="fa-solid fa-user-slash me-1">
+           </i>
+           Deactivate User
+          </button>
+         </div>
+         <div class="form-actions">
+          <a class="btn btn-light" href="./user_management.html" id="cancelBtn">
+           <i class="fa-solid fa-xmark me-1">
+           </i>
+           Cancel
+          </a>
+          <button class="btn btn-primary" id="saveBtn" type="submit">
+           <i class="fa-solid fa-floppy-disk me-1">
+           </i>
+           <span id="saveBtnText">
+            Create User
+           </span>
+          </button>
+         </div>
+        </div>
+       </form>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center">
+       <div class="text-muted small" id="auditInfo">
+        Last updated: —
+       </div>
+       <div class="text-muted small" id="userIdSummary">
+        User ID: —
+       </div>
+      </div>
+     </div>
+     <!-- Success Toast -->
+     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
+      <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-bg-success border-0" id="successToast" role="alert">
+       <div class="d-flex">
+        <div class="toast-body">
+         <i class="fa-solid fa-circle-check me-2">
+         </i>
+         <span id="toastMsg">
+          Saved successfully.
+         </span>
+        </div>
+        <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+        </button>
+       </div>
+      </div>
+     </div>
+     <!-- Mobile sidebar backdrop -->
+     <div class="sidebar-backdrop" hidden="" id="sidebarBackdrop">
+     </div>
+    </main>
+    <!-- Footer -->
+    <footer class="admin-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/18/18';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js">
+  </script>
+  <!-- Bootstrap 5 Bundle JS -->
+  <script crossorigin="anonymous" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script>
+   // Page state
+const roles = [
+    'Admin', 'Teacher', 'Parent', 'Student', 'Substitute', 'Counselor'
+];
+
+const mockDirectory = [{
+    staffId: 'T-00123',
+    email: 'ava.nguyen@school.edu'
+}, {
+    staffId: 'A-00001',
+    email: 'admin@school.edu'
+}, {
+    staffId: 'P-20011',
+    email: 'parent.pat@school.edu'
+}];
+
+const qs = new URLSearchParams(window.location.search);
+const editingId = qs.get('id');
+
+const el = (id) => document.getElementById(id);
+
+// Fill role options
+function populateRoles() {
+    const select = el('role');
+    roles.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r;
+        opt.textContent = r;
+        select.appendChild(opt);
+    });
+}
+
+// Mock fetch user by id
+function fetchUser(id) {
+    // Simulated API delay
+    return new Promise(resolve => {
+        setTimeout(() => {
+            // Example pre-populated user
+            resolve({
+                staffId: 'T-00123',
+                firstName: 'Ava',
+                lastName: 'Nguyen',
+                email: 'ava.nguyen@school.edu',
+                role: 'Teacher',
+                status: 'active',
+                updatedAt: '2025-01-05 09:30'
+            });
+        }, 600);
+    });
+}
+
+// Form utilities
+function setFormMode(mode, user) {
+    const isEdit = mode === 'edit';
+    el('pageTitle').textContent = isEdit ? 'Edit User' : 'Create New User';
+    el('breadcrumbCurrent').textContent = isEdit ? 'Edit User' : 'Create User';
+    el('headerIcon').className = isEdit ? 'fa-solid fa-user-pen' : 'fa-solid fa-user-plus';
+    el('headerText').textContent = isEdit ? 'Edit User Details' : 'New User Details';
+    el('saveBtnText').textContent = isEdit ? 'Save Changes' : 'Create User';
+    if (isEdit) {
+        el('deactivateBtn').classList.remove('d-none');
+        el('userStatusBadge').classList.toggle('d-none', false);
+        el('userStatusBadge').innerHTML = (user?.status === 'active') ?
+            '<span class="status-dot success me-1"></span>Active' :
+            '<span class="status-dot error me-1"></span>Inactive';
+        el('auditInfo').textContent = 'Last updated: ' + (user?.updatedAt || '—');
+        el('auditInfoTop').textContent = 'Last updated: ' + (user?.updatedAt || '—');
+        el('userIdSummary').textContent = 'User ID: ' + (user?.staffId || '—');
+    } else {
+        el('deactivateBtn').classList.add('d-none');
+        el('userStatusBadge').classList.add('d-none');
+        el('auditInfo').textContent = 'Last updated: —';
+        el('auditInfoTop').textContent = 'Last updated: —';
+        el('userIdSummary').textContent = 'User ID: —';
+    }
+}
+
+function fillForm(data) {
+    if (!data) return;
+    el('firstName').value = data.firstName || '';
+    el('lastName').value = data.lastName || '';
+    el('staffId').value = data.staffId || '';
+    el('email').value = data.email || '';
+    if (data.role) el('role').value = data.role;
+    // Staff ID read-only in edit mode
+    el('staffId').toggleAttribute('readonly', true);
+}
+
+function validateForm() {
+    const form = el('userForm');
+    const isValid = form.checkValidity();
+
+    // Custom quick email format check (beyond native)
+    const email = el('email').value.trim();
+    const emailOk = /.+@.+\..+/.test(email);
+    if (!emailOk) {
+        el('email').setCustomValidity('Invalid');
+    } else {
+        el('email').setCustomValidity('');
+    }
+
+    return form.checkValidity();
+}
+
+function showToast(message) {
+    el('toastMsg').textContent = message || 'Saved successfully.';
+    const t = new bootstrap.Toast(el('successToast'));
+    t.show();
+}
+
+function isDuplicateStaffId(id) {
+    return mockDirectory.some(u => u.staffId.toLowerCase() === id.toLowerCase());
+}
+
+function isDuplicateEmail(email) {
+    return mockDirectory.some(u => u.email.toLowerCase() === email.toLowerCase());
+}
+
+function markInvalid(input, message) {
+    if (message) input.setCustomValidity(message);
+    input.classList.add('is-invalid');
+    input.reportValidity();
+}
+
+function clearInvalid(input) {
+    input.setCustomValidity('');
+    input.classList.remove('is-invalid');
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    populateRoles();
+    const form = el('userForm');
+    const infoAlert = el('infoAlert');
+    infoAlert.classList.remove('d-none');
+
+    let formMode = editingId ? 'edit' : 'create';
+    setFormMode(formMode);
+
+    // If edit mode, load data
+    if (formMode === 'edit') {
+        el('loadingSkeleton').classList.remove('d-none');
+        const data = await fetchUser(editingId);
+        fillForm(data);
+        setFormMode('edit', data);
+        el('loadingSkeleton').classList.add('d-none');
+    }
+
+    // Track dirtiness
+    let isDirty = false;
+    form.addEventListener('input', () => {
+        isDirty = true;
+    });
+
+    // Real-time validation
+    ['firstName', 'lastName', 'staffId', 'email', 'role'].forEach(id => {
+        const input = el(id);
+        input?.addEventListener('input', () => {
+            clearInvalid(input);
+        });
+    });
+
+    // Save/Create handler
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const isValid = validateForm();
+        form.classList.add('was-validated');
+        if (!isValid) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Check the form',
+                text: 'Please fix validation errors before saving.'
+            });
+            return;
+        }
+
+        // Simulate unique checks (in real app, backend validates)
+        if (formMode === 'create') {
+            if (isDuplicateStaffId(el('staffId').value.trim())) {
+                markInvalid(el('staffId'));
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Duplicate ID',
+                    text: 'The provided User/Staff ID already exists.'
+                });
+            }
+            if (isDuplicateEmail(el('email').value.trim())) {
+                markInvalid(el('email'));
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Duplicate Email',
+                    text: 'The provided email is already in use.'
+                });
+            }
+        }
+
+        // Simulate loading
+        const saveBtn = el('saveBtn');
+        saveBtn.disabled = true;
+        const original = el('saveBtnText').textContent;
+        el('saveBtnText').innerHTML = 'Saving...';
+
+        await new Promise(r => setTimeout(r, 900));
+
+        saveBtn.disabled = false;
+        el('saveBtnText').textContent = original;
+        isDirty = false;
+        showToast('User saved successfully');
+        await Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'User details saved. Redirecting to user list...',
+            timer: 1200,
+            showConfirmButton: false
+        });
+        window.location.href = './user_management.html';
+    });
+
+    // Reset form
+    el('resetBtn').addEventListener('click', () => {
+        if (formMode === 'edit') {
+            window.location.reload();
+        } else {
+            form.reset();
+            form.classList.remove('was-validated');
+        }
+    });
+
+    // Cancel with confirm if dirty
+    el('cancelBtn').addEventListener('click', (ev) => {
+        if (!isDirty) return; // allow navigation
+        ev.preventDefault();
+        Swal.fire({
+            title: 'Discard changes?',
+            text: 'Your unsaved changes will be lost.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Discard',
+            cancelButtonText: 'Stay'
+        }).then((res) => {
+            if (res.isConfirmed) {
+                window.location.href = './user_management.html';
+            }
+        });
+    });
+
+    // Deactivate user (edit mode only)
+    el('deactivateBtn').addEventListener('click', async () => {
+        const result = await Swal.fire({
+            title: 'Deactivate this user?',
+            text: 'The user will lose access until reactivated.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, deactivate',
+            cancelButtonText: 'Cancel'
+        });
+        if (!result.isConfirmed) return;
+        await new Promise(r => setTimeout(r, 600));
+        el('userStatusBadge').innerHTML = '<span class="status-dot error me-1"></span>Inactive';
+        el('deactivateBtn').classList.add('d-none');
+        showToast('User deactivated');
+    });
+
+    // Mobile sidebar toggle
+    const sidebar = el('sidebar');
+    const backdrop = el('sidebarBackdrop');
+    const openSidebar = () => {
+        sidebar.classList.add('open');
+        backdrop.hidden = false;
+        backdrop.classList.add('show');
+    };
+    const closeSidebar = () => {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('show');
+        setTimeout(() => backdrop.hidden = true, 200);
+    };
+    el('sidebarToggle').addEventListener('click', openSidebar);
+    backdrop.addEventListener('click', closeSidebar);
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSidebar();
+    });
+});
+  </script>
+ </body>
+</html>

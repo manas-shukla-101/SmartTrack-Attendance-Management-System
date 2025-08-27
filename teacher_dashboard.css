@@ -1,0 +1,64 @@
+/* teacher_dashboard.css - Page-specific styles for Teacher Dashboard */
+:root {
+    --header-height: 64px;
+    --footer-height: 44px
+    }
+/* Keep header and footer look as provided; add layering */
+.teacher-header {
+    z-index: 1020;
+    background: #fff;
+    border-bottom: 1px solid #eee
+    }
+.teacher-footer {
+    z-index: 1010;
+    background: #f8f9fa;
+    border-top: 1px solid #eee
+    }
+/* Sidebar pinned below header */
+.teacher-sidebar {
+    position: sticky;
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height) - 0)
+    }
+/* Main panel spacing is handled by global .main-panel; ensure min height to push footer */
+.main-panel {
+    min-height: calc(100vh - var(--header-height) - var(--footer-height))
+    }
+/* Class card highlights */
+.class-card {
+    padding: 14px 16px;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--radius-2, 10px);
+    background: var(--surface-0, #fff)
+    }
+.class-card.current {
+    border-left: 4px solid var(--color-primary);
+    background: var(--primary-soft)
+    }
+.class-card.upcoming {
+    border-left: 4px solid var(--color-info);
+    background: var(--info-soft)
+    }
+/* Corrections table */
+#correctionsTable thead th[role="button"] {
+    cursor: pointer;
+    user-select: none
+    }
+#correctionsTable tbody tr:hover {
+    background: rgba(0, 0, 0, 0.02)
+    }
+/* Chart area fix (canvas height via parent) */
+#submissionChart {
+    width: 100% !important;
+    height: 240px !important
+    }
+/* Small adjustments on mobile */
+@media (max-width: 991.98px) {
+    .teacher-sidebar {
+        display: none
+        }
+    /* hide fixed sidebar on small screens */
+    .main-panel {
+        padding: var(--space-3, 12px)
+        }
+    }

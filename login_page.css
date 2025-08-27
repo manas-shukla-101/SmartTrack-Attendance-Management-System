@@ -1,0 +1,39 @@
+/* login_page.css – Page-specific styles (kept minimal; uses global theme in style.css) */
+/* Apply Poppins brand typeface on this page without altering global theme vars */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Centering wrapper for auth */
+.auth-wrapper {
+    min-height: calc(100vh - 56px - 44px);
+    /* header+footer approx; remains responsive */
+    }
+/* Adjust login container spacing */
+.login-form-container h1 {
+    font-weight: 700
+    }
+.login-form-container .form-label {
+    font-weight: 600
+    }
+/* Subtle hover for the visibility toggle button */
+.toggle-visibility-icon {
+    border-color: var(--bs-border-color)
+    }
+.toggle-visibility-icon:hover {
+    background: var(--neutral-soft)
+    }
+/* Test credentials table tweaks */
+.card .table-theme thead th {
+    position: static
+    }
+/* avoid sticky inside card */
+.card .table-theme tbody tr:hover {
+    background: rgba(0, 0, 0, 0.02)
+    }
+/* Responsive adjustments for small screens */
+@media (max-width: 575.98px) {
+    .auth-wrapper {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem
+        }
+    }

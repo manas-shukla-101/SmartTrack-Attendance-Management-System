@@ -1,0 +1,118 @@
+/* approval_queue.css - page specific styles for Approval Queue (admin) */
+:root {
+    --primary: #f08e1b;
+    --secondary: #9a296a
+    }
+/* Admin common components (from provided design) */
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee;
+    position: sticky;
+    top: 0
+    }
+.admin-sidebar .brand {
+    background: var(--primary);
+    color: #fff
+    }
+.admin-sidebar .nav-link {
+    color: #333;
+    border-radius: 0.4rem;
+    margin: 0.15rem 0.5rem
+    }
+.admin-sidebar .nav-link.active {
+    background: rgba(240, 142, 27, 0.15);
+    color: #000;
+    border-left: 4px solid var(--primary)
+    }
+.admin-sidebar .nav-link:hover {
+    background: rgba(154, 41, 106, 0.08);
+    color: #000
+    }
+.admin-header {
+    border-bottom: 1px solid #eee;
+    background: #fff
+    }
+.admin-footer {
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    color: #555
+    }
+/* Mobile sidebar behavior */
+@media (max-width: 991.98px) {
+    .admin-sidebar {
+        position: fixed;
+        left: 0;
+        transform: translatex(-100%);
+        z-index: 1040;
+        box-shadow: var(--shadow-2)
+        }
+    .admin-sidebar.open {
+        transform: translatex(0);
+        transition: transform 0.25s ease
+        }
+    body {
+        overflow-x: hidden
+        }
+    }
+/* Page-specific tweaks */
+.page-header .page-title {
+    display: flex;
+    align-items: center;
+    gap: 8px
+    }
+#filtersCard .card-header .title {
+    font-weight: 600
+    }
+/* Request row subtle hover state is inherited from Bootstrap table-hover */
+.request-row td {
+    cursor: pointer
+    }
+.request-row td:last-child {
+    cursor: default
+    }
+/* Badge variants using theme soft backgrounds */
+.badge.bg-warning-subtle {
+    background: var(--warning-soft);
+    color: #5a3f00;
+    border: 1px solid rgba(255, 165, 0, 0.35)
+    }
+/* Modal content comparison blocks */
+.bg-info-soft {
+    background: var(--info-soft)
+    }
+.bg-success-soft {
+    background: var(--success-soft)
+    }
+.bg-warning-soft {
+    background: var(--warning-soft)
+    }
+.bg-primary-soft {
+    background: var(--primary-soft)
+    }
+/* Chart card canvas responsiveness fix */
+#typeChart {
+    width: 100% !important;
+    height: auto !important
+    }
+/* Toast positioning (already set inline z-index) */
+#globalToast {
+    box-shadow: var(--shadow-2)
+    }
+/* Pagination adjustments */
+#pagination .page-item.active .page-link {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--text-on-primary)
+    }
+/* Accessibility focus ring for interactive items */
+.nav-link:focus-visible, .btn:focus-visible, .form-select:focus, .form-control:focus {
+    box-shadow: 0 0 0 3px rgba(240, 142, 27, 0.25)
+    }
+/* Ensure main content doesn't slide under fixed mobile sidebar */
+@media (max-width: 991.98px) {
+    #app-shell {
+        padding-left: 0
+        }
+    }

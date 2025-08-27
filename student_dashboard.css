@@ -1,0 +1,111 @@
+/* student_dashboard.css - page specific styles for Student Dashboard */
+/* Use Poppins across this page */
+body {
+    font-family: "Poppins", var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif
+    }
+/* Adopt provided Student UI component styles (centralized here to avoid inline duplication) */
+:root {
+    --primary: #f08e1b;
+    --secondary: #9a296a
+    }
+.student-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee
+    }
+.student-sidebar .brand {
+    background: var(--primary);
+    color: #fff
+    }
+.student-sidebar .nav-link {
+    color: #333;
+    border-radius: 0.4rem;
+    margin: 0.15rem 0.5rem
+    }
+.student-sidebar .nav-link.active {
+    background: rgba(240, 142, 27, 0.15);
+    color: #000;
+    border-left: 4px solid var(--primary)
+    }
+.student-sidebar .nav-link:hover {
+    background: rgba(154, 41, 106, 0.08)
+    }
+.student-header {
+    border-bottom: 1px solid #eee;
+    background: #fff
+    }
+.student-footer {
+    border-top: 1px solid #eee;
+    background: #f8f9fa
+    }
+/* Layout shell: sidebar + main */
+.dashboard-shell {
+    min-height: 100vh;
+    background: transparent
+    }
+.dashboard-main {
+    background: transparent
+    }
+/* Metric cards enhancements */
+.metric-card {
+    position: relative
+    }
+.metric-card .metric-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: inline-grid;
+    place-items: center;
+    font-size: 16px
+    }
+/* List styling */
+#scheduleList .list-group-item {
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem
+    }
+#scheduleList .period {
+    font-weight: 700
+    }
+/* Chart cards: fix height for responsive charts */
+#trendChart, #breakdownChart {
+    width: 100% !important;
+    height: 240px !important
+    }
+@media (min-width: 1200px) {
+    #trendChart, #breakdownChart {
+        height: 220px !important
+        }
+    }
+/* Offcanvas width to match sidebar */
+.offcanvas-start {
+    width: 260px
+    }
+/* Small utility alignments */
+.bg-primary-soft {
+    background: var(--primary-soft)
+    }
+.bg-error-soft {
+    background: var(--error-soft)
+    }
+.bg-warning-soft {
+    background: var(--warning-soft)
+    }
+/* Buttons in header quick action alignment (ensure contrast over brand color) */
+.student-header .btn {
+    border-radius: var(--radius-1)
+    }
+/* Ensure footer sticks to bottom with flex column in main wrapper */
+.student-footer {
+    margin-top: auto
+    }
+/* Improve badge contrast on soft backgrounds */
+.badge.rounded-pill.bg-primary-soft {
+    color: var(--text-strong)
+    }
+/* Mobile tweaks */
+@media (max-width: 991.98px) {
+    .student-sidebar {
+        display: none
+        }
+    }

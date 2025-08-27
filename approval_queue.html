@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Approval Queue • Admin Portal
+  </title>
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkfT9GmD1iBf1n1xTcv0VxYDsCYe7i0yQX2VYZmQ4bNHgipbY8GXY3kBw==" referrerpolicy="no-referrer" rel="stylesheet">
+   <!-- Global Theme CSS -->
+   <link href="style.css" rel="stylesheet"/>
+   <!-- Page-specific CSS -->
+   <link href="approval_queue.css" rel="stylesheet"/>
+   <!-- Flatpickr CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet"/>
+  </link>
+ </head>
+ <body>
+  <div class="d-flex min-vh-100" id="app-shell">
+   <!-- Sidebar (Admin) -->
+   <nav class="admin-sidebar d-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/36/36'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Attendance System
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/admin/40/40'" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold">
+        Admin User
+       </div>
+       <small class="text-muted">
+        Administrator
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" href="./admin_dashboard.html">
+        <i class="fa-solid fa-gauge me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./reports_page.html">
+        <i class="fa-solid fa-chart-line me-2">
+        </i>
+        Reports
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link active" href="./approval_queue.html">
+        <i class="fa-solid fa-list-check me-2">
+        </i>
+        Approvals
+       </a>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminUsersMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenu" role="button">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Users
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminUsersMenu">
+        <a class="nav-link" href="./user_management.html">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Manage Users
+        </a>
+        <a class="nav-link" href="./user_form.html">
+         <i class="fa-solid fa-user-plus me-2">
+         </i>
+         Add New User
+        </a>
+       </div>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminSettingsMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenu" role="button">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminSettingsMenu">
+        <a class="nav-link" href="./system_settings.html">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         System Settings
+        </a>
+        <a class="nav-link" href="./calendar_settings.html">
+         <i class="fa-solid fa-calendar-days me-2">
+         </i>
+         Calendar
+        </a>
+        <a class="nav-link" href="./schedule_settings.html">
+         <i class="fa-solid fa-clock me-2">
+         </i>
+         Bell Schedules
+        </a>
+        <a class="nav-link" href="./codes_settings.html">
+         <i class="fa-solid fa-code me-2">
+         </i>
+         Attendance Codes
+        </a>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Main Column -->
+   <div class="d-flex flex-column flex-grow-1">
+    <!-- Header -->
+    <nav class="admin-header navbar navbar-expand-lg px-3">
+     <button aria-label="Toggle sidebar" class="btn btn-link d-lg-none" id="sidebarToggle">
+      <i class="fa-solid fa-bars">
+      </i>
+     </button>
+     <a class="navbar-brand d-flex align-items-center" href="./admin_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand2/28/28'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Admin Portal
+      </span>
+     </a>
+     <form class="d-none d-md-flex ms-3 flex-grow-1" id="topSearchForm" role="search">
+      <div class="input-group">
+       <span class="input-group-text bg-white">
+        <i class="fa-solid fa-magnifying-glass">
+        </i>
+       </span>
+       <input class="form-control" id="topSearchInput" placeholder="Search students, classes, users..." type="search"/>
+      </div>
+     </form>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item me-2">
+       <a class="nav-link position-relative" href="#" id="notifBell">
+        <i class="fa-solid fa-bell">
+        </i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+         3
+        </span>
+       </a>
+      </li>
+      <li class="nav-item me-2">
+       <a class="nav-link" href="#">
+        <i class="fa-solid fa-envelope">
+        </i>
+       </a>
+      </li>
+      <li class="nav-item dropdown">
+       <a aria-expanded="false" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/u/32/32'" src="https://via.placeholder.com/32"/>
+        Admin
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./user_management.html">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Manage Users
+         </a>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./system_settings.html">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          Settings
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Content -->
+    <main class="flex-grow-1 p-3 p-lg-4">
+     <!-- Breadcrumb and Actions -->
+     <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+      <nav aria-label="breadcrumb" class="breadcrumb mb-2 mb-lg-0">
+       <span class="breadcrumb-item">
+        <a href="./admin_dashboard.html">
+         Dashboard
+        </a>
+       </span>
+       <span aria-current="page" class="breadcrumb-item active">
+        Approval Queue
+       </span>
+      </nav>
+      <div class="d-flex gap-2">
+       <button class="btn btn-light" id="refreshBtn">
+        <i class="fa-solid fa-rotate me-1">
+        </i>
+        Refresh
+       </button>
+       <button class="btn btn-outline-primary" id="exportBtn">
+        <i class="fa-solid fa-file-export me-1">
+        </i>
+        Export CSV
+       </button>
+      </div>
+     </div>
+     <div class="page-header">
+      <div class="page-title">
+       Approval Queue
+      </div>
+      <div class="text-muted">
+       Review attendance corrections from teachers and absence excuses from parents.
+      </div>
+     </div>
+     <!-- Feedback area -->
+     <div class="alert alert-info d-none" id="feedbackArea" role="alert">
+      <i class="fa-solid fa-circle-info me-1">
+      </i>
+      Tip: Click on any row to review details and approve or reject.
+     </div>
+     <!-- Metrics Row -->
+     <div class="grid auto-fit-lg mb-4">
+      <div class="metric-card">
+       <div class="metric-title">
+        Pending Requests
+       </div>
+       <div class="metric-value" id="metricPending">
+        —
+       </div>
+       <div class="text-muted">
+        <i class="fa-regular fa-clock me-1">
+        </i>
+        Awaiting decision
+       </div>
+      </div>
+      <div class="metric-card">
+       <div class="metric-title">
+        Corrections
+       </div>
+       <div class="metric-value text-info" id="metricCorrections">
+        —
+       </div>
+       <div class="text-muted">
+        <i class="fa-solid fa-pen-to-square me-1">
+        </i>
+        Teacher submitted
+       </div>
+      </div>
+      <div class="metric-card">
+       <div class="metric-title">
+        Excuses
+       </div>
+       <div class="metric-value text-secondary" id="metricExcuses">
+        —
+       </div>
+       <div class="text-muted">
+        <i class="fa-solid fa-user-group me-1">
+        </i>
+        Parent submitted
+       </div>
+      </div>
+     </div>
+     <!-- Filters -->
+     <div class="card mb-3" id="filtersCard">
+      <div class="card-header">
+       <div class="widget-header w-100">
+        <div class="title d-flex align-items-center gap-2">
+         <i class="fa-solid fa-filter text-muted">
+         </i>
+         <span class="widget-title">
+          Filters
+         </span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+         <button class="btn btn-light btn-sm" id="resetFiltersBtn">
+          <i class="fa-solid fa-eraser me-1">
+          </i>
+          Reset
+         </button>
+        </div>
+       </div>
+      </div>
+      <div class="card-body">
+       <form class="row gy-2 gx-2 align-items-end" id="filtersForm">
+        <div class="col-12 col-md-3">
+         <label class="form-label">
+          Request Type
+         </label>
+         <select class="form-select" id="filterType">
+          <option>
+           All
+          </option>
+          <option>
+           Corrections
+          </option>
+          <option>
+           Excuses
+          </option>
+         </select>
+        </div>
+        <div class="col-12 col-md-4">
+         <label class="form-label">
+          Date Submitted
+         </label>
+         <div class="input-group">
+          <span class="input-group-text">
+           <i class="fa-regular fa-calendar">
+           </i>
+          </span>
+          <input class="form-control" id="filterDateRange" placeholder="Select date range" readonly="" type="text"/>
+         </div>
+        </div>
+        <div class="col-12 col-md-4">
+         <label class="form-label">
+          Search
+         </label>
+         <div class="input-group">
+          <span class="input-group-text">
+           <i class="fa-solid fa-magnifying-glass">
+           </i>
+          </span>
+          <input class="form-control" id="filterSearch" placeholder="Search by Student or Submitter..." type="text"/>
+         </div>
+         <small class="form-text">
+          Press Enter or pause typing to search
+         </small>
+        </div>
+        <div class="col-12 col-md-1">
+         <div class="form-check mt-4">
+          <input class="form-check-input" id="filterNewOnly" type="checkbox"/>
+          <label class="form-check-label" for="filterNewOnly">
+           New
+          </label>
+         </div>
+        </div>
+       </form>
+      </div>
+     </div>
+     <!-- Chart and Queue -->
+     <div class="row g-3 mb-3">
+      <div class="col-12 col-xl-4">
+       <div class="card h-100">
+        <div class="card-header">
+         <div class="title">
+          Requests by Type
+         </div>
+        </div>
+        <div class="card-body">
+         <canvas aria-label="Requests by Type chart" height="220" id="typeChart" role="img">
+         </canvas>
+        </div>
+       </div>
+      </div>
+      <div class="col-12 col-xl-8">
+       <div class="card h-100" id="requestsCard">
+        <div class="card-header">
+         <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
+          <div class="title">
+           Pending Requests
+          </div>
+          <div class="d-flex align-items-center gap-2">
+           <div class="d-none d-md-flex align-items-center text-muted">
+            <i class="fa-solid fa-arrow-up-wide-short me-2">
+            </i>
+            Sort:
+           </div>
+           <select class="form-select form-select-sm" id="sortBy" style="min-width: 160px;">
+            <option value="date_desc">
+             Date Submitted (Newest)
+            </option>
+            <option value="date_asc">
+             Date Submitted (Oldest)
+            </option>
+            <option value="student_asc">
+             Student (A-Z)
+            </option>
+            <option value="student_desc">
+             Student (Z-A)
+            </option>
+           </select>
+           <select class="form-select form-select-sm" id="pageSize" style="min-width: 120px;">
+            <option value="6">
+             6 per page
+            </option>
+            <option value="10">
+             10 per page
+            </option>
+            <option value="20">
+             20 per page
+            </option>
+           </select>
+          </div>
+         </div>
+        </div>
+        <div class="card-body p-0">
+         <div class="table-responsive">
+          <table aria-label="Pending requests table" class="table table-hover align-middle mb-0 table-theme" id="requestsTable">
+           <thead>
+            <tr>
+             <th scope="col">
+              ID
+             </th>
+             <th scope="col">
+              Student
+             </th>
+             <th scope="col">
+              Type
+             </th>
+             <th scope="col">
+              Submitter
+             </th>
+             <th scope="col">
+              Submitted
+             </th>
+             <th class="text-center" scope="col">
+              Status
+             </th>
+             <th class="text-end" scope="col">
+              Actions
+             </th>
+            </tr>
+           </thead>
+           <tbody id="requestsTbody">
+            <!-- Rows render via JS -->
+           </tbody>
+          </table>
+         </div>
+        </div>
+        <div class="card-footer d-flex flex-wrap align-items-center justify-content-between gap-2">
+         <div class="text-muted" id="paginationInfo">
+          Showing — of —
+         </div>
+         <nav aria-label="Queue pagination">
+          <ul class="pagination mb-0" id="pagination">
+           <!-- Pagination items -->
+          </ul>
+         </nav>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- Toast container for notifications -->
+     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+      <div aria-atomic="true" aria-live="polite" class="toast align-items-center text-bg-primary border-0" id="globalToast" role="status">
+       <div class="d-flex">
+        <div class="toast-body">
+         <i class="fa-solid fa-circle-check me-2">
+         </i>
+         <span id="toastMsg">
+          Action completed
+         </span>
+        </div>
+        <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+        </button>
+       </div>
+      </div>
+     </div>
+    </main>
+    <!-- Footer -->
+    <footer class="admin-footer py-2 px-3 d-flex align-items-center justify-content-between">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand3/18/18'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Request Detail Modal -->
+  <div aria-hidden="true" aria-labelledby="requestDetailLabel" class="modal fade" id="requestDetailModal" tabindex="-1">
+   <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+     <div class="modal-header">
+      <h5 class="modal-title" id="requestDetailLabel">
+       Request Details
+      </h5>
+      <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+      </button>
+     </div>
+     <div class="modal-body">
+      <div class="skeleton" id="detailLoader" style="height: 140px; display:none">
+      </div>
+      <div class="d-none" id="detailContent">
+       <div class="row g-3">
+        <div class="col-12 col-lg-4">
+         <div class="card">
+          <div class="card-header">
+           <div class="title">
+            Student
+           </div>
+          </div>
+          <div class="card-body">
+           <div class="d-flex align-items-center mb-2">
+            <img alt="Avatar" class="rounded-circle me-2" height="56" id="detailAvatar" onerror="this.onerror=null;this.src='https://picsum.photos/seed/student/56/56'" src="https://via.placeholder.com/56" width="56"/>
+            <div>
+             <div class="fw-semibold" id="detailStudent">
+              —
+             </div>
+             <small class="text-muted" id="detailStudentMeta">
+              Grade — • ID —
+             </small>
+            </div>
+           </div>
+           <div>
+            <span class="badge-soft info" id="detailTypeChip">
+             —
+            </span>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="col-12 col-lg-8">
+         <div class="card">
+          <div class="card-header">
+           <div class="title">
+            Request
+           </div>
+          </div>
+          <div class="card-body" id="detailDynamic">
+           <!-- Filled by JS: correction comparison or excuse details -->
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="mt-3">
+        <label class="form-label" for="adminComment">
+         Admin Comment (optional)
+        </label>
+        <textarea class="form-control" id="adminComment" placeholder="Add an optional comment..." rows="3"></textarea>
+       </div>
+      </div>
+     </div>
+     <div class="modal-footer">
+      <button class="btn btn-danger" id="rejectBtn">
+       <i class="fa-solid fa-xmark me-1">
+       </i>
+       Reject
+      </button>
+      <button class="btn btn-success" id="approveBtn">
+       <i class="fa-solid fa-check me-1">
+       </i>
+       Approve
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <!-- Bootstrap 5 Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- Flatpickr -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr">
+  </script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Data model (mock)
+const mockData = [{
+    id: 'RQ-1024',
+    studentName: 'Ava Johnson',
+    grade: '10',
+    studentId: 'S1001',
+    type: 'Correction',
+    submitter: 'Ms. Carter',
+    date: '2025-01-22',
+    status: 'Pending',
+    isNew: true,
+    details: {
+        original: {
+            date: '2025-01-21',
+            status: 'Absent'
+        },
+        proposed: {
+            status: 'Present'
+        },
+        reason: 'Student was present but marked absent by mistake.'
+    }
+}, {
+    id: 'RQ-1025',
+    studentName: 'Liam Smith',
+    grade: '8',
+    studentId: 'S1002',
+    type: 'Excuse',
+    submitter: 'Emily Smith (Parent)',
+    date: '2025-01-21',
+    status: 'Pending',
+    isNew: false,
+    details: {
+        dates: ['2025-01-18', '2025-01-19'],
+        reason: 'Flu with fever. Doctor recommended rest.',
+        attachmentUrl: 'https://example.com/attachments/doctor_note_1025.pdf'
+    }
+}, {
+    id: 'RQ-1026',
+    studentName: 'Sophia Williams',
+    grade: '9',
+    studentId: 'S1003',
+    type: 'Correction',
+    submitter: 'Mr. Lopez',
+    date: '2025-01-20',
+    status: 'Pending',
+    isNew: true,
+    details: {
+        original: {
+            date: '2025-01-19',
+            status: 'Tardy'
+        },
+        proposed: {
+            status: 'Present'
+        },
+        reason: 'Bus delay was excused by office.'
+    }
+}, {
+    id: 'RQ-1027',
+    studentName: 'Noah Brown',
+    grade: '11',
+    studentId: 'S1004',
+    type: 'Excuse',
+    submitter: 'Michael Brown (Parent)',
+    date: '2025-01-19',
+    status: 'Pending',
+    isNew: false,
+    details: {
+        dates: ['2025-01-17'],
+        reason: 'Family emergency.',
+        attachmentUrl: 'https://example.com/attachments/note_1027.jpg'
+    }
+}, {
+    id: 'RQ-1028',
+    studentName: 'Isabella Garcia',
+    grade: '7',
+    studentId: 'S1005',
+    type: 'Correction',
+    submitter: 'Ms. Nguyen',
+    date: '2025-01-18',
+    status: 'Pending',
+    isNew: false,
+    details: {
+        original: {
+            date: '2025-01-17',
+            status: 'Absent'
+        },
+        proposed: {
+            status: 'Excused'
+        },
+        reason: 'Office approved field trip absence.'
+    }
+}, {
+    id: 'RQ-1029',
+    studentName: 'Mason Davis',
+    grade: '12',
+    studentId: 'S1006',
+    type: 'Excuse',
+    submitter: 'Sarah Davis (Parent)',
+    date: '2025-01-18',
+    status: 'Pending',
+    isNew: false,
+    details: {
+        dates: ['2025-01-15', '2025-01-16'],
+        reason: 'College visit.',
+        attachmentUrl: ''
+    }
+}, {
+    id: 'RQ-1030',
+    studentName: 'Mia Martinez',
+    grade: '10',
+    studentId: 'S1007',
+    type: 'Correction',
+    submitter: 'Mr. Patel',
+    date: '2025-01-17',
+    status: 'Pending',
+    isNew: false,
+    details: {
+        original: {
+            date: '2025-01-16',
+            status: 'Absent'
+        },
+        proposed: {
+            status: 'Present'
+        },
+        reason: 'Student checked in late; teacher forgot to update.'
+    }
+}, {
+    id: 'RQ-1031',
+    studentName: 'Ethan Wilson',
+    grade: '9',
+    studentId: 'S1008',
+    type: 'Excuse',
+    submitter: 'Laura Wilson (Parent)',
+    date: '2025-01-16',
+    status: 'Pending',
+    isNew: true,
+    details: {
+        dates: ['2025-01-14'],
+        reason: 'Dental appointment.',
+        attachmentUrl: 'https://example.com/attachments/dental_1031.pdf'
+    }
+}, {
+    id: 'RQ-1032',
+    studentName: 'Charlotte Anderson',
+    grade: '8',
+    studentId: 'S1009',
+    type: 'Correction',
+    submitter: 'Ms. Rivera',
+    date: '2025-01-15',
+    status: 'Pending',
+    isNew: false,
+    details: {
+        original: {
+            date: '2025-01-14',
+            status: 'Tardy'
+        },
+        proposed: {
+            status: 'Present'
+        },
+        reason: 'Attendance updated in office but not synced.'
+    }
+}, {
+    id: 'RQ-1033',
+    studentName: 'James Thomas',
+    grade: '11',
+    studentId: 'S1010',
+    type: 'Excuse',
+    submitter: 'Peter Thomas (Parent)',
+    date: '2025-01-14',
+    status: 'Pending',
+    isNew: false,
+    details: {
+        dates: ['2025-01-13'],
+        reason: 'Car trouble.',
+        attachmentUrl: ''
+    }
+}, {
+    id: 'RQ-1034',
+    studentName: 'Amelia Jackson',
+    grade: '7',
+    studentId: 'S1011',
+    type: 'Correction',
+    submitter: 'Ms. Chen',
+    date: '2025-01-13',
+    status: 'Pending',
+    isNew: false,
+    details: {
+        original: {
+            date: '2025-01-12',
+            status: 'Absent'
+        },
+        proposed: {
+            status: 'Present'
+        },
+        reason: 'In-class test present; marked absent mistakenly.'
+    }
+}, {
+    id: 'RQ-1035',
+    studentName: 'Benjamin White',
+    grade: '12',
+    studentId: 'S1012',
+    type: 'Excuse',
+    submitter: 'Anna White (Parent)',
+    date: '2025-01-12',
+    status: 'Pending',
+    isNew: false,
+    details: {
+        dates: ['2025-01-10'],
+        reason: 'Illness.',
+        attachmentUrl: ''
+    }
+}, ];
+
+// State
+let state = {
+    data: [...mockData],
+    filters: {
+        type: 'All',
+        dateStart: null,
+        dateEnd: null,
+        search: '',
+        newOnly: false
+    },
+    sortBy: 'date_desc',
+    pageSize: 6,
+    page: 1,
+    loading: false,
+    selectedId: null,
+};
+
+// Elements
+const tbody = document.getElementById('requestsTbody');
+const pagination = document.getElementById('pagination');
+const paginationInfo = document.getElementById('paginationInfo');
+const metricPending = document.getElementById('metricPending');
+const metricCorrections = document.getElementById('metricCorrections');
+const metricExcuses = document.getElementById('metricExcuses');
+const filterType = document.getElementById('filterType');
+const filterSearch = document.getElementById('filterSearch');
+const filterNewOnly = document.getElementById('filterNewOnly');
+const sortBySel = document.getElementById('sortBy');
+const pageSizeSel = document.getElementById('pageSize');
+const dateRangeInput = document.getElementById('filterDateRange');
+const requestsCard = document.getElementById('requestsCard');
+
+// Date formatter
+function fmtDate(iso) {
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+// Filtering
+function getFilteredData() {
+    const {
+        type,
+        dateStart,
+        dateEnd,
+        search,
+        newOnly
+    } = state.filters;
+    let rows = state.data.filter(r => r.status === 'Pending');
+    if (type !== 'All') {
+        rows = rows.filter(r => (type === 'Corrections' ? r.type === 'Correction' : r.type === 'Excuse'));
+    }
+    if (dateStart && dateEnd) {
+        const s = new Date(dateStart);
+        const e = new Date(dateEnd);
+        rows = rows.filter(r => {
+            const d = new Date(r.date);
+            return d >= s && d <= e;
+        });
+    }
+    if (search && search.trim() !== '') {
+        const q = search.toLowerCase();
+        rows = rows.filter(r => (r.studentName + ' ' + r.submitter).toLowerCase().includes(q));
+    }
+    if (newOnly) rows = rows.filter(r => r.isNew);
+    return rows;
+}
+
+// Sorting
+function sortRows(rows) {
+    const s = state.sortBy;
+    const sorted = [...rows];
+    if (s === 'date_desc') sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+    if (s === 'date_asc') sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+    if (s === 'student_asc') sorted.sort((a, b) => a.studentName.localeCompare(b.studentName));
+    if (s === 'student_desc') sorted.sort((a, b) => b.studentName.localeCompare(a.studentName));
+    return sorted;
+}
+
+// Pagination helpers
+function paginate(rows) {
+    const total = rows.length;
+    const pages = Math.max(1, Math.ceil(total / state.pageSize));
+    state.page = Math.min(state.page, pages);
+    const start = (state.page - 1) * state.pageSize;
+    const end = Math.min(start + state.pageSize, total);
+    return {
+        slice: rows.slice(start, end),
+        total,
+        pages,
+        start: start + 1,
+        end
+    };
+}
+
+// Render table
+function renderTable() {
+    tbody.innerHTML = '';
+    const filtered = getFilteredData();
+    const sorted = sortRows(filtered);
+    const {
+        slice,
+        total,
+        pages,
+        start,
+        end
+    } = paginate(sorted);
+
+    if (state.loading) {
+        const skel = document.createElement('tr');
+        skel.innerHTML = `<td colspan="7" class="p-0"><div class="skeleton" style="height:64px"></div></td>`;
+        tbody.appendChild(skel);
+    } else if (slice.length === 0) {
+        const empty = document.createElement('tr');
+        empty.innerHTML = `<td colspan="7"><div class="empty-state py-4"><div class="text-muted">No requests match your filters.</div></div></td>`;
+        tbody.appendChild(empty);
+    } else {
+        slice.forEach(r => tbody.appendChild(rowTemplate(r)));
+    }
+
+    // Pagination UI
+    pagination.innerHTML = '';
+    for (let i = 1; i <= pages; i++) {
+        const li = document.createElement('li');
+        li.className = 'page-item' + (i === state.page ? ' active' : '');
+        li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        li.addEventListener('click', (e) => {
+            e.preventDefault();
+            state.page = i;
+            renderTable();
+            window.scrollTo({
+                top: requestsCard.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        });
+        pagination.appendChild(li);
+    }
+    paginationInfo.textContent = total ? `Showing ${start}-${end} of ${total}` : 'Showing 0 of 0';
+
+    renderMetrics();
+    updateChart();
+}
+
+function badgeForType(type) {
+    if (type === 'Correction') return '<span class="badge-soft info">Correction</span>';
+    return '<span class="badge-soft secondary">Excuse</span>';
+}
+
+function rowTemplate(r) {
+    const tr = document.createElement('tr');
+    tr.className = 'request-row';
+    tr.innerHTML = `
+        <td class="text-muted">${r.id}${r.isNew ? ' <span class="badge bg-warning-subtle text-warning border ms-1">NEW</span>' : ''}</td>
+        <td>
+          <div class="fw-semibold">${r.studentName}</div>
+          <small class="text-muted">ID ${r.studentId} • Grade ${r.grade}</small>
+        </td>
+        <td>${badgeForType(r.type)}</td>
+        <td>${r.submitter}</td>
+        <td>${fmtDate(r.date)}</td>
+        <td class="text-center"><span class="badge rounded-pill text-bg-secondary">${r.status}</span></td>
+        <td class="text-end">
+          <button class="btn btn-sm btn-primary" data-id="${r.id}"><i class="fa-regular fa-eye me-1"></i> Review</button>
+        </td>`;
+    tr.querySelector('button').addEventListener('click', () => openDetail(r.id));
+    tr.addEventListener('click', (ev) => {
+        if (ev.target.tagName.toLowerCase() !== 'button' && !ev.target.closest('button')) openDetail(r.id);
+    });
+    return tr;
+}
+
+function renderMetrics() {
+    const filtered = getFilteredData();
+    const total = filtered.length;
+    const corrections = filtered.filter(r => r.type === 'Correction').length;
+    const excuses = filtered.filter(r => r.type === 'Excuse').length;
+    metricPending.textContent = total;
+    metricCorrections.textContent = corrections;
+    metricExcuses.textContent = excuses;
+}
+
+// Chart.js donut
+let typeChart;
+
+function updateChart() {
+    const filtered = getFilteredData();
+    const corrections = filtered.filter(r => r.type === 'Correction').length;
+    const excuses = filtered.filter(r => r.type === 'Excuse').length;
+    const ctx = document.getElementById('typeChart');
+    const data = {
+        labels: ['Corrections', 'Excuses'],
+        datasets: [{
+            label: 'Requests',
+            data: [corrections, excuses],
+            backgroundColor: ['rgba(0,153,210,0.65)', 'rgba(154,41,106,0.65)'],
+            borderColor: ['#0099D2', '#9a296a'],
+            borderWidth: 1
+        }]
+    };
+    if (typeChart) {
+        typeChart.data = data;
+        typeChart.update();
+        return;
+    }
+    typeChart = new Chart(ctx, {
+        type: 'doughnut',
+        data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+// Detail modal
+const detailModalEl = document.getElementById('requestDetailModal');
+const detailModal = new bootstrap.Modal(detailModalEl);
+const detailContent = document.getElementById('detailContent');
+const detailLoader = document.getElementById('detailLoader');
+const detailStudent = document.getElementById('detailStudent');
+const detailStudentMeta = document.getElementById('detailStudentMeta');
+const detailTypeChip = document.getElementById('detailTypeChip');
+const detailDynamic = document.getElementById('detailDynamic');
+const adminComment = document.getElementById('adminComment');
+const approveBtn = document.getElementById('approveBtn');
+const rejectBtn = document.getElementById('rejectBtn');
+
+function openDetail(id) {
+    state.selectedId = id;
+    const req = state.data.find(r => r.id === id);
+    if (!req) return;
+    detailContent.classList.add('d-none');
+    detailLoader.style.display = 'block';
+    adminComment.value = '';
+    detailStudent.textContent = req.studentName;
+    detailStudentMeta.textContent = `Grade ${req.grade} • ID ${req.studentId}`;
+    detailTypeChip.textContent = req.type;
+    detailTypeChip.className = 'badge-soft ' + (req.type === 'Correction' ? 'info' : 'secondary');
+    detailDynamic.innerHTML = '';
+    // Simulate API delay
+    setTimeout(() => {
+        if (req.type === 'Correction') {
+            detailDynamic.innerHTML = `
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <div class="bg-info-soft p-3 rounded border">
+                  <div class="fw-semibold mb-2"><i class="fa-regular fa-circle-xmark me-1 text-danger"></i>Original</div>
+                  <div><span class="text-muted">Date:</span> ${fmtDate(req.details.original.date)}</div>
+                  <div><span class="text-muted">Status:</span> ${req.details.original.status}</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="bg-success-soft p-3 rounded border">
+                  <div class="fw-semibold mb-2"><i class="fa-regular fa-circle-check me-1 text-success"></i>Proposed</div>
+                  <div><span class="text-muted">Status:</span> ${req.details.proposed.status}</div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3">
+              <div class="fw-semibold">Teacher Reason</div>
+              <div class="text-muted">${req.details.reason}</div>
+            </div>`;
+        } else {
+            const attach = req.details.attachmentUrl ? `<a href="${req.details.attachmentUrl}" class="btn btn-sm btn-outline-info mt-2" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-paperclip me-1"></i> View Attachment</a>` : '<div class="mt-2 text-muted">No attachment provided</div>';
+            detailDynamic.innerHTML = `
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <div class="bg-warning-soft p-3 rounded border">
+                  <div class="fw-semibold mb-2"><i class="fa-regular fa-calendar-days me-1 text-warning"></i> Dates of Absence</div>
+                  <div>${req.details.dates.map(d => fmtDate(d)).join(', ')}</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="bg-primary-soft p-3 rounded border">
+                  <div class="fw-semibold mb-2"><i class="fa-solid fa-message me-1 text-primary"></i> Parent Reason</div>
+                  <div class="text-muted">${req.details.reason}</div>
+                  ${attach}
+                </div>
+              </div>
+            </div>`;
+        }
+        detailLoader.style.display = 'none';
+        detailContent.classList.remove('d-none');
+    }, 400);
+
+    detailModal.show();
+}
+
+function showToast(message) {
+    const toastEl = document.getElementById('globalToast');
+    document.getElementById('toastMsg').textContent = message;
+    new bootstrap.Toast(toastEl, {
+        delay: 3000
+    }).show();
+}
+
+function performDecision(decision) {
+    const req = state.data.find(r => r.id === state.selectedId);
+    if (!req) return;
+
+    Swal.fire({
+        title: decision === 'approve' ? 'Approve Request?' : 'Reject Request?',
+        text: decision === 'approve' ? 'This will update the official attendance record.' : 'The submitter will be notified of the rejection.',
+        icon: decision === 'approve' ? 'success' : 'warning',
+        showCancelButton: true,
+        confirmButtonText: decision === 'approve' ? 'Yes, Approve' : 'Yes, Reject',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: decision === 'approve' ? '#00774E' : '#CD2026'
+    }).then(result => {
+        if (!result.isConfirmed) return;
+        approveBtn.disabled = true;
+        rejectBtn.disabled = true;
+        // Simulate API call
+        setTimeout(() => {
+            // Remove request from dataset
+            state.data = state.data.filter(r => r.id !== req.id);
+            detailModal.hide();
+            approveBtn.disabled = false;
+            rejectBtn.disabled = false;
+            renderTable();
+            showToast(decision === 'approve' ? 'Request approved and records updated.' : 'Request rejected and submitter notified.');
+        }, 700);
+    });
+}
+
+approveBtn.addEventListener('click', () => performDecision('approve'));
+rejectBtn.addEventListener('click', () => performDecision('reject'));
+
+// Filters wiring
+filterType.addEventListener('change', () => {
+    state.filters.type = filterType.value;
+    state.page = 1;
+    renderTable();
+});
+sortBySel.addEventListener('change', () => {
+    state.sortBy = sortBySel.value;
+    renderTable();
+});
+pageSizeSel.addEventListener('change', () => {
+    state.pageSize = parseInt(pageSizeSel.value, 10);
+    state.page = 1;
+    renderTable();
+});
+filterNewOnly.addEventListener('change', () => {
+    state.filters.newOnly = filterNewOnly.checked;
+    state.page = 1;
+    renderTable();
+});
+
+// Search debounce
+let searchDebounce;
+filterSearch.addEventListener('input', () => {
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(() => {
+        state.filters.search = filterSearch.value;
+        state.page = 1;
+        renderTable();
+    }, 400);
+});
+filterSearch.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        state.filters.search = filterSearch.value;
+        state.page = 1;
+        renderTable();
+    }
+});
+
+// Date range picker
+flatpickr(dateRangeInput, {
+    mode: 'range',
+    dateFormat: 'Y-m-d',
+    onClose: (selectedDates) => {
+        if (selectedDates.length === 2) {
+            state.filters.dateStart = selectedDates[0].toISOString().slice(0, 10);
+            state.filters.dateEnd = selectedDates[1].toISOString().slice(0, 10);
+        } else {
+            state.filters.dateStart = null;
+            state.filters.dateEnd = null;
+        }
+        state.page = 1;
+        renderTable();
+    }
+});
+
+// Reset filters
+document.getElementById('resetFiltersBtn').addEventListener('click', () => {
+    filterType.value = 'All';
+    filterSearch.value = '';
+    filterNewOnly.checked = false;
+    dateRangeInput.value = '';
+    state.filters = {
+        type: 'All',
+        dateStart: null,
+        dateEnd: null,
+        search: '',
+        newOnly: false
+    };
+    state.page = 1;
+    renderTable();
+});
+
+// Refresh (simulate reload)
+document.getElementById('refreshBtn').addEventListener('click', () => {
+    state.loading = true;
+    renderTable();
+    setTimeout(() => {
+        state.loading = false;
+        renderTable();
+        showToast('Data refreshed.');
+    }, 800);
+});
+
+// Export CSV
+document.getElementById('exportBtn').addEventListener('click', () => {
+    const rows = sortRows(getFilteredData());
+    const headers = ['ID', 'Student', 'Type', 'Submitter', 'Submitted', 'Status'];
+    const csvRows = [headers.join(',')];
+    rows.forEach(r => csvRows.push([r.id, r.studentName, r.type, r.submitter, r.date, r.status].map(v => '"' + ('' + v).replaceAll('"', '\"') + '"').join(',')));
+    const blob = new Blob([csvRows.join('\n')], {
+        type: 'text/csv;charset=utf-8;'
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'approval_queue.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+});
+
+// Top search redirect to filters
+document.getElementById('topSearchForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    filterSearch.value = document.getElementById('topSearchInput').value;
+    filterSearch.dispatchEvent(new Event('input'));
+});
+
+// Sidebar Toggle (small screens)
+const sidebar = document.querySelector('.admin-sidebar');
+document.getElementById('sidebarToggle').addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+});
+
+// Init
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('feedbackArea').classList.remove('d-none');
+    renderTable();
+});
+  </script>
+ </body>
+</html>

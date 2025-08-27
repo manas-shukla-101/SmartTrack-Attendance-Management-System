@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html id="calendarSettingsPage" lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Calendar Settings • Attendance System
+  </title>
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <!-- FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet"/>
+  <!-- SweetAlert2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" rel="stylesheet"/>
+  <!-- Global site theme -->
+  <link href="style.css" rel="stylesheet"/>
+  <!-- Page-specific CSS -->
+  <link href="calendar_settings.css" rel="stylesheet"/>
+  <!-- Admin common components styles (as provided) -->
+  <style>
+   :root { --primary:#f08e1b; --secondary:#9a296a; }
+    .admin-sidebar { width: 260px; min-height: 100vh; background:#fff; border-right:1px solid #eee; }
+    .admin-sidebar .brand { background: var(--primary); color:#fff; }
+    .admin-sidebar .nav-link { color:#333; border-radius:.4rem; margin:.15rem .5rem; }
+    .admin-sidebar .nav-link.active { background: rgba(240,142,27,0.15); color:#000; border-left:4px solid var(--primary); }
+    .admin-sidebar .nav-link:hover { background: rgba(154,41,106,0.08); color:#000; }
+    .admin-header { border-bottom:1px solid #eee; background:#fff; }
+    .admin-footer { border-top:1px solid #eee; background:#f8f9fa; color:#555; }
+  </style>
+ </head>
+ <body>
+  <div class="d-flex min-vh-100">
+   <!-- Sidebar: Desktop -->
+   <nav aria-label="Sidebar Navigation" class="admin-sidebar d-none d-lg-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/60/36'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Attendance System
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/40/40'" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold">
+        Admin User
+       </div>
+       <small class="text-muted">
+        Administrator
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" href="./admin_dashboard.html">
+        <i class="fa-solid fa-gauge me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./reports_page.html">
+        <i class="fa-solid fa-chart-line me-2">
+        </i>
+        Reports
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./approval_queue.html">
+        <i class="fa-solid fa-list-check me-2">
+        </i>
+        Approvals
+       </a>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminUsersMenuDesktop" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenuDesktop" role="button">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Users
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminUsersMenuDesktop">
+        <a class="nav-link" href="./user_management.html">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Manage Users
+        </a>
+        <a class="nav-link" href="./user_form.html">
+         <i class="fa-solid fa-user-plus me-2">
+         </i>
+         Add New User
+        </a>
+       </div>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminSettingsMenuDesktop" aria-expanded="true" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenuDesktop" role="button">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse show ps-4" id="adminSettingsMenuDesktop">
+        <a class="nav-link" href="./system_settings.html">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         System Settings
+        </a>
+        <a class="nav-link active" href="./calendar_settings.html">
+         <i class="fa-solid fa-calendar-days me-2">
+         </i>
+         Calendar
+        </a>
+        <a class="nav-link" href="./schedule_settings.html">
+         <i class="fa-solid fa-clock me-2">
+         </i>
+         Bell Schedules
+        </a>
+        <a class="nav-link" href="./codes_settings.html">
+         <i class="fa-solid fa-code me-2">
+         </i>
+         Attendance Codes
+        </a>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Sidebar: Mobile Offcanvas -->
+   <div aria-labelledby="sidebarLabel" class="offcanvas offcanvas-start" id="sidebar" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title" id="sidebarLabel">
+      Menu
+     </h5>
+     <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+    <div class="offcanvas-body p-0">
+     <nav aria-label="Sidebar Navigation (Mobile)" class="admin-sidebar d-flex flex-column">
+      <div class="brand d-flex align-items-center p-3">
+       <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/60/36'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+       <div class="fw-bold">
+        Attendance System
+       </div>
+      </div>
+      <div class="p-3 border-bottom">
+       <div class="d-flex align-items-center">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/40/40'" src="https://via.placeholder.com/40"/>
+        <div>
+         <div class="fw-semibold">
+          Admin User
+         </div>
+         <small class="text-muted">
+          Administrator
+         </small>
+        </div>
+       </div>
+      </div>
+      <div class="flex-grow-1 overflow-auto">
+       <ul class="nav flex-column mt-2">
+        <li class="nav-item">
+         <a class="nav-link" href="./admin_dashboard.html">
+          <i class="fa-solid fa-gauge me-2">
+          </i>
+          Dashboard
+         </a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" href="./reports_page.html">
+          <i class="fa-solid fa-chart-line me-2">
+          </i>
+          Reports
+         </a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" href="./approval_queue.html">
+          <i class="fa-solid fa-list-check me-2">
+          </i>
+          Approvals
+         </a>
+        </li>
+        <li class="nav-item">
+         <a aria-controls="adminUsersMenuMobile" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenuMobile" role="button">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Users
+          <i class="fa-solid fa-chevron-down float-end">
+          </i>
+         </a>
+         <div class="collapse ps-4" id="adminUsersMenuMobile">
+          <a class="nav-link" href="./user_management.html">
+           <i class="fa-solid fa-users me-2">
+           </i>
+           Manage Users
+          </a>
+          <a class="nav-link" href="./user_form.html">
+           <i class="fa-solid fa-user-plus me-2">
+           </i>
+           Add New User
+          </a>
+         </div>
+        </li>
+        <li class="nav-item">
+         <a aria-controls="adminSettingsMenuMobile" aria-expanded="true" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenuMobile" role="button">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          Settings
+          <i class="fa-solid fa-chevron-down float-end">
+          </i>
+         </a>
+         <div class="collapse show ps-4" id="adminSettingsMenuMobile">
+          <a class="nav-link" href="./system_settings.html">
+           <i class="fa-solid fa-gear me-2">
+           </i>
+           System Settings
+          </a>
+          <a class="nav-link active" href="./calendar_settings.html">
+           <i class="fa-solid fa-calendar-days me-2">
+           </i>
+           Calendar
+          </a>
+          <a class="nav-link" href="./schedule_settings.html">
+           <i class="fa-solid fa-clock me-2">
+           </i>
+           Bell Schedules
+          </a>
+          <a class="nav-link" href="./codes_settings.html">
+           <i class="fa-solid fa-code me-2">
+           </i>
+           Attendance Codes
+          </a>
+         </div>
+        </li>
+       </ul>
+      </div>
+      <div class="p-3">
+       <a class="btn btn-outline-secondary w-100" href="./index.html">
+        <i class="fa-solid fa-right-from-bracket me-2">
+        </i>
+        Logout
+       </a>
+      </div>
+     </nav>
+    </div>
+   </div>
+   <!-- Main content column -->
+   <div class="flex-grow-1 d-flex flex-column">
+    <!-- Header -->
+    <nav class="admin-header navbar navbar-expand-lg px-3">
+     <button class="btn btn-link d-lg-none" data-bs-target="#sidebar" data-bs-toggle="offcanvas">
+      <i class="fa-solid fa-bars">
+      </i>
+     </button>
+     <a class="navbar-brand d-flex align-items-center" href="./admin_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand2/28/28'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Admin Portal
+      </span>
+     </a>
+     <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+      <div class="input-group">
+       <span class="input-group-text bg-white">
+        <i class="fa-solid fa-magnifying-glass">
+        </i>
+       </span>
+       <input class="form-control" placeholder="Search students, classes, users..." type="search"/>
+      </div>
+     </form>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item me-2">
+       <a class="nav-link position-relative" href="#">
+        <i class="fa-solid fa-bell">
+        </i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+         3
+        </span>
+       </a>
+      </li>
+      <li class="nav-item me-2">
+       <a class="nav-link" href="#">
+        <i class="fa-solid fa-envelope">
+        </i>
+       </a>
+      </li>
+      <li class="nav-item dropdown">
+       <a aria-expanded="false" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user2/32/32'" src="https://via.placeholder.com/32"/>
+        Admin
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./user_management.html">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Manage Users
+         </a>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./system_settings.html">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          Settings
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main -->
+    <main class="flex-grow-1 p-3 p-lg-4">
+     <div class="container-fluid">
+      <!-- Page header -->
+      <div class="page-header mb-3">
+       <div class="d-flex align-items-center gap-2">
+        <i class="fa-solid fa-calendar-days text-primary">
+        </i>
+        <h1 class="page-title mb-0">
+         Calendar Settings
+        </h1>
+       </div>
+       <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-light" id="btnExport">
+         <i class="fa-solid fa-file-export me-1">
+         </i>
+         Export
+        </button>
+        <button class="btn btn-light" id="btnImport">
+         <i class="fa-solid fa-file-import me-1">
+         </i>
+         Import
+        </button>
+        <button class="btn btn-info text-white" id="btnBulk">
+         <i class="fa-solid fa-bolt me-1">
+         </i>
+         Bulk Actions
+        </button>
+       </div>
+      </div>
+      <!-- Controls Row -->
+      <div class="row g-3 align-items-end mb-3">
+       <div class="col-12 col-md-4">
+        <label class="form-label" for="yearSelector">
+         Academic Year
+        </label>
+        <select aria-label="Academic Year Selector" class="form-select" id="yearSelector">
+         <option>
+          Loading...
+         </option>
+        </select>
+        <div class="form-text">
+         Selecting a year loads its calendar configuration.
+        </div>
+       </div>
+       <div class="col-12 col-md-8 d-flex align-items-center justify-content-md-end gap-2">
+        <div class="tag">
+         <i class="fa-solid fa-circle text-success me-1">
+         </i>
+         Instructional
+        </div>
+        <div class="tag">
+         <i class="fa-solid fa-circle text-error me-1">
+         </i>
+         Holiday
+        </div>
+        <div class="tag">
+         <i class="fa-solid fa-circle text-warning me-1">
+         </i>
+         Teacher Workday
+        </div>
+        <div class="tag">
+         <i class="fa-solid fa-circle text-info me-1">
+         </i>
+         Special Schedule
+        </div>
+       </div>
+      </div>
+      <!-- Summary and Calendar Row -->
+      <div class="row g-3">
+       <div class="col-12 col-xl-3">
+        <div class="card h-100">
+         <div class="card-header">
+          <span class="widget-title">
+           Year Summary
+          </span>
+         </div>
+         <div class="card-body">
+          <canvas aria-label="Yearly days by type chart" height="200" id="summaryChart">
+          </canvas>
+          <div class="mt-3 small text-muted" id="summaryStats">
+           Loading summary...
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="col-12 col-xl-9">
+        <div class="card">
+         <div class="card-header">
+          <div class="d-flex align-items-center gap-2">
+           <i class="fa-regular fa-calendar me-1">
+           </i>
+           <span class="widget-title">
+            Academic Calendar
+           </span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+           <div aria-label="Month Navigation" class="btn-group" role="group">
+            <button class="btn btn-light" id="prevMonth">
+             <i class="fa-solid fa-chevron-left">
+             </i>
+            </button>
+            <button class="btn btn-light" id="todayBtn">
+             Today
+            </button>
+            <button class="btn btn-light" id="nextMonth">
+             <i class="fa-solid fa-chevron-right">
+             </i>
+            </button>
+           </div>
+          </div>
+         </div>
+         <div class="card-body p-0">
+          <div aria-label="Interactive calendar" id="calendar">
+          </div>
+         </div>
+         <div class="card-footer">
+          <div class="d-flex flex-wrap align-items-center gap-3">
+           <span class="badge-soft success">
+            <i class="fa-solid fa-circle small">
+            </i>
+            Instructional
+           </span>
+           <span class="badge-soft error">
+            <i class="fa-solid fa-circle small">
+            </i>
+            Holiday
+           </span>
+           <span class="badge-soft warning">
+            <i class="fa-solid fa-circle small">
+            </i>
+            Teacher Workday
+           </span>
+           <span class="badge-soft info">
+            <i class="fa-solid fa-circle small">
+            </i>
+            Special Schedule
+           </span>
+           <span class="ms-auto text-muted small">
+            <i class="fa-solid fa-circle me-1" style="color:#cfd6de">
+            </i>
+            Weekends shaded
+           </span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Events List -->
+      <div class="card mt-3">
+       <div class="card-header">
+        <div class="d-flex align-items-center gap-2">
+         <i class="fa-solid fa-list">
+         </i>
+         <span class="widget-title">
+          Calendar Events
+         </span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+         <div class="input-group input-group-sm" style="width: 260px;">
+          <span class="input-group-text bg-white">
+           <i class="fa-solid fa-magnifying-glass">
+           </i>
+          </span>
+          <input class="form-control" id="searchEvents" placeholder="Search description or date" type="text"/>
+         </div>
+         <select class="form-select form-select-sm" id="filterType" style="width: 180px;">
+          <option value="all">
+           All Types
+          </option>
+          <option value="instructional">
+           Instructional
+          </option>
+          <option value="holiday">
+           Holiday
+          </option>
+          <option value="workday">
+           Teacher Workday
+          </option>
+          <option value="special_schedule">
+           Special Schedule
+          </option>
+         </select>
+         <select class="form-select form-select-sm" id="sortBy" style="width: 160px;">
+          <option value="dateAsc">
+           Date ↑
+          </option>
+          <option value="dateDesc">
+           Date ↓
+          </option>
+          <option value="typeAsc">
+           Type A→Z
+          </option>
+         </select>
+        </div>
+       </div>
+       <div class="card-body p-0">
+        <div class="table-responsive">
+         <table class="table table-hover align-middle mb-0" id="eventsTable">
+          <thead class="table-light">
+           <tr>
+            <th style="min-width:120px;">
+             Date
+            </th>
+            <th style="min-width:160px;">
+             Type
+            </th>
+            <th>
+             Description
+            </th>
+            <th style="min-width:140px;">
+             Bell Schedule
+            </th>
+            <th class="text-end" style="min-width:140px;">
+             Actions
+            </th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td class="p-4" colspan="5">
+             <div class="skeleton" style="height: 16px;">
+             </div>
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+       <div class="card-footer d-flex align-items-center justify-content-between">
+        <div class="small text-muted" id="paginationInfo">
+         Loading...
+        </div>
+        <nav aria-label="Table pagination">
+         <ul class="pagination pagination-sm mb-0" id="pagination">
+          <li class="page-item disabled">
+           <button class="page-link">
+            Prev
+           </button>
+          </li>
+          <li class="page-item active">
+           <button class="page-link">
+            1
+           </button>
+          </li>
+          <li class="page-item">
+           <button class="page-link">
+            2
+           </button>
+          </li>
+          <li class="page-item">
+           <button class="page-link">
+            Next
+           </button>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+      <!-- Inline feedback area -->
+      <div class="alert alert-info mt-3 d-none" id="feedbackArea" role="status">
+       <i class="fa-solid fa-circle-info me-2">
+       </i>
+       <span id="feedbackText">
+        Loading...
+       </span>
+      </div>
+     </div>
+    </main>
+    <!-- Footer -->
+    <footer class="admin-footer py-2 px-3 d-flex align-items-center justify-content-between">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand3/18/18'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Date Editor Modal -->
+  <div aria-hidden="true" aria-labelledby="dateEditorLabel" class="modal fade" id="dateEditorModal" tabindex="-1">
+   <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+     <div class="modal-header">
+      <h5 class="modal-title" id="dateEditorLabel">
+       <i class="fa-solid fa-pen-to-square me-1">
+       </i>
+       Edit Date
+      </h5>
+      <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+      </button>
+     </div>
+     <div class="modal-body">
+      <form id="dateEditorForm">
+       <div class="mb-3">
+        <label class="form-label">
+         Selected Date
+        </label>
+        <input class="form-control" disabled="" id="selectedDateDisplay" type="text"/>
+       </div>
+       <div class="mb-3">
+        <label class="form-label">
+         Event Type
+        </label>
+        <div class="d-flex flex-wrap gap-3" id="eventTypeGroup">
+         <div class="form-check">
+          <input checked="" class="form-check-input" id="typeInstructional" name="eventType" type="radio" value="instructional"/>
+          <label class="form-check-label" for="typeInstructional">
+           Instructional Day
+          </label>
+         </div>
+         <div class="form-check">
+          <input class="form-check-input" id="typeHoliday" name="eventType" type="radio" value="holiday"/>
+          <label class="form-check-label" for="typeHoliday">
+           Holiday
+          </label>
+         </div>
+         <div class="form-check">
+          <input class="form-check-input" id="typeWorkday" name="eventType" type="radio" value="workday"/>
+          <label class="form-check-label" for="typeWorkday">
+           Teacher Workday
+          </label>
+         </div>
+         <div class="form-check">
+          <input class="form-check-input" id="typeSpecial" name="eventType" type="radio" value="special_schedule"/>
+          <label class="form-check-label" for="typeSpecial">
+           Special Schedule
+          </label>
+         </div>
+        </div>
+       </div>
+       <div class="mb-3">
+        <label class="form-label" for="eventDescription">
+         Description
+        </label>
+        <input class="form-control" id="eventDescription" maxlength="60" placeholder="e.g., Winter Break, Staff Development Day" type="text"/>
+        <div class="form-text">
+         Required for non-instructional days.
+        </div>
+       </div>
+       <div class="mb-3" id="scheduleSelectGroup">
+        <label class="form-label" for="scheduleSelect">
+         Bell Schedule
+        </label>
+        <select class="form-select" id="scheduleSelect">
+         <!-- options injected -->
+        </select>
+        <div class="form-text">
+         Defaults to Regular Day.
+        </div>
+       </div>
+       <div class="text-danger d-none" id="formErrors">
+        <i class="fa-solid fa-triangle-exclamation me-1">
+        </i>
+        Please fix the errors above.
+       </div>
+      </form>
+     </div>
+     <div class="modal-footer">
+      <button class="btn btn-light" data-bs-dismiss="modal" type="button">
+       Cancel
+      </button>
+      <button class="btn btn-danger d-none" id="deleteEventBtn" type="button">
+       <i class="fa-solid fa-trash me-1">
+       </i>
+       Delete
+      </button>
+      <button class="btn btn-primary" id="saveEventBtn" type="button">
+       <i class="fa-solid fa-floppy-disk me-1">
+       </i>
+       Save
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- FullCalendar JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js">
+  </script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js">
+  </script>
+  <script>
+   // Data store (mock API)
+const availableYears = ['2024-2025', '2025-2026', '2026-2027'];
+const bellSchedules = [{
+    id: 'regular',
+    name: 'Regular Day'
+}, {
+    id: 'half',
+    name: 'Half Day'
+}, {
+    id: 'late',
+    name: 'Late Start'
+}];
+
+// In-memory event data by year
+const eventStore = {
+    '2025-2026': [{
+        date: '2025-08-20',
+        type: 'instructional',
+        description: 'First Day of School',
+        scheduleId: 'regular'
+    }, {
+        date: '2025-09-01',
+        type: 'holiday',
+        description: 'Labor Day'
+    }, {
+        date: '2025-10-17',
+        type: 'special_schedule',
+        description: 'Homecoming Pep Rally',
+        scheduleId: 'half'
+    }, {
+        date: '2025-11-04',
+        type: 'workday',
+        description: 'Teacher Workday'
+    }, {
+        date: '2025-11-27',
+        type: 'holiday',
+        description: 'Thanksgiving Day'
+    }, {
+        date: '2025-12-22',
+        type: 'holiday',
+        description: 'Winter Break Begins'
+    }, {
+        date: '2026-01-02',
+        type: 'holiday',
+        description: 'Winter Break Ends'
+    }, {
+        date: '2026-02-16',
+        type: 'holiday',
+        description: 'Presidents Day'
+    }, {
+        date: '2026-03-18',
+        type: 'special_schedule',
+        description: 'Early Release',
+        scheduleId: 'half'
+    }, {
+        date: '2026-05-27',
+        type: 'instructional',
+        description: 'Last Day of School',
+        scheduleId: 'regular'
+    }],
+    '2024-2025': [{
+        date: '2024-08-21',
+        type: 'instructional',
+        description: 'First Day of School',
+        scheduleId: 'regular'
+    }, {
+        date: '2024-09-02',
+        type: 'holiday',
+        description: 'Labor Day'
+    }, {
+        date: '2024-12-23',
+        type: 'holiday',
+        description: 'Winter Break Begins'
+    }, {
+        date: '2025-01-03',
+        type: 'holiday',
+        description: 'Winter Break Ends'
+    }],
+    '2026-2027': [{
+        date: '2026-08-19',
+        type: 'instructional',
+        description: 'First Day of School',
+        scheduleId: 'regular'
+    }, {
+        date: '2026-09-07',
+        type: 'holiday',
+        description: 'Labor Day'
+    }]
+};
+
+// Utilities
+const fmtDate = (d) => new Date(d).toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+});
+const getScheduleName = (id) => bellSchedules.find(b => b.id === id)?.name || '—';
+const typeLabel = (t) => ({
+    instructional: 'Instructional Day',
+    holiday: 'Holiday',
+    workday: 'Teacher Workday',
+    special_schedule: 'Special Schedule'
+})[t] || t;
+const typeBadge = (t) => ({
+    instructional: '<span class="badge-soft success">Instructional</span>',
+    holiday: '<span class="badge-soft error">Holiday</span>',
+    workday: '<span class="badge-soft warning">Workday</span>',
+    special_schedule: '<span class="badge-soft info">Special</span>'
+})[t] || t;
+
+// Global state
+let selectedYear = '2025-2026';
+let calendar; // FullCalendar instance
+let summaryChart;
+
+// DOM refs
+const yearSelector = document.getElementById('yearSelector');
+const calendarEl = document.getElementById('calendar');
+const prevBtn = document.getElementById('prevMonth');
+const nextBtn = document.getElementById('nextMonth');
+const todayBtn = document.getElementById('todayBtn');
+const eventsTable = document.getElementById('eventsTable').querySelector('tbody');
+const paginationInfo = document.getElementById('paginationInfo');
+const searchEvents = document.getElementById('searchEvents');
+const filterType = document.getElementById('filterType');
+const sortBy = document.getElementById('sortBy');
+
+// Modal refs
+const dateEditorModal = new bootstrap.Modal(document.getElementById('dateEditorModal'));
+const selectedDateDisplay = document.getElementById('selectedDateDisplay');
+const eventDescription = document.getElementById('eventDescription');
+const scheduleSelect = document.getElementById('scheduleSelect');
+const scheduleSelectGroup = document.getElementById('scheduleSelectGroup');
+const deleteEventBtn = document.getElementById('deleteEventBtn');
+const saveEventBtn = document.getElementById('saveEventBtn');
+const formErrors = document.getElementById('formErrors');
+
+let editingDateISO = null;
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    // Load years
+    yearSelector.innerHTML = availableYears.map(y => `<option ${y===selectedYear?'selected':''} value="${y}">${y}</option>`).join('');
+
+    // Load schedules into modal select
+    scheduleSelect.innerHTML = bellSchedules.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+
+    // Calendar
+    initCalendar();
+    loadYear(selectedYear, {
+        init: true
+    });
+
+    // Controls
+    yearSelector.addEventListener('change', (e) => {
+        onYearChange(e.target.value);
+    });
+    prevBtn.addEventListener('click', () => calendar.prev());
+    nextBtn.addEventListener('click', () => calendar.next());
+    todayBtn.addEventListener('click', () => calendar.today());
+
+    // Modal logic: toggle schedule select visibility
+    document.getElementById('eventTypeGroup').addEventListener('change', () => {
+        toggleScheduleVisibility();
+    });
+
+    saveEventBtn.addEventListener('click', onSaveEvent);
+    deleteEventBtn.addEventListener('click', onDeleteEvent);
+
+    // Table filters
+    [searchEvents, filterType, sortBy].forEach(el => el.addEventListener('input', renderEventsTable));
+
+    // Export / Import / Bulk
+    document.getElementById('btnExport').addEventListener('click', onExport);
+    document.getElementById('btnImport').addEventListener('click', onImport);
+    document.getElementById('btnBulk').addEventListener('click', onBulk);
+});
+
+function initCalendar() {
+    calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'standard',
+        initialView: 'dayGridMonth',
+        headerToolbar: false,
+        selectable: true,
+        editable: false,
+        dayMaxEvents: true,
+        firstDay: 0,
+        weekends: true,
+        dateClick: info => {
+            openEditor(info.dateStr);
+        },
+        eventClick: info => {
+            openEditor(info.event.startStr);
+        },
+        events: [],
+        eventClassNames: (arg) => {
+            const t = arg.event.extendedProps.type;
+            return [`evt-${t}`];
+        },
+        dayCellDidMount: (arg) => {
+            // Style weekends background via CSS using fc-day-sat/sun classes
+        },
+    });
+    calendar.render();
+}
+
+async function loadYear(year, opts = {}) {
+    showFeedback(`Loading academic calendar for ${year}...`);
+    await new Promise(r => setTimeout(r, 500)); // simulate API delay
+
+    const events = (eventStore[year] || []).map(evt => fcEventFromStore(evt));
+    calendar.removeAllEvents();
+    calendar.addEventSource(events);
+
+    // Position calendar to academic year start (Aug 1 of first year)
+    const firstYear = parseInt(year.split('-')[0], 10);
+    calendar.gotoDate(new Date(firstYear, 7, 1)); // August (0-indexed 7)
+
+    hideFeedback();
+    renderEventsTable();
+    updateSummary();
+}
+
+function fcEventFromStore(evt) {
+    const colors = {
+        instructional: getComputedStyle(document.documentElement).getPropertyValue('--color-success').trim() || '#00774E',
+        holiday: getComputedStyle(document.documentElement).getPropertyValue('--color-error').trim() || '#CD2026',
+        workday: getComputedStyle(document.documentElement).getPropertyValue('--color-warning').trim() || '#FFA500',
+        special_schedule: getComputedStyle(document.documentElement).getPropertyValue('--color-info').trim() || '#0099D2'
+    };
+    return {
+        title: evt.description || typeLabel(evt.type),
+        start: evt.date,
+        allDay: true,
+        color: colors[evt.type],
+        textColor: '#111',
+        extendedProps: {
+            type: evt.type,
+            scheduleId: evt.scheduleId || null
+        }
+    };
+}
+
+function onYearChange(year) {
+    selectedYear = year;
+    loadYear(year);
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        timer: 1800,
+        showConfirmButton: false,
+        icon: 'success',
+        title: `Switched to ${year}`
+    });
+}
+
+function openEditor(dateISO) {
+    editingDateISO = dateISO;
+    selectedDateDisplay.value = fmtDate(dateISO);
+
+    // Prefill if exists
+    const existing = (eventStore[selectedYear] || []).find(e => e.date === dateISO);
+    if (existing) {
+        document.querySelector(`#eventTypeGroup input[value="${existing.type}"]`).checked = true;
+        eventDescription.value = existing.description || '';
+        if (existing.scheduleId) scheduleSelect.value = existing.scheduleId;
+        else scheduleSelect.value = 'regular';
+        deleteEventBtn.classList.remove('d-none');
+    } else {
+        document.getElementById('typeInstructional').checked = true;
+        eventDescription.value = '';
+        scheduleSelect.value = 'regular';
+        deleteEventBtn.classList.add('d-none');
+    }
+    toggleScheduleVisibility();
+    formErrors.classList.add('d-none');
+    dateEditorModal.show();
+}
+
+function toggleScheduleVisibility() {
+    const selectedType = document.querySelector('#eventTypeGroup input[name="eventType"]:checked').value;
+    if (selectedType === 'instructional') {
+        scheduleSelectGroup.classList.remove('d-none');
+    } else {
+        scheduleSelectGroup.classList.add('d-none');
+    }
+}
+
+function onSaveEvent() {
+    const type = document.querySelector('#eventTypeGroup input[name="eventType"]:checked').value;
+    const desc = eventDescription.value.trim();
+    const scheduleId = (type === 'instructional') ? scheduleSelect.value : null;
+
+    // Validation
+    if (type !== 'instructional' && desc.length === 0) {
+        formErrors.classList.remove('d-none');
+        return;
+    }
+    formErrors.classList.add('d-none');
+
+    // Update store
+    const list = eventStore[selectedYear] || (eventStore[selectedYear] = []);
+    const idx = list.findIndex(e => e.date === editingDateISO);
+    const newEvt = {
+        date: editingDateISO,
+        type,
+        description: (type === 'instructional' ? (desc || 'Instructional Day') : desc),
+        scheduleId
+    };
+    if (idx >= 0) list[idx] = newEvt;
+    else list.push(newEvt);
+
+    // Update calendar
+    calendar.getEvents().forEach(e => {
+        if (e.startStr === editingDateISO) e.remove();
+    });
+    calendar.addEvent(fcEventFromStore(newEvt));
+
+    // UI
+    dateEditorModal.hide();
+    renderEventsTable();
+    updateSummary();
+    Swal.fire({
+        icon: 'success',
+        title: 'Saved',
+        text: `Changes saved for ${fmtDate(editingDateISO)}.`,
+        confirmButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--color-success').trim() || '#00774E'
+    });
+}
+
+function onDeleteEvent() {
+    const list = eventStore[selectedYear] || [];
+    const idx = list.findIndex(e => e.date === editingDateISO);
+    if (idx < 0) {
+        dateEditorModal.hide();
+        return;
+    }
+
+    Swal.fire({
+        icon: 'warning',
+        title: 'Delete this event?',
+        text: fmtDate(editingDateISO),
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        confirmButtonColor: '#d33'
+    }).then(res => {
+        if (res.isConfirmed) {
+            list.splice(idx, 1);
+            calendar.getEvents().forEach(e => {
+                if (e.startStr === editingDateISO) e.remove();
+            });
+            dateEditorModal.hide();
+            renderEventsTable();
+            updateSummary();
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                timer: 1500,
+                showConfirmButton: false,
+                icon: 'success',
+                title: 'Event deleted'
+            });
+        }
+    });
+}
+
+// Table rendering with simple paging
+const PAGE_SIZE = 6;
+let currentPage = 1;
+
+function getFilteredSortedEvents() {
+    const q = searchEvents.value.trim().toLowerCase();
+    const typeF = filterType.value;
+    const sort = sortBy.value;
+    let rows = (eventStore[selectedYear] || []).slice();
+    if (typeF !== 'all') rows = rows.filter(r => r.type === typeF);
+    if (q) rows = rows.filter(r => r.description?.toLowerCase().includes(q) || r.date.includes(q));
+    rows.sort((a, b) => {
+        if (sort === 'dateAsc') return a.date.localeCompare(b.date);
+        if (sort === 'dateDesc') return b.date.localeCompare(a.date);
+        if (sort === 'typeAsc') return typeLabel(a.type).localeCompare(typeLabel(b.type));
+        return 0;
+    });
+    return rows;
+}
+
+function renderEventsTable() {
+    const rows = getFilteredSortedEvents();
+    const total = rows.length;
+    const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    if (currentPage > pages) currentPage = 1;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const pageRows = rows.slice(start, start + PAGE_SIZE);
+
+    eventsTable.innerHTML = (pageRows.length ? pageRows.map(r => `
+        <tr>
+          <td>${fmtDate(r.date)}</td>
+          <td>${typeBadge(r.type)}</td>
+          <td>${r.description || '—'}</td>
+          <td>${r.type==='instructional' ? getScheduleName(r.scheduleId) : '—'}</td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-light me-2" data-date="${r.date}" onclick="(function(d){openEditor(d)})(this.getAttribute('data-date'))"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn btn-sm btn-danger" data-date="${r.date}" onclick="(function(d){editingDateISO=d; onDeleteEvent()})(this.getAttribute('data-date'))"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join('') : '<tr><td colspan="5" class="text-center p-4 text-muted">No events found</td></tr>');
+
+    paginationInfo.textContent = total ? `Showing ${start+1}-${Math.min(start+PAGE_SIZE,total)} of ${total}` : 'No records';
+    renderPagination(pages);
+}
+
+function renderPagination(pages) {
+    const ul = document.getElementById('pagination');
+    ul.innerHTML = '';
+    const addItem = (label, disabled, active, onClick) => {
+        const li = document.createElement('li');
+        li.className = `page-item${disabled?' disabled':''}${active?' active':''}`;
+        const btn = document.createElement('button');
+        btn.className = 'page-link';
+        btn.textContent = label;
+        if (!disabled) btn.addEventListener('click', onClick);
+        li.appendChild(btn);
+        ul.appendChild(li);
+    };
+    addItem('Prev', currentPage === 1, false, () => {
+        currentPage--;
+        renderEventsTable();
+    });
+    for (let i = 1; i <= pages; i++) addItem(String(i), false, i === currentPage, () => {
+        currentPage = i;
+        renderEventsTable();
+    });
+    addItem('Next', currentPage === pages, false, () => {
+        currentPage++;
+        renderEventsTable();
+    });
+}
+
+function updateSummary() {
+    const rows = eventStore[selectedYear] || [];
+    const counts = {
+        instructional: 0,
+        holiday: 0,
+        workday: 0,
+        special_schedule: 0
+    };
+    rows.forEach(r => counts[r.type] = (counts[r.type] || 0) + 1);
+
+    const data = [counts.instructional, counts.holiday, counts.workday, counts.special_schedule];
+    const colors = [
+        getCssVar('--color-success') || '#00774E',
+        getCssVar('--color-error') || '#CD2026',
+        getCssVar('--color-warning') || '#FFA500',
+        getCssVar('--color-info') || '#0099D2'
+    ];
+
+    const ctx = document.getElementById('summaryChart');
+    if (summaryChart) summaryChart.destroy();
+    summaryChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Instructional', 'Holiday', 'Workday', 'Special'],
+            datasets: [{
+                data,
+                backgroundColor: colors,
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        }
+    });
+
+    document.getElementById('summaryStats').innerHTML = `
+        <div class="small">Instructional: <strong>${counts.instructional}</strong></div>
+        <div class="small">Holidays: <strong>${counts.holiday}</strong></div>
+        <div class="small">Teacher Workdays: <strong>${counts.workday}</strong></div>
+        <div class="small">Special Schedules: <strong>${counts.special_schedule}</strong></div>
+      `;
+}
+
+function getCssVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function showFeedback(msg) {
+    const el = document.getElementById('feedbackArea');
+    document.getElementById('feedbackText').textContent = msg;
+    el.classList.remove('d-none');
+}
+
+function hideFeedback() {
+    const el = document.getElementById('feedbackArea');
+    el.classList.add('d-none');
+}
+
+// Import/Export mocks
+function onExport() {
+    const rows = eventStore[selectedYear] || [];
+    const blob = new Blob([JSON.stringify({
+        year: selectedYear,
+        events: rows
+    }, null, 2)], {
+        type: 'application/json'
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `calendar_${selectedYear}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        timer: 1500,
+        showConfirmButton: false,
+        icon: 'success',
+        title: 'Exported'
+    });
+}
+
+function onImport() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    input.addEventListener('change', () => {
+        const file = input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                const data = JSON.parse(reader.result);
+                if (data.year && Array.isArray(data.events)) {
+                    eventStore[data.year] = data.events;
+                    selectedYear = data.year;
+                    yearSelector.value = selectedYear;
+                    loadYear(selectedYear);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Imported',
+                        text: `Calendar loaded for ${selectedYear}`
+                    });
+                } else {
+                    throw new Error('Invalid file');
+                }
+            } catch (e) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Import failed',
+                    text: 'Please select a valid calendar JSON file.'
+                });
+            }
+        };
+        reader.readAsText(file);
+    });
+    input.click();
+}
+
+function onBulk() {
+    Swal.fire({
+        title: 'Bulk Actions',
+        html: '<div class="text-start">' +
+            '<p class="mb-2">Apply to selected range (mock):</p>' +
+            '<div class="mb-2"><label class="form-label">Type</label><select id="bulkType" class="form-select"><option value="holiday">Holiday</option><option value="workday">Teacher Workday</option></select></div>' +
+            '<div class="mb-2"><label class="form-label">Description</label><input id="bulkDesc" class="form-control" placeholder="e.g., Spring Break"></div>' +
+            '</div>',
+        showCancelButton: true,
+        confirmButtonText: 'Apply',
+    }).then(res => {
+        if (res.isConfirmed) {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                timer: 1500,
+                showConfirmButton: false,
+                icon: 'success',
+                title: 'Bulk action queued'
+            });
+        }
+    });
+}
+  </script>
+ </body>
+</html>

@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Student Dashboard
+  </title>
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <!-- Theme stylesheet -->
+  <link href="style.css" rel="stylesheet"/>
+  <!-- Page-specific stylesheet -->
+  <link href="student_dashboard.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- Mobile Top Bar (shows toggle for sidebar on small screens) -->
+  <nav class="navbar navbar-light bg-white border-bottom d-lg-none px-3">
+   <div class="d-flex align-items-center w-100 justify-content-between">
+    <button aria-controls="mobileSidebar" class="btn btn-light" data-bs-target="#mobileSidebar" data-bs-toggle="offcanvas">
+     <i class="fa-solid fa-bars">
+     </i>
+    </button>
+    <a class="navbar-brand d-flex align-items-center" href="./student_dashboard.html">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/64/64';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+     <span class="fw-semibold">
+      Student
+     </span>
+    </a>
+    <a class="btn btn-primary" href="./checkin_kiosk.html">
+     <i class="fa-solid fa-qrcode me-2">
+     </i>
+     Check-in
+    </a>
+   </div>
+  </nav>
+  <div class="dashboard-shell d-flex">
+   <!-- Sidebar (desktop) -->
+   <aside class="student-sidebar d-none d-lg-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/72/72';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;">
+      <div class="fw-bold">
+       Student Portal
+      </div>
+     </img>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/student/40/40';" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold" id="sidebarStudentName">
+        Student Name
+       </div>
+       <small class="text-muted">
+        Student
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link active" href="./student_dashboard.html">
+        <i class="fa-solid fa-house me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_history.html">
+        <i class="fa-solid fa-list me-2">
+        </i>
+        My Attendance History
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./checkin_kiosk.html">
+        <i class="fa-solid fa-qrcode me-2">
+        </i>
+        Self Check-in
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <button class="btn btn-outline-secondary w-100" id="sidebarLogoutBtn">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </button>
+    </div>
+   </aside>
+   <!-- Offcanvas Sidebar (mobile) -->
+   <div aria-labelledby="mobileSidebarLabel" class="offcanvas offcanvas-start" id="mobileSidebar" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title" id="mobileSidebarLabel">
+      Student Portal
+     </h5>
+     <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column p-0">
+     <div class="p-3 border-bottom">
+      <div class="d-flex align-items-center">
+       <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/student/40/40';" src="https://via.placeholder.com/40"/>
+       <div>
+        <div class="fw-semibold" id="mobileSidebarStudentName">
+         Student Name
+        </div>
+        <small class="text-muted">
+         Student
+        </small>
+       </div>
+      </div>
+     </div>
+     <ul class="nav flex-column mt-2 px-2">
+      <li class="nav-item">
+       <a class="nav-link active" href="./student_dashboard.html">
+        <i class="fa-solid fa-house me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_history.html">
+        <i class="fa-solid fa-list me-2">
+        </i>
+        My Attendance History
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./checkin_kiosk.html">
+        <i class="fa-solid fa-qrcode me-2">
+        </i>
+        Self Check-in
+       </a>
+      </li>
+     </ul>
+     <div class="mt-auto p-3">
+      <button class="btn btn-outline-secondary w-100" data-logout="true">
+       <i class="fa-solid fa-right-from-bracket me-2">
+       </i>
+       Logout
+      </button>
+     </div>
+    </div>
+   </div>
+   <!-- Main Wrapper -->
+   <div class="dashboard-main d-flex flex-column flex-grow-1 min-vh-100">
+    <!-- Student Header with Quick Action (desktop) -->
+    <nav class="student-header navbar navbar-expand-lg px-3 d-none d-lg-flex">
+     <a class="navbar-brand d-flex align-items-center" href="./student_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/64/64';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Student
+      </span>
+     </a>
+     <div class="ms-3">
+      <a class="btn" href="./checkin_kiosk.html" style="background:var(--primary); color:#fff;">
+       <i class="fa-solid fa-qrcode me-2">
+       </i>
+       Self Check-in
+      </a>
+     </div>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item me-2">
+       <a class="nav-link position-relative" data-bs-title="Notifications" data-bs-toggle="tooltip" href="#">
+        <i class="fa-solid fa-bell">
+        </i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+         1
+        </span>
+       </a>
+      </li>
+      <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/avatar/32/32';" src="https://via.placeholder.com/32"/>
+        <span id="headerStudentName">
+         Student
+        </span>
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./attendance_history.html">
+          <i class="fa-solid fa-list me-2">
+          </i>
+          My History
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="#" id="headerLogout">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Page Header Title -->
+    <div class="page-header container-fluid py-3 px-3">
+     <div class="d-flex align-items-center gap-3">
+      <h1 class="page-title m-0">
+       My Dashboard
+      </h1>
+      <span class="badge-soft info" id="termBadge">
+       Current Term
+      </span>
+     </div>
+     <div class="d-flex align-items-center gap-2">
+      <div aria-label="View switcher" class="view-switcher d-none d-md-inline-flex" role="group">
+       <div class="option active">
+        <i class="fa-solid fa-grip">
+        </i>
+       </div>
+       <div class="option">
+        <i class="fa-solid fa-list">
+        </i>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+     <div class="container-fluid px-3">
+      <!-- Attendance Summary Cards -->
+      <div aria-live="polite" class="row g-3" id="summaryRow">
+       <!-- Loading Skeletons -->
+       <div class="col-12 col-md-4">
+        <div class="metric-card d-grid gap-2">
+         <div class="skeleton" style="height:22px">
+         </div>
+         <div class="skeleton" style="height:48px">
+         </div>
+        </div>
+       </div>
+       <div class="col-12 col-md-4">
+        <div class="metric-card d-grid gap-2">
+         <div class="skeleton" style="height:22px">
+         </div>
+         <div class="skeleton" style="height:48px">
+         </div>
+        </div>
+       </div>
+       <div class="col-12 col-md-4">
+        <div class="metric-card d-grid gap-2">
+         <div class="skeleton" style="height:22px">
+         </div>
+         <div class="skeleton" style="height:48px">
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Charts Row -->
+      <div class="row g-3 mt-1">
+       <div class="col-12 col-lg-6">
+        <div class="card h-100">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-chart-line text-primary">
+           </i>
+           Attendance Trend (7 days)
+          </div>
+          <div class="text-muted small">
+           Daily presence
+          </div>
+         </div>
+         <div class="card-body">
+          <canvas aria-label="Attendance trend chart" height="170" id="trendChart" role="img">
+          </canvas>
+         </div>
+        </div>
+       </div>
+       <div class="col-12 col-lg-6">
+        <div class="card h-100">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-chart-pie text-secondary">
+           </i>
+           Term Breakdown
+          </div>
+          <div class="text-muted small">
+           Present vs Absent vs Late
+          </div>
+         </div>
+         <div class="card-body">
+          <canvas aria-label="Attendance composition chart" height="170" id="breakdownChart" role="img">
+          </canvas>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Two-column Layout: Today's Schedule + Quick Actions -->
+      <div class="row g-3 mt-1">
+       <!-- Today's Schedule -->
+       <div class="col-12 col-xl-8">
+        <div class="card h-100">
+         <div class="card-header">
+          <div class="d-flex align-items-center gap-2">
+           <i class="fa-solid fa-calendar-day text-primary">
+           </i>
+           <div class="title">
+            Today's Schedule
+           </div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+           <div aria-label="Filter schedule" class="btn-group btn-group-sm" role="group">
+            <button class="btn btn-light active" data-filter="all">
+             All
+            </button>
+            <button class="btn btn-light" data-filter="upcoming">
+             Upcoming
+            </button>
+            <button class="btn btn-light" data-filter="completed">
+             Completed
+            </button>
+           </div>
+           <div class="input-group input-group-sm" style="width: 220px;">
+            <span class="input-group-text">
+             <i class="fa-solid fa-magnifying-glass">
+             </i>
+            </span>
+            <input class="form-control" id="scheduleSearch" placeholder="Search class" type="text"/>
+           </div>
+          </div>
+         </div>
+         <div class="card-body">
+          <!-- Info summary -->
+          <div class="d-flex justify-content-between align-items-center mb-2 small text-muted">
+           <div>
+            Showing
+            <span id="scheduleCount">
+             0
+            </span>
+            items •
+            <span id="todayStr">
+             Today
+            </span>
+           </div>
+           <div>
+            Local time:
+            <span id="localTime">
+            </span>
+           </div>
+          </div>
+          <ul aria-live="polite" class="list-group list-group-flush" id="scheduleList">
+           <!-- Loading Items -->
+           <li class="list-group-item">
+            <div class="skeleton" style="height:18px">
+            </div>
+           </li>
+           <li class="list-group-item">
+            <div class="skeleton" style="height:18px">
+            </div>
+           </li>
+           <li class="list-group-item">
+            <div class="skeleton" style="height:18px">
+            </div>
+           </li>
+          </ul>
+         </div>
+         <div class="card-footer d-flex justify-content-between align-items-center small text-muted">
+          <div>
+           <i class="fa-solid fa-circle-info me-1">
+           </i>
+           Status legend:
+           <span class="badge rounded-pill bg-success">
+            Present
+           </span>
+           <span class="badge rounded-pill bg-danger">
+            Absent
+           </span>
+           <span class="badge rounded-pill bg-warning text-dark">
+            Late
+           </span>
+           <span class="badge rounded-pill bg-secondary">
+            Pending
+           </span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+           <button class="btn btn-sm btn-light" id="refreshSchedule">
+            <i class="fa-solid fa-rotate">
+            </i>
+            Refresh
+           </button>
+          </div>
+         </div>
+        </div>
+       </div>
+       <!-- Quick Actions -->
+       <div class="col-12 col-xl-4">
+        <div class="card h-100">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-bolt text-warning">
+           </i>
+           Quick Actions
+          </div>
+         </div>
+         <div class="card-body d-grid gap-2">
+          <button class="btn btn-primary w-100" id="viewHistoryBtn">
+           <i class="fa-solid fa-list me-2">
+           </i>
+           View Full History
+          </button>
+          <button class="btn btn-info w-100" disabled="" id="checkInBtn">
+           <i class="fa-solid fa-qrcode me-2">
+           </i>
+           Self Check-In
+          </button>
+          <div class="small text-muted" id="checkInWindowMsg">
+           Checking availability...
+          </div>
+          <div class="border rounded p-3 bg-info-soft">
+           <div class="fw-semibold mb-1">
+            <i class="fa-solid fa-lightbulb text-info me-1">
+            </i>
+            Tip
+           </div>
+           <div class="small">
+            Check-in is enabled during a valid window near the start of your next class. You'll see it turn on automatically.
+           </div>
+          </div>
+         </div>
+         <div class="card-footer d-flex justify-content-between small text-muted">
+          <span>
+           <i class="fa-solid fa-shield-halved me-1">
+           </i>
+           Secure
+          </span>
+          <a class="text-decoration-none" href="./checkin_kiosk.html">
+           Kiosk Mode
+          </a>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </main>
+    <!-- Footer -->
+    <footer class="student-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/36/36';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Toasts (system feedback) -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080">
+   <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-bg-primary border-0" id="welcomeToast" role="alert">
+    <div class="d-flex">
+     <div class="toast-body">
+      <i class="fa-solid fa-hand-wave me-2">
+      </i>
+      Welcome back,
+      <span id="toastStudentName">
+       Student
+      </span>
+      !
+     </div>
+     <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Mock user info (would come from auth/session in real app)
+const currentStudent = {
+    id: '12345',
+    name: 'Alex Johnson',
+    profilePictureUrl: 'https://via.placeholder.com/40'
+};
+
+// Utility: format time
+function pad(n) {
+    return n < 10 ? '0' + n : n
+}
+
+function formatTime(date) {
+    const h = date.getHours();
+    const m = date.getMinutes();
+    return `${pad(h)}:${pad(m)}`
+}
+
+// Update header/sidebar names
+function populateUser() {
+    document.getElementById('sidebarStudentName').textContent = currentStudent.name;
+    document.getElementById('mobileSidebarStudentName').textContent = currentStudent.name;
+    document.getElementById('headerStudentName').textContent = currentStudent.name;
+    document.getElementById('toastStudentName').textContent = currentStudent.name.split(' ')[0];
+}
+
+// Bootstrap tooltips
+function initTooltips() {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+}
+
+// Toast
+function showWelcomeToast() {
+    const toastEl = document.getElementById('welcomeToast');
+    const toast = new bootstrap.Toast(toastEl, {
+        delay: 3000
+    });
+    toast.show();
+}
+
+// Mock APIs
+function fetchSummary() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve({
+                termName: 'Spring 2025',
+                attendanceRate: 94.2, // percent
+                totalAbsences: 2,
+                totalTardies: 1,
+                breakdown: {
+                    present: 120,
+                    absent: 3,
+                    late: 4
+                },
+                trend: [1, 1, 1, 1, 0, 1, 1] // presence last 7 days (1=present,0=absent/late)
+            });
+        }, 700);
+    });
+}
+
+function fetchSchedule() {
+    // Build a sample schedule around today
+    const today = new Date();
+    const base = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8, 0, 0, 0);
+    const classes = [{
+        period: '1',
+        className: 'Algebra II',
+        start: new Date(base),
+        end: new Date(base.getTime() + 45 * 60000),
+        teacher: 'J. Parker',
+        room: 'A203'
+    }, {
+        period: '2',
+        className: 'English Lit',
+        start: new Date(base.getTime() + 55 * 60000),
+        end: new Date(base.getTime() + 100 * 60000),
+        teacher: 'M. Rivera',
+        room: 'B112'
+    }, {
+        period: '3',
+        className: 'Chemistry',
+        start: new Date(base.getTime() + 110 * 60000),
+        end: new Date(base.getTime() + 155 * 60000),
+        teacher: 'Dr. Chen',
+        room: 'Lab C'
+    }, {
+        period: '4',
+        className: 'US History',
+        start: new Date(base.getTime() + 165 * 60000),
+        end: new Date(base.getTime() + 210 * 60000),
+        teacher: 'S. Patel',
+        room: 'D310'
+    }, {
+        period: '5',
+        className: 'Physical Ed',
+        start: new Date(base.getTime() + 250 * 60000),
+        end: new Date(base.getTime() + 295 * 60000),
+        teacher: 'Coach Lee',
+        room: 'Gym'
+    }, {
+        period: '6',
+        className: 'Art Design',
+        start: new Date(base.getTime() + 305 * 60000),
+        end: new Date(base.getTime() + 350 * 60000),
+        teacher: 'K. Nguyen',
+        room: 'Art 1'
+    }];
+    return new Promise(resolve => setTimeout(() => resolve(classes), 650));
+}
+
+function fetchCheckInStatus(schedule) {
+    // Enabled if there is a class starting within next 15 minutes
+    const now = new Date();
+    const upcoming = schedule.find(c => (c.start - now) > 0 && (c.start - now) <= 15 * 60000);
+    const current = schedule.find(c => now >= c.start && now <= c.end);
+    const available = !!(upcoming || current);
+    let message = 'No eligible class currently.';
+    if (current) {
+        message = `Check-in available for Period ${current.period} • ends ${formatTime(new Date(current.start.getTime()+10*60000))}`
+    } else if (upcoming) {
+        message = `Opens soon for Period ${upcoming.period} at ${formatTime(upcoming.start)}`
+    }
+    return {
+        available,
+        message
+    };
+}
+
+// Render Summary
+function renderSummary(summary) {
+    const rateClass = summary.attendanceRate >= 95 ? 'text-success' : (summary.attendanceRate >= 90 ? 'text-warning' : 'text-danger');
+    const summaryHtml = `
+        <div class="col-12 col-md-4">
+          <div class="metric-card">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="metric-title">Attendance Rate</div>
+              <div class="metric-icon bg-primary-soft text-primary"><i class="fa-solid fa-user-check"></i></div>
+            </div>
+            <div class="metric-value ${rateClass}" aria-live="polite">${summary.attendanceRate.toFixed(1)}%</div>
+            <div class="small text-muted">Goal: 95%</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="metric-card">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="metric-title">Total Absences</div>
+              <div class="metric-icon bg-error-soft text-danger"><i class="fa-solid fa-user-xmark"></i></div>
+            </div>
+            <div class="metric-value">${summary.totalAbsences}</div>
+            <div class="small text-muted">This term</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="metric-card">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="metric-title">Total Tardies</div>
+              <div class="metric-icon bg-warning-soft text-warning"><i class="fa-solid fa-user-clock"></i></div>
+            </div>
+            <div class="metric-value">${summary.totalTardies}</div>
+            <div class="small text-muted">This term</div>
+          </div>
+        </div>`;
+    const row = document.getElementById('summaryRow');
+    row.innerHTML = summaryHtml;
+    document.getElementById('termBadge').textContent = summary.termName;
+}
+
+// Render Schedule
+function getStatusBadge(status) {
+    switch (status) {
+        case 'Present':
+            return '<span class="badge rounded-pill bg-success">Present</span>';
+        case 'Absent':
+            return '<span class="badge rounded-pill bg-danger">Absent</span>';
+        case 'Late':
+            return '<span class="badge rounded-pill bg-warning text-dark">Late</span>';
+        default:
+            return '<span class="badge rounded-pill bg-secondary">Pending</span>';
+    }
+}
+
+function determineStatus(start, end) {
+    const now = new Date();
+    if (now > end) return 'Present'; // sample: assume attended past classes
+    if (now >= start && now <= end) return 'Pending';
+    if (now < start) return 'Upcoming';
+    return 'Pending';
+}
+
+function renderSchedule(list) {
+    const ul = document.getElementById('scheduleList');
+    let html = '';
+    list.forEach((item, idx) => {
+        const statusRaw = determineStatus(item.start, item.end);
+        const attendanceStatus = (statusRaw === 'Upcoming' || statusRaw === 'Pending') ? 'Not Yet Taken' : statusRaw;
+        const badge = getStatusBadge(attendanceStatus === 'Not Yet Taken' ? 'Pending' : attendanceStatus);
+        const filterState = (statusRaw === 'Upcoming' || statusRaw === 'Pending') ? 'upcoming' : 'completed';
+        const id = `sched${idx}`;
+        html += `
+          <li class="list-group-item schedule-item" data-filter-state="${filterState}" data-class-name="${item.className.toLowerCase()}">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-3">
+                <div class="period badge rounded-pill bg-primary-soft text-strong">P${item.period}</div>
+                <div>
+                  <div class="fw-semibold">${item.className}</div>
+                  <div class="small text-muted">${formatTime(item.start)} - ${formatTime(item.end)}</div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                ${badge}
+                <button class="btn btn-sm btn-light" data-bs-toggle="collapse" data-bs-target="#${id}" aria-expanded="false" aria-controls="${id}"><i class="fa-solid fa-chevron-down"></i></button>
+              </div>
+            </div>
+            <div class="collapse mt-2" id="${id}">
+              <div class="border rounded p-2 bg-surface">
+                <div class="row g-2 small">
+                  <div class="col-6"><i class="fa-solid fa-chalkboard-user me-1 text-muted"></i> Teacher: <span class="fw-semibold">${item.teacher}</span></div>
+                  <div class="col-6"><i class="fa-solid fa-door-open me-1 text-muted"></i> Room: <span class="fw-semibold">${item.room}</span></div>
+                </div>
+              </div>
+            </div>
+          </li>`;
+    });
+    ul.innerHTML = html;
+    document.getElementById('scheduleCount').textContent = list.length;
+    updateLocalTime();
+}
+
+// Filtering & Search
+function initScheduleFilters() {
+    const buttons = document.querySelectorAll('[data-filter]');
+    buttons.forEach(btn => btn.addEventListener('click', (e) => {
+        buttons.forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        applyScheduleFilter();
+    }))
+    document.getElementById('scheduleSearch').addEventListener('input', applyScheduleFilter);
+}
+
+function applyScheduleFilter() {
+    const activeBtn = document.querySelector('[data-filter].active');
+    const filter = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+    const q = (document.getElementById('scheduleSearch').value || '').toLowerCase();
+    const items = document.querySelectorAll('#scheduleList .schedule-item');
+    let visible = 0;
+    items.forEach(li => {
+        const state = li.getAttribute('data-filter-state');
+        const cls = li.getAttribute('data-class-name');
+        const passFilter = filter === 'all' || state === filter;
+        const passSearch = !q || cls.includes(q);
+        if (passFilter && passSearch) {
+            li.classList.remove('d-none');
+            visible++;
+        } else li.classList.add('d-none');
+    })
+    document.getElementById('scheduleCount').textContent = visible;
+}
+
+// Check-in
+function setCheckInStatus(status) {
+    const btn = document.getElementById('checkInBtn');
+    const msg = document.getElementById('checkInWindowMsg');
+    btn.disabled = !status.available;
+    msg.textContent = status.message;
+}
+
+function handleCheckIn() {
+    const btn = document.getElementById('checkInBtn');
+    btn.addEventListener('click', () => {
+        Swal.fire({
+            title: 'Self Check-In',
+            text: 'Proceed to the check-in kiosk or scan a QR code using your device.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Open Kiosk',
+            cancelButtonText: 'Use Camera',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = './checkin_kiosk.html';
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    title: 'Camera Access',
+                    text: 'Your device will request camera access to scan the QR code.',
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                })
+            }
+        })
+    })
+}
+
+// Charts
+let trendChart, breakdownChart;
+
+function renderCharts(summary) {
+    const trendCtx = document.getElementById('trendChart');
+    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const data = summary.trend.map(v => v ? 100 : 0);
+    trendChart = new Chart(trendCtx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Presence %',
+                data,
+                borderColor: getComputedStyle(document.documentElement).getPropertyValue('--color-info').trim() || '#0099D2',
+                backgroundColor: 'rgba(0,153,210,0.15)',
+                fill: true,
+                tension: 0.35,
+                pointRadius: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+            scales: {
+                y: {
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    ticks: {
+                        callback: v => v + '%'
+                    }
+                }
+            }
+        }
+    });
+
+    const breakdownCtx = document.getElementById('breakdownChart');
+    const b = summary.breakdown;
+    breakdownChart = new Chart(breakdownCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Present', 'Absent', 'Late'],
+            datasets: [{
+                data: [b.present, b.absent, b.late],
+                backgroundColor: [
+                    getComputedStyle(document.documentElement).getPropertyValue('--color-success').trim() || '#00774E',
+                    getComputedStyle(document.documentElement).getPropertyValue('--color-error').trim() || '#CD2026',
+                    getComputedStyle(document.documentElement).getPropertyValue('--color-warning').trim() || '#FFA500'
+                ],
+                borderWidth: 1,
+                borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim() || '#d3d3d4'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+// Logout handlers
+function initLogout() {
+    function confirmLogout() {
+        Swal.fire({
+            title: 'Logout?',
+            text: 'You will be redirected to the login page.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Logout',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Invalidate token (mock)
+                window.location.href = './index.html';
+            }
+        })
+    }
+    document.getElementById('headerLogout').addEventListener('click', confirmLogout);
+    document.getElementById('sidebarLogoutBtn').addEventListener('click', confirmLogout);
+    document.querySelectorAll('[data-logout]')?.forEach(el => el.addEventListener('click', confirmLogout));
+}
+
+// Local time updater
+function updateLocalTime() {
+    const el = document.getElementById('localTime');
+    if (!el) return;
+    const now = new Date();
+    el.textContent = now.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+// Refresh schedule button
+function initRefresh() {
+    document.getElementById('refreshSchedule').addEventListener('click', async () => {
+        document.getElementById('scheduleList').innerHTML = '<li class="list-group-item"><div class="skeleton" style="height:18px"></div></li>';
+        const schedule = await fetchSchedule();
+        renderSchedule(schedule);
+        applyScheduleFilter();
+        const status = fetchCheckInStatus(schedule);
+        setCheckInStatus(status);
+    })
+}
+
+// View history navigation
+function initViewHistory() {
+    document.getElementById('viewHistoryBtn').addEventListener('click', () => {
+        window.location.href = './attendance_history.html';
+    })
+}
+
+// Today string
+function setTodayStr() {
+    const d = new Date();
+    document.getElementById('todayStr').textContent = d.toLocaleDateString(undefined, {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+// Initialize app
+(async function init() {
+    populateUser();
+    initTooltips();
+    setTodayStr();
+    updateLocalTime();
+    setInterval(updateLocalTime, 30000);
+
+    const [summary, schedule] = await Promise.all([fetchSummary(), fetchSchedule()]);
+    renderSummary(summary);
+    renderCharts(summary);
+    renderSchedule(schedule);
+    initScheduleFilters();
+    applyScheduleFilter();
+
+    const status = fetchCheckInStatus(schedule);
+    setCheckInStatus(status);
+    handleCheckIn();
+    initRefresh();
+    initViewHistory();
+    initLogout();
+    showWelcomeToast();
+})();
+  </script>
+ </body>
+</html>

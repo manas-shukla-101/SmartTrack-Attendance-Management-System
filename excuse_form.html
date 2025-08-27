@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Submit Absence Excuse
+  </title>
+  <!-- Brand Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+  <!-- Flatpickr (Date Range Picker) -->
+  <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet"/>
+  <!-- Global Theme CSS -->
+  <link href="style.css" rel="stylesheet"/>
+  <!-- Page-specific CSS -->
+  <link href="excuse_form.css" rel="stylesheet"/>
+ </head>
+ <body style="font-family: 'Poppins', var(--font-sans);">
+  <!-- Common Header (Shared Pages) -->
+  <nav class="common-header navbar navbar-expand-lg px-3">
+   <a class="navbar-brand d-flex align-items-center" href="#">
+    <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/attendance-logo/56/56'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+    <span class="fw-semibold">
+     Attendance
+    </span>
+   </a>
+   <span class="ms-3 text-muted d-none d-md-inline" id="commonPageTitle">
+    Submit Absence Excuse
+   </span>
+   <ul class="navbar-nav ms-auto">
+    <li class="nav-item dropdown">
+     <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/avatar28/28/28'" src="https://via.placeholder.com/28"/>
+      Account
+     </a>
+     <ul class="dropdown-menu dropdown-menu-end">
+      <li>
+       <a class="dropdown-item" href="#" id="backDashDD">
+        <i class="fa-solid fa-arrow-left me-2">
+        </i>
+        Back to Dashboard
+       </a>
+      </li>
+      <li>
+       <hr class="dropdown-divider"/>
+      </li>
+      <li>
+       <a class="dropdown-item" href="./index.html">
+        <i class="fa-solid fa-right-to-bracket me-2">
+        </i>
+        Login
+       </a>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </nav>
+  <div class="d-flex min-vh-100">
+   <!-- Sidebar (Applicable to excuse_form) -->
+   <nav class="common-sidebar d-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand32/32/32'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:32px;">
+      <div class="fw-bold">
+       Attendance
+      </div>
+     </img>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" data-role="auto" href="#" id="backToDashboard">
+        <i class="fa-solid fa-arrow-left me-2">
+        </i>
+        Back to Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_history.html">
+        <i class="fa-solid fa-list me-2">
+        </i>
+        Attendance History
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_roster.html">
+        <i class="fa-solid fa-clipboard-check me-2">
+        </i>
+        Take Attendance
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link active" href="./excuse_form.html">
+        <i class="fa-solid fa-file-circle-plus me-2">
+        </i>
+        Submit Excuse
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="#">
+        <i class="fa-solid fa-circle-question me-2">
+        </i>
+        Help
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3 border-top">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-to-bracket me-2">
+      </i>
+      Login
+     </a>
+    </div>
+   </nav>
+   <!-- Main Content Area -->
+   <div class="flex-grow-1 d-flex flex-column">
+    <main class="main-panel">
+     <div class="container-fluid">
+      <!-- Breadcrumb / Page Header -->
+      <div class="page-header">
+       <div class="d-flex align-items-center gap-2">
+        <h1 class="page-title mb-0">
+         Submit Absence Excuse
+        </h1>
+        <span class="badge-soft info">
+         <i class="fa-solid fa-info-circle">
+         </i>
+         Parent Submission
+        </span>
+       </div>
+       <div class="view-switcher d-none d-md-inline-flex">
+        <div class="option active">
+         <i class="fa-solid fa-file-pen me-1">
+         </i>
+         Form
+        </div>
+        <div class="option">
+         <i class="fa-solid fa-clock-rotate-left me-1">
+         </i>
+         Recent
+        </div>
+       </div>
+      </div>
+      <div class="row g-4">
+       <div class="col-12 col-lg-8">
+        <!-- System feedback area -->
+        <div class="alert alert-info d-none" id="systemFeedback" role="alert">
+         <i class="fa-solid fa-circle-info me-2">
+         </i>
+         Use this form to submit an absence excuse. Required fields are marked with *.
+        </div>
+        <!-- Absence Submission Form Card -->
+        <div class="card" id="excuseFormCard">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-file-pen text-primary">
+           </i>
+           <span class="widget-title">
+            Absence Excuse Form
+           </span>
+          </div>
+          <div>
+           <span class="text-muted small">
+            <i class="fa-regular fa-calendar me-1">
+            </i>
+            Today:
+            <span id="todayStr">
+            </span>
+           </span>
+          </div>
+         </div>
+         <div class="card-body">
+          <form id="absenceForm" novalidate="">
+           <!-- Student Selector (shows only if >1 student) -->
+           <div class="mb-3" id="studentSelectorGroup" style="display:none;">
+            <label class="form-label" for="studentSelect">
+             For which student?
+             <span class="text-danger">
+              *
+             </span>
+            </label>
+            <select class="form-select" id="studentSelect" required="">
+             <!-- options injected by JS -->
+            </select>
+            <div class="invalid-feedback">
+             Please select a student.
+            </div>
+           </div>
+           <!-- Single student display (if only one) -->
+           <div class="mb-3" id="studentSingleGroup" style="display:none;">
+            <label class="form-label">
+             Student
+            </label>
+            <input class="form-control" id="studentSingle" readonly="" type="text"/>
+           </div>
+           <!-- Date Range Picker -->
+           <div class="mb-3">
+            <label class="form-label" for="dateRange">
+             Absence Date(s)
+             <span class="text-danger">
+              *
+             </span>
+            </label>
+            <input class="form-control" id="dateRange" placeholder="Select date or range" required="" type="text"/>
+            <div class="form-text">
+             You can select a single day or a range. Past submissions are limited to 30 days.
+            </div>
+            <div class="invalid-feedback">
+             Please choose a valid date or date range.
+            </div>
+           </div>
+           <!-- Reason Text Area with character counter -->
+           <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+             <label class="form-label mb-0" for="reasonText">
+              Reason for Absence
+              <span class="text-danger">
+               *
+              </span>
+             </label>
+             <small class="text-muted">
+              <span id="reasonChars">
+               0
+              </span>
+              /500
+             </small>
+            </div>
+            <textarea class="form-control" id="reasonText" maxlength="500" placeholder="e.g., Doctor's appointment for routine check-up" required="" rows="5"></textarea>
+            <div class="invalid-feedback">
+             Please provide a reason (max 500 characters).
+            </div>
+           </div>
+           <!-- File Uploader -->
+           <div class="mb-3">
+            <label class="form-label">
+             Supporting Document (optional)
+            </label>
+            <div class="upload-dropzone p-3 border rounded bg-light" id="uploadZone">
+             <div class="d-flex align-items-center gap-2">
+              <i class="fa-solid fa-cloud-arrow-up text-info">
+              </i>
+              <div>
+               <div class="fw-semibold">
+                Upload file
+               </div>
+               <small class="text-muted">
+                PDF, JPG, PNG up to 5MB
+               </small>
+              </div>
+             </div>
+             <input accept=".pdf,.jpg,.jpeg,.png" class="visually-hidden" id="fileInput" type="file"/>
+            </div>
+            <div class="mt-2 d-none" id="fileSelected">
+             <span class="badge bg-primary-soft text-dark border">
+              <i class="fa-regular fa-file me-2">
+              </i>
+              <span id="fileName">
+               filename
+              </span>
+             </span>
+             <button class="btn btn-sm btn-light ms-2" id="removeFileBtn" type="button">
+              <i class="fa-solid fa-xmark">
+              </i>
+              Remove
+             </button>
+            </div>
+            <div class="invalid-feedback d-block d-none" id="fileError">
+            </div>
+           </div>
+           <!-- Submission Controls -->
+           <div class="d-flex align-items-center gap-2 pt-2">
+            <button class="btn btn-primary" id="submitBtn" type="submit">
+             <span class="btn-label">
+              <i class="fa-solid fa-paper-plane me-2">
+              </i>
+              Submit Excuse
+             </span>
+             <span aria-hidden="true" class="spinner-border spinner-border-sm ms-2 d-none" id="submitSpinner" role="status">
+             </span>
+            </button>
+            <button class="btn btn-light" id="cancelBtn" type="button">
+             <i class="fa-solid fa-circle-xmark me-2">
+             </i>
+             Cancel
+            </button>
+           </div>
+          </form>
+         </div>
+         <div class="card-footer d-flex align-items-center justify-content-between">
+          <small class="text-muted">
+           <i class="fa-regular fa-shield-check me-1">
+           </i>
+           Submissions are reviewed by school administrators.
+          </small>
+          <a class="text-decoration-none" data-bs-toggle="tooltip" href="#" title="View policy">
+           <i class="fa-solid fa-scale-balanced me-1">
+           </i>
+           Absence Policy
+          </a>
+         </div>
+        </div>
+        <!-- Recent Submissions Table -->
+        <div class="card mt-4">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-clock-rotate-left text-secondary">
+           </i>
+           <span class="widget-title">
+            Recent Excuse Submissions
+           </span>
+          </div>
+          <div class="d-flex gap-2">
+           <input class="form-control form-control-sm" id="searchInput" placeholder="Search by student or reason" type="text"/>
+           <select class="form-select form-select-sm" id="statusFilter" style="min-width:160px;">
+            <option value="">
+             All Statuses
+            </option>
+            <option value="Pending">
+             Pending
+            </option>
+            <option value="Approved">
+             Approved
+            </option>
+            <option value="Rejected">
+             Rejected
+            </option>
+           </select>
+          </div>
+         </div>
+         <div class="card-body p-0">
+          <div class="table-responsive">
+           <table class="table-theme mb-0" id="submissionsTable">
+            <thead>
+             <tr>
+              <th class="sortable" data-key="submittedOn" role="button">
+               Submitted On
+               <i class="fa-solid fa-sort ms-1">
+               </i>
+              </th>
+              <th class="sortable" data-key="student" role="button">
+               Student
+               <i class="fa-solid fa-sort ms-1">
+               </i>
+              </th>
+              <th>
+               Date Range
+              </th>
+              <th>
+               Reason
+              </th>
+              <th class="sortable" data-key="status" role="button">
+               Status
+               <i class="fa-solid fa-sort ms-1">
+               </i>
+              </th>
+              <th>
+               Actions
+              </th>
+             </tr>
+            </thead>
+            <tbody id="submissionsTbody">
+             <!-- rows injected by JS -->
+            </tbody>
+           </table>
+          </div>
+         </div>
+         <div class="card-footer d-flex align-items-center justify-content-between">
+          <small class="text-muted" id="paginationInfo">
+           Showing 1-6 of 6
+          </small>
+          <div class="btn-group btn-group-sm" role="group">
+           <button class="btn btn-light" disabled="" id="prevPage">
+            <i class="fa-solid fa-angle-left">
+            </i>
+           </button>
+           <button class="btn btn-light" disabled="" id="nextPage">
+            <i class="fa-solid fa-angle-right">
+            </i>
+           </button>
+          </div>
+         </div>
+        </div>
+       </div>
+       <!-- Right Sidebar: Helpful Info & Chart (optional) -->
+       <div class="col-12 col-lg-4">
+        <div class="card">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-lightbulb text-warning">
+           </i>
+           <span class="widget-title">
+            Helpful Information
+           </span>
+          </div>
+         </div>
+         <div class="card-body">
+          <ul class="list-unstyled mb-3">
+           <li class="mb-2">
+            <i class="fa-regular fa-circle-check text-success me-2">
+            </i>
+            Provide detailed reason to expedite approval.
+           </li>
+           <li class="mb-2">
+            <i class="fa-regular fa-circle-check text-success me-2">
+            </i>
+            Attach doctor's note when applicable.
+           </li>
+           <li class="mb-2">
+            <i class="fa-regular fa-circle-check text-success me-2">
+            </i>
+            For multi-day absences, select a date range.
+           </li>
+          </ul>
+          <div class="border rounded p-3 bg-light">
+           <div class="d-flex align-items-center justify-content-between mb-2">
+            <strong>
+             Absence Days by Month
+            </strong>
+            <span class="badge-soft secondary">
+             Last 6 months
+            </span>
+           </div>
+           <canvas aria-label="Absence chart" height="140" id="absenceChart" role="img">
+           </canvas>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </main>
+    <!-- Common Footer -->
+    <footer class="common-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand18/36/18'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Toast Container -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: var(--z-toast);">
+   <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-bg-success border-0" id="liveToast" role="alert">
+    <div class="d-flex">
+     <div class="toast-body">
+      <i class="fa-solid fa-check-circle me-2">
+      </i>
+      Excuse submitted successfully.
+     </div>
+     <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- Dependencies: Bootstrap JS, SweetAlert2, Flatpickr, Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Role-aware back routing for header and sidebar
+(function() {
+    const map = {
+        Admin: './admin_dashboard.html',
+        Teacher: './teacher_dashboard.html',
+        Parent: './parent_dashboard.html',
+        Student: './student_dashboard.html',
+        Substitute: './substitute_dashboard.html'
+    };
+    const role = (window.currentUserRole || 'Parent').trim(); // default Parent for demo
+    const backSidebar = document.getElementById('backToDashboard');
+    const backHeader = document.getElementById('backDashDD');
+    if (backSidebar && map[role]) backSidebar.setAttribute('href', map[role]);
+    if (backHeader && map[role]) backHeader.setAttribute('href', map[role]);
+})();
+
+// Initialize tooltips
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+tooltipTriggerList.map(function(tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+
+// Mock data: students associated to current parent
+const studentList = [{
+    id: 'stu-101',
+    name: 'Ava Johnson',
+    grade: '4'
+}, {
+    id: 'stu-102',
+    name: 'Liam Johnson',
+    grade: '7'
+}];
+
+// State
+let selectedStudentId = null;
+let absenceStartDate = null;
+let absenceEndDate = null;
+let reason = '';
+let attachedFile = null;
+let isSubmitting = false;
+
+// Elements
+const todayStr = document.getElementById('todayStr');
+todayStr.textContent = new Date().toLocaleDateString();
+
+const studentSelectorGroup = document.getElementById('studentSelectorGroup');
+const studentSingleGroup = document.getElementById('studentSingleGroup');
+const studentSelect = document.getElementById('studentSelect');
+const studentSingle = document.getElementById('studentSingle');
+
+const dateRangeInput = document.getElementById('dateRange');
+const reasonText = document.getElementById('reasonText');
+const reasonChars = document.getElementById('reasonChars');
+const fileInput = document.getElementById('fileInput');
+const uploadZone = document.getElementById('uploadZone');
+const fileSelected = document.getElementById('fileSelected');
+const fileNameEl = document.getElementById('fileName');
+const fileError = document.getElementById('fileError');
+
+const submitBtn = document.getElementById('submitBtn');
+const submitSpinner = document.getElementById('submitSpinner');
+const cancelBtn = document.getElementById('cancelBtn');
+
+const absenceForm = document.getElementById('absenceForm');
+
+// Initialize student selector
+(function initStudentSelector() {
+    if (studentList.length > 1) {
+        studentSelectorGroup.style.display = '';
+        studentSingleGroup.style.display = 'none';
+        studentSelect.innerHTML = '<option value="">Select student</option>' + studentList.map(s => `<option value="${s.id}">${s.name} (Grade ${s.grade})</option>`).join('');
+    } else if (studentList.length === 1) {
+        studentSelectorGroup.style.display = 'none';
+        studentSingleGroup.style.display = '';
+        studentSingle.value = `${studentList[0].name} (Grade ${studentList[0].grade})`;
+        selectedStudentId = studentList[0].id;
+    }
+})();
+
+studentSelect?.addEventListener('change', (e) => {
+    selectedStudentId = e.target.value || null;
+    validateForm();
+});
+
+// Initialize Flatpickr for date range
+const fp = flatpickr(dateRangeInput, {
+    mode: 'range',
+    dateFormat: 'Y-m-d',
+    defaultDate: [new Date(), new Date()],
+    minDate: new Date(new Date().setDate(new Date().getDate() - 30)),
+    // Allow future dates
+    onChange: function(selectedDates) {
+        if (selectedDates.length === 2) {
+            absenceStartDate = selectedDates[0];
+            absenceEndDate = selectedDates[1];
+        } else if (selectedDates.length === 1) {
+            absenceStartDate = selectedDates[0];
+            absenceEndDate = selectedDates[0];
+        } else {
+            absenceStartDate = null;
+            absenceEndDate = null;
+        }
+        validateForm();
+    }
+});
+
+// Reason character counter
+reasonText.addEventListener('input', () => {
+    reason = reasonText.value.trim();
+    reasonChars.textContent = reasonText.value.length;
+    validateForm();
+});
+
+// File upload handling
+uploadZone.addEventListener('click', () => fileInput.click());
+uploadZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadZone.classList.add('drag-over');
+});
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadZone.classList.remove('drag-over');
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+});
+
+document.getElementById('removeFileBtn').addEventListener('click', () => {
+    attachedFile = null;
+    fileInput.value = '';
+    fileSelected.classList.add('d-none');
+    fileError.classList.add('d-none');
+});
+
+function handleFile(file) {
+    const allowed = ['application/pdf', 'image/jpeg', 'image/png'];
+    if (!allowed.includes(file.type)) {
+        fileError.textContent = 'Unsupported file type. Please upload PDF, JPG, or PNG.';
+        fileError.classList.remove('d-none');
+        return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+        fileError.textContent = 'File is too large. Maximum size is 5MB.';
+        fileError.classList.remove('d-none');
+        return;
+    }
+    attachedFile = file;
+    fileError.classList.add('d-none');
+    fileNameEl.textContent = file.name;
+    fileSelected.classList.remove('d-none');
+}
+
+// Validate form and enable/disable submit button
+function validateForm() {
+    let valid = true;
+    // Student validation
+    if (studentList.length > 1) {
+        if (!selectedStudentId) valid = false;
+    }
+    // Dates validation
+    if (!absenceStartDate || !absenceEndDate) valid = false;
+    // Reason validation
+    if (!reason || reason.length === 0 || reason.length > 500) valid = false;
+
+    submitBtn.disabled = !valid || isSubmitting;
+    return valid;
+}
+
+// Cancel button behavior
+cancelBtn.addEventListener('click', async () => {
+    const res = await Swal.fire({
+        title: 'Discard this excuse?',
+        text: 'Your entered information will be lost.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, discard',
+        cancelButtonText: 'Continue editing'
+    });
+    if (res.isConfirmed) {
+        window.location.href = './parent_dashboard.html';
+    }
+});
+
+// Form submit
+absenceForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    // Show Bootstrap validation UI
+    if (studentList.length > 1) {
+        studentSelect.classList.toggle('is-invalid', !selectedStudentId);
+    }
+    dateRangeInput.classList.toggle('is-invalid', !(absenceStartDate && absenceEndDate));
+    reasonText.classList.toggle('is-invalid', !(reason && reason.length <= 500));
+
+    if (!validateForm()) return;
+
+    const confirm = await Swal.fire({
+        title: 'Submit absence excuse?',
+        html: `<div class="text-start small">\n               <div><strong>Student:</strong> ${getStudentName(selectedStudentId)}</div>\n               <div><strong>Dates:</strong> ${fmt(absenceStartDate)} to ${fmt(absenceEndDate)}</div>\n               <div><strong>Reason:</strong> ${escapeHtml(reason).slice(0,120)}${reason.length>120?'…':''}</div>\n               </div>`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        cancelButtonText: 'Cancel'
+    });
+    if (!confirm.isConfirmed) return;
+
+    isSubmitting = true;
+    submitBtn.disabled = true;
+    submitSpinner.classList.remove('d-none');
+    // Simulate API call
+    setTimeout(() => {
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        submitSpinner.classList.add('d-none');
+        Swal.fire({
+            title: 'Submitted!',
+            text: 'Your excuse was submitted successfully.',
+            icon: 'success',
+            timer: 1600,
+            showConfirmButton: false
+        });
+        // Toast
+        const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+        toast.show();
+        // Add to Recent Submissions mock table
+        addSubmissionRow({
+            submittedOn: new Date(),
+            student: getStudentName(selectedStudentId),
+            start: absenceStartDate,
+            end: absenceEndDate,
+            reason: reason,
+            status: 'Pending'
+        });
+        // Reset form
+        absenceForm.reset();
+        reason = '';
+        reasonChars.textContent = '0';
+        attachedFile = null;
+        fileSelected.classList.add('d-none');
+        fileError.classList.add('d-none');
+        // Reset flatpickr to today
+        fp.setDate([new Date(), new Date()], true);
+    }, 1200);
+});
+
+function getStudentName(id) {
+    if (!id && studentList.length === 1) return studentList[0].name;
+    const s = studentList.find(x => x.id === id);
+    return s ? s.name : 'Unknown';
+}
+
+function fmt(d) {
+    return new Date(d).toLocaleDateString();
+}
+
+function escapeHtml(str) {
+    return str.replace(/[&<>'"]/g, t => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '\'': '&#39;',
+        '"': '&quot;'
+    } [t]));
+}
+
+// Mock submissions data and table rendering
+const submissions = [{
+    submittedOn: new Date('2025-02-02'),
+    student: 'Ava Johnson',
+    start: new Date('2025-02-05'),
+    end: new Date('2025-02-05'),
+    reason: 'Dental appointment',
+    status: 'Approved'
+}, {
+    submittedOn: new Date('2025-02-10'),
+    student: 'Liam Johnson',
+    start: new Date('2025-02-12'),
+    end: new Date('2025-02-14'),
+    reason: 'Family event out of town',
+    status: 'Pending'
+}, {
+    submittedOn: new Date('2025-01-22'),
+    student: 'Ava Johnson',
+    start: new Date('2025-01-23'),
+    end: new Date('2025-01-23'),
+    reason: 'Fever and rest as advised by doctor',
+    status: 'Approved'
+}, {
+    submittedOn: new Date('2025-01-12'),
+    student: 'Liam Johnson',
+    start: new Date('2025-01-15'),
+    end: new Date('2025-01-16'),
+    reason: 'Travel for competition',
+    status: 'Approved'
+}, {
+    submittedOn: new Date('2025-01-05'),
+    student: 'Ava Johnson',
+    start: new Date('2025-01-07'),
+    end: new Date('2025-01-07'),
+    reason: 'Routine check-up',
+    status: 'Rejected'
+}, {
+    submittedOn: new Date('2024-12-28'),
+    student: 'Liam Johnson',
+    start: new Date('2025-01-02'),
+    end: new Date('2025-01-03'),
+    reason: 'Cold and cough',
+    status: 'Approved'
+}];
+
+const tbody = document.getElementById('submissionsTbody');
+const searchInput = document.getElementById('searchInput');
+const statusFilter = document.getElementById('statusFilter');
+const paginationInfo = document.getElementById('paginationInfo');
+const prevPageBtn = document.getElementById('prevPage');
+const nextPageBtn = document.getElementById('nextPage');
+const pageSize = 6;
+let page = 1;
+let sortKey = 'submittedOn';
+let sortAsc = false;
+
+function renderTable() {
+    let filtered = submissions.slice();
+    const q = searchInput.value.toLowerCase().trim();
+    const st = statusFilter.value;
+    if (q) filtered = filtered.filter(r => r.student.toLowerCase().includes(q) || r.reason.toLowerCase().includes(q));
+    if (st) filtered = filtered.filter(r => r.status === st);
+    // Sort
+    filtered.sort((a, b) => {
+        const A = a[sortKey];
+        const B = b[sortKey];
+        let cmp = 0;
+        if (sortKey === 'submittedOn') cmp = new Date(A) - new Date(B);
+        else if (sortKey === 'student' || sortKey === 'status') cmp = ('' + A).localeCompare('' + B);
+        return sortAsc ? cmp : -cmp;
+    });
+    const total = filtered.length;
+    const pages = Math.max(1, Math.ceil(total / pageSize));
+    page = Math.min(page, pages);
+    const startIdx = (page - 1) * pageSize;
+    const endIdx = Math.min(startIdx + pageSize, total);
+    const slice = filtered.slice(startIdx, endIdx);
+    tbody.innerHTML = slice.map(r => rowHtml(r)).join('');
+    paginationInfo.textContent = `Showing ${total?startIdx+1:0}-${endIdx} of ${total}`;
+    prevPageBtn.disabled = page <= 1;
+    nextPageBtn.disabled = page >= pages;
+    // Activate tooltips in table
+    document.querySelectorAll('#submissionsTable [data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+}
+
+function rowHtml(r) {
+    const range = `${fmt(r.start)} - ${fmt(r.end)}`;
+    const snippet = r.reason.length > 40 ? r.reason.slice(0, 40) + '…' : r.reason;
+    const badgeClass = r.status === 'Approved' ? 'success' : (r.status === 'Pending' ? 'warning' : 'danger');
+    return `<tr>
+        <td>${fmt(r.submittedOn)}</td>
+        <td>${r.student}</td>
+        <td>${range}</td>
+        <td><span data-bs-toggle="tooltip" title="${escapeHtml(r.reason)}">${escapeHtml(snippet)}</span></td>
+        <td><span class="badge-soft ${badgeClass}">${r.status}</span></td>
+        <td>
+          <div class="d-flex gap-1">
+            <button class="btn btn-sm btn-light" data-action="view"><i class="fa-regular fa-eye"></i></button>
+            ${r.status==='Pending' ? `<button class="btn btn-sm btn-danger" data-action="cancel"><i class="fa-regular fa-circle-xmark"></i></button>` : ''}
+          </div>
+        </td>
+      </tr>`;
+}
+
+function addSubmissionRow(rec) {
+    submissions.unshift(rec);
+    renderTable();
+}
+
+// Table interactions
+searchInput.addEventListener('input', () => {
+    page = 1;
+    renderTable();
+});
+statusFilter.addEventListener('change', () => {
+    page = 1;
+    renderTable();
+});
+prevPageBtn.addEventListener('click', () => {
+    if (page > 1) {
+        page--;
+        renderTable();
+    }
+});
+nextPageBtn.addEventListener('click', () => {
+    page++;
+    renderTable();
+});
+
+document.querySelectorAll('.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+        const key = th.getAttribute('data-key');
+        if (sortKey === key) sortAsc = !sortAsc;
+        else {
+            sortKey = key;
+            sortAsc = true;
+        }
+        renderTable();
+    });
+});
+
+// Initial render
+renderTable();
+
+// Chart.js: simple absence trend
+const ctx = document.getElementById('absenceChart');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'],
+        datasets: [{
+            label: 'Days',
+            data: [2, 1, 3, 2, 4, 1],
+            backgroundColor: 'rgba(240,142,27,0.65)',
+            borderColor: 'rgba(240,142,27,1)',
+            borderWidth: 1,
+            borderRadius: 6
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                enabled: true
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+    }
+});
+  </script>
+ </body>
+</html>

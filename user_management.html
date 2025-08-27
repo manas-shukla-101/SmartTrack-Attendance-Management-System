@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   User Management | Attendance System Admin
+  </title>
+  <!-- Brand Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+   <!-- App Theme CSS -->
+   <link href="style.css" rel="stylesheet">
+    <!-- Page-specific CSS -->
+    <link href="user_management.css" rel="stylesheet"/>
+   </link>
+  </link>
+ </head>
+ <body>
+  <!-- Admin Header -->
+  <nav class="admin-header navbar navbar-expand-lg px-3">
+   <button aria-controls="sidebar" aria-label="Open sidebar" class="btn btn-link d-lg-none" data-bs-target="#sidebar" data-bs-toggle="offcanvas">
+    <i class="fa-solid fa-bars">
+    </i>
+   </button>
+   <a class="navbar-brand d-flex align-items-center" href="./admin_dashboard.html">
+    <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/56/28'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+    <span class="fw-semibold">
+     Admin Portal
+    </span>
+   </a>
+   <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+    <div class="input-group">
+     <span class="input-group-text bg-white">
+      <i class="fa-solid fa-magnifying-glass">
+      </i>
+     </span>
+     <input class="form-control" placeholder="Search students, classes, users..." type="search"/>
+    </div>
+   </form>
+   <ul class="navbar-nav ms-auto">
+    <li class="nav-item me-2">
+     <a class="nav-link position-relative" data-bs-title="Notifications" data-bs-toggle="tooltip" href="#">
+      <i class="fa-solid fa-bell">
+      </i>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+       3
+      </span>
+     </a>
+    </li>
+    <li class="nav-item me-2">
+     <a class="nav-link" data-bs-title="Messages" data-bs-toggle="tooltip" href="#">
+      <i class="fa-solid fa-envelope">
+      </i>
+     </a>
+    </li>
+    <li class="nav-item dropdown">
+     <a aria-expanded="false" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/admin/32/32'" src="https://via.placeholder.com/32"/>
+      Admin
+     </a>
+     <ul class="dropdown-menu dropdown-menu-end">
+      <li>
+       <a class="dropdown-item" href="./user_management.html">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Manage Users
+       </a>
+      </li>
+      <li>
+       <a class="dropdown-item" href="./system_settings.html">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+       </a>
+      </li>
+      <li>
+       <hr class="dropdown-divider"/>
+      </li>
+      <li>
+       <a class="dropdown-item" href="./index.html">
+        <i class="fa-solid fa-right-from-bracket me-2">
+        </i>
+        Logout
+       </a>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </nav>
+  <div class="admin-layout d-flex">
+   <!-- Desktop Sidebar -->
+   <aside class="admin-sidebar d-none d-lg-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/72/36'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;">
+      <div class="fw-bold">
+       Attendance System
+      </div>
+     </img>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/profile/40/40'" src="https://via.placeholder.com/40">
+       <div>
+        <div class="fw-semibold">
+         Admin User
+        </div>
+        <small class="text-muted">
+         Administrator
+        </small>
+       </div>
+      </img>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" href="./admin_dashboard.html">
+        <i class="fa-solid fa-gauge me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./reports_page.html">
+        <i class="fa-solid fa-chart-line me-2">
+        </i>
+        Reports
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./approval_queue.html">
+        <i class="fa-solid fa-list-check me-2">
+        </i>
+        Approvals
+       </a>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminUsersMenuDesktop" aria-expanded="true" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenuDesktop" role="button">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Users
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse show ps-4" id="adminUsersMenuDesktop">
+        <a class="nav-link active" href="./user_management.html">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Manage Users
+        </a>
+        <a class="nav-link" href="./user_form.html">
+         <i class="fa-solid fa-user-plus me-2">
+         </i>
+         Add New User
+        </a>
+       </div>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminSettingsMenuDesktop" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenuDesktop" role="button">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminSettingsMenuDesktop">
+        <a class="nav-link" href="./system_settings.html">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         System Settings
+        </a>
+        <a class="nav-link" href="./calendar_settings.html">
+         <i class="fa-solid fa-calendar-days me-2">
+         </i>
+         Calendar
+        </a>
+        <a class="nav-link" href="./schedule_settings.html">
+         <i class="fa-solid fa-clock me-2">
+         </i>
+         Bell Schedules
+        </a>
+        <a class="nav-link" href="./codes_settings.html">
+         <i class="fa-solid fa-code me-2">
+         </i>
+         Attendance Codes
+        </a>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </aside>
+   <!-- Mobile Offcanvas Sidebar -->
+   <div aria-labelledby="sidebarLabel" class="offcanvas offcanvas-start" id="sidebar" tabindex="-1">
+    <div class="offcanvas-header">
+     <h5 class="offcanvas-title" id="sidebarLabel">
+      Menu
+     </h5>
+     <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button">
+     </button>
+    </div>
+    <div class="offcanvas-body p-0">
+     <nav class="admin-sidebar d-flex flex-column w-100" style="border-right:0">
+      <div class="brand d-flex align-items-center p-3">
+       <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/offlogo/72/36'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+       <div class="fw-bold">
+        Attendance System
+       </div>
+      </div>
+      <div class="p-3 border-bottom">
+       <div class="d-flex align-items-center">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/profile2/40/40'" src="https://via.placeholder.com/40"/>
+        <div>
+         <div class="fw-semibold">
+          Admin User
+         </div>
+         <small class="text-muted">
+          Administrator
+         </small>
+        </div>
+       </div>
+      </div>
+      <div class="flex-grow-1 overflow-auto">
+       <ul class="nav flex-column mt-2">
+        <li class="nav-item">
+         <a class="nav-link" href="./admin_dashboard.html">
+          <i class="fa-solid fa-gauge me-2">
+          </i>
+          Dashboard
+         </a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" href="./reports_page.html">
+          <i class="fa-solid fa-chart-line me-2">
+          </i>
+          Reports
+         </a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" href="./approval_queue.html">
+          <i class="fa-solid fa-list-check me-2">
+          </i>
+          Approvals
+         </a>
+        </li>
+        <li class="nav-item">
+         <a aria-controls="adminUsersMenu" aria-expanded="true" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenu" role="button">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Users
+          <i class="fa-solid fa-chevron-down float-end">
+          </i>
+         </a>
+         <div class="collapse show ps-4" id="adminUsersMenu">
+          <a class="nav-link active" href="./user_management.html">
+           <i class="fa-solid fa-users me-2">
+           </i>
+           Manage Users
+          </a>
+          <a class="nav-link" href="./user_form.html">
+           <i class="fa-solid fa-user-plus me-2">
+           </i>
+           Add New User
+          </a>
+         </div>
+        </li>
+        <li class="nav-item">
+         <a aria-controls="adminSettingsMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenu" role="button">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          Settings
+          <i class="fa-solid fa-chevron-down float-end">
+          </i>
+         </a>
+         <div class="collapse ps-4" id="adminSettingsMenu">
+          <a class="nav-link" href="./system_settings.html">
+           <i class="fa-solid fa-gear me-2">
+           </i>
+           System Settings
+          </a>
+          <a class="nav-link" href="./calendar_settings.html">
+           <i class="fa-solid fa-calendar-days me-2">
+           </i>
+           Calendar
+          </a>
+          <a class="nav-link" href="./schedule_settings.html">
+           <i class="fa-solid fa-clock me-2">
+           </i>
+           Bell Schedules
+          </a>
+          <a class="nav-link" href="./codes_settings.html">
+           <i class="fa-solid fa-code me-2">
+           </i>
+           Attendance Codes
+          </a>
+         </div>
+        </li>
+       </ul>
+      </div>
+      <div class="p-3">
+       <a class="btn btn-outline-secondary w-100" href="./index.html">
+        <i class="fa-solid fa-right-from-bracket me-2">
+        </i>
+        Logout
+       </a>
+      </div>
+     </nav>
+    </div>
+   </div>
+   <!-- Main Content -->
+   <main class="main-panel flex-grow-1">
+    <div class="container-fluid">
+     <!-- Page Header -->
+     <div class="page-header">
+      <div class="d-flex align-items-center gap-2">
+       <h1 class="page-title mb-0">
+        User Management
+       </h1>
+       <span class="badge-soft info">
+        Central hub for user accounts
+       </span>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+       <a class="btn btn-primary" href="./user_form.html">
+        <i class="fa-solid fa-user-plus me-2">
+        </i>
+        Add New User
+       </a>
+       <button class="btn btn-light" id="exportCsvBtn">
+        <i class="fa-solid fa-file-export me-2">
+        </i>
+        Export CSV
+       </button>
+      </div>
+     </div>
+     <!-- Key Metrics -->
+     <div class="grid auto-fit-md mb-4">
+      <div class="metric-card">
+       <div class="metric-title">
+        Total Users
+       </div>
+       <div class="metric-value" id="metricTotal">
+        —
+       </div>
+      </div>
+      <div class="metric-card">
+       <div class="metric-title">
+        Active
+       </div>
+       <div class="metric-value text-success" id="metricActive">
+        —
+       </div>
+      </div>
+      <div class="metric-card">
+       <div class="metric-title">
+        Inactive
+       </div>
+       <div class="metric-value text-muted" id="metricInactive">
+        —
+       </div>
+      </div>
+     </div>
+     <!-- Search & Filter Bar -->
+     <div class="card mb-3">
+      <div class="card-body">
+       <form class="row g-2 align-items-center" onsubmit="return false;">
+        <div class="col-12 col-md-6 col-lg-5">
+         <label class="form-label mb-1" for="searchInput">
+          Search
+         </label>
+         <div class="input-group">
+          <span class="input-group-text">
+           <i class="fa-solid fa-magnifying-glass">
+           </i>
+          </span>
+          <input aria-label="Search users" class="form-control" id="searchInput" placeholder="Search by name or email..." type="text">
+          </input>
+         </div>
+         <small class="form-text">
+          Press Enter or pause typing to search.
+         </small>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+         <label class="form-label mb-1" for="roleFilter">
+          Role
+         </label>
+         <select class="form-select" id="roleFilter">
+          <option value="all">
+           All Roles
+          </option>
+          <option value="Administrator">
+           Administrator
+          </option>
+          <option value="Teacher">
+           Teacher
+          </option>
+          <option value="Staff">
+           Staff
+          </option>
+          <option value="Student">
+           Student
+          </option>
+          <option value="Parent">
+           Parent
+          </option>
+         </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+         <label class="form-label mb-1" for="statusFilter">
+          Status
+         </label>
+         <select class="form-select" id="statusFilter">
+          <option value="all">
+           All
+          </option>
+          <option selected="" value="Active">
+           Active
+          </option>
+          <option value="Inactive">
+           Inactive
+          </option>
+         </select>
+        </div>
+        <div class="col-12 col-lg-3 d-flex align-items-end gap-2">
+         <button class="btn btn-light" id="clearFiltersBtn" type="button">
+          <i class="fa-solid fa-rotate-left me-2">
+          </i>
+          Clear
+         </button>
+         <button class="btn btn-info text-white" id="refreshBtn" type="button">
+          <i class="fa-solid fa-arrows-rotate me-2">
+          </i>
+          Refresh
+         </button>
+        </div>
+       </form>
+      </div>
+     </div>
+     <!-- Data Table Card -->
+     <div class="card">
+      <div class="card-header">
+       <div class="title d-flex align-items-center gap-2">
+        <i class="fa-solid fa-users">
+        </i>
+        <span class="widget-title">
+         All Users
+        </span>
+        <span class="badge-soft primary" id="filterSummary">
+         Filters: Active
+        </span>
+       </div>
+       <div class="d-flex align-items-center gap-2">
+        <div aria-label="View switcher" class="view-switcher" role="group">
+         <div class="option active">
+          <i class="fa-solid fa-table">
+          </i>
+         </div>
+         <div class="option">
+          <i class="fa-solid fa-grip">
+          </i>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="card-body p-0">
+       <div class="table-responsive">
+        <table class="table table-theme mb-0" id="usersTable">
+         <thead>
+          <tr>
+           <th class="sortable" data-key="name">
+            Full Name
+            <i class="fa-solid fa-sort">
+            </i>
+           </th>
+           <th class="sortable" data-key="role">
+            Role
+            <i class="fa-solid fa-sort">
+            </i>
+           </th>
+           <th class="sortable" data-key="email">
+            Email/ID
+            <i class="fa-solid fa-sort">
+            </i>
+           </th>
+           <th class="sortable" data-key="status">
+            Status
+            <i class="fa-solid fa-sort">
+            </i>
+           </th>
+           <th class="text-end">
+            Actions
+           </th>
+          </tr>
+         </thead>
+         <tbody id="usersTbody">
+          <!-- Loading skeleton rows -->
+          <tr class="loading-row">
+           <td class="p-0" colspan="5">
+            <div class="p-3">
+             <div class="skeleton mb-2" style="height:16px">
+             </div>
+             <div class="skeleton mb-2" style="height:16px">
+             </div>
+             <div class="skeleton mb-2" style="height:16px">
+             </div>
+            </div>
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+      <div class="card-footer d-flex flex-wrap align-items-center justify-content-between gap-2">
+       <small class="text-muted" id="paginationInfo">
+        Showing — of — users
+       </small>
+       <nav aria-label="User table pagination">
+        <ul class="pagination mb-0" id="pagination">
+         <!-- Pagination items injected here -->
+        </ul>
+       </nav>
+      </div>
+     </div>
+     <!-- Alerts/Errors placeholder -->
+     <div aria-atomic="true" aria-live="polite" class="mt-3" id="alertsArea">
+     </div>
+    </div>
+   </main>
+  </div>
+  <!-- Admin Footer -->
+  <footer class="admin-footer py-2 px-3 d-flex align-items-center justify-content-between">
+   <div class="d-flex align-items-center">
+    <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/footlogo/36/18'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+    <small class="text-muted">
+     © 2025 Attendance System
+    </small>
+   </div>
+   <div>
+    <a class="text-decoration-none me-3" href="#">
+     Terms
+    </a>
+    <a class="text-decoration-none" href="#">
+     Privacy
+    </a>
+   </div>
+  </footer>
+  <!-- Toast Container -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+   <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-white bg-success border-0" id="actionToast" role="alert">
+    <div class="d-flex">
+     <div class="toast-body" id="toastBody">
+      Action completed.
+     </div>
+     <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <!-- Bootstrap 5 JS -->
+  <script crossorigin="anonymous" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script>
+   // Brand typography (ensure Poppins applies)
+document.documentElement.style.setProperty('--font-sans', "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'");
+
+// Bootstrap tooltips init
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+tooltipTriggerList.map(function(tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+
+// Mock current admin (cannot deactivate self)
+const currentAdminEmail = 'bob.smith@school.edu';
+
+// Mock data
+const usersData = [{
+    id: 101,
+    name: 'Alice Johnson',
+    email: 'alice.johnson@school.edu',
+    role: 'Teacher',
+    status: 'Active'
+}, {
+    id: 102,
+    name: 'Bob Smith',
+    email: 'bob.smith@school.edu',
+    role: 'Administrator',
+    status: 'Active'
+}, {
+    id: 103,
+    name: 'Carlos Hernandez',
+    email: 'carlos.hernandez@school.edu',
+    role: 'Staff',
+    status: 'Active'
+}, {
+    id: 104,
+    name: 'Diana Lee',
+    email: 'diana.lee@example.com',
+    role: 'Parent',
+    status: 'Inactive'
+}, {
+    id: 105,
+    name: 'Ethan Brown',
+    email: 'ethan.brown@student.school.edu',
+    role: 'Student',
+    status: 'Active'
+}, {
+    id: 106,
+    name: 'Fatima Khan',
+    email: 'fatima.khan@school.edu',
+    role: 'Teacher',
+    status: 'Active'
+}, {
+    id: 107,
+    name: 'Grace Park',
+    email: 'grace.park@example.com',
+    role: 'Parent',
+    status: 'Active'
+}, {
+    id: 108,
+    name: 'Henry Adams',
+    email: 'henry.adams@school.edu',
+    role: 'Staff',
+    status: 'Inactive'
+}];
+
+// State
+let state = {
+    isLoading: true,
+    searchTerm: '',
+    role: 'all',
+    status: 'Active',
+    sortColumn: 'name',
+    sortDirection: 'asc',
+    currentPage: 1,
+    itemsPerPage: 5
+};
+
+const els = {
+    tbody: document.getElementById('usersTbody'),
+    pagination: document.getElementById('pagination'),
+    paginationInfo: document.getElementById('paginationInfo'),
+    metricTotal: document.getElementById('metricTotal'),
+    metricActive: document.getElementById('metricActive'),
+    metricInactive: document.getElementById('metricInactive'),
+    searchInput: document.getElementById('searchInput'),
+    roleFilter: document.getElementById('roleFilter'),
+    statusFilter: document.getElementById('statusFilter'),
+    filterSummary: document.getElementById('filterSummary'),
+    exportCsvBtn: document.getElementById('exportCsvBtn'),
+    clearFiltersBtn: document.getElementById('clearFiltersBtn'),
+    refreshBtn: document.getElementById('refreshBtn'),
+    toast: document.getElementById('actionToast'),
+    toastBody: document.getElementById('toastBody')
+};
+
+function showToast(message, type = 'success') {
+    els.toast.classList.remove('bg-success', 'bg-danger', 'bg-info');
+    els.toast.classList.add(type === 'error' ? 'bg-danger' : (type === 'info' ? 'bg-info' : 'bg-success'));
+    els.toastBody.textContent = message;
+    const toast = new bootstrap.Toast(els.toast, {
+        delay: 2500
+    });
+    toast.show();
+}
+
+function sanitize(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+}
+
+function applyFilters(data) {
+    let list = data.slice();
+    const term = state.searchTerm.trim().toLowerCase();
+    if (term) {
+        list = list.filter(u => (u.name + ' ' + u.email).toLowerCase().includes(term));
+    }
+    if (state.role !== 'all') {
+        list = list.filter(u => u.role === state.role);
+    }
+    if (state.status !== 'all') {
+        list = list.filter(u => u.status === state.status);
+    }
+    // sort
+    list.sort((a, b) => {
+        const col = state.sortColumn;
+        let av = a[col];
+        let bv = b[col];
+        av = typeof av === 'string' ? av.toLowerCase() : av;
+        bv = typeof bv === 'string' ? bv.toLowerCase() : bv;
+        if (av < bv) return state.sortDirection === 'asc' ? -1 : 1;
+        if (av > bv) return state.sortDirection === 'asc' ? 1 : -1;
+        return 0;
+    });
+    return list;
+}
+
+function renderMetrics(data) {
+    const total = data.length;
+    const active = data.filter(u => u.status === 'Active').length;
+    const inactive = total - active;
+    els.metricTotal.textContent = total.toLocaleString();
+    els.metricActive.textContent = active.toLocaleString();
+    els.metricInactive.textContent = inactive.toLocaleString();
+}
+
+function renderTable() {
+    const filtered = applyFilters(usersData);
+    renderMetrics(filtered);
+    // Pagination
+    const totalItems = filtered.length;
+    const totalPages = Math.max(1, Math.ceil(totalItems / state.itemsPerPage));
+    state.currentPage = Math.min(state.currentPage, totalPages);
+    const startIdx = (state.currentPage - 1) * state.itemsPerPage;
+    const endIdx = Math.min(startIdx + state.itemsPerPage, totalItems);
+    const pageItems = filtered.slice(startIdx, endIdx);
+
+    // Update summary
+    let summaryParts = [];
+    summaryParts.push(state.status === 'all' ? 'Any status' : state.status);
+    summaryParts.push(state.role === 'all' ? 'All Roles' : state.role);
+    if (state.searchTerm.trim()) summaryParts.push('“' + state.searchTerm.trim() + '”');
+    els.filterSummary.textContent = 'Filters: ' + summaryParts.join(' • ');
+
+    // Render rows
+    if (state.isLoading) {
+        els.tbody.innerHTML = `<tr class="loading-row"><td colspan="5" class="p-0"><div class="p-3"><div class="skeleton mb-2" style="height:16px"></div><div class="skeleton mb-2" style="height:16px"></div><div class="skeleton mb-2" style="height:16px"></div></div></td></tr>`;
+    } else if (pageItems.length === 0) {
+        els.tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><div><i class="fa-regular fa-circle-question fa-2x mb-2"></i></div><div class="fw-semibold">No users match your filters</div><div class="empty-state-text">Try adjusting filters or clearing the search term.</div><button class="btn btn-light mt-2" id="clearInline">Clear Filters</button></div></td></tr>`;
+        const btn = document.getElementById('clearInline');
+        if (btn) btn.addEventListener('click', clearFilters);
+    } else {
+        els.tbody.innerHTML = pageItems.map(u => rowTemplate(u)).join('');
+        // enable tooltips in newly added buttons
+        const tts = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tts.map(el => new bootstrap.Tooltip(el));
+        // Wire action buttons
+        pageItems.forEach(u => {
+            const editBtn = document.querySelector(`button[data-action="edit"][data-id="${u.id}"]`);
+            const toggleBtn = document.querySelector(`button[data-action="toggle"][data-id="${u.id}"]`);
+            if (editBtn) editBtn.addEventListener('click', () => onEditUser(u));
+            if (toggleBtn) toggleBtn.addEventListener('click', () => onToggleUser(u));
+        });
+    }
+
+    // Pagination controls
+    renderPagination(totalItems, totalPages, startIdx, endIdx);
+}
+
+function rowTemplate(u) {
+    const isSelf = u.email === currentAdminEmail;
+    const statusBadge = u.status === 'Active' ?
+        '<span class="badge-soft success"><span class="status-dot success"></span> Active</span>' :
+        '<span class="badge-soft secondary"><span class="status-dot"></span> Inactive</span>';
+    const editDisabled = false;
+    const canToggle = !isSelf; // cannot deactivate self
+    const toggleIcon = u.status === 'Active' ? 'fa-user-slash' : 'fa-user-check';
+    const toggleTitle = u.status === 'Active' ? 'Deactivate user' : 'Activate user';
+    const toggleBtnClass = u.status === 'Active' ? 'btn-outline-danger' : 'btn-outline-success';
+    return `
+        <tr>
+          <td><div class="fw-semibold">${sanitize(u.name)}</div></td>
+          <td>${sanitize(u.role)}</td>
+          <td><a href="mailto:${sanitize(u.email)}">${sanitize(u.email)}</a></td>
+          <td>${statusBadge}</td>
+          <td class="text-end">
+            <div class="btn-group" role="group" aria-label="Row actions for ${sanitize(u.name)}">
+              <button type="button" class="btn btn-light btn-sm" data-action="edit" data-id="${u.id}" ${editDisabled ? 'disabled' : ''} data-bs-toggle="tooltip" data-bs-title="Edit user"><i class="fa-solid fa-pen"></i></button>
+              <button type="button" class="btn btn-sm ${toggleBtnClass}" data-action="toggle" data-id="${u.id}" ${canToggle ? '' : 'disabled'} data-bs-toggle="tooltip" data-bs-title="${toggleTitle}"><i class="fa-solid ${toggleIcon}"></i></button>
+            </div>
+          </td>
+        </tr>`;
+}
+
+function renderPagination(totalItems, totalPages, startIdx, endIdx) {
+    els.pagination.innerHTML = '';
+    els.paginationInfo.textContent = totalItems === 0 ? 'No users to display' : `Showing ${startIdx + 1}-${endIdx} of ${totalItems} users`;
+    if (totalPages <= 1) return; // hide pagination if not needed
+
+    const createItem = (label, page, disabled = false, active = false, aria = '') => {
+        const li = document.createElement('li');
+        li.className = 'page-item' + (disabled ? ' disabled' : '') + (active ? ' active' : '');
+        const a = document.createElement('a');
+        a.className = 'page-link';
+        a.href = '#';
+        a.innerHTML = label;
+        if (aria) a.setAttribute('aria-label', aria);
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!disabled) {
+                state.currentPage = page;
+                renderTable();
+                window.scrollTo({
+                    top: document.querySelector('.admin-header').offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        li.appendChild(a);
+        return li;
+    };
+
+    els.pagination.appendChild(createItem('&laquo;', 1, state.currentPage === 1, false, 'First'));
+    els.pagination.appendChild(createItem('&lsaquo;', Math.max(1, state.currentPage - 1), state.currentPage === 1, false, 'Previous'));
+    for (let p = 1; p <= totalPages; p++) {
+        els.pagination.appendChild(createItem(String(p), p, false, state.currentPage === p));
+    }
+    els.pagination.appendChild(createItem('&rsaquo;', Math.min(totalPages, state.currentPage + 1), state.currentPage === totalPages, false, 'Next'));
+    els.pagination.appendChild(createItem('&raquo;', totalPages, state.currentPage === totalPages, false, 'Last'));
+}
+
+function onEditUser(user) {
+    // Navigate to user form with prefill id
+    window.location.href = `./user_form.html?userId=${encodeURIComponent(user.id)}`;
+}
+
+function onToggleUser(user) {
+    const willDeactivate = user.status === 'Active';
+    Swal.fire({
+        title: willDeactivate ? 'Deactivate user?' : 'Activate user?',
+        text: willDeactivate ? `Are you sure you want to deactivate ${user.name}? They will lose access.` : `Activate ${user.name} and restore their access?`,
+        icon: willDeactivate ? 'warning' : 'question',
+        showCancelButton: true,
+        confirmButtonText: willDeactivate ? 'Yes, deactivate' : 'Yes, activate',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: willDeactivate ? '#CD2026' : '#00774E'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Simulate API update
+            setTimeout(() => {
+                user.status = willDeactivate ? 'Inactive' : 'Active';
+                showToast(`User ${user.name} is now ${user.status}.`, 'success');
+                renderTable();
+            }, 300);
+        }
+    });
+}
+
+// Debounce helper
+function debounce(fn, delay = 500) {
+    let t;
+    return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn.apply(this, args), delay);
+    };
+}
+
+function clearFilters() {
+    state.searchTerm = '';
+    state.role = 'all';
+    state.status = 'Active';
+    state.currentPage = 1;
+    els.searchInput.value = '';
+    els.roleFilter.value = 'all';
+    els.statusFilter.value = 'Active';
+    renderTable();
+}
+
+function exportCsv() {
+    const rows = applyFilters(usersData);
+    const header = ['ID', 'Full Name', 'Email', 'Role', 'Status'];
+    const csv = [header.join(',')].concat(rows.map(r => [r.id, '"' + r.name + '"', r.email, r.role, r.status].join(','))).join('\n');
+    const blob = new Blob([csv], {
+        type: 'text/csv;charset=utf-8;'
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'users_export.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast('Exported CSV successfully', 'info');
+}
+
+function simulateFetch() {
+    state.isLoading = true;
+    renderTable();
+    setTimeout(() => {
+        state.isLoading = false;
+        renderTable();
+    }, 600);
+}
+
+// Event bindings
+window.addEventListener('DOMContentLoaded', () => {
+    // Sort handlers
+    document.querySelectorAll('#usersTable thead th.sortable').forEach(th => {
+        th.style.cursor = 'pointer';
+        th.addEventListener('click', () => {
+            const key = th.getAttribute('data-key');
+            if (state.sortColumn === key) {
+                state.sortDirection = state.sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                state.sortColumn = key;
+                state.sortDirection = 'asc';
+            }
+            // Update sort icons
+            document.querySelectorAll('#usersTable thead th.sortable i').forEach(icon => icon.className = 'fa-solid fa-sort');
+            const icon = th.querySelector('i');
+            icon.className = state.sortDirection === 'asc' ? 'fa-solid fa-sort-up' : 'fa-solid fa-sort-down';
+            renderTable();
+        });
+    });
+
+    // Filters
+    els.roleFilter.addEventListener('change', (e) => {
+        state.role = e.target.value;
+        state.currentPage = 1;
+        renderTable();
+    });
+    els.statusFilter.addEventListener('change', (e) => {
+        state.status = e.target.value;
+        state.currentPage = 1;
+        renderTable();
+    });
+
+    // Search (Enter or debounce)
+    els.searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            state.searchTerm = e.target.value;
+            state.currentPage = 1;
+            renderTable();
+        }
+    });
+    els.searchInput.addEventListener('input', debounce((e) => {
+        state.searchTerm = e.target.value;
+        state.currentPage = 1;
+        renderTable();
+    }, 500));
+
+    els.clearFiltersBtn.addEventListener('click', clearFilters);
+    els.refreshBtn.addEventListener('click', simulateFetch);
+    els.exportCsvBtn.addEventListener('click', exportCsv);
+
+    simulateFetch();
+});
+  </script>
+ </body>
+</html>

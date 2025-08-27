@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Attendance Roster
+  </title>
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+  <!-- SweetAlert2 -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.min.css" rel="stylesheet"/>
+  <!-- Global Theme CSS -->
+  <link href="style.css" rel="stylesheet"/>
+  <!-- Page-specific CSS -->
+  <link href="attendance_roster.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="d-flex" style="min-height:100vh;">
+   <!-- Sidebar (Common Component) -->
+   <!-- Sidebar is needed on this page (dashboard/roster views). Do not include on login page. -->
+   <!-- Common Shared Components (Login, Shared Records & Forms) -->
+   <!-- Applicable Pages: login_page, attendance_history, attendance_roster, correction_form, excuse_form -->
+   <!-- Icons: fa-right-to-bracket, fa-arrow-left, fa-list, fa-clipboard-check, fa-file-circle-plus, fa-circle-question -->
+   <!-- Notes: Minimal, role-agnostic sidebar; Back to Dashboard button routes based on role via data-role attribute -->
+   <style>
+    :root { --primary:#f08e1b; --secondary:#9a296a; }
+      .common-sidebar { width: 240px; min-height: 100vh; background:#fff; border-right:1px solid #eee; }
+      .common-sidebar .brand { background: var(--primary); color:#fff; }
+      .common-sidebar .nav-link { color:#333; border-radius:.4rem; margin:.15rem .5rem; }
+      .common-sidebar .nav-link:hover { background: rgba(154,41,106,0.08); }
+      .common-header { border-bottom:1px solid #eee; background:#fff; }
+      .common-footer { border-top:1px solid #eee; background:#f8f9fa; }
+   </style>
+   <nav class="common-sidebar d-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/32/32?grayscale'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:32px;"/>
+     <div class="fw-bold">
+      Attendance
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" data-role="auto" href="#" id="backToDashboard">
+        <i class="fa-solid fa-arrow-left me-2">
+        </i>
+        Back to Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_history.html">
+        <i class="fa-solid fa-list me-2">
+        </i>
+        Attendance History
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_roster.html">
+        <i class="fa-solid fa-clipboard-check me-2">
+        </i>
+        Take Attendance
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./excuse_form.html">
+        <i class="fa-solid fa-file-circle-plus me-2">
+        </i>
+        Submit Excuse
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="#">
+        <i class="fa-solid fa-circle-question me-2">
+        </i>
+        Help
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3 border-top">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-to-bracket me-2">
+      </i>
+      Login
+     </a>
+    </div>
+   </nav>
+   <div class="flex-grow-1 d-flex flex-column">
+    <!-- Header (Common Component) -->
+    <!-- Common Header (Shared Pages) -->
+    <nav class="common-header navbar navbar-expand-lg px-3">
+     <a class="navbar-brand d-flex align-items-center" href="#">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo2/28/28?grayscale'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Attendance
+      </span>
+     </a>
+     <span class="ms-3 text-muted d-none d-md-inline" id="commonPageTitle">
+      Take Attendance
+     </span>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/u/28/28?grayscale'" src="https://i.pravatar.cc/28?img=12"/>
+        Account
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="#" id="backDashDD">
+          <i class="fa-solid fa-arrow-left me-2">
+          </i>
+          Back to Dashboard
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-to-bracket me-2">
+          </i>
+          Login
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main Panel -->
+    <main class="main-panel">
+     <!-- Roster Header (sticky) -->
+     <section class="app-card roster-sticky-header mb-3" id="rosterHeader">
+      <div class="card-header">
+       <div class="d-flex align-items-center gap-3">
+        <div class="rounded bg-primary-soft p-2 d-flex align-items-center justify-content-center" style="width:44px;height:44px;">
+         <i class="fa-solid fa-clipboard-check text-primary">
+         </i>
+        </div>
+        <div>
+         <div class="widget-title" id="classTitle">
+          Algebra II • Period 3
+         </div>
+         <div class="text-muted small" id="courseTitle">
+          Math 10B
+         </div>
+        </div>
+       </div>
+       <div class="d-flex align-items-center gap-2">
+        <div class="text-muted me-2 d-none d-md-inline">
+         <i class="fa-regular fa-calendar me-1">
+         </i>
+         Select Date
+        </div>
+        <input aria-label="Select date for attendance" class="form-control" id="datePicker" style="max-width: 220px;" type="date"/>
+       </div>
+      </div>
+      <div class="card-body py-3">
+       <div class="d-flex flex-wrap align-items-center gap-2">
+        <div class="badge-soft info" id="rosterMeta">
+         <i class="fa-regular fa-clock me-1">
+         </i>
+         <span id="attendanceWindow">
+          Today
+         </span>
+        </div>
+        <div class="badge-soft secondary">
+         <i class="fa-solid fa-user-group me-1">
+         </i>
+         <span id="studentCount">
+          0
+         </span>
+         Students
+        </div>
+        <div class="badge-soft success d-none d-sm-inline" id="submittedBadge" style="display:none;">
+         <i class="fa-solid fa-check-double me-1">
+         </i>
+         Submitted
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Controls Row: Search, Filter, Sort -->
+     <section class="app-card mb-3">
+      <div class="card-body py-3">
+       <div class="row g-2 align-items-center">
+        <div class="col-12 col-md-6">
+         <div class="input-group">
+          <span class="input-group-text bg-muted">
+           <i class="fa-solid fa-magnifying-glass">
+           </i>
+          </span>
+          <input aria-label="Search students" class="form-control" id="searchInput" placeholder="Search students by name..." type="text"/>
+         </div>
+        </div>
+        <div class="col-6 col-md-3">
+         <select aria-label="Filter by status" class="form-select" id="statusFilter">
+          <option selected="" value="all">
+           All Statuses
+          </option>
+          <option value="Unmarked">
+           Unmarked
+          </option>
+          <option value="Present">
+           Present
+          </option>
+          <option value="Absent">
+           Absent
+          </option>
+          <option value="Late">
+           Late
+          </option>
+          <option value="Excused">
+           Excused
+          </option>
+         </select>
+        </div>
+        <div class="col-6 col-md-3">
+         <select aria-label="Sort students" class="form-select" id="sortBy">
+          <option selected="" value="lastNameAsc">
+           Sort: Last Name A→Z
+          </option>
+          <option value="lastNameDesc">
+           Sort: Last Name Z→A
+          </option>
+          <option value="firstNameAsc">
+           Sort: First Name A→Z
+          </option>
+          <option value="firstNameDesc">
+           Sort: First Name Z→A
+          </option>
+         </select>
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Distribution Chart -->
+     <section class="app-card mb-3">
+      <div class="card-header">
+       <div class="widget-title">
+        Status Distribution
+       </div>
+       <div class="text-muted small">
+        Updates as you mark attendance
+       </div>
+      </div>
+      <div class="card-body">
+       <div class="row g-3 align-items-center">
+        <div class="col-12 col-md-6">
+         <canvas aria-label="Attendance status distribution" height="160" id="statusChart" role="img">
+         </canvas>
+        </div>
+        <div class="col-12 col-md-6">
+         <ul class="list-unstyled mb-0" id="statusSummary">
+          <!-- populated by JS -->
+         </ul>
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Student Roster Table -->
+     <section class="app-card">
+      <div class="card-header">
+       <div class="widget-title">
+        Student Roster
+       </div>
+       <div class="text-muted small" id="tableMeta">
+        Showing
+        <span id="showingCount">
+         0
+        </span>
+        of
+        <span id="totalCount">
+         0
+        </span>
+       </div>
+      </div>
+      <div class="card-body p-0">
+       <div class="table-responsive">
+        <table class="table table-theme mb-0" id="rosterTable">
+         <thead>
+          <tr>
+           <th scope="col" style="width:56px;">
+            #
+           </th>
+           <th scope="col">
+            Student
+           </th>
+           <th class="text-center" scope="col" style="min-width:340px;">
+            Status
+           </th>
+           <th class="text-end" scope="col" style="width:120px;">
+            Actions
+           </th>
+          </tr>
+         </thead>
+         <tbody id="rosterBody">
+          <!-- Rows injected via JS -->
+         </tbody>
+        </table>
+       </div>
+      </div>
+     </section>
+     <div class="py-4">
+     </div>
+     <!-- Roster Action Bar (sticky at bottom of viewport) -->
+     <div class="bottom-bar" id="rosterActionBar">
+      <div class="d-flex align-items-center flex-wrap gap-2">
+       <span class="log-line">
+        <i class="fa-regular fa-circle-dot me-1 text-primary">
+        </i>
+        <span id="actionBarStatus">
+         Editing today's roster
+        </span>
+       </span>
+      </div>
+      <div class="ms-auto d-flex align-items-center gap-2" id="actionButtons">
+       <button class="btn btn-light" id="btnMarkAll">
+        <i class="fa-solid fa-user-check me-2">
+        </i>
+        Mark all Present
+       </button>
+       <button class="btn btn-primary" id="btnSubmit">
+        <span aria-hidden="true" class="spinner-border spinner-border-sm me-2 d-none" id="submitSpinner" role="status">
+        </span>
+        <i class="fa-solid fa-paper-plane me-2">
+        </i>
+        Submit Attendance
+       </button>
+       <button class="btn btn-warning d-none" id="btnRequestCorrection">
+        <i class="fa-regular fa-pen-to-square me-2">
+        </i>
+        Request Correction
+       </button>
+      </div>
+     </div>
+    </main>
+    <!-- Footer (Common Component) -->
+    <!-- Common Footer -->
+    <footer class="common-footer py-2 px-3 d-flex align-items-center justify-content-between">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo3/18/18?grayscale'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.11/dayjs.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Role-aware back routing (relative links)
+(function() {
+    const map = {
+        Admin: './admin_dashboard.html',
+        Teacher: './teacher_dashboard.html',
+        Parent: './parent_dashboard.html',
+        Student: './student_dashboard.html',
+        Substitute: './substitute_dashboard.html'
+    };
+    const role = (window.currentUserRole || 'Teacher').trim();
+    const el = document.getElementById('backToDashboard');
+    if (el && map[role]) el.setAttribute('href', map[role]);
+    const back = document.getElementById('backDashDD');
+    if (back && map[role]) back.setAttribute('href', map[role]);
+})();
+
+// Sample class context
+const classContext = {
+    classId: 101,
+    className: 'Algebra II',
+    courseName: 'Math 10B',
+    period: 'Period 3'
+};
+
+// Mock Students (10 rows)
+const students = [{
+    id: 1,
+    firstName: 'Alice',
+    lastName: 'Nguyen',
+    avatar: 'https://i.pravatar.cc/40?img=5'
+}, {
+    id: 2,
+    firstName: 'Benjamin',
+    lastName: 'Ortiz',
+    avatar: 'https://i.pravatar.cc/40?img=15'
+}, {
+    id: 3,
+    firstName: 'Chloe',
+    lastName: 'Patel',
+    avatar: 'https://i.pravatar.cc/40?img=11'
+}, {
+    id: 4,
+    firstName: 'Diego',
+    lastName: 'Ramirez',
+    avatar: 'https://i.pravatar.cc/40?img=32'
+}, {
+    id: 5,
+    firstName: 'Elena',
+    lastName: 'Santos',
+    avatar: 'https://i.pravatar.cc/40?img=22'
+}, {
+    id: 6,
+    firstName: 'Farah',
+    lastName: 'Ali',
+    avatar: 'https://i.pravatar.cc/40?img=24'
+}, {
+    id: 7,
+    firstName: 'Gavin',
+    lastName: 'Brooks',
+    avatar: 'https://i.pravatar.cc/40?img=7'
+}, {
+    id: 8,
+    firstName: 'Hana',
+    lastName: 'Kim',
+    avatar: 'https://i.pravatar.cc/40?img=14'
+}, {
+    id: 9,
+    firstName: 'Ivan',
+    lastName: 'Kovacs',
+    avatar: 'https://i.pravatar.cc/40?img=1'
+}, {
+    id: 10,
+    firstName: 'Jasmine',
+    lastName: 'Lee',
+    avatar: 'https://i.pravatar.cc/40?img=9'
+}];
+
+// State
+let selectedDate = dayjs().format('YYYY-MM-DD');
+let isPastRecord = false;
+let isSubmitted = false;
+let isSubmitting = false;
+let studentAttendanceData = {}; // { studentId: {status: 'Present'|'Absent'|'Late'|'Excused'|'Unmarked'} }
+
+const defaultStatuses = ['Present', 'Absent', 'Late', 'Excused'];
+
+// Initialize defaults - unsubmitted roster defaults to Present
+students.forEach(s => {
+    studentAttendanceData[s.id] = {
+        status: 'Present'
+    };
+});
+
+// DOM refs
+const datePicker = document.getElementById('datePicker');
+const rosterBody = document.getElementById('rosterBody');
+const studentCount = document.getElementById('studentCount');
+const showingCount = document.getElementById('showingCount');
+const totalCount = document.getElementById('totalCount');
+const actionBarStatus = document.getElementById('actionBarStatus');
+const btnMarkAll = document.getElementById('btnMarkAll');
+const btnSubmit = document.getElementById('btnSubmit');
+const btnRequestCorrection = document.getElementById('btnRequestCorrection');
+const submitSpinner = document.getElementById('submitSpinner');
+const attendanceWindow = document.getElementById('attendanceWindow');
+const submittedBadge = document.getElementById('submittedBadge');
+const searchInput = document.getElementById('searchInput');
+const statusFilter = document.getElementById('statusFilter');
+const sortBy = document.getElementById('sortBy');
+
+// Setup date picker bounds
+const today = dayjs().format('YYYY-MM-DD');
+datePicker.max = today;
+datePicker.value = today;
+
+function computeIsPast(dateStr) {
+    return dayjs(dateStr).isBefore(dayjs(), 'day');
+}
+
+function renderHeaderMeta() {
+    document.getElementById('classTitle').textContent = `${classContext.className} • ${classContext.period}`;
+    document.getElementById('courseTitle').textContent = classContext.courseName;
+    studentCount.textContent = students.length;
+    totalCount.textContent = students.length;
+    if (isSubmitted) {
+        submittedBadge.style.display = '';
+    } else {
+        submittedBadge.style.display = 'none';
+    }
+    attendanceWindow.textContent = isPastRecord ? dayjs(selectedDate).format('MMM D, YYYY') : 'Today';
+}
+
+// Sorting helpers
+function compareNames(a, b, mode) {
+    const aF = a.firstName.toLowerCase(),
+        aL = a.lastName.toLowerCase();
+    const bF = b.firstName.toLowerCase(),
+        bL = b.lastName.toLowerCase();
+    if (mode === 'lastNameAsc') return aL.localeCompare(bL) || aF.localeCompare(bF);
+    if (mode === 'lastNameDesc') return bL.localeCompare(aL) || bF.localeCompare(aF);
+    if (mode === 'firstNameAsc') return aF.localeCompare(bF) || aL.localeCompare(bL);
+    if (mode === 'firstNameDesc') return bF.localeCompare(aF) || bL.localeCompare(aL);
+    return 0;
+}
+
+function filteredStudents() {
+    const q = searchInput.value.trim().toLowerCase();
+    const f = statusFilter.value;
+    let list = students.filter(s => {
+        const name = `${s.firstName} ${s.lastName}`.toLowerCase();
+        const matchQ = q ? name.includes(q) : true;
+        const st = (studentAttendanceData[s.id]?.status) || 'Unmarked';
+        const matchF = (f === 'all') ? true : (st === f);
+        return matchQ && matchF;
+    });
+    list = list.sort((a, b) => compareNames(a, b, sortBy.value));
+    return list;
+}
+
+function statusColor(status) {
+    switch (status) {
+        case 'Present':
+            return 'success';
+        case 'Absent':
+            return 'danger';
+        case 'Late':
+            return 'warning';
+        case 'Excused':
+            return 'info';
+        default:
+            return 'secondary';
+    }
+}
+
+function renderRoster() {
+    const list = filteredStudents();
+    showingCount.textContent = list.length;
+    rosterBody.innerHTML = '';
+    list.forEach((s, idx) => {
+        const st = studentAttendanceData[s.id]?.status || 'Unmarked';
+        const tr = document.createElement('tr');
+        tr.setAttribute('data-student-id', s.id);
+        // #
+        const th = document.createElement('th');
+        th.scope = 'row';
+        th.textContent = idx + 1;
+        tr.appendChild(th);
+        // Student cell
+        const tdName = document.createElement('td');
+        tdName.innerHTML = `
+          <div class="d-flex align-items-center gap-2">
+            <img class="student-avatar" src="${s.avatar}" onerror="this.onerror=null;this.src='https://picsum.photos/seed/${s.id}/40/40?grayscale'" alt="${s.firstName} ${s.lastName}">
+            <div>
+              <div class="fw-semibold">${s.lastName}, ${s.firstName}</div>
+              <div class="text-muted small">ID: ${String(s.id).padStart(6,'0')}</div>
+            </div>
+          </div>`;
+        tr.appendChild(tdName);
+        // Status control
+        const tdStatus = document.createElement('td');
+        tdStatus.className = 'text-center';
+        const nameGroup = `status-${s.id}`;
+        const statuses = ['Present', 'Absent', 'Late', 'Excused'];
+        const group = document.createElement('div');
+        group.className = 'btn-group status-segment';
+        group.role = 'group';
+        group.setAttribute('aria-label', `Attendance status for ${s.firstName} ${s.lastName}`);
+        statuses.forEach(code => {
+            const inputId = `${nameGroup}-${code}`;
+            const input = document.createElement('input');
+            input.className = 'btn-check';
+            input.type = 'radio';
+            input.name = nameGroup;
+            input.id = inputId;
+            input.autocomplete = 'off';
+            input.checked = (st === code);
+            if (isSubmitted) input.disabled = true;
+            const label = document.createElement('label');
+            label.className = `btn btn-sm btn-outline-${statusColor(code)}`;
+            label.setAttribute('for', inputId);
+            label.setAttribute('data-status', code);
+            label.innerHTML = `<i class="me-1 ${code==='Present'?'fa-solid fa-user-check': code==='Absent'?'fa-solid fa-user-xmark': code==='Late'?'fa-regular fa-clock':'fa-regular fa-circle-check'}"></i>${code}`;
+            input.addEventListener('change', () => {
+                if (input.checked) {
+                    studentAttendanceData[s.id] = {
+                        status: code
+                    };
+                    updateActionStateDirty();
+                    updateChart();
+                    updateStatusSummary();
+                }
+            });
+            group.appendChild(input);
+            group.appendChild(label);
+        });
+        tdStatus.appendChild(group);
+        tr.appendChild(tdStatus);
+        // Actions
+        const tdAction = document.createElement('td');
+        tdAction.className = 'text-end';
+        const noteBtn = document.createElement('button');
+        noteBtn.className = 'btn btn-icon btn-light';
+        noteBtn.innerHTML = '<i class="fa-regular fa-note-sticky" data-bs-toggle="tooltip" title="Add a note"></i>';
+        if (isSubmitted) noteBtn.disabled = true;
+        noteBtn.addEventListener('click', () => addNoteForStudent(s));
+        tdAction.appendChild(noteBtn);
+        tr.appendChild(tdAction);
+
+        rosterBody.appendChild(tr);
+    });
+    // Enable tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
+}
+
+async function addNoteForStudent(s) {
+    const {
+        value: text
+    } = await Swal.fire({
+        title: `Add note for ${s.firstName} ${s.lastName}`,
+        input: 'textarea',
+        inputLabel: 'Note',
+        inputPlaceholder: 'Optional note (e.g., arrived with parent note)...',
+        inputAttributes: {
+            'aria-label': 'Note'
+        },
+        showCancelButton: true
+    });
+    if (text) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Saved',
+            text: 'Your note has been attached (demo).',
+            timer: 1500,
+            showConfirmButton: false
+        });
+    }
+}
+
+function updateActionStateDirty() {
+    if (isSubmitted) {
+        actionBarStatus.textContent = `Viewing submitted record for ${dayjs(selectedDate).format('MMM D, YYYY')}`;
+    } else if (isPastRecord) {
+        actionBarStatus.textContent = `Viewing past record (${dayjs(selectedDate).format('MMM D, YYYY')})`;
+    } else {
+        actionBarStatus.textContent = 'Editing today\'s roster';
+    }
+}
+
+// Chart.js Doughnut
+let chart;
+
+function getCounts() {
+    const counts = {
+        Present: 0,
+        Absent: 0,
+        Late: 0,
+        Excused: 0
+    };
+    students.forEach(s => {
+        const st = studentAttendanceData[s.id]?.status || 'Unmarked';
+        if (counts[st] !== undefined) counts[st]++;
+    });
+    return counts;
+}
+
+function updateChart() {
+    const c = getCounts();
+    if (!chart) return;
+    chart.data.datasets[0].data = [c.Present, c.Absent, c.Late, c.Excused];
+    chart.update();
+}
+
+function updateStatusSummary() {
+    const c = getCounts();
+    const total = students.length;
+    const el = document.getElementById('statusSummary');
+    el.innerHTML = `
+        <li class="mb-1"><span class="badge-soft success me-2"><i class="fa-solid fa-user-check me-1"></i>Present</span> ${c.Present} of ${total}</li>
+        <li class="mb-1"><span class="badge-soft error me-2"><i class="fa-solid fa-user-xmark me-1"></i>Absent</span> ${c.Absent} of ${total}</li>
+        <li class="mb-1"><span class="badge-soft warning me-2"><i class="fa-regular fa-clock me-1"></i>Late</span> ${c.Late} of ${total}</li>
+        <li class="mb-1"><span class="badge-soft info me-2"><i class="fa-regular fa-circle-check me-1"></i>Excused</span> ${c.Excused} of ${total}</li>`;
+}
+
+function initChart() {
+    const ctx = document.getElementById('statusChart');
+    const c = getCounts();
+    chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Present', 'Absent', 'Late', 'Excused'],
+            datasets: [{
+                data: [c.Present, c.Absent, c.Late, c.Excused],
+                backgroundColor: ['#e5f1ed', '#fae8e9', '#fff6e5', '#e5f4fa'],
+                borderColor: ['#00774E', '#CD2026', '#FFA500', '#0099D2'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+function setSubmittedState(submitted) {
+    isSubmitted = submitted;
+    submittedBadge.style.display = submitted ? '' : 'none';
+    btnSubmit.classList.toggle('d-none', submitted || isPastRecord);
+    btnMarkAll.classList.toggle('d-none', submitted || isPastRecord);
+    btnRequestCorrection.classList.toggle('d-none', !(submitted && isPastRecord));
+    renderRoster();
+    updateActionStateDirty();
+}
+
+function onDateChange(dateStr) {
+    selectedDate = dateStr;
+    isPastRecord = computeIsPast(dateStr);
+    // Simulate fetch delay
+    rosterBody.innerHTML = '';
+    for (let i = 0; i < 5; i++) {
+        const tr = document.createElement('tr');
+        const cols = ['56px', 'auto', '340px', '120px'];
+        for (let c = 0; c < 4; c++) {
+            const td = document.createElement(c === 0 ? 'th' : 'td');
+            td.innerHTML = '<span class="skeleton" style="display:block;height:16px;width:100%;"></span>';
+            tr.appendChild(td);
+        }
+        rosterBody.appendChild(tr);
+    }
+    // For past dates, assume already submitted; otherwise unsubmitted
+    setTimeout(() => {
+        setSubmittedState(isPastRecord);
+        renderHeaderMeta();
+        renderRoster();
+        updateChart();
+        updateStatusSummary();
+    }, 600);
+}
+
+// Event bindings
+datePicker.addEventListener('change', (e) => {
+    const v = e.target.value;
+    if (dayjs(v).isAfter(dayjs(), 'day')) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Future date disabled',
+            text: 'You cannot select a future date.'
+        });
+        datePicker.value = today;
+        return;
+    }
+    onDateChange(v);
+});
+
+btnMarkAll.addEventListener('click', () => {
+    students.forEach(s => {
+        studentAttendanceData[s.id] = {
+            status: 'Present'
+        };
+    });
+    renderRoster();
+    updateChart();
+    updateStatusSummary();
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        timer: 1500,
+        showConfirmButton: false,
+        icon: 'success',
+        title: 'All students marked Present'
+    });
+});
+
+btnSubmit.addEventListener('click', async () => {
+    if (isSubmitting) return;
+    isSubmitting = true;
+    submitSpinner.classList.remove('d-none');
+    btnSubmit.setAttribute('disabled', 'disabled');
+    btnMarkAll.setAttribute('disabled', 'disabled');
+    try {
+        // Simulate POST
+        await new Promise(res => setTimeout(res, 1400));
+        Swal.fire({
+            icon: 'success',
+            title: 'Attendance Submitted',
+            text: 'Notifications to parents of absent students will be sent automatically. ',
+            confirmButtonText: 'OK'
+        });
+        setSubmittedState(true);
+    } catch (err) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Submission failed',
+            text: 'Please try again.'
+        });
+    } finally {
+        submitSpinner.classList.add('d-none');
+        btnSubmit.removeAttribute('disabled');
+        btnMarkAll.removeAttribute('disabled');
+        isSubmitting = false;
+    }
+});
+
+btnRequestCorrection.addEventListener('click', () => {
+    const params = new URLSearchParams({
+        classId: String(classContext.classId),
+        date: selectedDate
+    });
+    window.location.href = `./correction_form.html?${params.toString()}`;
+});
+
+// Filters
+searchInput.addEventListener('input', () => {
+    renderRoster();
+    showingCount.textContent = filteredStudents().length;
+});
+statusFilter.addEventListener('change', () => {
+    renderRoster();
+    showingCount.textContent = filteredStudents().length;
+});
+sortBy.addEventListener('change', () => {
+    renderRoster();
+});
+
+// Initial load
+(function init() {
+    renderHeaderMeta();
+    initChart();
+    renderRoster();
+    updateStatusSummary();
+    updateActionStateDirty();
+    showingCount.textContent = students.length;
+    totalCount.textContent = students.length;
+    onDateChange(today);
+})();
+  </script>
+ </body>
+</html>

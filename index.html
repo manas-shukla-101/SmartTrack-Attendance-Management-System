@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Attendance System – Login
+  </title>
+  <!-- Brand Typography: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-S+4Z6TtH0fVQSAJk8m2m1m2V8YulzjL1bI4bHcfrz6U0r0k8y4r9wH3DgP7qCwLwle7P8m2S2hF0JtX9P2T5xQ==" referrerpolicy="no-referrer" rel="stylesheet">
+   <!-- SweetAlert2 -->
+   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Main Theme CSS -->
+    <link href="style.css" rel="stylesheet"/>
+    <!-- Page-specific CSS -->
+    <link href="login_page.css" rel="stylesheet"/>
+   </link>
+  </link>
+ </head>
+ <body>
+  <!-- Common Header (included on login page; sidebar intentionally omitted) -->
+  <nav class="common-header navbar navbar-expand-lg px-3">
+   <a class="navbar-brand d-flex align-items-center" href="./index.html">
+    <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/attendance-logo/56/56';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+    <span class="fw-semibold">
+     Attendance
+    </span>
+   </a>
+   <span class="ms-3 text-muted d-none d-md-inline" id="commonPageTitle">
+    Login
+   </span>
+   <button aria-controls="hdrNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#hdrNav" data-bs-toggle="collapse" type="button">
+    <span class="navbar-toggler-icon">
+    </span>
+   </button>
+   <div class="collapse navbar-collapse" id="hdrNav">
+    <ul class="navbar-nav ms-auto">
+     <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#">
+       <img alt="Avatar" class="rounded-circle me-2" src="https://via.placeholder.com/28"/>
+       Account
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+       <li>
+        <a class="dropdown-item" href="#" id="backDashDD">
+         <i class="fa-solid fa-arrow-left me-2">
+         </i>
+         Back to Dashboard
+        </a>
+       </li>
+       <li>
+        <hr class="dropdown-divider"/>
+       </li>
+       <li>
+        <a class="dropdown-item" href="./index.html">
+         <i class="fa-solid fa-right-to-bracket me-2">
+         </i>
+         Login
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </div>
+  </nav>
+  <!-- Main Content -->
+  <main class="auth-wrapper d-flex align-items-center py-5">
+   <div class="container">
+    <div class="row justify-content-center">
+     <div class="col-12 col-md-8 col-lg-5">
+      <div class="login-form-container">
+       <!-- Brand / Intro -->
+       <div class="text-center mb-3">
+        <img alt="School / District" class="mx-auto mb-2" height="56" onerror="this.onerror=null;this.src='https://picsum.photos/seed/attendance/56/56'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" width="56"/>
+        <h1 class="h4 mb-1">
+         Welcome back
+        </h1>
+        <p class="text-muted mb-0">
+         Sign in to the Attendance Tracking System
+        </p>
+       </div>
+       <!-- System Feedback Area -->
+       <div class="alert alert-danger d-none" id="formAlert" role="alert">
+        Invalid credentials. Please check your username/email and password.
+       </div>
+       <!-- Login Form -->
+       <form id="loginForm" novalidate="">
+        <div class="mb-3">
+         <label class="form-label" for="username">
+          Username or Email
+         </label>
+         <div class="input-group">
+          <span class="input-group-text">
+           <i class="fa-regular fa-user">
+           </i>
+          </span>
+          <input autocomplete="username" class="form-control" id="username" placeholder="Enter your username or email" required="" type="text"/>
+         </div>
+         <div class="form-text">
+          Use your assigned username or your email.
+         </div>
+        </div>
+        <div class="mb-3">
+         <label class="form-label" for="password">
+          Password
+         </label>
+         <div class="input-group">
+          <span class="input-group-text">
+           <i class="fa-solid fa-lock">
+           </i>
+          </span>
+          <input autocomplete="current-password" class="form-control password-input-field" id="password" placeholder="Enter your password" required="" type="password"/>
+          <button aria-label="Toggle password visibility" class="btn btn-light toggle-visibility-icon" id="togglePassword" type="button">
+           <i class="fa-regular fa-eye">
+           </i>
+          </button>
+         </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between mb-3">
+         <div class="form-check">
+          <input class="form-check-input" id="rememberMe" type="checkbox" value="1"/>
+          <label class="form-check-label" for="rememberMe">
+           Remember me
+          </label>
+         </div>
+         <a class="text-decoration-none" href="./forgot-password.html">
+          Forgot your password?
+         </a>
+        </div>
+        <div class="d-grid gap-2">
+         <button class="btn btn-primary" id="loginBtn" type="submit">
+          <span class="default-text">
+           <i class="fa-solid fa-right-to-bracket me-2">
+           </i>
+           Log In
+          </span>
+          <span class="loading-text d-none">
+           <span aria-hidden="true" class="spinner-border spinner-border-sm me-2" role="status">
+           </span>
+           Signing in…
+          </span>
+         </button>
+        </div>
+       </form>
+       <!-- Security note -->
+       <div class="mt-3 small text-muted">
+        By signing in, you agree to comply with district policies and data privacy requirements.
+       </div>
+      </div>
+      <!-- Test Credentials Helper -->
+      <div class="card mt-3">
+       <div class="card-header d-flex align-items-center justify-content-between">
+        <div class="fw-semibold">
+         Test Credentials
+        </div>
+        <span class="badge-soft info">
+         Demo
+        </span>
+       </div>
+       <div class="card-body">
+        <div class="table-responsive">
+         <table class="table table-theme mb-2">
+          <thead>
+           <tr>
+            <th>
+             Role
+            </th>
+            <th>
+             Username/Email
+            </th>
+            <th>
+             Password
+            </th>
+            <th>
+             Redirects To
+            </th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+            <td>
+             Admin
+            </td>
+            <td>
+             <code>
+              admin@example.com
+             </code>
+            </td>
+            <td>
+             <code>
+              Admin@123
+             </code>
+            </td>
+            <td>
+             <a href="./admin_dashboard.html">
+              admin_dashboard.html
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             Teacher
+            </td>
+            <td>
+             <code>
+              teacher.alvarez
+             </code>
+            </td>
+            <td>
+             <code>
+              Teach@123
+             </code>
+            </td>
+            <td>
+             <a href="./teacher_dashboard.html">
+              teacher_dashboard.html
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             Parent
+            </td>
+            <td>
+             <code>
+              parent.lane
+             </code>
+            </td>
+            <td>
+             <code>
+              Parent@123
+             </code>
+            </td>
+            <td>
+             <a href="./parent_dashboard.html">
+              parent_dashboard.html
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             Student
+            </td>
+            <td>
+             <code>
+              s100245
+             </code>
+            </td>
+            <td>
+             <code>
+              Student@123
+             </code>
+            </td>
+            <td>
+             <a href="./student_dashboard.html">
+              student_dashboard.html
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             Substitute
+            </td>
+            <td>
+             <code>
+              sub.garcia
+             </code>
+            </td>
+            <td>
+             <code>
+              Sub@123
+             </code>
+            </td>
+            <td>
+             <a href="./substitute_dashboard.html">
+              substitute_dashboard.html
+             </a>
+            </td>
+           </tr>
+           <tr>
+            <td>
+             Student
+            </td>
+            <td>
+             <code>
+              student.johnson@example.com
+             </code>
+            </td>
+            <td>
+             <code>
+              Student@456
+             </code>
+            </td>
+            <td>
+             <a href="./student_dashboard.html">
+              student_dashboard.html
+             </a>
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+        <small class="text-muted">
+         Use any of the above to test role-based redirection.
+        </small>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  <!-- Common Footer -->
+  <footer class="common-footer py-2 px-3 d-flex align-items-center justify-content-between">
+   <div class="d-flex align-items-center">
+    <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/footer/36/36'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+    <small class="text-muted">
+     © 2025 Attendance System
+    </small>
+   </div>
+   <div>
+    <a class="text-decoration-none me-3" href="#">
+     Terms
+    </a>
+    <a class="text-decoration-none" href="#">
+     Privacy
+    </a>
+   </div>
+  </footer>
+  <!-- Bootstrap JS -->
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js">
+  </script>
+  <script>
+   // Map Back to Dashboard (role-aware) for header dropdown
+(function() {
+    const map = {
+        Admin: './admin_dashboard.html',
+        Teacher: './teacher_dashboard.html',
+        Parent: './parent_dashboard.html',
+        Student: './student_dashboard.html',
+        Substitute: './substitute_dashboard.html'
+    };
+    const role = (window.currentUserRole || '').trim();
+    const back = document.getElementById('backDashDD');
+    if (back && map[role]) back.setAttribute('href', map[role]);
+})();
+
+// Mock credential store and role routing
+const USERS = {
+    // Admin
+    'admin@example.com': {
+        role: 'Admin',
+        password: 'Admin@123',
+        redirect: './admin_dashboard.html'
+    },
+    // Teacher
+    'teacher.alvarez': {
+        role: 'Teacher',
+        password: 'Teach@123',
+        redirect: './teacher_dashboard.html'
+    },
+    // Parent
+    'parent.lane': {
+        role: 'Parent',
+        password: 'Parent@123',
+        redirect: './parent_dashboard.html'
+    },
+    // Students
+    's100245': {
+        role: 'Student',
+        password: 'Student@123',
+        redirect: './student_dashboard.html'
+    },
+    'student.johnson@example.com': {
+        role: 'Student',
+        password: 'Student@456',
+        redirect: './student_dashboard.html'
+    },
+    // Substitute
+    'sub.garcia': {
+        role: 'Substitute',
+        password: 'Sub@123',
+        redirect: './substitute_dashboard.html'
+    }
+};
+
+const form = document.getElementById('loginForm');
+const usernameEl = document.getElementById('username');
+const passwordEl = document.getElementById('password');
+const alertEl = document.getElementById('formAlert');
+const loginBtn = document.getElementById('loginBtn');
+const togglePasswordBtn = document.getElementById('togglePassword');
+
+// Toggle password visibility
+togglePasswordBtn.addEventListener('click', () => {
+    const isPwd = passwordEl.getAttribute('type') === 'password';
+    passwordEl.setAttribute('type', isPwd ? 'text' : 'password');
+    togglePasswordBtn.innerHTML = isPwd ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+    passwordEl.focus();
+});
+
+// Helper to set loading state
+function setLoading(isLoading) {
+    if (isLoading) {
+        loginBtn.setAttribute('disabled', 'disabled');
+        loginBtn.querySelector('.default-text').classList.add('d-none');
+        loginBtn.querySelector('.loading-text').classList.remove('d-none');
+    } else {
+        loginBtn.removeAttribute('disabled');
+        loginBtn.querySelector('.default-text').classList.remove('d-none');
+        loginBtn.querySelector('.loading-text').classList.add('d-none');
+    }
+}
+
+// Show inline alert
+function showInlineError(msg) {
+    alertEl.textContent = msg;
+    alertEl.classList.remove('d-none');
+}
+
+function hideInlineError() {
+    alertEl.classList.add('d-none');
+}
+
+// Form submission
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    hideInlineError();
+
+    const username = (usernameEl.value || '').trim();
+    const password = passwordEl.value || '';
+
+    // Simple client-side validation
+    if (!username) {
+        usernameEl.classList.add('is-invalid');
+        usernameEl.focus();
+        showInlineError('Please enter your username or email.');
+        return;
+    } else {
+        usernameEl.classList.remove('is-invalid');
+    }
+    if (!password) {
+        passwordEl.classList.add('is-invalid');
+        passwordEl.focus();
+        showInlineError('Please enter your password.');
+        return;
+    } else {
+        passwordEl.classList.remove('is-invalid');
+    }
+
+    setLoading(true);
+
+    // Simulate async auth
+    setTimeout(() => {
+        const record = USERS[username];
+        if (!record || record.password !== password) {
+            setLoading(false);
+            showInlineError('Invalid credentials. Please check your username/email and password.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Login failed',
+                text: 'Please verify your credentials and try again.',
+                confirmButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--color-primary') || '#f08e1b'
+            });
+            return;
+        }
+
+        // Success: show success alert and redirect
+        Swal.fire({
+            icon: 'success',
+            title: `Welcome, ${record.role}!`,
+            text: 'Authentication successful. Redirecting to your dashboard…',
+            timer: 1200,
+            timerProgressBar: true,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        }).then(() => {
+            window.location.href = record.redirect;
+        });
+
+    }, 900);
+});
+
+// Accessibility: Enter key triggers submit, clear inline error on input
+[usernameEl, passwordEl].forEach(el => {
+    el.addEventListener('input', () => hideInlineError());
+});
+  </script>
+ </body>
+</html>

@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Reports Page - Attendance System
+  </title>
+  <!-- Brand Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+   <!-- Flatpickr (Date Range) -->
+   <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+    <!-- Global Theme Styles -->
+    <link href="style.css" rel="stylesheet"/>
+    <!-- Page-specific CSS -->
+    <link href="reports_page.css" rel="stylesheet"/>
+   </link>
+  </link>
+ </head>
+ <body>
+  <div class="app-shell d-flex">
+   <!-- Sidebar (Left) -->
+   <nav class="admin-sidebar d-flex flex-column" id="sidebar">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/36/36'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Attendance System
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user/40/40'" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold">
+        Admin User
+       </div>
+       <small class="text-muted">
+        Administrator
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" href="./admin_dashboard.html">
+        <i class="fa-solid fa-gauge me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link active" href="./reports_page.html">
+        <i class="fa-solid fa-chart-line me-2">
+        </i>
+        Reports
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./approval_queue.html">
+        <i class="fa-solid fa-list-check me-2">
+        </i>
+        Approvals
+       </a>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminUsersMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenu" role="button">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Users
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminUsersMenu">
+        <a class="nav-link" href="./user_management.html">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Manage Users
+        </a>
+        <a class="nav-link" href="./user_form.html">
+         <i class="fa-solid fa-user-plus me-2">
+         </i>
+         Add New User
+        </a>
+       </div>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminSettingsMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenu" role="button">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminSettingsMenu">
+        <a class="nav-link" href="./system_settings.html">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         System Settings
+        </a>
+        <a class="nav-link" href="./calendar_settings.html">
+         <i class="fa-solid fa-calendar-days me-2">
+         </i>
+         Calendar
+        </a>
+        <a class="nav-link" href="./schedule_settings.html">
+         <i class="fa-solid fa-clock me-2">
+         </i>
+         Bell Schedules
+        </a>
+        <a class="nav-link" href="./codes_settings.html">
+         <i class="fa-solid fa-code me-2">
+         </i>
+         Attendance Codes
+        </a>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Right Content Area -->
+   <div class="app-main d-flex flex-column min-vh-100 flex-grow-1">
+    <!-- Header (Top) -->
+    <nav class="admin-header navbar navbar-expand-lg px-3">
+     <button aria-label="Open menu" class="btn btn-link d-lg-none" data-bs-target="#offcanvasSidebar" data-bs-toggle="offcanvas">
+      <i class="fa-solid fa-bars">
+      </i>
+     </button>
+     <a class="navbar-brand d-flex align-items-center" href="./admin_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/logo/28/28'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Admin Portal
+      </span>
+     </a>
+     <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+      <div class="input-group">
+       <span class="input-group-text bg-white">
+        <i class="fa-solid fa-magnifying-glass">
+        </i>
+       </span>
+       <input class="form-control" placeholder="Search students, classes, users..." type="search"/>
+      </div>
+     </form>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item me-2">
+       <a aria-label="Notifications" class="nav-link position-relative" href="#">
+        <i class="fa-solid fa-bell">
+        </i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+         3
+        </span>
+       </a>
+      </li>
+      <li class="nav-item me-2">
+       <a aria-label="Messages" class="nav-link" href="#">
+        <i class="fa-solid fa-envelope">
+        </i>
+       </a>
+      </li>
+      <li class="nav-item dropdown">
+       <a aria-expanded="false" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/admin/32/32'" src="https://via.placeholder.com/32"/>
+        Admin
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./user_management.html">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Manage Users
+         </a>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./system_settings.html">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          Settings
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./index.html">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Offcanvas Sidebar for Mobile -->
+    <div aria-labelledby="offcanvasSidebarLabel" class="offcanvas offcanvas-start" id="offcanvasSidebar" tabindex="-1">
+     <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasSidebarLabel">
+       Menu
+      </h5>
+      <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button">
+      </button>
+     </div>
+     <div class="offcanvas-body p-0">
+      <!-- Clone of the main sidebar content for mobile -->
+      <div class="admin-sidebar d-flex flex-column w-100" style="border-right:0;">
+       <div class="p-3 border-bottom">
+        <div class="d-flex align-items-center">
+         <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/user2/40/40'" src="https://via.placeholder.com/40">
+          <div>
+           <div class="fw-semibold">
+            Admin User
+           </div>
+           <small class="text-muted">
+            Administrator
+           </small>
+          </div>
+         </img>
+        </div>
+       </div>
+       <div class="flex-grow-1 overflow-auto">
+        <ul class="nav flex-column mt-2">
+         <li class="nav-item">
+          <a class="nav-link" href="./admin_dashboard.html">
+           <i class="fa-solid fa-gauge me-2">
+           </i>
+           Dashboard
+          </a>
+         </li>
+         <li class="nav-item">
+          <a class="nav-link active" href="./reports_page.html">
+           <i class="fa-solid fa-chart-line me-2">
+           </i>
+           Reports
+          </a>
+         </li>
+         <li class="nav-item">
+          <a class="nav-link" href="./approval_queue.html">
+           <i class="fa-solid fa-list-check me-2">
+           </i>
+           Approvals
+          </a>
+         </li>
+         <li class="nav-item">
+          <a aria-controls="adminUsersMenu2" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenu2" role="button">
+           <i class="fa-solid fa-users me-2">
+           </i>
+           Users
+           <i class="fa-solid fa-chevron-down float-end">
+           </i>
+          </a>
+          <div class="collapse ps-4" id="adminUsersMenu2">
+           <a class="nav-link" href="./user_management.html">
+            <i class="fa-solid fa-users me-2">
+            </i>
+            Manage Users
+           </a>
+           <a class="nav-link" href="./user_form.html">
+            <i class="fa-solid fa-user-plus me-2">
+            </i>
+            Add New User
+           </a>
+          </div>
+         </li>
+         <li class="nav-item">
+          <a aria-controls="adminSettingsMenu2" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminSettingsMenu2" role="button">
+           <i class="fa-solid fa-gear me-2">
+           </i>
+           Settings
+           <i class="fa-solid fa-chevron-down float-end">
+           </i>
+          </a>
+          <div class="collapse ps-4" id="adminSettingsMenu2">
+           <a class="nav-link" href="./system_settings.html">
+            <i class="fa-solid fa-gear me-2">
+            </i>
+            System Settings
+           </a>
+           <a class="nav-link" href="./calendar_settings.html">
+            <i class="fa-solid fa-calendar-days me-2">
+            </i>
+            Calendar
+           </a>
+           <a class="nav-link" href="./schedule_settings.html">
+            <i class="fa-solid fa-clock me-2">
+            </i>
+            Bell Schedules
+           </a>
+           <a class="nav-link" href="./codes_settings.html">
+            <i class="fa-solid fa-code me-2">
+            </i>
+            Attendance Codes
+           </a>
+          </div>
+         </li>
+        </ul>
+       </div>
+       <div class="p-3">
+        <a class="btn btn-outline-secondary w-100" href="./index.html">
+         <i class="fa-solid fa-right-from-bracket me-2">
+         </i>
+         Logout
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+     <div class="container-fluid py-3">
+      <div class="page-header">
+       <div class="d-flex align-items-center gap-2">
+        <h1 class="page-title mb-0">
+         Reports
+        </h1>
+        <span class="badge-soft info">
+         Generate, analyze, export
+        </span>
+       </div>
+       <div class="d-none d-md-flex align-items-center gap-2">
+        <button class="btn btn-light btn-sm" id="btnShowHelp">
+         <i class="fa-regular fa-circle-question me-1">
+         </i>
+         Help
+        </button>
+       </div>
+      </div>
+      <nav aria-label="breadcrumb" class="breadcrumb">
+       <ol class="breadcrumb mb-3">
+        <li class="breadcrumb-item">
+         <a href="./admin_dashboard.html">
+          Admin
+         </a>
+        </li>
+        <li aria-current="page" class="breadcrumb-item active">
+         Reports
+        </li>
+       </ol>
+      </nav>
+      <div class="d-flex gap-3 flex-wrap flex-lg-nowrap">
+       <!-- Left: Report Configuration Panel -->
+       <aside aria-label="Report configuration" class="report-config-panel app-card">
+        <div class="card-header">
+         <div class="title d-flex align-items-center gap-2">
+          <i class="fa-solid fa-sliders">
+          </i>
+          <span class="widget-title">
+           Report Configuration
+          </span>
+         </div>
+         <button class="btn btn-light btn-sm" id="btnResetFilters">
+          <i class="fa-solid fa-rotate me-1">
+          </i>
+          Reset
+         </button>
+        </div>
+        <div class="card-body">
+         <!-- Report Selector -->
+         <div class="mb-3">
+          <label class="form-label" for="reportType">
+           Select Report Type
+          </label>
+          <select aria-label="Select report type" class="form-select" id="reportType">
+           <option disabled="" selected="" value="">
+            Choose a report...
+           </option>
+          </select>
+          <div class="form-text" id="reportDescription">
+           Pick a template to see relevant filters.
+          </div>
+         </div>
+         <!-- Dynamic Filters Container -->
+         <div class="d-grid gap-3" id="dynamicFilters">
+          <!-- Date Range -->
+          <div>
+           <label class="form-label" for="dateRange">
+            Date Range
+           </label>
+           <input class="form-control" id="dateRange" placeholder="Select date range" type="text"/>
+           <div class="form-text">
+            Start date must be before or equal to end date.
+           </div>
+          </div>
+          <!-- Placeholder for template-specific filters -->
+          <div class="d-grid gap-3" id="templateFilters">
+          </div>
+         </div>
+         <div class="d-grid gap-2 mt-3">
+          <button class="btn btn-primary" disabled="" id="btnGenerate">
+           <i class="fa-solid fa-play me-1">
+           </i>
+           Generate Report
+          </button>
+         </div>
+        </div>
+       </aside>
+       <!-- Right: Report Preview Panel -->
+       <section aria-live="polite" class="report-preview flex-grow-1 d-flex flex-column gap-3">
+        <!-- Key Metrics -->
+        <div class="grid auto-fit-lg">
+         <div class="metric-card">
+          <div class="metric-title">
+           Students Flagged
+          </div>
+          <div class="metric-value" id="metricStudents">
+           —
+          </div>
+         </div>
+         <div class="metric-card">
+          <div class="metric-title">
+           Average Absence %
+          </div>
+          <div class="metric-value" id="metricAbsence">
+           —
+          </div>
+         </div>
+         <div class="metric-card">
+          <div class="metric-title">
+           Selected Range
+          </div>
+          <div class="metric-value" id="metricRange">
+           —
+          </div>
+         </div>
+        </div>
+        <!-- Chart Card -->
+        <div class="card">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-chart-column">
+           </i>
+           <span class="widget-title" id="chartTitle">
+            Absences by Grade
+           </span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+           <button class="btn btn-light btn-sm" id="btnToggleChartType">
+            <i class="fa-solid fa-arrows-rotate me-1">
+            </i>
+            Toggle Type
+           </button>
+          </div>
+         </div>
+         <div class="card-body">
+          <canvas aria-label="Report chart" height="110" id="reportChart" role="img">
+          </canvas>
+         </div>
+        </div>
+        <!-- Report Table Card -->
+        <div class="card position-relative" id="tableCard">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-table">
+           </i>
+           <span class="widget-title" id="reportTitle">
+            Report Preview
+           </span>
+          </div>
+          <div aria-label="Export controls" class="btn-group" role="group">
+           <button class="btn btn-outline-secondary btn-sm" disabled="" id="btnExportCSV">
+            <i class="fa-solid fa-file-csv me-1">
+            </i>
+            CSV
+           </button>
+           <button class="btn btn-outline-secondary btn-sm" disabled="" id="btnExportPDF">
+            <i class="fa-solid fa-file-pdf me-1">
+            </i>
+            PDF
+           </button>
+          </div>
+         </div>
+         <div class="card-body p-0">
+          <div class="table-responsive">
+           <table class="table table-theme mb-0" id="reportTable">
+            <thead>
+             <tr id="tableHead">
+              <!-- Dynamic columns -->
+             </tr>
+            </thead>
+            <tbody id="tableBody">
+             <tr>
+              <td class="text-center p-4 text-muted" colspan="8">
+               No data available. Configure filters and generate a report.
+              </td>
+             </tr>
+            </tbody>
+           </table>
+          </div>
+          <div class="d-flex align-items-center justify-content-between p-3 border-top">
+           <small class="text-muted" id="paginationInfo">
+            —
+           </small>
+           <nav>
+            <ul class="pagination pagination-sm mb-0" id="pagination">
+             <!-- Dynamic pagination -->
+            </ul>
+           </nav>
+          </div>
+         </div>
+         <!-- Loading Overlay -->
+         <div aria-hidden="true" class="loading-overlay d-none" id="loadingOverlay">
+          <div aria-label="Loading" class="spinner-border text-primary" role="status">
+          </div>
+          <div class="mt-2 text-muted">
+           Generating report...
+          </div>
+         </div>
+        </div>
+        <!-- Empty/Error/Info States -->
+        <div class="d-none" id="stateContainer">
+         <div class="empty-state">
+          <i class="fa-regular fa-folder-open fa-2x text-muted">
+          </i>
+          <div class="empty-state-text">
+           No data available for the selected criteria.
+          </div>
+          <button class="btn btn-light retry-button" id="btnRetry">
+           <i class="fa-solid fa-rotate me-1">
+           </i>
+           Try Again
+          </button>
+         </div>
+        </div>
+       </section>
+      </div>
+     </div>
+    </main>
+    <!-- Footer (Bottom) -->
+    <footer class="admin-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/footer/18/18'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Toast Container (System Feedback) -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1060">
+   <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-bg-primary border-0" id="liveToast" role="alert">
+    <div class="d-flex">
+     <div class="toast-body" id="toastMessage">
+      Action completed.
+     </div>
+     <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <!-- Bootstrap 5 JS (with Popper) -->
+  <script crossorigin="anonymous" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- Flatpickr -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr">
+  </script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <!-- jsPDF and AutoTable for PDF export -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js">
+  </script>
+  <script>
+   // Brand: use Poppins on this page
+document.documentElement.style.setProperty('--font-sans', 'Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"');
+
+// Report Templates (mock API data)
+const reportTemplates = [{
+    id: 'chronic',
+    name: 'Chronic Absenteeism',
+    description: 'Identifies students missing 10% or more of instructional days within a date range.',
+    filters: {
+        requires: ['dateRange', 'gradeLevels', 'threshold'],
+        gradeLevels: ['K', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+        thresholdDefault: 10
+    },
+    columns: [{
+        key: 'student',
+        label: 'Student'
+    }, {
+        key: 'grade',
+        label: 'Grade'
+    }, {
+        key: 'absences',
+        label: 'Days Absent'
+    }, {
+        key: 'absencePct',
+        label: 'Absence %'
+    }, {
+        key: 'lastAbsence',
+        label: 'Last Absence'
+    }]
+}, {
+    id: 'state',
+    name: 'State Compliance',
+    description: 'Summarizes attendance metrics required for state reporting.',
+    filters: {
+        requires: ['dateRange', 'gradeLevels'],
+        gradeLevels: ['K', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+    },
+    columns: [{
+        key: 'student',
+        label: 'Student'
+    }, {
+        key: 'grade',
+        label: 'Grade'
+    }, {
+        key: 'presentDays',
+        label: 'Present Days'
+    }, {
+        key: 'excused',
+        label: 'Excused'
+    }, {
+        key: 'unexcused',
+        label: 'Unexcused'
+    }]
+}, {
+    id: 'daily',
+    name: 'Daily Summary',
+    description: 'Daily attendance summary by homeroom or campus.',
+    filters: {
+        requires: ['dateRange', 'campus'],
+        campuses: ['All Campuses', 'North', 'South', 'East', 'West']
+    },
+    columns: [{
+        key: 'date',
+        label: 'Date'
+    }, {
+        key: 'campus',
+        label: 'Campus'
+    }, {
+        key: 'enrolled',
+        label: 'Enrolled'
+    }, {
+        key: 'present',
+        label: 'Present'
+    }, {
+        key: 'attendanceRate',
+        label: 'Attendance %'
+    }]
+}];
+
+// Application state
+let state = {
+    selectedTemplate: null,
+    filterValues: {
+        dateRange: '',
+        gradeLevels: [],
+        threshold: null,
+        campus: null
+    },
+    isLoading: false,
+    data: [],
+    allData: [], // used for export
+    columns: [],
+    sort: {
+        key: null,
+        direction: 'asc'
+    },
+    page: 1,
+    pageSize: 10,
+    chart: null,
+    chartType: 'bar'
+};
+
+// Elements
+const elReportType = document.getElementById('reportType');
+const elReportDescription = document.getElementById('reportDescription');
+const elTemplateFilters = document.getElementById('templateFilters');
+const elGenerate = document.getElementById('btnGenerate');
+const elLoading = document.getElementById('loadingOverlay');
+const elTableHead = document.getElementById('tableHead');
+const elTableBody = document.getElementById('tableBody');
+const elPagination = document.getElementById('pagination');
+const elPaginationInfo = document.getElementById('paginationInfo');
+const elExportCSV = document.getElementById('btnExportCSV');
+const elExportPDF = document.getElementById('btnExportPDF');
+const elReportTitle = document.getElementById('reportTitle');
+const elMetricStudents = document.getElementById('metricStudents');
+const elMetricAbsence = document.getElementById('metricAbsence');
+const elMetricRange = document.getElementById('metricRange');
+const elChartTitle = document.getElementById('chartTitle');
+const elBtnReset = document.getElementById('btnResetFilters');
+const elBtnToggleChartType = document.getElementById('btnToggleChartType');
+
+// Toast helper
+const toastEl = document.getElementById('liveToast');
+const toastMessageEl = document.getElementById('toastMessage');
+const toast = new bootstrap.Toast(toastEl);
+
+// Initialize date range picker
+const fp = flatpickr('#dateRange', {
+    mode: 'range',
+    dateFormat: 'Y-m-d'
+});
+
+// Populate report types
+function loadReportTemplates() {
+    reportTemplates.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t.id;
+        opt.textContent = t.name;
+        elReportType.appendChild(opt);
+    });
+}
+
+// Render template-specific filters
+function renderTemplateFilters(template) {
+    elTemplateFilters.innerHTML = '';
+    if (!template) return;
+
+    const f = template.filters;
+    if (f.requires.includes('gradeLevels')) {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = `
+          <label class="form-label" for="gradeLevels">Grade Levels</label>
+          <select id="gradeLevels" class="form-select" multiple size="6" aria-label="Select grade levels">
+            ${(f.gradeLevels || []).map(g => `<option value="${g}">${g}</option>`).join('')}
+          </select>
+          <div class="form-text">Hold Ctrl/Cmd to select multiple.</div>
+        `;
+        elTemplateFilters.appendChild(wrap);
+    }
+
+    if (f.requires.includes('threshold')) {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = `
+          <label class="form-label" for="threshold">Absence Threshold (%)</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+            <input type="number" min="1" max="100" step="1" id="threshold" class="form-control" value="${f.thresholdDefault ?? 10}" />
+          </div>
+          <div class="form-text">Students at or above this absence percentage will be flagged.</div>
+        `;
+        elTemplateFilters.appendChild(wrap);
+    }
+
+    if (f.requires.includes('campus')) {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = `
+          <label class="form-label" for="campus">Campus</label>
+          <select id="campus" class="form-select">
+            ${(f.campuses || []).map(c => `<option value="${c}">${c}</option>`).join('')}
+          </select>
+        `;
+        elTemplateFilters.appendChild(wrap);
+    }
+}
+
+// Validate to enable Generate button
+function validateForm() {
+    const hasTemplate = !!state.selectedTemplate;
+    const dateRange = document.getElementById('dateRange').value.trim();
+    let valid = hasTemplate && !!dateRange;
+
+    if (hasTemplate) {
+        const req = state.selectedTemplate.filters.requires;
+        if (req.includes('gradeLevels')) {
+            const gl = Array.from(document.getElementById('gradeLevels')?.selectedOptions || []).map(o => o.value);
+            valid = valid && gl.length > 0;
+        }
+        if (req.includes('threshold')) {
+            const th = parseInt(document.getElementById('threshold')?.value ?? '0', 10);
+            valid = valid && !isNaN(th) && th > 0 && th <= 100;
+        }
+        if (req.includes('campus')) {
+            const campus = document.getElementById('campus')?.value;
+            valid = valid && !!campus;
+        }
+    }
+
+    elGenerate.disabled = !valid;
+}
+
+// Handle template change
+elReportType.addEventListener('change', () => {
+    const val = elReportType.value;
+    const tmpl = reportTemplates.find(t => t.id === val);
+    state.selectedTemplate = tmpl || null;
+    state.columns = tmpl ? tmpl.columns : [];
+    elReportDescription.textContent = tmpl ? tmpl.description : 'Pick a template to see relevant filters.';
+    renderTemplateFilters(tmpl);
+    validateForm();
+});
+
+// Delegate filter changes
+document.getElementById('dynamicFilters').addEventListener('input', () => validateForm());
+
+// Reset filters
+elBtnReset.addEventListener('click', () => {
+    document.getElementById('dateRange').value = '';
+    fp.clear();
+    elReportType.value = '';
+    elReportDescription.textContent = 'Pick a template to see relevant filters.';
+    elTemplateFilters.innerHTML = '';
+    state.selectedTemplate = null;
+    state.columns = [];
+    validateForm();
+});
+
+// Generate mock data based on template
+function generateMockData(template, filters) {
+    const now = new Date();
+    // produce 28 rows
+    const students = [
+        'Ava Thompson', 'Liam Martinez', 'Olivia Clark', 'Noah Rodriguez', 'Emma Lewis', 'Elijah Walker', 'Sophia Hall', 'Lucas Allen', 'Mia Young', 'Mason Hernandez', 'Amelia King', 'Logan Wright', 'Harper Scott', 'Ethan Green', 'Evelyn Adams', 'James Baker', 'Abigail Nelson', 'Benjamin Carter', 'Emily Mitchell', 'Jack Perez', 'Sofia Roberts', 'Henry Turner', 'Avery Phillips', 'Michael Campbell', 'Ella Parker', 'William Evans', 'Scarlett Edwards', 'Alexander Collins'
+    ];
+    const grades = ['K', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
+    const data = students.map((s, i) => {
+        const grade = grades[Math.floor(Math.random() * grades.length)];
+        const absences = Math.floor(Math.random() * 18);
+        const totalDays = 180;
+        const absencePct = +(absences / totalDays * 100).toFixed(1);
+        const lastAbsence = new Date(now.getFullYear(), Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
+        const presentDays = totalDays - absences;
+        const excused = Math.floor(absences * 0.4);
+        const unexcused = absences - excused;
+        const date = new Date(now.getFullYear(), Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
+        const campus = (template.id === 'daily') ? (['North', 'South', 'East', 'West'][Math.floor(Math.random() * 4)]) : null;
+        const enrolled = 25 + Math.floor(Math.random() * 7);
+        const present = Math.min(enrolled, Math.max(0, enrolled - Math.floor(Math.random() * 5)));
+        const attendanceRate = +((present / Math.max(1, enrolled)) * 100).toFixed(1);
+
+        return {
+            student: s,
+            grade,
+            absences,
+            absencePct,
+            lastAbsence,
+            presentDays,
+            excused,
+            unexcused,
+            date,
+            campus,
+            enrolled,
+            present,
+            attendanceRate
+        };
+    });
+
+    // Filter by selected grade levels if applicable
+    if (template.filters.requires.includes('gradeLevels') && filters.gradeLevels?.length) {
+        return data.filter(d => filters.gradeLevels.includes(d.grade));
+    }
+    return data;
+}
+
+function formatCell(key, val) {
+    if (key.toLowerCase().includes('date') || key === 'lastAbsence') {
+        if (!val) return '—';
+        const d = (val instanceof Date) ? val : new Date(val);
+        return d.toLocaleDateString();
+    }
+    if (String(key).toLowerCase().includes('pct') || key === 'attendanceRate') {
+        return (val ?? 0).toFixed(1) + '%';
+    }
+    if (typeof val === 'number') {
+        return val.toLocaleString();
+    }
+    return val ?? '—';
+}
+
+function setLoading(isLoading) {
+    state.isLoading = isLoading;
+    elLoading.classList.toggle('d-none', !isLoading);
+    elExportCSV.disabled = isLoading || state.allData.length === 0;
+    elExportPDF.disabled = isLoading || state.allData.length === 0;
+}
+
+function computeMetrics() {
+    const rows = state.allData;
+    if (!rows.length) {
+        elMetricStudents.textContent = '—';
+        elMetricAbsence.textContent = '—';
+        return;
+    }
+    // Students flagged = count
+    elMetricStudents.textContent = rows.length.toLocaleString();
+    // Avg absence rate if column exists; fallback to attendanceRate inverse
+    if (rows[0].hasOwnProperty('absencePct')) {
+        const avg = rows.reduce((a, r) => a + (r.absencePct || 0), 0) / rows.length;
+        elMetricAbsence.textContent = avg.toFixed(1) + '%';
+    } else if (rows[0].hasOwnProperty('attendanceRate')) {
+        const avg = rows.reduce((a, r) => a + (r.attendanceRate || 0), 0) / rows.length;
+        elMetricAbsence.textContent = (100 - avg).toFixed(1) + '%';
+    } else {
+        elMetricAbsence.textContent = '—';
+    }
+}
+
+function updateRangeMetric() {
+    const val = document.getElementById('dateRange').value;
+    elMetricRange.textContent = val || '—';
+}
+
+function renderTable() {
+    // Headers
+    elTableHead.innerHTML = '';
+    state.columns.forEach(col => {
+        const th = document.createElement('th');
+        th.className = 'sortable';
+        th.tabIndex = 0;
+        th.setAttribute('role', 'button');
+        th.dataset.key = col.key;
+        th.innerHTML = `<span>${col.label}</span> <i class="fa-solid fa-sort sort-indicator"></i>`;
+        th.addEventListener('click', () => toggleSort(col.key));
+        th.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') toggleSort(col.key);
+        });
+        elTableHead.appendChild(th);
+    });
+
+    // Sorting
+    let rows = [...state.allData];
+    if (state.sort.key) {
+        const {
+            key,
+            direction
+        } = state.sort;
+        rows.sort((a, b) => {
+            const va = a[key];
+            const vb = b[key];
+            if (va == null) return 1;
+            if (vb == null) return -1;
+            if (va instanceof Date && vb instanceof Date) {
+                return direction === 'asc' ? va - vb : vb - va;
+            }
+            if (typeof va === 'number' && typeof vb === 'number') {
+                return direction === 'asc' ? va - vb : vb - va;
+            }
+            return direction === 'asc' ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+        });
+    }
+
+    // Pagination
+    const start = (state.page - 1) * state.pageSize;
+    const paged = rows.slice(start, start + state.pageSize);
+
+    // Body
+    elTableBody.innerHTML = '';
+    if (!paged.length) {
+        elTableBody.innerHTML = `<tr><td colspan="${state.columns.length}" class="text-center p-4 text-muted">No data available for the selected criteria.</td></tr>`;
+    } else {
+        paged.forEach(r => {
+            const tr = document.createElement('tr');
+            state.columns.forEach(c => {
+                const td = document.createElement('td');
+                td.textContent = formatCell(c.key, r[c.key]);
+                tr.appendChild(td);
+            });
+            elTableBody.appendChild(tr);
+        });
+    }
+
+    // Pagination UI
+    renderPagination(rows.length);
+
+    // Update export buttons
+    const hasData = state.allData.length > 0;
+    elExportCSV.disabled = !hasData;
+    elExportPDF.disabled = !hasData;
+
+    // Title
+    elReportTitle.textContent = state.selectedTemplate ? `${state.selectedTemplate.name} - Preview` : 'Report Preview';
+}
+
+function renderPagination(total) {
+    const totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+    state.page = Math.min(state.page, totalPages);
+    elPagination.innerHTML = '';
+
+    const infoStart = total ? ((state.page - 1) * state.pageSize + 1) : 0;
+    const infoEnd = Math.min(total, state.page * state.pageSize);
+    elPaginationInfo.textContent = total ? `Showing ${infoStart}-${infoEnd} of ${total}` : '—';
+
+    const addPageItem = (label, page, disabled = false, active = false) => {
+        const li = document.createElement('li');
+        li.className = `page-item ${disabled ? 'disabled' : ''} ${active ? 'active' : ''}`;
+        const a = document.createElement('a');
+        a.className = 'page-link';
+        a.href = '#';
+        a.textContent = label;
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!disabled) {
+                state.page = page;
+                renderTable();
+            }
+        });
+        li.appendChild(a);
+        elPagination.appendChild(li);
+    };
+
+    addPageItem('«', Math.max(1, state.page - 1), state.page === 1);
+    for (let p = 1; p <= totalPages; p++) {
+        if (p === 1 || p === totalPages || Math.abs(p - state.page) <= 1) {
+            addPageItem(String(p), p, false, p === state.page);
+        } else if (Math.abs(p - state.page) === 2) {
+            const li = document.createElement('li');
+            li.className = 'page-item disabled';
+            li.innerHTML = '<span class="page-link">…</span>';
+            elPagination.appendChild(li);
+        }
+    }
+    addPageItem('»', Math.min(totalPages, state.page + 1), state.page === totalPages);
+}
+
+function toggleSort(key) {
+    if (state.sort.key === key) {
+        state.sort.direction = state.sort.direction === 'asc' ? 'desc' : 'asc';
+    } else {
+        state.sort.key = key;
+        state.sort.direction = 'asc';
+    }
+    renderTable();
+}
+
+function updateChart() {
+    const ctx = document.getElementById('reportChart');
+    const rows = state.allData;
+    if (!rows.length) {
+        if (state.chart) {
+            state.chart.destroy();
+            state.chart = null;
+        }
+        return;
+    }
+
+    // Compute dataset by grade or by date depending on template
+    let labels = [];
+    let values = [];
+    if (state.selectedTemplate?.id === 'daily') {
+        // Group by date
+        const map = new Map();
+        for (const r of rows) {
+            const k = (r.date instanceof Date ? r.date : new Date(r.date)).toLocaleDateString();
+            map.set(k, (map.get(k) || 0) + (r.attendanceRate || 0));
+        }
+        labels = Array.from(map.keys());
+        values = Array.from(map.values()).map(v => +(v).toFixed(1));
+        elChartTitle.textContent = 'Average Attendance % by Day';
+    } else {
+        // Group by grade: average absence %
+        const map = new Map();
+        for (const r of rows) {
+            const g = r.grade || '—';
+            const acc = map.get(g) || {
+                sum: 0,
+                count: 0
+            };
+            acc.sum += (r.absencePct || (100 - (r.attendanceRate || 0)));
+            acc.count += 1;
+            map.set(g, acc);
+        }
+        labels = Array.from(map.keys()).sort((a, b) => String(a).localeCompare(String(b)));
+        values = labels.map(l => +(map.get(l).sum / map.get(l).count).toFixed(1));
+        elChartTitle.textContent = 'Average Absence % by Grade';
+    }
+
+    const data = {
+        labels,
+        datasets: [{
+            label: 'Value',
+            data: values,
+            backgroundColor: 'rgba(240, 142, 27, 0.25)',
+            borderColor: 'rgba(240, 142, 27, 1)',
+            borderWidth: 2,
+            tension: 0.25,
+            fill: state.chartType === 'line'
+        }]
+    };
+
+    if (state.chart) state.chart.destroy();
+    state.chart = new Chart(ctx, {
+        type: state.chartType,
+        data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '%'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        }
+    });
+}
+
+// Generate button handler
+document.getElementById('btnGenerate').addEventListener('click', async () => {
+    if (!state.selectedTemplate) return;
+
+    // Collect filters
+    const range = document.getElementById('dateRange').value.trim();
+    const filters = {
+        dateRange: range
+    };
+    const req = state.selectedTemplate.filters.requires;
+    if (req.includes('gradeLevels')) {
+        filters.gradeLevels = Array.from(document.getElementById('gradeLevels').selectedOptions).map(o => o.value);
+    }
+    if (req.includes('threshold')) {
+        filters.threshold = parseInt(document.getElementById('threshold').value, 10);
+    }
+    if (req.includes('campus')) {
+        filters.campus = document.getElementById('campus').value;
+    }
+
+    setLoading(true);
+    state.page = 1;
+    state.sort = {
+        key: null,
+        direction: 'asc'
+    };
+    elTableBody.innerHTML = `<tr><td colspan="${state.columns.length || 1}"><div class="p-3"><span class="skeleton" style="height:16px"></span></div></td></tr>`;
+
+    // Simulate API
+    setTimeout(() => {
+        const rows = generateMockData(state.selectedTemplate, filters);
+        // Optional: apply threshold filter for chronic
+        if (state.selectedTemplate.id === 'chronic' && filters.threshold) {
+            state.allData = rows.filter(r => r.absencePct >= filters.threshold);
+        } else {
+            state.allData = rows;
+        }
+        updateRangeMetric();
+        computeMetrics();
+        renderTable();
+        updateChart();
+        setLoading(false);
+        toastMessageEl.textContent = 'Report generated successfully';
+        toast.show();
+    }, 900);
+});
+
+// Export handlers
+elExportCSV.addEventListener('click', () => {
+    if (!state.allData.length) return;
+    const cols = state.columns.map(c => c.key);
+    const header = state.columns.map(c => '"' + c.label + '"').join(',');
+    const lines = state.allData.map(r => cols.map(k => {
+        const val = r[k];
+        const out = formatCell(k, val);
+        return '"' + String(out).replaceAll('"', '""') + '"';
+    }).join(','));
+    const csv = [header, ...lines].join('\n');
+    const blob = new Blob([csv], {
+        type: 'text/csv;charset=utf-8;'
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (state.selectedTemplate?.name || 'report') + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    Swal.fire({
+        icon: 'success',
+        title: 'Exported',
+        text: 'CSV downloaded successfully.'
+    });
+});
+
+elExportPDF.addEventListener('click', () => {
+    if (!state.allData.length) return;
+    const {
+        jsPDF
+    } = window.jspdf;
+    const doc = new jsPDF({
+        orientation: 'landscape'
+    });
+    const head = [state.columns.map(c => c.label)];
+    const body = state.allData.map(r => state.columns.map(c => formatCell(c.key, r[c.key])));
+    doc.text(state.selectedTemplate?.name || 'Report', 14, 14);
+    doc.autoTable({
+        head,
+        body,
+        startY: 20,
+        styles: {
+            fontSize: 8
+        }
+    });
+    doc.save((state.selectedTemplate?.name || 'report') + '.pdf');
+    Swal.fire({
+        icon: 'success',
+        title: 'Exported',
+        text: 'PDF downloaded successfully.'
+    });
+});
+
+// Help
+document.getElementById('btnShowHelp').addEventListener('click', () => {
+    Swal.fire({
+        title: 'Generating Reports',
+        html: `<div class="text-start">
+          <p>1) Choose a report type.</p>
+          <p>2) Set the date range and filters.</p>
+          <p>3) Click Generate to preview the data, then export as CSV or PDF.</p>
+        </div>`,
+        icon: 'info',
+        confirmButtonText: 'Got it'
+    });
+});
+
+// Retry action from empty-state
+document.getElementById('btnRetry').addEventListener('click', () => {
+    if (!elGenerate.disabled) elGenerate.click();
+});
+
+// Toggle chart type
+elBtnToggleChartType.addEventListener('click', () => {
+    state.chartType = state.chartType === 'bar' ? 'line' : 'bar';
+    updateChart();
+});
+
+// Init
+loadReportTemplates();
+  </script>
+ </body>
+</html>

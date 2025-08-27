@@ -1,0 +1,124 @@
+/* Reports Page (reports_page.css) */
+/* Use Poppins brand typography on this page */
+body {
+    font-family: Poppins, var(--font-sans)
+    }
+/* Shell Layout */
+.app-shell {
+    min-height: 100vh
+    }
+.app-main {
+    background: transparent
+    }
+/* Sidebar, Header, Footer styles (consistent across admin pages) */
+:root {
+    --primary: #f08e1b;
+    --secondary: #9a296a
+    }
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee;
+    position: sticky;
+    top: 0
+    }
+.admin-sidebar .brand {
+    background: var(--primary);
+    color: #fff
+    }
+.admin-sidebar .nav-link {
+    color: #333;
+    border-radius: 0.4rem;
+    margin: 0.15rem 0.5rem
+    }
+.admin-sidebar .nav-link.active {
+    background: rgba(240, 142, 27, 0.15);
+    color: #000;
+    border-left: 4px solid var(--primary)
+    }
+.admin-sidebar .nav-link:hover {
+    background: rgba(154, 41, 106, 0.08);
+    color: #000
+    }
+.admin-header {
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1030
+    }
+.admin-footer {
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    color: #555
+    }
+/* Responsive: collapse sidebar on smaller screens (offcanvas used) */
+@media (max-width: 991.98px) {
+    .admin-sidebar {
+        display: none
+        }
+    }
+/* Report configuration panel */
+.report-config-panel {
+    width: 340px;
+    flex: 0 0 340px;
+    align-self: flex-start;
+    position: sticky;
+    top: 76px
+    }
+@media (max-width: 991.98px) {
+    .report-config-panel {
+        position: static;
+        width: 100%;
+        flex: 1 1 100%
+        }
+    }
+/* Loading overlay for table card */
+.loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    backdrop-filter: blur(2px)
+    }
+/* Sortable headers */
+th.sortable {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap
+    }
+th.sortable .sort-indicator {
+    opacity: 0.5
+    }
+th.sortable:hover .sort-indicator {
+    opacity: 1
+    }
+/* Chart card canvas height */
+#reportChart {
+    min-height: 240px
+    }
+/* Tweak metric cards */
+.metric-card .metric-value {
+    font-variation-settings: "wght" 800
+    }
+/* Breadcrumb spacing */
+.breadcrumb {
+    margin-bottom: 0
+    }
+/* Utilities */
+.table-theme tbody tr:hover {
+    background: rgba(0, 0, 0, 0.02)
+    }
+/* Ensure footer sticks at bottom when content is short */
+.app-main {
+    display: flex;
+    flex-direction: column
+    }
+main.flex-grow-1 {
+    flex: 1 0 auto
+    }

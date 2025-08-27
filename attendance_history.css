@@ -1,0 +1,62 @@
+/* attendance_history.css - Page-specific enhancements for Attendance History */
+/* Use Poppins across this page (global fallback already set via style.css) */
+body {
+    font-family: "Poppins", var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif
+    }
+/* Keep the header sticky within the right column for long lists */
+.common-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-nav)
+    }
+/* Filters card tweaks */
+#filtersCard .choices__inner {
+    min-height: 42px
+    }
+#filtersCard .form-label {
+    font-weight: 600
+    }
+/* Summary metric cards spacing in side grid */
+.metric-card {
+    min-height: 96px
+    }
+/* Table header sticky for long lists */
+#recordsTable thead th {
+    position: sticky;
+    top: 0;
+    background: var(--surface-muted);
+    z-index: 2
+    }
+#recordsTable thead th.sortable {
+    cursor: pointer;
+    user-select: none
+    }
+#recordsTable tbody tr:hover {
+    background: rgba(0, 0, 0, 0.02)
+    }
+/* Status badge color nuances (leveraging theme soft badges) */
+.badge-soft.neutral {
+    background: var(--neutral-soft);
+    color: var(--text)
+    }
+/* Pagination alignment on mobile */
+@media (max-width: 575.98px) {
+    #paginationInfo {
+        width: 100%;
+        order: 2;
+        text-align: left;
+        margin-top: 8px
+        }
+    }
+/* Chart container height to ensure responsiveness */
+#trendChart {
+    min-height: 220px
+    }
+/* Feedback alert spacing */
+#feedbackArea .alert {
+    margin: 0
+    }
+/* Ensure main layout fills height with footer at bottom */
+html, body {
+    height: 100%
+    }

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Substitute Dashboard
+  </title>
+  <!-- Brand Typography: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 CSS -->
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet"/>
+  <!-- Font Awesome 6 -->
+  <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-+3xS0n+eB2i0P1q6Z8mG3vK1Q9Rr1m4Knhu2+f0bYlY1oL3xY8d0o8bO+qkzE1It7q8RkQbTQ3S0JY6WzGq2Gg==" referrerpolicy="no-referrer" rel="stylesheet">
+   <!-- SweetAlert2 -->
+   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Global Theme CSS -->
+    <link href="style.css" rel="stylesheet"/>
+    <!-- Page Specific CSS -->
+    <link href="substitute_dashboard.css" rel="stylesheet"/>
+   </link>
+  </link>
+ </head>
+ <body class="view-grid">
+  <div class="sub-layout d-flex">
+   <!-- Left Sidebar (Common Component) -->
+   <nav class="sub-sidebar d-flex flex-column">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null; this.src='https://picsum.photos/seed/subbrand/72/36'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Substitute Portal
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null; this.src='https://picsum.photos/seed/subavatar/40/40'" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold" id="sidebarSubName">
+        Substitute
+       </div>
+       <small class="text-muted">
+        Temporary Access
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link active" href="./substitute_dashboard.html">
+        <i class="fa-solid fa-house me-2">
+        </i>
+        Today's Classes
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./attendance_roster.html">
+        <i class="fa-solid fa-clipboard-check me-2">
+        </i>
+        Take Attendance
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./index.html" id="sidebarLogout">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Right Content Area -->
+   <div class="content-area flex-grow-1 d-flex flex-column min-vh-100">
+    <!-- Header (Common Component) with Quick Action -->
+    <nav class="sub-header navbar navbar-expand-lg px-3 sticky-top bg-white">
+     <a class="navbar-brand d-flex align-items-center" href="./substitute_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null; this.src='https://picsum.photos/seed/subhdr/56/28'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Substitute
+      </span>
+     </a>
+     <div class="ms-3">
+      <a class="btn" href="./attendance_roster.html" id="quickTakeAttendance" style="background:var(--primary); color:#fff;">
+       <i class="fa-solid fa-clipboard-check me-2">
+       </i>
+       Take Attendance
+      </a>
+     </div>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null; this.src='https://picsum.photos/seed/subhdravatar/32/32'" src="https://via.placeholder.com/32"/>
+        <span id="headerSubName">
+         Substitute
+        </span>
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./substitute_dashboard.html">
+          <i class="fa-solid fa-house me-2">
+          </i>
+          Dashboard
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="#" id="dropdownLogout">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+     <div class="container-fluid py-3 py-lg-4">
+      <!-- Page Header: Welcome + Date + Logout -->
+      <div class="page-header mb-3">
+       <div>
+        <h1 class="page-title mb-1" id="welcomeTitle">
+         Welcome, Substitute
+        </h1>
+        <div class="text-muted" id="currentDateText">
+         <i class="fa-regular fa-calendar me-2">
+         </i>
+         Today
+        </div>
+       </div>
+       <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-danger" id="logoutBtn">
+         <i class="fa-solid fa-right-from-bracket me-2">
+         </i>
+         Logout
+        </button>
+       </div>
+      </div>
+      <!-- Feedback/Notification Area -->
+      <div class="mb-3" id="alertContainer">
+      </div>
+      <!-- Metrics Row: Submission Overview Chart -->
+      <div class="row g-3 mb-3">
+       <div class="col-12 col-md-6 col-xl-4">
+        <div class="card h-100">
+         <div class="card-header">
+          <div class="title">
+           Today's Attendance Status
+          </div>
+         </div>
+         <div class="card-body">
+          <canvas height="160" id="submissionChart">
+          </canvas>
+          <div class="d-flex justify-content-around text-center mt-3">
+           <div>
+            <div class="metric-title">
+             Submitted
+            </div>
+            <div class="metric-value" id="submittedCount">
+             0
+            </div>
+           </div>
+           <div>
+            <div class="metric-title">
+             Pending
+            </div>
+            <div class="metric-value text-warning" id="pendingCount">
+             0
+            </div>
+           </div>
+           <div>
+            <div class="metric-title">
+             Total
+            </div>
+            <div class="metric-value text-info" id="totalCount">
+             0
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="col-12 col-md-6 col-xl-8">
+        <div class="card h-100">
+         <div class="card-header">
+          <div class="title">
+           Quick Tips
+          </div>
+         </div>
+         <div class="card-body">
+          <ul class="mb-0">
+           <li>
+            Click any class card to open its roster and record attendance.
+           </li>
+           <li>
+            Use the filters below to quickly find a class.
+           </li>
+           <li>
+            You can return here anytime using the Dashboard link in the menu.
+           </li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- Controls: Search, Filter, Sort -->
+      <div class="card mb-3">
+       <div class="card-body">
+        <form class="row g-2 align-items-center" id="controlForm">
+         <div class="col-12 col-md-5">
+          <div class="input-group">
+           <span class="input-group-text">
+            <i class="fa-solid fa-magnifying-glass">
+            </i>
+           </span>
+           <input class="form-control" id="searchInput" placeholder="Search by class name..." type="text"/>
+          </div>
+         </div>
+         <div class="col-6 col-md-3">
+          <select class="form-select" id="statusFilter">
+           <option value="all">
+            All Statuses
+           </option>
+           <option value="Pending">
+            Pending
+           </option>
+           <option value="Submitted">
+            Submitted
+           </option>
+          </select>
+         </div>
+         <div class="col-6 col-md-3">
+          <select class="form-select" id="sortSelect">
+           <option value="periodAsc">
+            Sort by Period (Asc)
+           </option>
+           <option value="periodDesc">
+            Sort by Period (Desc)
+           </option>
+           <option value="timeAsc">
+            Sort by Time (Asc)
+           </option>
+           <option value="timeDesc">
+            Sort by Time (Desc)
+           </option>
+           <option value="nameAsc">
+            Sort by Name (A-Z)
+           </option>
+           <option value="nameDesc">
+            Sort by Name (Z-A)
+           </option>
+          </select>
+         </div>
+         <div class="col-12 col-md-1 d-grid">
+          <button class="btn btn-light" id="clearFilters" type="button">
+           Clear
+          </button>
+         </div>
+        </form>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+         <small class="text-muted" id="resultsInfo">
+          Showing 0 of 0
+         </small>
+         <small class="text-muted">
+          Today is
+          <span id="resultsDate">
+           -
+          </span>
+         </small>
+        </div>
+       </div>
+      </div>
+      <!-- Loading State -->
+      <div class="card mb-3" id="loadingState">
+       <div class="card-body">
+        <div class="skeleton mb-2" style="height:20px">
+        </div>
+        <div class="skeleton mb-2" style="height:20px">
+        </div>
+        <div class="skeleton mb-2" style="height:20px">
+        </div>
+       </div>
+      </div>
+      <!-- No Assignments State -->
+      <div class="empty-state d-none" id="emptyState">
+       <img alt="No Assignments" class="rounded" src="https://picsum.photos/seed/noassign/120/80?grayscale">
+        <div class="text-strong">
+         No Assignments for Today
+        </div>
+        <p class="empty-state-text">
+         You have no classes assigned for today. Please contact the school administration if you believe this is an error.
+        </p>
+       </img>
+      </div>
+      <!-- Assigned Classes Grid -->
+      <div class="card-grid" id="assignmentsGrid">
+      </div>
+     </div>
+    </main>
+    <!-- Footer (Common Component) -->
+    <footer class="sub-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null; this.src='https://picsum.photos/seed/subftr/36/18'" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Toast Container for system notifications -->
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080">
+   <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-bg-primary border-0" id="liveToast" role="alert">
+    <div class="d-flex">
+     <div class="toast-body" id="toastBody">
+      Assignments loaded
+     </div>
+     <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- Bootstrap 5 JS -->
+  <script crossorigin="anonymous" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js">
+  </script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Mock session/user
+const session = {
+    substituteName: localStorage.getItem('substituteName') || 'Jordan Lee'
+};
+
+// Mock API: substitute assignments for today
+const mockAssignments = [{
+    classId: 101,
+    className: 'Algebra I',
+    classPeriod: 1,
+    classTime: '08:00 – 08:50',
+    attendanceStatus: 'Pending'
+}, {
+    classId: 102,
+    className: 'English II',
+    classPeriod: 2,
+    classTime: '09:00 – 09:50',
+    attendanceStatus: 'Submitted'
+}, {
+    classId: 103,
+    className: 'Biology',
+    classPeriod: 3,
+    classTime: '10:00 – 10:50',
+    attendanceStatus: 'Pending'
+}, {
+    classId: 104,
+    className: 'World History',
+    classPeriod: 4,
+    classTime: '11:00 – 11:50',
+    attendanceStatus: 'Submitted'
+}, {
+    classId: 105,
+    className: 'Geometry',
+    classPeriod: 5,
+    classTime: '12:40 – 13:30',
+    attendanceStatus: 'Pending'
+}, {
+    classId: 106,
+    className: 'Physical Education',
+    classPeriod: 6,
+    classTime: '13:40 – 14:30',
+    attendanceStatus: 'Submitted'
+}];
+
+let allAssignments = [];
+let filteredAssignments = [];
+let chartInstance = null;
+
+// Elements
+const welcomeTitle = document.getElementById('welcomeTitle');
+const currentDateText = document.getElementById('currentDateText');
+const resultsDate = document.getElementById('resultsDate');
+const assignmentsGrid = document.getElementById('assignmentsGrid');
+const loadingState = document.getElementById('loadingState');
+const emptyState = document.getElementById('emptyState');
+const resultsInfo = document.getElementById('resultsInfo');
+const searchInput = document.getElementById('searchInput');
+const statusFilter = document.getElementById('statusFilter');
+const sortSelect = document.getElementById('sortSelect');
+const clearFilters = document.getElementById('clearFilters');
+const submittedCount = document.getElementById('submittedCount');
+const pendingCount = document.getElementById('pendingCount');
+const totalCount = document.getElementById('totalCount');
+const quickTakeAttendance = document.getElementById('quickTakeAttendance');
+const alertContainer = document.getElementById('alertContainer');
+
+// Header names
+document.getElementById('headerSubName').textContent = session.substituteName;
+document.getElementById('sidebarSubName').textContent = session.substituteName;
+
+// Welcome + date
+function setDate() {
+    const now = new Date();
+    const longDate = now.toLocaleDateString(undefined, {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    currentDateText.innerHTML = '<i class="fa-regular fa-calendar me-2"></i>' + longDate;
+    resultsDate.textContent = longDate;
+}
+
+function setWelcome() {
+    welcomeTitle.textContent = `Welcome, ${session.substituteName}`;
+}
+
+// Render assignments
+function renderAssignments(list) {
+    assignmentsGrid.innerHTML = '';
+    list.forEach(item => {
+        const card = document.createElement('a');
+        card.href = `./attendance_roster.html?classId=${encodeURIComponent(item.classId)}`;
+        card.className = 'assignment-card card text-decoration-none';
+        card.setAttribute('data-class-id', item.classId);
+        card.innerHTML = `
+          <div class="card-body d-flex flex-column gap-2">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="h5 mb-1 text-strong">${item.className}</div>
+                <div class="text-muted"><span class="period-pill me-2">Period ${item.classPeriod}</span> <i class="fa-regular fa-clock me-1"></i>${item.classTime}</div>
+              </div>
+              <div>
+                ${renderStatusBadge(item.attendanceStatus)}
+              </div>
+            </div>
+            <div class="d-flex justify-content-end align-items-center mt-1">
+              <span class="text-info fw-semibold me-1">Open Roster</span>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div>
+          </div>`;
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Navigate with confirmation-like feedback
+            Swal.fire({
+                title: 'Open Attendance Roster?',
+                text: `${item.className} • Period ${item.classPeriod}`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Open',
+                cancelButtonText: 'Cancel'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = `./attendance_roster.html?classId=${encodeURIComponent(item.classId)}`;
+                }
+            });
+        });
+        assignmentsGrid.appendChild(card);
+    });
+}
+
+function renderStatusBadge(status) {
+    if (status === 'Submitted') {
+        return '<span class="badge-soft success"><i class="fa-solid fa-check-circle me-1"></i> Submitted</span>';
+    }
+    return '<span class="badge-soft warning"><i class="fa-solid fa-hourglass-half me-1"></i> Pending</span>';
+}
+
+// Filters and sorting
+function applyFilters() {
+    const q = searchInput.value.trim().toLowerCase();
+    const st = statusFilter.value;
+    let list = [...allAssignments];
+
+    if (q) {
+        list = list.filter(a => a.className.toLowerCase().includes(q));
+    }
+    if (st !== 'all') {
+        list = list.filter(a => a.attendanceStatus === st);
+    }
+
+    const sortVal = sortSelect.value;
+    switch (sortVal) {
+        case 'periodAsc':
+            list.sort((a, b) => a.classPeriod - b.classPeriod);
+            break;
+        case 'periodDesc':
+            list.sort((a, b) => b.classPeriod - a.classPeriod);
+            break;
+        case 'timeAsc':
+            list.sort((a, b) => timeToNum(a.classTime) - timeToNum(b.classTime));
+            break;
+        case 'timeDesc':
+            list.sort((a, b) => timeToNum(b.classTime) - timeToNum(a.classTime));
+            break;
+        case 'nameAsc':
+            list.sort((a, b) => a.className.localeCompare(b.className));
+            break;
+        case 'nameDesc':
+            list.sort((a, b) => b.className.localeCompare(a.className));
+            break;
+    }
+
+    filteredAssignments = list;
+    renderAssignments(filteredAssignments);
+    updateResultsInfo();
+    toggleEmptyState();
+    updateChartCounts();
+}
+
+function timeToNum(timeRange) {
+    // Expects format 'HH:MM – HH:MM'
+    const start = timeRange.split('–')[0].trim();
+    const [h, m] = start.split(':').map(Number);
+    return h * 60 + m;
+}
+
+function updateResultsInfo() {
+    resultsInfo.textContent = `Showing ${filteredAssignments.length} of ${allAssignments.length}`;
+}
+
+function toggleEmptyState() {
+    if (filteredAssignments.length === 0) {
+        emptyState.classList.remove('d-none');
+    } else {
+        emptyState.classList.add('d-none');
+    }
+}
+
+// Chart
+function renderChart() {
+    const ctx = document.getElementById('submissionChart');
+    if (!ctx) return;
+    const counts = getCounts();
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+    chartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Submitted', 'Pending'],
+            datasets: [{
+                data: [counts.submitted, counts.pending],
+                backgroundColor: ['rgba(0, 119, 78, 0.8)', 'rgba(255, 165, 0, 0.8)'],
+                borderWidth: 1,
+                hoverOffset: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+            cutout: '60%'
+        }
+    });
+}
+
+function getCounts() {
+    const submitted = allAssignments.filter(a => a.attendanceStatus === 'Submitted').length;
+    const pending = allAssignments.filter(a => a.attendanceStatus === 'Pending').length;
+    return {
+        submitted,
+        pending,
+        total: allAssignments.length
+    };
+}
+
+function updateChartCounts() {
+    const submitted = filteredAssignments.filter(a => a.attendanceStatus === 'Submitted').length;
+    const pending = filteredAssignments.filter(a => a.attendanceStatus === 'Pending').length;
+    submittedCount.textContent = submitted;
+    pendingCount.textContent = pending;
+    totalCount.textContent = filteredAssignments.length;
+}
+
+// Quick Take Attendance: go to first pending if exists
+function hookQuickAction() {
+    quickTakeAttendance.addEventListener('click', (e) => {
+        e.preventDefault();
+        const firstPending = allAssignments.find(a => a.attendanceStatus === 'Pending');
+        const url = firstPending ? `./attendance_roster.html?classId=${encodeURIComponent(firstPending.classId)}` : './attendance_roster.html';
+        window.location.href = url;
+    });
+}
+
+// Logout flows
+function setupLogout(button) {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Logout?',
+            text: 'Your temporary session will be ended.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Logout',
+            cancelButtonText: 'Cancel'
+        }).then(result => {
+            if (result.isConfirmed) {
+                // Clear client session (server-side should also invalidate)
+                localStorage.removeItem('substituteName');
+                window.location.href = './index.html';
+            }
+        });
+    });
+}
+
+// System alert helper
+function showAlert(message, type = 'info') {
+    alertContainer.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+}
+
+function showToast(text) {
+    const toastEl = document.getElementById('liveToast');
+    document.getElementById('toastBody').textContent = text;
+    const toast = new bootstrap.Toast(toastEl);
+    toast.show();
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+    setWelcome();
+    setDate();
+
+    // Tooltips (if any)
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Simulate loading
+    loadingState.classList.remove('d-none');
+    setTimeout(() => {
+        allAssignments = [...mockAssignments];
+        loadingState.classList.add('d-none');
+
+        // Initial render
+        applyFilters();
+        renderChart();
+        showToast('Assignments loaded');
+    }, 650);
+
+    // Listeners
+    searchInput.addEventListener('input', applyFilters);
+    statusFilter.addEventListener('change', applyFilters);
+    sortSelect.addEventListener('change', applyFilters);
+    clearFilters.addEventListener('click', () => {
+        searchInput.value = '';
+        statusFilter.value = 'all';
+        sortSelect.value = 'periodAsc';
+        applyFilters();
+    });
+
+    // Logout buttons
+    setupLogout(document.getElementById('logoutBtn'));
+    setupLogout(document.getElementById('dropdownLogout'));
+    setupLogout(document.getElementById('sidebarLogout'));
+
+    hookQuickAction();
+});
+  </script>
+ </body>
+</html>

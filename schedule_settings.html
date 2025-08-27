@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Schedule Settings | Admin Portal
+  </title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Font Awesome 6 -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+   <!-- SweetAlert2 -->
+   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet"/>
+   <!-- Theme stylesheet provided -->
+   <link href="style.css" rel="stylesheet"/>
+   <!-- Page-specific CSS -->
+   <link href="schedule_settings.css" rel="stylesheet"/>
+   <style>
+    body { font-family: 'Poppins', var(--font-sans); }
+   </style>
+  </link>
+ </head>
+ <body class="view-grid">
+  <div class="d-flex" style="min-height:100vh;">
+   <!-- Sidebar (common component - included for admin/settings pages) -->
+   <nav class="admin-sidebar d-flex flex-column" id="sidebar">
+    <div class="brand d-flex align-items-center p-3">
+     <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand/36/36';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:36px;"/>
+     <div class="fw-bold">
+      Attendance System
+     </div>
+    </div>
+    <div class="p-3 border-bottom">
+     <div class="d-flex align-items-center">
+      <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/admin/40/40';" src="https://via.placeholder.com/40"/>
+      <div>
+       <div class="fw-semibold">
+        Admin User
+       </div>
+       <small class="text-muted">
+        Administrator
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+     <ul class="nav flex-column mt-2">
+      <li class="nav-item">
+       <a class="nav-link" href="./admin_dashboard.html">
+        <i class="fa-solid fa-gauge me-2">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./reports_page.html">
+        <i class="fa-solid fa-chart-line me-2">
+        </i>
+        Reports
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="./approval_queue.html">
+        <i class="fa-solid fa-list-check me-2">
+        </i>
+        Approvals
+       </a>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminUsersMenu" aria-expanded="false" class="nav-link" data-bs-toggle="collapse" href="#adminUsersMenu" role="button">
+        <i class="fa-solid fa-users me-2">
+        </i>
+        Users
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse ps-4" id="adminUsersMenu">
+        <a class="nav-link" href="./user_management.html">
+         <i class="fa-solid fa-users me-2">
+         </i>
+         Manage Users
+        </a>
+        <a class="nav-link" href="./user_form.html">
+         <i class="fa-solid fa-user-plus me-2">
+         </i>
+         Add New User
+        </a>
+       </div>
+      </li>
+      <li class="nav-item">
+       <a aria-controls="adminSettingsMenu" aria-expanded="true" class="nav-link active" data-bs-toggle="collapse" href="#adminSettingsMenu" role="button">
+        <i class="fa-solid fa-gear me-2">
+        </i>
+        Settings
+        <i class="fa-solid fa-chevron-down float-end">
+        </i>
+       </a>
+       <div class="collapse show ps-4" id="adminSettingsMenu">
+        <a class="nav-link" href="./system_settings.html">
+         <i class="fa-solid fa-gear me-2">
+         </i>
+         System Settings
+        </a>
+        <a class="nav-link" href="./calendar_settings.html">
+         <i class="fa-solid fa-calendar-days me-2">
+         </i>
+         Calendar
+        </a>
+        <a class="nav-link active" href="./schedule_settings.html">
+         <i class="fa-solid fa-clock me-2">
+         </i>
+         Bell Schedules
+        </a>
+        <a class="nav-link" href="./codes_settings.html">
+         <i class="fa-solid fa-code me-2">
+         </i>
+         Attendance Codes
+        </a>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div class="p-3">
+     <a class="btn btn-outline-secondary w-100" href="./login_page.html">
+      <i class="fa-solid fa-right-from-bracket me-2">
+      </i>
+      Logout
+     </a>
+    </div>
+   </nav>
+   <!-- Main Content Column -->
+   <div class="flex-grow-1 d-flex flex-column min-vh-100">
+    <!-- Header (common component) -->
+    <nav class="admin-header navbar navbar-expand-lg px-3">
+     <button aria-label="Toggle sidebar" class="btn btn-link d-lg-none" id="sidebarToggle">
+      <i class="fa-solid fa-bars">
+      </i>
+     </button>
+     <a class="navbar-brand d-flex align-items-center" href="./admin_dashboard.html">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand2/28/28';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:28px"/>
+      <span class="fw-semibold">
+       Admin Portal
+      </span>
+     </a>
+     <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+      <div class="input-group">
+       <span class="input-group-text bg-white">
+        <i class="fa-solid fa-magnifying-glass">
+        </i>
+       </span>
+       <input class="form-control" placeholder="Search students, classes, users..." type="search"/>
+      </div>
+     </form>
+     <ul class="navbar-nav ms-auto">
+      <li class="nav-item me-2">
+       <a aria-label="Notifications" class="nav-link position-relative" href="#">
+        <i class="fa-solid fa-bell">
+        </i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+         3
+        </span>
+       </a>
+      </li>
+      <li class="nav-item me-2">
+       <a aria-label="Messages" class="nav-link" href="#">
+        <i class="fa-solid fa-envelope">
+        </i>
+       </a>
+      </li>
+      <li class="nav-item dropdown">
+       <a aria-expanded="false" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button">
+        <img alt="Avatar" class="rounded-circle me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/admin2/32/32';" src="https://via.placeholder.com/32"/>
+        Admin
+       </a>
+       <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+         <a class="dropdown-item" href="./user_management.html">
+          <i class="fa-solid fa-users me-2">
+          </i>
+          Manage Users
+         </a>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./system_settings.html">
+          <i class="fa-solid fa-gear me-2">
+          </i>
+          Settings
+         </a>
+        </li>
+        <li>
+         <hr class="dropdown-divider"/>
+        </li>
+        <li>
+         <a class="dropdown-item" href="./login_page.html">
+          <i class="fa-solid fa-right-from-bracket me-2">
+          </i>
+          Logout
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <!-- Main Panel Content -->
+    <main class="main-panel container-fluid py-3">
+     <div class="container-max">
+      <!-- Breadcrumb and Page Title -->
+      <nav aria-label="breadcrumb" class="breadcrumb mb-2">
+       <span class="breadcrumb-item">
+        <a href="./admin_dashboard.html">
+         Dashboard
+        </a>
+       </span>
+       <span class="breadcrumb-item">
+        <a href="./system_settings.html">
+         Settings
+        </a>
+       </span>
+       <span aria-current="page" class="breadcrumb-item active">
+        Schedule Settings
+       </span>
+      </nav>
+      <div class="page-header">
+       <div class="d-flex align-items-center gap-2">
+        <h1 class="page-title m-0">
+         Schedule Settings
+        </h1>
+        <span class="badge-soft info">
+         <i class="fa-solid fa-clock">
+         </i>
+         Manage Bell Schedules
+        </span>
+       </div>
+       <div aria-label="View" class="view-switcher" role="tablist">
+        <div aria-selected="true" class="option active">
+         Form View
+        </div>
+       </div>
+      </div>
+      <!-- Two-panel layout -->
+      <div class="row g-3" id="scheduleLayout">
+       <!-- Left: Schedule List Panel -->
+       <div class="col-12 col-lg-4">
+        <div class="card h-100" id="scheduleListCard">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-list">
+           </i>
+           <span class="widget-title">
+            Schedules
+           </span>
+          </div>
+          <button class="btn btn-sm btn-primary" id="btnAddNew">
+           <i class="fa-solid fa-plus me-1">
+           </i>
+           Add New Schedule
+          </button>
+         </div>
+         <div class="card-body">
+          <div class="row g-2 mb-2">
+           <div class="col-12">
+            <div class="input-group">
+             <span class="input-group-text">
+              <i class="fa-solid fa-magnifying-glass">
+              </i>
+             </span>
+             <input class="form-control" id="searchInput" placeholder="Search schedules..." type="text"/>
+            </div>
+           </div>
+           <div class="col-6">
+            <select class="form-select" id="sortSelect">
+             <option value="nameAsc">
+              Name A-Z
+             </option>
+             <option value="nameDesc">
+              Name Z-A
+             </option>
+             <option value="updatedDesc">
+              Recently Updated
+             </option>
+             <option value="updatedAsc">
+              Oldest Updated
+             </option>
+            </select>
+           </div>
+           <div class="col-6">
+            <select class="form-select" id="filterSelect">
+             <option value="all">
+              All
+             </option>
+             <option value="assigned">
+              Assigned
+             </option>
+             <option value="unassigned">
+              Unassigned
+             </option>
+            </select>
+           </div>
+          </div>
+          <!-- Loading skeleton -->
+          <div class="d-grid gap-2" id="listSkeleton">
+           <div class="skeleton" style="height:44px">
+           </div>
+           <div class="skeleton" style="height:44px">
+           </div>
+           <div class="skeleton" style="height:44px">
+           </div>
+          </div>
+          <ul aria-label="Schedule list" class="list-group list-group-flush d-none" id="scheduleList">
+           <!-- JS injects items here -->
+          </ul>
+         </div>
+         <div class="card-footer d-flex align-items-center justify-content-between">
+          <small class="text-muted" id="listCount">
+           0 schedules
+          </small>
+          <div class="text-muted">
+           <i class="fa-regular fa-clock me-1">
+           </i>
+           <span id="lastRefreshed">
+            Just now
+           </span>
+          </div>
+         </div>
+        </div>
+       </div>
+       <!-- Right: Schedule Form Panel -->
+       <div class="col-12 col-lg-8">
+        <div class="card h-100" id="scheduleFormCard">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-pen-to-square">
+           </i>
+           <span class="widget-title" id="formTitle">
+            Create Schedule
+           </span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+           <span class="badge-soft success d-none" id="activeBadge">
+            <i class="fa-solid fa-check-circle">
+            </i>
+            Active
+           </span>
+           <span class="badge-soft warning d-none" data-bs-title="Applied to calendar days" data-bs-toggle="tooltip" id="assignedBadge">
+            <i class="fa-solid fa-calendar-day">
+            </i>
+            Assigned
+           </span>
+          </div>
+         </div>
+         <div class="card-body">
+          <!-- Loading state for form -->
+          <div id="formSkeleton">
+           <div class="skeleton mb-2" style="height:32px">
+           </div>
+           <div class="skeleton mb-2" style="height:78px">
+           </div>
+           <div class="skeleton mb-2" style="height:48px">
+           </div>
+          </div>
+          <form class="d-none" id="scheduleForm" novalidate="">
+           <!-- Schedule Name -->
+           <div class="mb-3">
+            <label class="form-label" for="scheduleName">
+             Schedule Name
+            </label>
+            <input class="form-control" id="scheduleName" placeholder="e.g., Regular Day" required="" type="text"/>
+            <div class="form-text">
+             Name must be unique and descriptive.
+            </div>
+            <div class="invalid-feedback" id="nameError">
+             Please enter a unique schedule name.
+            </div>
+           </div>
+           <!-- Periods Container -->
+           <div class="d-flex align-items-center justify-content-between mb-2">
+            <h6 class="m-0">
+             Periods
+            </h6>
+            <button class="btn btn-sm btn-light" id="btnAddPeriod" type="button">
+             <i class="fa-solid fa-plus me-1">
+             </i>
+             Add Period
+            </button>
+           </div>
+           <div class="d-grid gap-2" id="periodsContainer">
+            <!-- Period rows injected here -->
+           </div>
+           <div class="alert alert-warning mt-3 d-none" id="formErrors" role="alert">
+            <i class="fa-solid fa-triangle-exclamation me-1">
+            </i>
+            <span id="errorText">
+             Fix the highlighted issues before saving.
+            </span>
+           </div>
+           <div class="submit-action-footer d-flex justify-content-end gap-2 mt-3">
+            <button class="btn btn-light" id="btnCancel" type="button">
+             Cancel
+            </button>
+            <button class="btn btn-primary" disabled="" id="btnSave" type="submit">
+             <i class="fa-solid fa-floppy-disk me-1">
+             </i>
+             Save Schedule
+            </button>
+           </div>
+          </form>
+         </div>
+        </div>
+        <!-- Overview / Chart -->
+        <div class="card mt-3">
+         <div class="card-header">
+          <div class="title d-flex align-items-center gap-2">
+           <i class="fa-solid fa-chart-pie">
+           </i>
+           <span class="widget-title">
+            Instructional Minutes by Schedule
+           </span>
+          </div>
+         </div>
+         <div class="card-body">
+          <canvas aria-label="Minutes chart" height="140" id="minutesChart" role="img">
+          </canvas>
+          <small class="text-muted">
+           This shows total instructional minutes per schedule for quick comparison.
+          </small>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </main>
+    <!-- Footer (common component) -->
+    <footer class="admin-footer py-2 px-3 d-flex align-items-center justify-content-between mt-auto">
+     <div class="d-flex align-items-center">
+      <img alt="Logo" class="me-2" onerror="this.onerror=null;this.src='https://picsum.photos/seed/brand3/18/18';" src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg" style="height:18px"/>
+      <small class="text-muted">
+       © 2025 Attendance System
+      </small>
+     </div>
+     <div>
+      <a class="text-decoration-none me-3" href="#">
+       Terms
+      </a>
+      <a class="text-decoration-none" href="#">
+       Privacy
+      </a>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <!-- Toast container (for optional inline feedback) -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: var(--z-toast, 1060);">
+   <div aria-atomic="true" aria-live="polite" class="toast align-items-center text-bg-success border-0" id="saveToast" role="status">
+    <div class="d-flex">
+     <div class="toast-body">
+      <i class="fa-solid fa-check me-1">
+      </i>
+      Schedule saved successfully.
+     </div>
+     <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js">
+  </script>
+  <script>
+   // Bootstrap tooltips
+document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+
+// Sidebar toggle (mobile)
+const sidebarToggle = document.getElementById('sidebarToggle');
+const sidebar = document.getElementById('sidebar');
+if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener('click', () => {
+        document.body.classList.toggle('sidebar-collapsed');
+    });
+}
+
+// Mock Data
+let schedules = [{
+    id: 'reg',
+    name: 'Regular Day',
+    assigned: true,
+    updatedAt: '2025-01-14T09:15:00Z',
+    periods: [{
+        num: 1,
+        start: '08:00',
+        end: '08:50'
+    }, {
+        num: 2,
+        start: '08:50',
+        end: '09:40'
+    }, {
+        num: 3,
+        start: '09:40',
+        end: '10:30'
+    }, {
+        num: 4,
+        start: '10:30',
+        end: '11:20'
+    }, {
+        num: 5,
+        start: '11:20',
+        end: '12:10'
+    }, {
+        num: 6,
+        start: '12:10',
+        end: '13:00'
+    }]
+}, {
+    id: 'early',
+    name: 'Early Dismissal',
+    assigned: false,
+    updatedAt: '2025-01-10T14:00:00Z',
+    periods: [{
+        num: 1,
+        start: '08:00',
+        end: '08:40'
+    }, {
+        num: 2,
+        start: '08:40',
+        end: '09:20'
+    }, {
+        num: 3,
+        start: '09:20',
+        end: '10:00'
+    }, {
+        num: 4,
+        start: '10:00',
+        end: '10:40'
+    }, {
+        num: 5,
+        start: '10:40',
+        end: '11:20'
+    }]
+}, {
+    id: 'asm',
+    name: 'Assembly Schedule',
+    assigned: false,
+    updatedAt: '2025-01-09T11:30:00Z',
+    periods: [{
+        num: 1,
+        start: '08:00',
+        end: '08:45'
+    }, {
+        num: 2,
+        start: '08:45',
+        end: '09:30'
+    }, {
+        num: 3,
+        start: '09:30',
+        end: '10:15'
+    }, {
+        num: 4,
+        start: '10:15',
+        end: '11:00'
+    }, {
+        num: 5,
+        start: '11:00',
+        end: '11:30'
+    }, {
+        num: 6,
+        start: '11:30',
+        end: '12:15'
+    }]
+}, {
+    id: 'late',
+    name: 'Late Start',
+    assigned: false,
+    updatedAt: '2025-01-08T08:00:00Z',
+    periods: [{
+        num: 1,
+        start: '09:00',
+        end: '09:45'
+    }, {
+        num: 2,
+        start: '09:45',
+        end: '10:30'
+    }, {
+        num: 3,
+        start: '10:30',
+        end: '11:15'
+    }, {
+        num: 4,
+        start: '11:15',
+        end: '12:00'
+    }, {
+        num: 5,
+        start: '12:00',
+        end: '12:45'
+    }]
+}, {
+    id: 'final1',
+    name: 'Final Exams Day 1',
+    assigned: true,
+    updatedAt: '2025-01-15T12:45:00Z',
+    periods: [{
+        num: 1,
+        start: '08:00',
+        end: '09:30'
+    }, {
+        num: 2,
+        start: '09:30',
+        end: '11:00'
+    }, {
+        num: 3,
+        start: '11:00',
+        end: '12:30'
+    }]
+}, {
+    id: 'final2',
+    name: 'Final Exams Day 2',
+    assigned: false,
+    updatedAt: '2025-01-16T12:45:00Z',
+    periods: [{
+        num: 1,
+        start: '08:00',
+        end: '09:30'
+    }, {
+        num: 2,
+        start: '09:30',
+        end: '11:00'
+    }, {
+        num: 3,
+        start: '11:00',
+        end: '12:30'
+    }]
+}];
+
+let state = {
+    isLoading: true,
+    selectedId: null,
+    formMode: 'create', // 'create' | 'edit'
+    dirty: false
+};
+
+const els = {
+    list: document.getElementById('scheduleList'),
+    listSkeleton: document.getElementById('listSkeleton'),
+    listCount: document.getElementById('listCount'),
+    lastRefreshed: document.getElementById('lastRefreshed'),
+    search: document.getElementById('searchInput'),
+    sort: document.getElementById('sortSelect'),
+    filter: document.getElementById('filterSelect'),
+    btnAddNew: document.getElementById('btnAddNew'),
+    formCard: document.getElementById('scheduleFormCard'),
+    form: document.getElementById('scheduleForm'),
+    formSkeleton: document.getElementById('formSkeleton'),
+    formTitle: document.getElementById('formTitle'),
+    scheduleName: document.getElementById('scheduleName'),
+    nameError: document.getElementById('nameError'),
+    periodsContainer: document.getElementById('periodsContainer'),
+    btnAddPeriod: document.getElementById('btnAddPeriod'),
+    btnCancel: document.getElementById('btnCancel'),
+    btnSave: document.getElementById('btnSave'),
+    formErrors: document.getElementById('formErrors'),
+    errorText: document.getElementById('errorText'),
+    assignedBadge: document.getElementById('assignedBadge'),
+    activeBadge: document.getElementById('activeBadge')
+};
+
+function minutesFromTime(t) {
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+}
+
+function timeFromMinutes(mins) {
+    const h = Math.floor(mins / 60).toString().padStart(2, '0');
+    const m = (mins % 60).toString().padStart(2, '0');
+    return `${h}:${m}`;
+}
+
+function renderList() {
+    let items = [...schedules];
+    const q = els.search.value.trim().toLowerCase();
+    if (q) items = items.filter(s => s.name.toLowerCase().includes(q));
+    const f = els.filter.value;
+    if (f === 'assigned') items = items.filter(s => s.assigned);
+    if (f === 'unassigned') items = items.filter(s => !s.assigned);
+    const sort = els.sort.value;
+    items.sort((a, b) => {
+        if (sort === 'nameAsc') return a.name.localeCompare(b.name);
+        if (sort === 'nameDesc') return b.name.localeCompare(a.name);
+        if (sort === 'updatedAsc') return new Date(a.updatedAt) - new Date(b.updatedAt);
+        if (sort === 'updatedDesc') return new Date(b.updatedAt) - new Date(a.updatedAt);
+        return 0;
+    });
+    els.list.innerHTML = '';
+    items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex align-items-center justify-content-between schedule-list-item';
+        li.dataset.id = item.id;
+        li.innerHTML = `
+          <div class="d-flex align-items-center gap-2 flex-grow-1">
+            <i class="fa-solid fa-bell text-muted"></i>
+            <div class="d-flex flex-column">
+              <span class="fw-semibold">${item.name}</span>
+              <small class="text-muted">Updated ${new Date(item.updatedAt).toLocaleString()}</small>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            ${item.assigned ? '<span class="badge-soft warning d-none d-md-inline" data-bs-toggle="tooltip" data-bs-title="Applied in calendar"><i class="fa-solid fa-calendar-day"></i> Assigned</span>' : ''}
+            <button class="btn btn-sm btn-light btn-icon action-edit" aria-label="Edit ${item.name}"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn btn-sm btn-light btn-icon action-delete" aria-label="Delete ${item.name}"><i class="fa-solid fa-trash"></i></button>
+          </div>`;
+        if (state.selectedId === item.id) li.classList.add('active');
+        li.addEventListener('click', (e) => {
+            if (e.target.closest('.action-edit')) {
+                e.stopPropagation();
+                loadForEdit(item.id);
+                return;
+            }
+            if (e.target.closest('.action-delete')) {
+                e.stopPropagation();
+                attemptDelete(item.id);
+                return;
+            }
+            loadForEdit(item.id);
+        });
+        els.list.appendChild(li);
+    });
+    els.listCount.textContent = `${items.length} schedules`;
+    els.lastRefreshed.textContent = new Date().toLocaleTimeString();
+
+    // re-enable tooltips for new items
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+}
+
+function clearForm() {
+    els.scheduleName.value = '';
+    els.periodsContainer.innerHTML = '';
+    hideErrors();
+    els.btnSave.disabled = true;
+    state.dirty = false;
+    els.assignedBadge.classList.add('d-none');
+    els.activeBadge.classList.add('d-none');
+}
+
+function setFormMode(mode) {
+    state.formMode = mode;
+    if (mode === 'create') {
+        els.formTitle.textContent = 'Create Schedule';
+    } else {
+        els.formTitle.textContent = 'Edit Schedule';
+    }
+}
+
+function addPeriodRow(period = null) {
+    const count = els.periodsContainer.children.length;
+    const num = period?.num ?? (count + 1);
+    const start = period?.start ?? (count === 0 ? '08:00' : (els.periodsContainer.lastElementChild?.querySelector('[data-field="end"]').value || '08:50'));
+    const end = period?.end ?? timeFromMinutes(Math.min(minutesFromTime(start) + 45, 23 * 60 + 59));
+
+    const row = document.createElement('div');
+    row.className = 'period-row';
+    row.innerHTML = `
+        <div class="input-group input-group-sm">
+          <span class="input-group-text">#</span>
+          <input type="number" min="1" step="1" class="form-control period-number" data-field="num" value="${num}" aria-label="Period number">
+        </div>
+        <div>
+          <label class="form-label mb-1">Start</label>
+          <input type="time" class="form-control" data-field="start" value="${start}" step="60" required>
+        </div>
+        <div>
+          <label class="form-label mb-1">End</label>
+          <input type="time" class="form-control" data-field="end" value="${end}" step="60" required>
+        </div>
+        <div class="d-flex align-items-end">
+          <button type="button" class="btn btn-sm btn-light w-100 btn-remove-period"><i class="fa-solid fa-xmark"></i></button>
+        </div>`;
+
+    row.querySelectorAll('input').forEach(inp => {
+        inp.addEventListener('change', markDirtyValidate);
+        inp.addEventListener('blur', validateForm);
+    });
+    row.querySelector('.btn-remove-period').addEventListener('click', () => {
+        row.remove();
+        renumberPeriods();
+        markDirtyValidate();
+    });
+    els.periodsContainer.appendChild(row);
+}
+
+function renumberPeriods() {
+    [...els.periodsContainer.children].forEach((row, idx) => {
+        const numInput = row.querySelector('[data-field="num"]');
+        numInput.value = idx + 1;
+    });
+}
+
+function collectFormData() {
+    const name = els.scheduleName.value.trim();
+    const periods = [...els.periodsContainer.children].map(row => ({
+        num: parseInt(row.querySelector('[data-field="num"]').value, 10),
+        start: row.querySelector('[data-field="start"]').value,
+        end: row.querySelector('[data-field="end"]').value
+    }));
+    periods.sort((a, b) => a.num - b.num);
+    return {
+        name,
+        periods
+    };
+}
+
+function showErrors(msg) {
+    els.formErrors.classList.remove('d-none');
+    els.errorText.textContent = msg || 'Fix the highlighted issues before saving.';
+}
+
+function hideErrors() {
+    els.formErrors.classList.add('d-none');
+}
+
+function validateForm() {
+    let valid = true;
+    hideErrors();
+    // Name validation
+    const {
+        name,
+        periods
+    } = collectFormData();
+    const duplicate = schedules.some(s => s.name.toLowerCase() === name.toLowerCase() && s.id !== state.selectedId);
+    if (!name || duplicate) {
+        valid = false;
+        els.scheduleName.classList.add('is-invalid');
+        els.nameError.textContent = !name ? 'Name is required.' : 'Name must be unique.';
+    } else {
+        els.scheduleName.classList.remove('is-invalid');
+    }
+
+    // Periods validation
+    if (periods.length === 0) {
+        valid = false;
+        showErrors('Add at least one period.');
+    }
+
+    // Validate each period time
+    for (const row of els.periodsContainer.children) {
+        const startEl = row.querySelector('[data-field="start"]');
+        const endEl = row.querySelector('[data-field="end"]');
+        const s = startEl.value;
+        const e = endEl.value;
+        startEl.classList.remove('is-invalid');
+        endEl.classList.remove('is-invalid');
+        if (!s || !e || minutesFromTime(s) >= minutesFromTime(e)) {
+            startEl.classList.add('is-invalid');
+            endEl.classList.add('is-invalid');
+            valid = false;
+            showErrors('Each period end time must be after its start time.');
+        }
+    }
+
+    // Check continuity and no overlaps
+    const sorted = periods.slice().sort((a, b) => a.num - b.num);
+    for (let i = 1; i < sorted.length; i++) {
+        const prev = sorted[i - 1];
+        const curr = sorted[i];
+        const prevEnd = minutesFromTime(prev.end);
+        const currStart = minutesFromTime(curr.start);
+        if (currStart < prevEnd) {
+            valid = false;
+            showErrors('Periods cannot overlap.');
+            break;
+        }
+        if (currStart !== prevEnd) {
+            valid = false;
+            showErrors('There cannot be gaps between consecutive periods.');
+            break;
+        }
+    }
+
+    els.btnSave.disabled = !(valid && state.dirty);
+    return valid;
+}
+
+function markDirtyValidate() {
+    state.dirty = true;
+    validateForm();
+}
+
+function loadForEdit(id) {
+    // Simulate loading details
+    state.selectedId = id;
+    setFormMode('edit');
+    els.formTitle.textContent = 'Edit Schedule';
+    els.list.querySelectorAll('.list-group-item').forEach(li => li.classList.toggle('active', li.dataset.id === id));
+
+    els.formSkeleton.classList.remove('d-none');
+    els.form.classList.add('d-none');
+    setTimeout(() => {
+        const s = schedules.find(x => x.id === id);
+        clearForm();
+        els.scheduleName.value = s.name;
+        s.periods.forEach(p => addPeriodRow(p));
+        els.assignedBadge.classList.toggle('d-none', !s.assigned);
+        state.dirty = false;
+        validateForm();
+        els.formSkeleton.classList.add('d-none');
+        els.form.classList.remove('d-none');
+    }, 300);
+}
+
+function createNew() {
+    state.selectedId = null;
+    setFormMode('create');
+    els.list.querySelectorAll('.list-group-item').forEach(li => li.classList.remove('active'));
+    els.formSkeleton.classList.add('d-none');
+    els.form.classList.remove('d-none');
+    clearForm();
+    addPeriodRow({
+        num: 1,
+        start: '08:00',
+        end: '08:45'
+    });
+}
+
+function attemptDelete(id) {
+    const s = schedules.find(x => x.id === id);
+    if (!s) return;
+    if (s.assigned) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Cannot delete',
+            text: 'This schedule is currently assigned in the calendar.'
+        });
+        return;
+    }
+    Swal.fire({
+        icon: 'warning',
+        title: `Delete "${s.name}"?`,
+        text: 'This action cannot be undone.',
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        confirmButtonColor: '#CD2026'
+    }).then(res => {
+        if (res.isConfirmed) {
+            schedules = schedules.filter(x => x.id !== id);
+            if (state.selectedId === id) {
+                createNew();
+            }
+            renderList();
+            Swal.fire({
+                icon: 'success',
+                title: 'Deleted',
+                timer: 1200,
+                showConfirmButton: false
+            });
+            updateChart();
+        }
+    });
+}
+
+function upsertSchedule() {
+    const valid = validateForm();
+    if (!valid) return;
+    const data = collectFormData();
+    if (state.formMode === 'create') {
+        const newId = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 24) + '-' + Math.floor(Math.random() * 1000);
+        schedules.push({
+            id: newId,
+            name: data.name,
+            assigned: false,
+            updatedAt: new Date().toISOString(),
+            periods: data.periods
+        });
+        state.selectedId = newId;
+        setFormMode('edit');
+    } else {
+        const idx = schedules.findIndex(s => s.id === state.selectedId);
+        if (idx >= 0) {
+            schedules[idx] = {
+                ...schedules[idx],
+                name: data.name,
+                periods: data.periods,
+                updatedAt: new Date().toISOString()
+            };
+        }
+    }
+    state.dirty = false;
+    els.btnSave.disabled = true;
+    renderList();
+    updateChart();
+    const toast = new bootstrap.Toast(document.getElementById('saveToast'));
+    toast.show();
+    Swal.fire({
+        icon: 'success',
+        title: 'Schedule saved',
+        timer: 1200,
+        showConfirmButton: false
+    });
+}
+
+function bindEvents() {
+    els.search.addEventListener('input', renderList);
+    els.sort.addEventListener('change', renderList);
+    els.filter.addEventListener('change', renderList);
+    els.btnAddNew.addEventListener('click', createNew);
+    els.btnAddPeriod.addEventListener('click', () => {
+        addPeriodRow();
+        markDirtyValidate();
+    });
+    els.scheduleName.addEventListener('input', markDirtyValidate);
+    els.scheduleName.addEventListener('blur', validateForm);
+    els.btnCancel.addEventListener('click', () => {
+        if (!state.selectedId) {
+            createNew();
+            return;
+        }
+        loadForEdit(state.selectedId);
+    });
+    els.form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        upsertSchedule();
+    });
+}
+
+// Chart.js
+let chart;
+
+function updateChart() {
+    const labels = schedules.map(s => s.name);
+    const minutes = schedules.map(s => s.periods.reduce((acc, p) => acc + (minutesFromTime(p.end) - minutesFromTime(p.start)), 0));
+    const data = {
+        labels,
+        datasets: [{
+            label: 'Minutes',
+            data: minutes,
+            backgroundColor: labels.map((_, i) => `rgba(${(i*52)%255}, ${(i*91)%255}, ${(i*143)%255}, 0.35)`),
+            borderColor: labels.map((_, i) => `rgba(${(i*52)%255}, ${(i*91)%255}, ${(i*143)%255}, 0.9)`),
+            borderWidth: 1
+        }]
+    };
+    const ctx = document.getElementById('minutesChart').getContext('2d');
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, {
+        type: 'bar',
+        data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => `${ctx.parsed.y} minutes`
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Minutes'
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Initial load simulation
+function init() {
+    bindEvents();
+    setTimeout(() => {
+        state.isLoading = false;
+        els.listSkeleton.classList.add('d-none');
+        els.list.classList.remove('d-none');
+        renderList();
+        els.formSkeleton.classList.add('d-none');
+        els.form.classList.remove('d-none');
+        createNew();
+        updateChart();
+    }, 600);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+  </script>
+ </body>
+</html>

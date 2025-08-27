@@ -1,0 +1,94 @@
+/* ParentDashboard.css - Page specific styles (avoid duplication with style.css) */
+/* Use Poppins as brand font, fall back to theme font */
+body {
+    font-family: "Poppins", var(--font-sans)
+    }
+/* Sidebar/Header/Footer styling per provided components */
+:root {
+    --primary: #f08e1b;
+    --secondary: #9a296a
+    }
+.parent-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee
+    }
+.parent-sidebar .brand {
+    background: var(--primary);
+    color: #fff
+    }
+.parent-sidebar .nav-link {
+    color: #333;
+    border-radius: 0.4rem;
+    margin: 0.15rem 0.5rem
+    }
+.parent-sidebar .nav-link.active {
+    background: rgba(240, 142, 27, 0.15);
+    color: #000;
+    border-left: 4px solid var(--primary)
+    }
+.parent-sidebar .nav-link:hover {
+    background: rgba(154, 41, 106, 0.08)
+    }
+.parent-header {
+    border-bottom: 1px solid #eee;
+    background: #fff
+    }
+.parent-footer {
+    border-top: 1px solid #eee;
+    background: #f8f9fa
+    }
+/* Today summary status badges */
+.status-present {
+    background: var(--success-soft);
+    color: #0d5c3d;
+    border: 1px solid rgba(13, 92, 61, 0.15)
+    }
+.status-absent {
+    background: var(--error-soft);
+    color: #7a0f12;
+    border: 1px solid rgba(122, 15, 18, 0.15)
+    }
+.status-tardy {
+    background: var(--warning-soft);
+    color: #5a3f00;
+    border: 1px solid rgba(90, 63, 0, 0.15)
+    }
+.status-pending {
+    background: var(--neutral-soft);
+    color: var(--text);
+    border: 1px solid rgba(0, 0, 0, 0.06)
+    }
+.badge.status-present, .badge.status-absent, .badge.status-tardy, .badge.status-pending {
+    padding: 0.5rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 600
+    }
+/* Chart container sizing */
+#termAttendanceChart {
+    max-width: 100%
+    }
+/* Table hover and clickable headers */
+#recentTable thead th[data-sort] {
+    cursor: pointer;
+    user-select: none
+    }
+#recentTable tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.03)
+    }
+/* Toast visual tuning to match theme */
+.toast.text-bg-light {
+    background: var(--surface-0) !important;
+    color: var(--text) !important;
+    border-color: var(--border-color) !important
+    }
+/* Student selector alignment on small screens */
+@media (max-width: 575.98px) {
+    #studentSelectorWrapper {
+        width: 100%
+        }
+    #studentSelect {
+        width: 100%
+        }
+    }
